@@ -6,12 +6,14 @@ env:
   global:
     - DOCKER_IMAGE='cardboardcode/epd-eloquent-base:latest'
     - PARALLEL_TESTS=true  # Global Variable
+    - CODE_COVERAGE="codecov.io"
+    - CODECOV_TOKEN="bfb1cab5-ed38-473e-b4e9-ac42cf65a51a"
 
   matrix:
     - ROS_DISTRO="eloquent" ROS_REPO=testing BEFORE_INIT="echo 'deb http://packages.ros.org/ros2-testing/ubuntu bionic main' > /etc/apt/sources.list.d/ros2-latest.list"
     - ROS_DISTRO="eloquent" ROS_REPO=main
 
 install:
-  - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci.git .industrial_ci -b master
+  - git clone --quiet --depth 1 https://github.com/Briancbn/industrial_ci .industrial_ci -b pr-coverage
 script:
   - .industrial_ci/travis.sh
