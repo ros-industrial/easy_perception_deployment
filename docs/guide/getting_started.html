@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started &mdash; easy_perception_deployment  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Training a P1 Image Classification Model" href="custom_p1_train.html" />
+    <link rel="prev" title="Setup" href="setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to easy_perception_deployment’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-camera-using-ros2">Build Camera using ROS2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-camera-ros2">Launch Camera ROS2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-easy-perception-deployment-ros2-package">Launch Easy Perception Deployment ROS2 Package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_p1_train.html">Training a P1 Image Classification Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_p2p3_train.html">Training a P2/P3 Object Detection Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_deploy.html">Deploying a custom ONNX Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">easy_perception_deployment</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guide/getting_started.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Follow the instructions to quickly get started with using <strong>easy_perception_deployment</strong>.</p>
+<p>The steps are meant to be executed in sequence. Please follow the steps strictly.</p>
+<div class="section" id="build-camera-using-ros2">
+<h2>Build Camera using ROS2<a class="headerlink" href="#build-camera-using-ros2" title="Permalink to this headline">¶</a></h2>
+<p>A ROS-supported camera device is required.</p>
+<p>If you are using a laptop with an integrated camera, follow these steps to transform it a necessary ROS node.</p>
+<p>We will continue to use the workspace we created in <a class="reference external" href="./setup.html">Setup</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/epd_ros2_ws/src
+git clone https://github.com/clydemcqueen/opencv_cam.git
+git clone https://github.com/ptrmu/ros2_shared.git
+<span class="nb">cd</span> ~/epd_ros2_ws
+<span class="nb">source</span> /opt/ros/eloquent/setup.bash
+rosdep install --from-paths src --ignore-src -y --rosdistro <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span><span class="s2">&quot;</span>
+colcon build
+</pre></div>
+</div>
+<p>So you have a simple ROS2 camera package ready to go using your laptop camera.</p>
+</div>
+<div class="section" id="launch-camera-ros2">
+<h2>Launch Camera ROS2<a class="headerlink" href="#launch-camera-ros2" title="Permalink to this headline">¶</a></h2>
+<p>Run the following commands to verify if your camera setup is working.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open a new commandline terminal</span>
+<span class="nb">cd</span> ~/epd_ros2_ws/
+<span class="nb">source</span> /opt/ros/eloquent/setup.bash
+<span class="nb">source</span> install/setup.bash
+ros2 run opencv_cam opencv_cam_main
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open a new commandline terminal</span>
+<span class="nb">source</span> /opt/ros/eloquent/setup.bash
+ros2 run image_tools showimage -r /image:<span class="o">=</span>/image_raw
+</pre></div>
+</div>
+<p>By running the commands in the 2 terminals, the <strong>Camera Setup</strong> is working if you
+see a window labelled, <strong>showimage</strong> displaying your camera feed.</p>
+</div>
+<div class="section" id="launch-easy-perception-deployment-ros2-package">
+<h2>Launch Easy Perception Deployment ROS2 Package<a class="headerlink" href="#launch-easy-perception-deployment-ros2-package" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Modify the following line in <strong>run.launch.py</strong> under the following directory:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/epd_ros2_ws/src/easy_perception_deployment/easy_perception_deployment/launch/
+</pre></div>
+</div>
+<p>Change from:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">,</span>
+    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;/processor/image_input&#39;</span><span class="p">,</span> <span class="s1">&#39;/virtual_camera/image_raw&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Change to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span><span class="p">,</span>
+    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;/processor/image_input&#39;</span><span class="p">,</span> <span class="s1">&#39;/image_raw&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>This sets the necessary link between <strong>any input ROS2 cameras</strong> and the <strong>easy_perception_deployment</strong> package.</p>
+<p>2. Double-click on <strong>easy_perception_deployment.desktop</strong> file on your Desktop.
+This file is generated by following the instructions under <a class="reference external" href="./setup.html">Setup</a>.</p>
+<p>A GUI window labelled, <strong>easy_perception_deployment</strong>,  should appear.</p>
+<ol class="arabic simple" start="3">
+<li><p>Click on the button labelled, <strong>Deploy</strong>.</p></li>
+</ol>
+<p>A GUI window labelled, <strong>Deploy</strong>, should appear.</p>
+<ol class="arabic simple" start="4">
+<li><p>Click on the button labelled, <strong>ONNX Model</strong>, and select <strong>FasterRCNN-10.onnx</strong> file under the following directory.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/epd_ros2_ws/src/easy_perception_deployment/easy_perception_deployment/data/model/FasterRCNN-10.onnx
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Click on the button labelled, <strong>Label List</strong>, and select <strong>coco_classes.txt</strong> file under the following directory.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/epd_ros2_ws/src/easy_perception_deployment/easy_perception_deployment/data/label_list/coco_classes.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Click on the DropDown menu labelled, <strong>Use Case</strong>, and select <strong>Classification</strong>.</p></li>
+</ol>
+<p>A window should appear, informing you that there are no further configurations required.</p>
+<ol class="arabic simple" start="7">
+<li><p>Click on the button labelled, <strong>Run</strong>.</p></li>
+</ol>
+<p>The <strong>easy_perception_deployment</strong> ROS2 package should start running and you should see your camera feed with bounding boxes
+showing the model inference result.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="custom_p1_train.html" class="btn btn-neutral float-right" title="Training a P1 Image Classification Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup.html" class="btn btn-neutral float-left" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020,  Bey Hao Yun
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

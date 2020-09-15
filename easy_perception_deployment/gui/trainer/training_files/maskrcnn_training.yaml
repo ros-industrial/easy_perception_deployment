@@ -1,0 +1,50 @@
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHT: "weights/e2e_mask_rcnn_R_50_FPN_1x_trimmed.pth"
+  BACKBONE:
+    CONV_BODY: "R-50-FPN"
+    FREEZE_CONV_BODY_AT: 2     #Freeze layers
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 256
+  RPN:
+    USE_FPN: True
+    ANCHOR_STRIDE: (4, 8, 16, 32, 64)
+    PRE_NMS_TOP_N_TRAIN: 2000
+    PRE_NMS_TOP_N_TEST: 1000
+    POST_NMS_TOP_N_TEST: 1000
+    FPN_POST_NMS_TOP_N_TEST: 1000
+  ROI_HEADS:
+    USE_FPN: True
+  ROI_BOX_HEAD:
+    POOLER_RESOLUTION: 7
+    POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
+    POOLER_SAMPLING_RATIO: 2
+    FEATURE_EXTRACTOR: "FPN2MLPFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+    NUM_CLASSES: 81 #Change to your number of objects +2
+  ROI_MASK_HEAD:
+    POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
+    FEATURE_EXTRACTOR: "MaskRCNNFPNFeatureExtractor"
+    PREDICTOR: "MaskRCNNC4Predictor"
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    RESOLUTION: 28
+    SHARE_BOX_FEATURE_EXTRACTOR: False
+  MASK_ON: True
+DATASETS:
+  TEST: ("coco_custom_val",)
+  TRAIN: ("coco_custom_train",)
+DATALOADER:
+  SIZE_DIVISIBILITY: 32
+SOLVER:
+  BASE_LR: 0.001                 # learning rate after warmup
+  WEIGHT_DECAY: 0.0001
+  STEPS: (1000,1500,2000,2500)   # where you want your learning rate to decrease
+  MAX_ITER: 3000                  #number of iteration
+  WARMUP_ITERS: 500
+  IMS_PER_BATCH: 1
+  TEST_PERIOD: 200   #run validation every * steps
+  CHECKPOINT_PERIOD: 200   #save model every * steps
+TEST:
+  IMS_PER_BATCH: 1
+OUTPUT_DIR: "./weights/custom/"    # saved weight output directory

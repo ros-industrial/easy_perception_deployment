@@ -1,0 +1,14 @@
+.. _faq:
+
+FAQ
+====
+This article lists answers to frequently asked questions.
+
+Issue: How to kill the program faster?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The **easy_perception_deployment** ROS2 package may take a long time to close when issued a kill signal via the Graphical User Interface (GUI).
+
+To kill it faster, do the following:
+
+Click on the terminal running the nodes.
+Press Ctrl + c to kill all nodes.

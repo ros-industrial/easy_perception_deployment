@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>image_viewer &mdash; easy_perception_deployment  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="message_utils" href="message_utils.html" />
+    <link rel="prev" title="epd_container" href="epd_container.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to easy_perception_deployment’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epd_container.html">epd_container</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">image_viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_utils.html">message_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processor.html">processor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usecase_config.html">usecase_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ort_base.html">ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p1_ort_base.html">p1_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p2_ort_base.html">p2_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p3_ort_base.html">p3_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P1Trainer.html">P1Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P2Trainer.html">P2Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P3Trainer.html">P3Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Counting.html">Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Deploy.html">Deploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Main.html">Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Train.html">Train</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">easy_perception_deployment</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>image_viewer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/image_viewer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="image-viewer">
+<span id="api-image-viewer"></span><h1>image_viewer<a class="headerlink" href="#image-viewer" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp class">
+<dt id="_CPPv411ImageViewer">
+<span id="_CPPv311ImageViewer"></span><span id="_CPPv211ImageViewer"></span><span id="ImageViewer"></span><span class="target" id="classImageViewer"></span><em class="property">class </em><code class="sig-name descname">ImageViewer</code> : <em class="property">public</em> Node<a class="headerlink" href="#_CPPv411ImageViewer" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;image_viewer.hpp&gt;</em><p>An <a class="reference internal" href="#classImageViewer"><span class="std std-ref">ImageViewer</span></a> class object. The <a class="reference internal" href="#classImageViewer"><span class="std std-ref">ImageViewer</span></a> class object inherits from the rclcpp::Node object to provide a localized way of viewing the output inference visualization results. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N11ImageViewer11ImageViewerEv">
+<span id="_CPPv3N11ImageViewer11ImageViewerEv"></span><span id="_CPPv2N11ImageViewer11ImageViewerEv"></span><span id="ImageViewer::ImageViewer"></span><span class="target" id="classImageViewer_1a968687d70a4f15be8442212da98ad36b"></span><code class="sig-name descname">ImageViewer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ImageViewer11ImageViewerEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Constructor function. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK11ImageViewer17encoding2mat_typeERKNSt6stringE">
+<span id="_CPPv3NK11ImageViewer17encoding2mat_typeERKNSt6stringE"></span><span id="_CPPv2NK11ImageViewer17encoding2mat_typeERKNSt6stringE"></span><span id="ImageViewer::encoding2mat_type__ssCRC"></span><span class="target" id="classImageViewer_1ad5179bd54d5bde2fe12b5f0cbf76c204"></span>int <code class="sig-name descname">encoding2mat_type</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>encoding</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11ImageViewer17encoding2mat_typeERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that sets the appropriate image encodings for displaying input images. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK11ImageViewer14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE">
+<span id="_CPPv3NK11ImageViewer14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="_CPPv2NK11ImageViewer14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="ImageViewer::image_callback__sensor_msgs::msg::Image::SharedPtrCC"></span><span class="target" id="classImageViewer_1aec81a9a8c06cecca37c376f67588bb2c"></span>void <code class="sig-name descname">image_callback</code><span class="sig-paren">(</span><em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>msg</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11ImageViewer14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A ROS2 callback function utilized by sub_1. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK11ImageViewer14state_callbackEKN8std_msgs3msg6String9SharedPtrE">
+<span id="_CPPv3NK11ImageViewer14state_callbackEKN8std_msgs3msg6String9SharedPtrE"></span><span id="_CPPv2NK11ImageViewer14state_callbackEKN8std_msgs3msg6String9SharedPtrE"></span><span id="ImageViewer::state_callback__std_msgs::msg::String::SharedPtrCC"></span><span class="target" id="classImageViewer_1a1ba06a0a1eeb1ff80cfd3b62ee968011"></span>void <code class="sig-name descname">state_callback</code><span class="sig-paren">(</span><em class="property">const</em> std_msgs::msg::String::SharedPtr <em>msg</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11ImageViewer14state_callbackEKN8std_msgs3msg6String9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A ROS2 callback function utilized by sub_2. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N11ImageViewer6sub_1_E">
+<span id="_CPPv3N11ImageViewer6sub_1_E"></span><span id="_CPPv2N11ImageViewer6sub_1_E"></span><span id="ImageViewer::sub_1___rclcpp::Subscription:sensor_msgs::msg::Image:::SharedPtr"></span><span class="target" id="classImageViewer_1a2043be9b399137b023c93487a2cd0c4a"></span>rclcpp::Subscription&lt;sensor_msgs::msg::Image&gt;::SharedPtr <code class="sig-name descname">sub_1_</code><a class="headerlink" href="#_CPPv4N11ImageViewer6sub_1_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A subscriber member variable to receive images to receive. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11ImageViewer6sub_2_E">
+<span id="_CPPv3N11ImageViewer6sub_2_E"></span><span id="_CPPv2N11ImageViewer6sub_2_E"></span><span id="ImageViewer::sub_2___rclcpp::Subscription:std_msgs::msg::String:::SharedPtr"></span><span class="target" id="classImageViewer_1a0b97f3ed5b0d8c9f166e4d0896704164"></span>rclcpp::Subscription&lt;std_msgs::msg::String&gt;::SharedPtr <code class="sig-name descname">sub_2_</code><a class="headerlink" href="#_CPPv4N11ImageViewer6sub_2_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A subscriber member variable to receive remote calls to shutdown. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="message_utils.html" class="btn btn-neutral float-right" title="message_utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="epd_container.html" class="btn btn-neutral float-left" title="epd_container" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020,  Bey Hao Yun
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

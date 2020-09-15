@@ -1,0 +1,73 @@
+.. _guide_setup:
+
+Setup
+=====
+
+System Requirements
++++++++++++++++++++
+1. **Ubuntu 18.04** (Bionic Beaver) Operating System.
+2. `ROS2 Elusor Eloquent <https://index.ros.org/doc/ros2/Installation/Eloquent/>`_
+3. `Anaconda3 <https://docs.anaconda.com/anaconda/install/>`_
+4. `ONNX Runtime <https://microsoft.github.io/onnxruntime/>`_ - Follow `Installation`_ below to install this dependency.
+5. CMake >=3.15.2
+
+*[Optional for Higher Performance]*
+
+1. CUDA (System tested on CUDA 10.2)
+2. CUDNN (System tested on CUDNN 7.6.5)
+
+
+Installation
++++++++++++++
+Follow the instructions below to start building the **easy_perception_deployment**
+ROS2 package.
+
+The following is the expected final folder structure by following the steps.
+
+.. code-block:: bash
+
+   ~/epd_ros2_ws/
+    |_src
+      |_easy_perception_deployment
+        |_easy_perception_deployment
+          |_<package_content ...>
+        |_epd_msgs
+          |_<package_content ...>
+
+1. Create **a ROS2 workspace**.
+
+.. code-block:: bash
+
+   cd $HOME
+   mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
+
+2. Download from **GitHub**.
+
+.. code-block:: bash
+
+   cd epd_ros2_ws/src
+   git clone https://github.com/ros-industrial/easy_perception_deployment
+
+3. Install **ONNX Runtime**. Please run the command based on your decision on whether you
+intend to run it with CPU or GPU.
+
+.. code-block:: bash
+
+   cd ~/epd_ros2_ws/src/easy_perception_deployment/easy_perception_deployment/scripts
+   sudo chmod u+x install_dep_cpu.sh
+   sudo chmod u+x install_dep_gpu.sh
+
+.. code-block:: bash
+
+   # If you intend to only use CPU (better compatibility but slower performance.)
+   ./install_deb_cpu.sh
+   # OR If you intend to use GPU (lower compatibility but faster performance.)
+   ./install_deb_gpu.sh
+
+4. Generate **desktop shortcut**. A ``.desktop`` file should appear in your Desktop.
+
+.. code-block:: bash
+
+   cd ~/epd_ros2_ws/src/easy_perception_deployment/easy_perception_deployment/
+   sudo chmod u+x scripts/create_desktop_shortcut.sh
+   ./scripts/create_desktop_shortcut.sh

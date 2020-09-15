@@ -1,0 +1,19 @@
+# dependencies
+easy_perception_deployment/build/*
+easy_perception_deployment/log/*
+easy_perception_deployment/install/*
+easy_perception_deployment/gui/trainer/P2TrainFarm/*
+easy_perception_deployment/gui/trainer/P3TrainFarm/*
+epd_msgs/build/*
+epd_msgs/log/*
+epd_msgs/install/*
+
+# testing or other data
+*.mp4
+*.mkv
+*.pyc
+*.pth
+*.onnx
+easy_perception_deployment/data/usecase_config.txt
+easy_perception_deployment/data/session_config.txt
+easy_perception_deployment/data/datasets/custom_dataset
