@@ -1,6 +1,6 @@
 
 # **easy_perception_deployment**
-[![pipeline status](https://gitlab.com/ROSI-AP/rosi-ap_rect/easy_perception_deployment/badges/master/pipeline.svg)](https://gitlab.com/ROSI-AP/rosi-ap_rect/easy_perception_deployment/commits/master)
+[![Build Status](https://travis-ci.org/cardboardcode/easy_perception_deployment.svg?branch=master)](https://travis-ci.org/cardboardcode/easy_perception_deployment)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
