@@ -11,7 +11,7 @@ To get started using it, please run the following commands to start **viewing th
 ``` bash
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://gitlab.com/ROSI-AP/rosi-ap_rect/easy_perception_deployment
+git clone https://github.com/ros-industrial/easy_perception_deployment.git
 
 ```
 
@@ -23,7 +23,7 @@ This section lists steps on how to build **easy_perception_deployment** package 
 # Download easy_perception_deployment
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://gitlab.com/ROSI-AP/rosi-ap_rect/easy_perception_deployment
+git clone https://github.com/ros-industrial/easy_perception_deployment.git
 
 # Install cv_bridge dependency
 cd ../
