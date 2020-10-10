@@ -168,7 +168,7 @@
 <h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Ubuntu 18.04</strong> (Bionic Beaver) Operating System.</p></li>
-<li><p><a class="reference external" href="https://index.ros.org/doc/ros2/Installation/Eloquent/">ROS2 Elusor Eloquent</a></p></li>
+<li><p><a class="reference external" href="https://index.ros.org/doc/ros2/Installation/Eloquent/">ROS2 Eloquent Elusor</a></p></li>
 <li><p><a class="reference external" href="https://docs.anaconda.com/anaconda/install/">Anaconda3</a></p></li>
 <li><p><a class="reference external" href="https://microsoft.github.io/onnxruntime/">ONNX Runtime</a> - Follow <a class="reference internal" href="#installation">Installation</a> below to install this dependency.</p></li>
 <li><p>CMake &gt;=3.15.2</p></li>
@@ -210,22 +210,22 @@ git clone https://github.com/ros-industrial/easy_perception_deployment
 <p>3. Install <strong>ONNX Runtime</strong>. Please run the command based on your decision on whether you
 intend to run it with CPU or GPU.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/epd_ros2_ws/src/easy_perception_deployment/easy_perception_deployment/scripts
-sudo chmod u+x install_dep_cpu.sh
-sudo chmod u+x install_dep_gpu.sh
+sudo chmod u+x install_dep_cpu.bash
+sudo chmod u+x install_dep_gpu.bash
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you intend to only use CPU (better compatibility but slower performance.)</span>
-./install_deb_cpu.sh
+./install_deb_cpu.bash
 <span class="c1"># OR If you intend to use GPU (lower compatibility but faster performance.)</span>
-./install_deb_gpu.sh
+./install_deb_gpu.bash
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
 <li><p>Generate <strong>desktop shortcut</strong>. A <code class="docutils literal notranslate"><span class="pre">.desktop</span></code> file should appear in your Desktop.</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/epd_ros2_ws/src/easy_perception_deployment/easy_perception_deployment/
-sudo chmod u+x scripts/create_desktop_shortcut.sh
-./scripts/create_desktop_shortcut.sh
+sudo chmod u+x scripts/create_desktop_shortcut.bash
+./scripts/create_desktop_shortcut.bash
 </pre></div>
 </div>
 </div>

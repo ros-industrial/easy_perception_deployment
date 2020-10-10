@@ -25,7 +25,7 @@ cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
 git clone https://github.com/ros-industrial/easy_perception_deployment.git
 
-# Install cv_bridge dependency
+# Install ROS dependencies
 cd ../
 sudo apt-get update
 source /opt/ros/eloquent/setup.bash
@@ -36,4 +36,7 @@ cd src/easy_perception_deployment/epd_msgs/
 colcon build && source install/setup.bash
 cd ../easy_perception_deployment
 colcon build && source install/setup.bash
+./scripts/create_desktop_shortcut.bash
+
+# Launch the program using the newly created desktop shortcut.
 ```
