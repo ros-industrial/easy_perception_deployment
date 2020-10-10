@@ -183,14 +183,14 @@ class DeployWindow(QWidget):
         Otherwise, run bash script to kill ROS2 package processes remotely.
         '''
         if not self._is_running:
-            self._deploy_process = subprocess.Popen(['./scripts/deploy.sh'])
+            self._deploy_process = subprocess.Popen(['./scripts/deploy.bash'])
             self.run_button.setText('Stop')
             self.run_button.setIcon(QIcon('img/quit.png'))
             self.run_button.setIconSize(QSize(100, 100))
             self.run_button.updateGeometry()
             self._is_running = True
         else:
-            self._kill_process = subprocess.Popen(['./scripts/kill.sh'])
+            self._kill_process = subprocess.Popen(['./scripts/kill.bash'])
             self.run_button.setText('Run')
             self.run_button.setIcon(QIcon('img/go.png'))
             self.run_button.setIconSize(QSize(100, 100))
