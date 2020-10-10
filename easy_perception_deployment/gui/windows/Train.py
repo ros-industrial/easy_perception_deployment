@@ -19,7 +19,7 @@ from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QComboBox, QFileDialog, QLabel, QPushButton, QWidget
 
-# from trainer.P1Trainer import P1Trainer
+from trainer.P1Trainer import P1Trainer
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
 
@@ -312,8 +312,8 @@ class TrainWindow(QWidget):
             else:
                 self._is_dataset_labelled = False
                 print('[ERROR] - Please ensure there is ' +
-                       '/train and /val sub-directories ' +
-                       'in the selected dataset directory.')
+                      '/train and /val sub-directories ' +
+                      'in the selected dataset directory.')
         elif self._precision_level == 2:
             isDatasetNamedRight = os.path.basename(self._path_to_dataset) == 'custom_dataset'
             trainDirExists = os.path.exists(self._path_to_dataset + '/train_dataset')

@@ -160,7 +160,8 @@ class P3Trainer:
 
     def runExportFarm(self, debug):
         '''
-        A Mutator function that runs a bash script that runs p3_exporter environment for exporting the trained .pth file to the final ONNX
+        A Mutator function that runs a bash script that runs p3_exporter
+        environment for exporting the trained .pth file to the final ONNX
         model file.
         '''
         self.export_process = subprocess.Popen([
