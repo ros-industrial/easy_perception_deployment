@@ -22,7 +22,7 @@ def generate_launch_description():
             package='easy_perception_deployment',
             node_executable='processor',
             output='screen',
-            remappings=[('/processor/image_input', '/image_raw')]
+            remappings=[('/processor/image_input', '/virtual_camera/image_raw')]
             ),
         launch_ros.actions.Node(
             package='easy_perception_deployment',

@@ -56,11 +56,10 @@ class P2Trainer:
         files.
         '''
         a_file = open(self.path_to_training_config, 'r')
-        config_lines = a_file.readlines()
+        b_file = open(self.path_to_export_config, 'r')
+        training_config_lines = a_file.readlines()
+        export_config_lines = b_file.readlines()
 
-        # Verify that the label follows COCO format.
-        # If true, minus 2 from the length of the label list and modify the training yml.
-        # Otherwise, use the length.
         isCOCOFormat = False
         for label in self.label_list:
             if label == '__ignore__':
@@ -69,11 +68,11 @@ class P2Trainer:
         if isCOCOFormat:
             custom_class_no = len(self.label_list)
         else:
-            custom_class_no = len(self.label_list) - 2
+            custom_class_no = len(self.label_list) + 2
 
         modif_line_index = 22
-        for i in range(0, len(config_lines)):
-            if 'NUM_CLASSES:' in config_lines[i]:
+        for i in range(0, len(training_config_lines)):
+            if 'NUM_CLASSES:' in training_config_lines[i]:
                 modif_line_index = i
                 break
 
@@ -81,11 +80,26 @@ class P2Trainer:
                       str(custom_class_no) +
                       ' #Change to your number of objects +2\n')
 
-        config_lines[modif_line_index] = modif_line
+        training_config_lines[modif_line_index] = modif_line
 
         a_file = open(self.path_to_training_config, 'w')
-        a_file.writelines(config_lines)
+        a_file.writelines(training_config_lines)
         a_file.close()
+
+        for i in range(0, len(export_config_lines)):
+            if 'NUM_CLASSES:' in export_config_lines[i]:
+                modif_line_index = i
+                break
+
+        modif_line = ('    NUM_CLASSES: ' +
+                      str(custom_class_no) +
+                      ' #Change to your number of objects +2\n')
+
+        export_config_lines[modif_line_index] = modif_line
+
+        b_file = open(self.path_to_export_config, 'w')
+        b_file.writelines(export_config_lines)
+        b_file.close()
 
     def train(self, debug):
         '''
@@ -97,7 +111,8 @@ class P2Trainer:
         '''
         self.createTrainFarm(debug)
         self.runTrainFarm(debug)
-        self.exportONNX(debug)
+        self.createExportFarm(debug)
+        self.runExportFarm(debug)
 
     def createTrainFarm(self, debug):
         '''
@@ -105,7 +120,7 @@ class P2Trainer:
         created in the createTrainFarm to run training session.
         '''
         self.create_process = subprocess.Popen([
-                              './trainer/training_files/scripts/install_p2trainfarm.sh',
+                              './trainer/training_files/scripts/install_p2trainfarm.bash',
                               self.path_to_dataset,
                               self.path_to_modif,
                               self.path_to_training_config,
@@ -119,20 +134,22 @@ class P2Trainer:
         created in the createTrainFarm to run training session.
         '''
         self.run_process = subprocess.Popen([
-                              './trainer/training_files/scripts/run_p2trainfarm.sh',
+                              './trainer/training_files/scripts/run_p2trainfarm.bash',
                               self.model_name,
-                              str(date.today())])
+                              str(date.today()),
+                              self.path_to_dataset,
+                              self.path_to_training_config])
         if not debug:
             self.run_process.communicate()
 
-    def exportONNX(self, debug):
+    def createExportFarm(self, debug):
         '''
         A Mutator function that runs a bash script that downloads, creates and runs
         an environment for exporting the trained .pth file to the final ONNX
         model file.
         '''
         self.build_export_process = subprocess.Popen([
-                              './trainer/exporter_files/scripts/install_p2exporter.sh',
+                              './trainer/exporter_files/scripts/install_p2exporter.bash',
                               self.model_name,
                               str(date.today()),
                               self.path_to_export_config,
@@ -140,9 +157,17 @@ class P2Trainer:
                               self.path_to_export_modif])
         if not debug:
             self.build_export_process.communicate()
+
+    def runExportFarm(self, debug):
+        '''
+        A Mutator function that runs a bash script that downloads, creates and runs
+        an environment for exporting the trained .pth file to the final ONNX
+        model file.
+        '''
         self.export_process = subprocess.Popen([
-                              './trainer/exporter_files/scripts/run_p2exporter.sh',
+                              './trainer/exporter_files/scripts/run_p2exporter.bash',
                               self.model_name,
-                              str(date.today())])
+                              str(date.today()),
+                              self.path_to_export_config])
         if not debug:
             self.export_process.communicate()

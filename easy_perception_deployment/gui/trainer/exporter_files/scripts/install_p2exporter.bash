@@ -24,7 +24,7 @@ then
       eval "$(conda shell.bash hook)"
       conda activate p2_exporter
       conda install ipython -y
-      pip install ninja yacs cython matplotlib tqdm opencv-python requests onnx onnxruntime
+      pip3 install ninja yacs cython matplotlib tqdm opencv-python requests onnx onnxruntime
 
       conda install -c pytorch pytorch-nightly cudatoolkit=10.0 -y
       conda install pytorch==1.2.0 torchvision -y # Temp for magic fix.
@@ -33,24 +33,24 @@ then
       git clone https://github.com/BowenBao/maskrcnn-benchmark.git --branch onnx_stage --single-branch p2_exporter
       cd p2_exporter
       export INSTALL_DIR=$PWD
-      python setup.py build install
+      python3 setup.py build develop
 
       # Install pycocotools
       git clone https://github.com/cocodataset/cocoapi.git
       cd cocoapi/PythonAPI
-      python setup.py build_ext install
+      python3 setup.py build_ext install
 
       # Install apex
       cd $INSTALL_DIR
       git clone https://github.com/NVIDIA/apex.git
       cd apex
-      python setup.py install
+      python3 setup.py install
 
       # Add in remove_initializer.py tool that is not naturally present in onnx_stage.
       cd $INSTALL_DIR
       mkdir -p configs/custom
-      cd $START_DIR
-      cp $path_to_export_config $INSTALL_DIR/configs/custom/fasterrcnn_export.yaml
+      # cd $START_DIR
+      # cp $path_to_export_config $INSTALL_DIR/configs/custom/fasterrcnn_export.yaml
 
       cd $INSTALL_DIR
       mkdir -p weights/custom
@@ -61,6 +61,8 @@ then
       cp $path_to_export_modif $INSTALL_DIR/demo/export_to_onnx.py
 
       echo "[p2_exporter] conda env created."
+else
+      echo "[p2_exporter] - FOUND. Skipping installation."
 fi
 
 unset env_exists INSTALL_DIR START_DIR
