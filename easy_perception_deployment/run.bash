@@ -28,6 +28,34 @@ if (( conda_ver < 2 )); then
     exit 1
 fi
 
+# Check if pretrained models have been downloaded.
+P1FILE=./data/model/squeezenet1.1-7.onnx
+if [ ! -f "$P1FILE" ]; then
+    echo "Downloading $P1FILE."
+    wget \
+    https://github.com/onnx/models/raw/master/vision/classification/squeezenet/model/squeezenet1.1-7.onnx \
+    --directory-prefix=./data/model/
+fi
+unset P1FILE
+
+P2FILE=./data/model/FasterRCNN-10.onnx
+if [ ! -f "$P2FILE" ]; then
+    echo "Downloading $P2FILE."
+    wget \
+    https://github.com/onnx/models/raw/master/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx \
+    --directory-prefix=./data/model/
+fi
+unset P2FILE
+
+P3FILE=./data/model/MaskRCNN-10.onnx
+if [ ! -f "$P3FILE" ]; then
+    echo "Downloading $P3FILE."
+    wget \
+    https://github.com/onnx/models/raw/master/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx \
+    --directory-prefix=./data/model/
+fi
+unset P3FILE
+
 # Checking if the epd_gui conda environment has been installed.
 env_exists=$(conda env list | grep epd_gui)
 
