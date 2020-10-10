@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-path_to_gui_run_script="$PWD/run.sh"
+path_to_gui_run_script="$PWD/run.bash"
 path_to_gui_icon_file="$PWD/gui/img/gui.png"
 
 outputdir1="$HOME/Desktop/"
