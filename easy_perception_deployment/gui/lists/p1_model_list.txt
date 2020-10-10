@@ -1,0 +1,7 @@
+resnet
+alexnet
+vgg
+squeezenet
+densenet
+inception
+mobilenet

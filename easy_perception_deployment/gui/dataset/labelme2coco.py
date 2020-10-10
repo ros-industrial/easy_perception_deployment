@@ -1,0 +1,182 @@
+# Copyright (C) 2016-2018 Kentaro Wada.
+# Copyright (C) 2011 Michael Pitidis, Hussein Abdulwahid.
+# Copyright 2020 Kenny Voo, ROS-Industrial Consortium Asia Pacific
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Modifications made:
+# - Excluded use of imgviz
+# - PIL.Image.fromarray(img).convert("RGB").save(out_img_file)
+# for line 93 of original code found in
+# https://github.com/wkentaro/labelme/blob/master/examples/
+# instance_segmentation/labelme2coco.py
+
+import argparse
+import collections
+import datetime
+import glob
+import json
+import os
+import os.path as osp
+import sys
+import uuid
+
+import labelme
+
+import numpy as np
+import PIL.Image
+
+try:
+    import pycocotools.mask
+except ImportError:
+    print('Please install pycocotools:\n\n    pip install pycocotools\n')
+    sys.exit(1)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument('input_dir', help='input annotated directory')
+    parser.add_argument('output_dir', help='output dataset directory')
+    parser.add_argument('--labels', help='labels file', required=True)
+    args = parser.parse_args()
+
+    if osp.exists(args.output_dir):
+        print('Output directory already exists:', args.output_dir)
+        sys.exit(1)
+    os.makedirs(args.output_dir)
+    os.makedirs(osp.join(args.output_dir, 'JPEGImages'))
+    print('Creating dataset:', args.output_dir)
+
+    now = datetime.datetime.now()
+
+    data = dict(
+        info=dict(
+            description=None,
+            url=None,
+            version=None,
+            year=now.year,
+            contributor=None,
+            date_created=now.strftime('%Y-%m-%d %H:%M:%S.%f'),
+        ),
+        licenses=[dict(url=None, id=0, name=None,)],
+        images=[
+            # license, url, file_name, height, width, date_captured, id
+        ],
+        type='instances',
+        annotations=[
+            # segmentation, area, iscrowd, image_id, bbox, category_id, id
+        ],
+        categories=[
+            # supercategory, id, name
+        ],
+    )
+
+    class_name_to_id = {}
+    for i, line in enumerate(open(args.labels).readlines()):
+        class_id = i - 1  # starts with -1
+        class_name = line.strip()
+        if class_id == -1:
+            assert class_name == '__ignore__'
+            continue
+        class_name_to_id[class_name] = class_id
+        data['categories'].append(
+            dict(supercategory=None, id=class_id, name=class_name,)
+        )
+
+    out_ann_file = osp.join(args.output_dir, 'annotations.json')
+    label_files = glob.glob(osp.join(args.input_dir, '*.json'))
+    for image_id, filename in enumerate(label_files):
+        print('Generating dataset from:', filename)
+
+        label_file = labelme.LabelFile(filename=filename)
+
+        base = osp.splitext(osp.basename(filename))[0]
+        out_img_file = osp.join(args.output_dir, 'JPEGImages', base + '.jpg')
+
+        img = labelme.utils.img_data_to_arr(label_file.imageData)
+        PIL.Image.fromarray(img).convert('RGB').save(out_img_file)
+        data['images'].append(
+            dict(
+                license=0,
+                url=None,
+                file_name=osp.relpath(out_img_file, osp.dirname(out_ann_file)),
+                height=img.shape[0],
+                width=img.shape[1],
+                date_captured=None,
+                id=image_id,
+            )
+        )
+
+        masks = {}  # for area
+        segmentations = collections.defaultdict(list)  # for segmentation
+        for shape in label_file.shapes:
+            points = shape['points']
+            label = shape['label']
+            group_id = shape.get('group_id')
+            shape_type = shape.get('shape_type', 'polygon')
+            mask = labelme.utils.shape_to_mask(
+                img.shape[:2], points, shape_type
+            )
+
+            if group_id is None:
+                group_id = uuid.uuid1()
+
+            instance = (label, group_id)
+
+            if instance in masks:
+                masks[instance] = masks[instance] | mask
+            else:
+                masks[instance] = mask
+
+            if shape_type == 'rectangle':
+                (x1, y1), (x2, y2) = points
+                x1, x2 = sorted([x1, x2])
+                y1, y2 = sorted([y1, y2])
+                points = [x1, y1, x2, y1, x2, y2, x1, y2]
+            else:
+                points = np.asarray(points).flatten().tolist()
+
+            segmentations[instance].append(points)
+        segmentations = dict(segmentations)
+
+        for instance, mask in masks.items():
+            cls_name, group_id = instance
+            if cls_name not in class_name_to_id:
+                continue
+            cls_id = class_name_to_id[cls_name]
+
+            mask = np.asfortranarray(mask.astype(np.uint8))
+            mask = pycocotools.mask.encode(mask)
+            area = float(pycocotools.mask.area(mask))
+            bbox = pycocotools.mask.toBbox(mask).flatten().tolist()
+
+            data['annotations'].append(
+                dict(
+                    id=len(data['annotations']),
+                    image_id=image_id,
+                    category_id=cls_id,
+                    segmentation=segmentations[instance],
+                    area=area,
+                    bbox=bbox,
+                    iscrowd=0,
+                )
+            )
+
+    with open(out_ann_file, 'w') as f:
+        json.dump(data, f)
+
+
+if __name__ == '__main__':
+    main()

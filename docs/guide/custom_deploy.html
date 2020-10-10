@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploying a custom ONNX Model &mdash; easy_perception_deployment  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Test" href="test.html" />
+    <link rel="prev" title="Training a P2/P3 Object Detection Model" href="custom_p2p3_train.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to easy_perception_deployment’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_p1_train.html">Training a P1 Image Classification Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_p2p3_train.html">Training a P2/P3 Object Detection Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deploying a custom ONNX Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#steps">Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-case-configuration">Use Case Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classification">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#counting">Counting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#color-matching">Color-Matching</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#incompatible-model-input-shape">Incompatible Model Input Shape?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">easy_perception_deployment</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Deploying a custom ONNX Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guide/custom_deploy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploying-a-custom-onnx-model">
+<span id="custom-deploy"></span><h1>Deploying a custom ONNX Model<a class="headerlink" href="#deploying-a-custom-onnx-model" title="Permalink to this headline">¶</a></h1>
+<p>Users are not limited to the models available or generated by <strong>easy_perception_deployment</strong> itself.</p>
+<p>You can generate your own ONNX model seperately, using your own training framework.</p>
+<p>As long as your ONNX model file fits the input shapes required, it can be deployed as a ROS2 inference
+engine all the same.</p>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<p>Follow the instruction below to deploy your own ONNX model. Be warned that the input shape of your model could
+be <em>currently incompatible</em> with that of <strong>easy_perception_deployment</strong>. If incompatible, please refer to the <a class="reference internal" href="#incompatible-model-input-shape">Incompatible Model Input Shape?</a> section below if the deployment fails.</p>
+<ol class="arabic simple">
+<li><p>Double-click on <code class="docutils literal notranslate"><span class="pre">easy_perception_deployment.desktop</span></code> file on your Desktop.</p></li>
+</ol>
+<p>The window labelled, <strong>easy_perception_deployment</strong> should appear.</p>
+<ol class="arabic simple" start="2">
+<li><p>Click on button labelled, <code class="docutils literal notranslate"><span class="pre">Deploy</span></code>.</p></li>
+</ol>
+<p>The window labelled, <strong>Deploy</strong> should appear.</p>
+<ol class="arabic simple" start="3">
+<li><p>Click on the button labelled, <strong>ONNX Model</strong>, and select your <code class="docutils literal notranslate"><span class="pre">.onnx</span></code> model file.</p></li>
+<li><p>Click on the button labelled, <strong>Label List</strong>, and select your <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file.</p></li>
+</ol>
+<p>Note that your label list should contain the object text labels that are sorted such that they are correctly mapped to the way the model has been trained to classify. See <code class="docutils literal notranslate"><span class="pre">data/label_list/coco_classes.txt</span></code> for an example.</p>
+<ol class="arabic simple" start="5">
+<li><p>Click on the DropDown menu labelled, <strong>Use Case</strong>, and select the Use-Case mode you wish to use.</p></li>
+</ol>
+<p>For more details on what Use-Case filter you can use to finetune your model inference output, please refer to the section, <a class="reference internal" href="#use-case-configuration">Use Case Configuration</a> below.</p>
+<ol class="arabic simple" start="6">
+<li><p>Once your Use-Case filter is selected, Click on the button labelled, <strong>Run</strong>.</p></li>
+</ol>
+<p>Your ONNX model will be read and deployed as a ROS2 package, awaiting input images to arrive on its topic.</p>
+</div>
+<div class="section" id="use-case-configuration">
+<h2>Use Case Configuration<a class="headerlink" href="#use-case-configuration" title="Permalink to this headline">¶</a></h2>
+<p><strong>Is your ONNX model trained to detect too many objects?</strong> Is your only option to limit the number of detection to retrain the model?</p>
+<p>Retraining a deep learning model is an extremely time-consuming task. That is why <strong>easy_perception_deployment</strong> offers the use of
+<strong>Use-Case Configuration</strong> to easily finetune the outputs of your inference engine.</p>
+<p>There are currently <strong>3 modes</strong> available.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>UseCase Mode No.</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Classification</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Counting</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Color-Matching</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="classification">
+<h3>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
+<p>This use-case runs default and does not alter the inference output of the input ONNX model.</p>
+</div>
+<div class="section" id="counting">
+<h3>Counting<a class="headerlink" href="#counting" title="Permalink to this headline">¶</a></h3>
+<p>This use-case allows users to select a subset of object labels from the original list of object labels which the input ONNX model is designed to detect.</p>
+<p>The inference output of a P2 or P3 model is then filtered to only show the user-selected objects.</p>
+</div>
+<div class="section" id="color-matching">
+<h3>Color-Matching<a class="headerlink" href="#color-matching" title="Permalink to this headline">¶</a></h3>
+<p>This use-case allows users to select a template reference image in the form of a <code class="docutils literal notranslate"><span class="pre">.png/.jpeg/.jpg</span></code> image file.</p>
+<p>The inference output of a P2 or P3 model is then filtered to only show detections that share similiarity with the reference image.</p>
+</div>
+</div>
+<div class="section" id="incompatible-model-input-shape">
+<h2>Incompatible Model Input Shape?<a class="headerlink" href="#incompatible-model-input-shape" title="Permalink to this headline">¶</a></h2>
+<p>Here at team ROS-Industrial Consortium Asia Pacific, we are continuously expanding the compatibility of
+different ONNX model with <strong>easy_perception_deployment</strong> over time.</p>
+<p>So if it is extremely difficult or impossible for you to tweak your model’s input shape
+please let us know by posting it as a GitHub issue <a class="reference external" href="https://github.com/ros-industrial/easy_perception_deployment/issues">here at official GitHub repository</a>.</p>
+<p>Thank you.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test.html" class="btn btn-neutral float-right" title="Test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="custom_p2p3_train.html" class="btn btn-neutral float-left" title="Training a P2/P3 Object Detection Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020,  Bey Hao Yun
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
