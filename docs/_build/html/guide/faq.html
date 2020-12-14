@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FAQ &mdash; easy_perception_deployment  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="p3_ort_base" href="../api/ort_cpp_lib/p3_ort_base.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to easy_perception_deployment’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_p1_train.html">Training a P1 Image Classification Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_p2p3_train.html">Training a P2/P3 Object Detection Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_deploy.html">Deploying a custom ONNX Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#issue-how-to-kill-the-program-faster">Issue: How to kill the program faster?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#issue-how-to-view-easy-perception-deployment-s-custom-messages">Issue: How to view easy_perception_deployment’s custom messages?</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">easy_perception_deployment</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>FAQ</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guide/faq.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="faq">
+<span id="id1"></span><h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<p>This article lists answers to frequently asked questions.</p>
+<div class="section" id="issue-how-to-kill-the-program-faster">
+<h2>Issue: How to kill the program faster?<a class="headerlink" href="#issue-how-to-kill-the-program-faster" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>easy_perception_deployment</strong> ROS2 package may take a long time to close when issued a kill signal via the Graphical User Interface (GUI).</p>
+<p>To kill it faster, do the following:</p>
+<p>Click on the terminal running the nodes.
+Press Ctrl + c to kill all nodes.</p>
+</div>
+<div class="section" id="issue-how-to-view-easy-perception-deployment-s-custom-messages">
+<h2>Issue: How to view easy_perception_deployment’s custom messages?<a class="headerlink" href="#issue-how-to-view-easy-perception-deployment-s-custom-messages" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>easy_perception_deployment</strong> ROS2 package outputs streamlined custom messages that can be used by external robotic agents in the following ROS2 topics:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/processor/epd_p1_output
+/processor/epd_p2_output
+/processor/epd_p3_output
+</pre></div>
+</div>
+<p>Follow the instructions below to view these messages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open a new terminal</span>
+<span class="nb">source</span> /opt/ros/foxy/setup.bash
+<span class="nb">source</span> ./epd_msgs/install/setup.bash
+<span class="c1"># For Precision Level 1 output</span>
+ros2 topic <span class="nb">echo</span> /processor/epd_p1_output
+<span class="c1"># For Precision Level 2 output</span>
+ros2 topic <span class="nb">echo</span> /processor/epd_p2_output
+<span class="c1"># For Precision Level 3 output</span>
+ros2 topic <span class="nb">echo</span> /processor/epd_p3_output
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../api/ort_cpp_lib/p3_ort_base.html" class="btn btn-neutral float-left" title="p3_ort_base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020,  Bey Hao Yun
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

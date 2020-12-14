@@ -48,9 +48,9 @@ public:
   /*! \brief A fixed integer for expected RGB 2D images*/
   const int IMG_CHANNEL = 3;
   /*! \brief The constant filepath to session_config.txt*/
-  const std::string PATH_TO_SESSION_CONFIG = "data/session_config.txt";
+  const std::string PATH_TO_SESSION_CONFIG = PATH_TO_PACKAGE "/data/session_config.txt";
   /*! \brief The constant filepath to usecase_config.txt*/
-  const std::string PATH_TO_USECASE_CONFIG = "data/usecase_config.txt";
+  const std::string PATH_TO_USECASE_CONFIG = PATH_TO_PACKAGE "/data/usecase_config.txt";
   /*! \brief The filepath to a template color image for Color-Matching use-case
   * filter.
   */

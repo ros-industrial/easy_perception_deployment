@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classImageViewer" kind="class" language="C++" prot="public">
+    <compoundname>ImageViewer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Node</basecompoundref>
+    <includes local="no">image_viewer.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classImageViewer_1a2043be9b399137b023c93487a2cd0c4a" prot="private" static="no" mutable="no">
+        <type>rclcpp::Subscription&lt; sensor_msgs::msg::Image &gt;::SharedPtr</type>
+        <definition>rclcpp::Subscription&lt;sensor_msgs::msg::Image&gt;::SharedPtr ImageViewer::sub_1_</definition>
+        <argsstring></argsstring>
+        <name>sub_1_</name>
+        <briefdescription>
+<para>A subscriber member variable to receive images to receive. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" line="43" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classImageViewer_1a0b97f3ed5b0d8c9f166e4d0896704164" prot="private" static="no" mutable="no">
+        <type>rclcpp::Subscription&lt; std_msgs::msg::String &gt;::SharedPtr</type>
+        <definition>rclcpp::Subscription&lt;std_msgs::msg::String&gt;::SharedPtr ImageViewer::sub_2_</definition>
+        <argsstring></argsstring>
+        <name>sub_2_</name>
+        <briefdescription>
+<para>A subscriber member variable to receive remote calls to shutdown. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" line="45" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classImageViewer_1a968687d70a4f15be8442212da98ad36b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ImageViewer::ImageViewer</definition>
+        <argsstring>()</argsstring>
+        <name>ImageViewer</name>
+        <briefdescription>
+<para>A Constructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" line="39" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" bodystart="56" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classImageViewer_1ad5179bd54d5bde2fe12b5f0cbf76c204" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ImageViewer::encoding2mat_type</definition>
+        <argsstring>(const std::string &amp;encoding) const</argsstring>
+        <name>encoding2mat_type</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>encoding</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that sets the appropriate image encodings for displaying input images. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" line="49" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" bodystart="78" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classImageViewer_1aec81a9a8c06cecca37c376f67588bb2c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageViewer::image_callback</definition>
+        <argsstring>(const sensor_msgs::msg::Image::SharedPtr msg) const</argsstring>
+        <name>image_callback</name>
+        <param>
+          <type>const sensor_msgs::msg::Image::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>A ROS2 callback function utilized by sub_1. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" line="51" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" bodystart="99" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classImageViewer_1a1ba06a0a1eeb1ff80cfd3b62ee968011" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageViewer::state_callback</definition>
+        <argsstring>(const std_msgs::msg::String::SharedPtr msg) const</argsstring>
+        <name>state_callback</name>
+        <param>
+          <type>const std_msgs::msg::String::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>A ROS2 callback function utilized by sub_2. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" line="53" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" bodystart="115" bodyend="124"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An <ref refid="classImageViewer" kindref="compound">ImageViewer</ref> class object. The <ref refid="classImageViewer" kindref="compound">ImageViewer</ref> class object inherits from the rclcpp::Node object to provide a localized way of viewing the output inference visualization results. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="16">
+        <label>ImageViewer</label>
+        <link refid="classImageViewer"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Node</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="18">
+        <label>ImageViewer</label>
+        <link refid="classImageViewer"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>Node</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" line="36" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/image_viewer.hpp" bodystart="35" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classImageViewer_1ad5179bd54d5bde2fe12b5f0cbf76c204" prot="private" virt="non-virtual"><scope>ImageViewer</scope><name>encoding2mat_type</name></member>
+      <member refid="classImageViewer_1aec81a9a8c06cecca37c376f67588bb2c" prot="private" virt="non-virtual"><scope>ImageViewer</scope><name>image_callback</name></member>
+      <member refid="classImageViewer_1a968687d70a4f15be8442212da98ad36b" prot="public" virt="non-virtual"><scope>ImageViewer</scope><name>ImageViewer</name></member>
+      <member refid="classImageViewer_1a1ba06a0a1eeb1ff80cfd3b62ee968011" prot="private" virt="non-virtual"><scope>ImageViewer</scope><name>state_callback</name></member>
+      <member refid="classImageViewer_1a2043be9b399137b023c93487a2cd0c4a" prot="private" virt="non-virtual"><scope>ImageViewer</scope><name>sub_1_</name></member>
+      <member refid="classImageViewer_1a0b97f3ed5b0d8c9f166e4d0896704164" prot="private" virt="non-virtual"><scope>ImageViewer</scope><name>sub_2_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

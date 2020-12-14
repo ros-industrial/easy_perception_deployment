@@ -15,10 +15,16 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <string>
 #include "bits/stdc++.h"
 #include "epd_utils_lib/epd_container.hpp"
 #include "gtest/gtest.h"
+
+std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/data/session_config.txt");
+std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/data/usecase_config.txt");
+std::string PATH_TO_ONNX_MODEL(PATH_TO_PACKAGE "/data/model/FasterRCNN-10.onnx");
+std::string PATH_TO_LABEL_LIST(PATH_TO_PACKAGE "/data/label_list/coco_classes.txt");
+std::string PATH_TO_TEST_IMAGE(PATH_TO_PACKAGE "/data/9544757988_991457c228_z.jpg");
 
 bool is_file_exist(const char * fileName)
 {
@@ -28,28 +34,28 @@ bool is_file_exist(const char * fileName)
 
 TEST(EPD_TestSuite, Test_loadP2ONNXModel_EPDContainer)
 {
-  if (!is_file_exist("./data/session_config.txt")) {
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/FasterRCNN-10.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/coco_classes.txt >> ./data/session_config.txt");
-    system("echo robot >> ./data/session_config.txt");
+  if (!is_file_exist(PATH_TO_SESSION_CONFIG.c_str())) {
+    system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo robot >> " + PATH_TO_SESSION_CONFIG).c_str());
   } else {
-    system("rm ./data/session_config.txt");
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/FasterRCNN-10.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/coco_classes.txt >> ./data/session_config.txt");
-    system("echo robot >> ./data/session_config.txt");
+    system(("rm " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo robot >> " + PATH_TO_SESSION_CONFIG).c_str());
   }
 
-  if (!is_file_exist("./data/usecase_config.txt")) {
-    system("touch ./data/usecase_config.txt");
-    system("echo 1 >> ./data/usecase_config.txt");
-    system("echo person >> ./data/usecase_config.txt");
+  if (!is_file_exist(PATH_TO_USECASE_CONFIG.c_str())) {
+    system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("echo 1 >> " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("echo person >> " + PATH_TO_USECASE_CONFIG).c_str());
   } else {
-    system("rm ./data/usecase_config.txt");
-    system("touch ./data/usecase_config.txt");
-    system("echo 1 >> ./data/usecase_config.txt");
-    system("echo person >> ./data/usecase_config.txt");
+    system(("rm " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("echo 1 >> " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("echo person >> " + PATH_TO_USECASE_CONFIG).c_str());
   }
 
   EPD::EPDContainer * ortAgent_;
@@ -60,7 +66,7 @@ TEST(EPD_TestSuite, Test_loadP2ONNXModel_EPDContainer)
   EXPECT_EQ(ortAgent_->classNames.size(), unsigned(81));
 
   // Download and load test image
-  cv::Mat frame = cv::imread("./data/9544757988_991457c228_z.jpg", CV_LOAD_IMAGE_COLOR);
+  cv::Mat frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
 
   ortAgent_->setFrameDimension(frame.cols, frame.rows);
   ortAgent_->initORTSessionHandler();

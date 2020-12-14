@@ -23,6 +23,7 @@
 
 #include "ort_cpp_lib/ort_base.hpp"
 #include "epd_utils_lib/message_utils.hpp"
+#include "sensor_msgs/msg/camera_info.hpp"
 
 
 namespace Ort
@@ -56,9 +57,24 @@ public:
   /*! \brief A auxillary Mutator function that calls the internal overloading
   infer_visualize function.*/
   cv::Mat infer_visualize(const cv::Mat & inputImg);
+
+  /*! \brief A auxillary Mutator function that calls the internal overloading
+  infer_visualize function with depth_msg and camera_info.*/
+  cv::Mat infer_visualize(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info);
+
   /*! \brief A auxillary Mutator function that calls the internal overloading
   infer_action function.*/
   EPD::EPDObjectDetection infer_action(const cv::Mat & inputImg);
+
+  /*! \brief A auxillary Mutator function that calls the internal overloading
+  infer_action function.*/
+  EPD::EPDObjectLocalization infer_action(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info);
 
   /*! \brief A Getter function that gets the number of object names used for an
   ongoing session.*/
@@ -120,9 +136,39 @@ private:
     const cv::Scalar & meanVal);
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
+  inference result for visualization purposes with localization results.*/
+  cv::Mat infer_visualize(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
+    int newW,
+    int newH,
+    int paddedW,
+    int paddedH,
+    float ratio,
+    float * dst,
+    float confThresh,
+    const cv::Scalar & meanVal);
+
+  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result for use by external agents.*/
   EPD::EPDObjectDetection infer_action(
     const cv::Mat & inputImg,
+    int newW,
+    int newH,
+    int paddedW,
+    int paddedH,
+    float ratio,
+    float * dst,
+    float confThresh,
+    const cv::Scalar & meanVal);
+
+  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
+  inference result for use by external agents.*/
+  EPD::EPDObjectLocalization infer_action(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
     int newW,
     int newH,
     int paddedW,
@@ -137,6 +183,21 @@ private:
   purposes.*/
   cv::Mat visualize(
     const cv::Mat & img,
+    const std::vector<std::array<float, 4>> & bboxes,
+    const std::vector<uint64_t> & classIndices,
+    const std::vector<cv::Mat> & masks,
+    const std::vector<std::string> & allClassNames,
+    const float maskThreshold);
+
+  double findMedian(cv::Mat depthImg);
+
+  /*! \brief A Mutator function that takes P2 inference outputs and illustrates
+  derived bounding boxes with corresponding object labels for visualization
+  purposes.*/
+  cv::Mat localize_visualize(
+    const cv::Mat & img,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
     const std::vector<std::array<float, 4>> & bboxes,
     const std::vector<uint64_t> & classIndices,
     const std::vector<cv::Mat> & masks,

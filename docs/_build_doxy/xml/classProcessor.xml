@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classProcessor" kind="class" language="C++" prot="public">
+    <compoundname>Processor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Node</basecompoundref>
+    <includes local="no">processor.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classProcessor_1a4329d7ce1d8b70098f624fb0238cf9c1" prot="private" static="no" mutable="no">
+        <type>rclcpp::Subscription&lt; std_msgs::msg::String &gt;::SharedPtr</type>
+        <definition>rclcpp::Subscription&lt;std_msgs::msg::String&gt;::SharedPtr Processor::status_sub</definition>
+        <argsstring></argsstring>
+        <name>status_sub</name>
+        <briefdescription>
+<para>A subscriber member variable to receive remote calls to shutdown. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="54" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classProcessor_1ac9ec915fae6bacf723ee6b93b48d06cc" prot="private" static="no" mutable="no">
+        <type>rclcpp::Subscription&lt; sensor_msgs::msg::Image &gt;::SharedPtr</type>
+        <definition>rclcpp::Subscription&lt;sensor_msgs::msg::Image&gt;::SharedPtr Processor::image_sub</definition>
+        <argsstring></argsstring>
+        <name>image_sub</name>
+        <briefdescription>
+<para>A subscriber member variable to receive images to receive. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="56" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classProcessor_1a61365d6da00f9053e36b2ab7cf666e1b" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; sensor_msgs::msg::Image &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;sensor_msgs::msg::Image&gt;::SharedPtr Processor::visual_pub</definition>
+        <argsstring></argsstring>
+        <name>visual_pub</name>
+        <briefdescription>
+<para>A publisher member variable to output visualization of inference results. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="59" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classProcessor_1a7d33a83eb12d67913c0a941f6f1c945a" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; epd_msgs::msg::EPDImageClassification &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;epd_msgs::msg::EPDImageClassification&gt;::SharedPtr Processor::p1_pub</definition>
+        <argsstring></argsstring>
+        <name>p1_pub</name>
+        <briefdescription>
+<para>A publisher member variable to output Precision-Level 1 (P1) specific inference output suitable for external agents. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="62" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classProcessor_1ace77cfbe4bc34f1704366b662f798e8c" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; epd_msgs::msg::EPDObjectDetection &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;epd_msgs::msg::EPDObjectDetection&gt;::SharedPtr Processor::p2_pub</definition>
+        <argsstring></argsstring>
+        <name>p2_pub</name>
+        <briefdescription>
+<para>A publisher member variable to output Precision-Level 2 (P2) specific inference output suitable for external agents. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="65" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classProcessor_1ac2adb0a4bd305f85c98a5c0b60e21782" prot="private" static="no" mutable="no">
+        <type>rclcpp::Publisher&lt; epd_msgs::msg::EPDObjectDetection &gt;::SharedPtr</type>
+        <definition>rclcpp::Publisher&lt;epd_msgs::msg::EPDObjectDetection&gt;::SharedPtr Processor::p3_pub</definition>
+        <argsstring></argsstring>
+        <name>p3_pub</name>
+        <briefdescription>
+<para>A publisher member variable to output Precision-Level 3 (P3) specific inference output suitable for external agents. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="68" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classProcessor_1ab8052dce81742f7806b2f258299970eb" prot="private" static="no" mutable="yes">
+        <type><ref refid="classEPD_1_1EPDContainer" kindref="compound">EPD::EPDContainer</ref></type>
+        <definition>EPD::EPDContainer Processor::ortAgent_</definition>
+        <argsstring></argsstring>
+        <name>ortAgent_</name>
+        <briefdescription>
+<para>A EPDContainer member object that serves as the aforementioned bridge. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="71" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classProcessor_1a65c205fad80987ed72216978e882cb80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Processor::Processor</definition>
+        <argsstring>(void)</argsstring>
+        <name>Processor</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A Constructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="50" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="84" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classProcessor_1ae5e88546782dc0d19b94457f29576f37" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Processor::topic_callback</definition>
+        <argsstring>(const sensor_msgs::msg::Image::SharedPtr msg) const</argsstring>
+        <name>topic_callback</name>
+        <param>
+          <type>const sensor_msgs::msg::Image::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>A ROS2 callback function utilized by image_sub.<linebreak/>
+It gets ortAgent_ to initialize once and only once when the first input image is received.<linebreak/>
+It also populates the appropriate ROS messages with EPDImageClassification/ EPDObjectDetection when the onlyVisualize boolean flag is set to false.<linebreak/>
+. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="79" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="124" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classProcessor_1abd818909057ac19f8f622258cb29e28b" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Processor::state_callback</definition>
+        <argsstring>(const std_msgs::msg::String::SharedPtr msg) const</argsstring>
+        <name>state_callback</name>
+        <param>
+          <type>const std_msgs::msg::String::SharedPtr</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>A ROS2 callback function utilized by status_sub. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="81" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="113" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An <ref refid="classProcessor" kindref="compound">Processor</ref> class object. This class object inherits rclcpp::Node object and acts the main bridge between the ROS2 interface and the underlying ort_cpp_lib library that is based on ONNXRuntime Library. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="47">
+        <label>Processor</label>
+        <link refid="classProcessor"/>
+        <childnode refid="48" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>rclcpp::Node</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="49">
+        <label>Processor</label>
+        <link refid="classProcessor"/>
+        <childnode refid="50" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>rclcpp::Node</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" line="47" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/processor.hpp" bodystart="46" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classProcessor_1ac9ec915fae6bacf723ee6b93b48d06cc" prot="private" virt="non-virtual"><scope>Processor</scope><name>image_sub</name></member>
+      <member refid="classProcessor_1ab8052dce81742f7806b2f258299970eb" prot="private" virt="non-virtual"><scope>Processor</scope><name>ortAgent_</name></member>
+      <member refid="classProcessor_1a7d33a83eb12d67913c0a941f6f1c945a" prot="private" virt="non-virtual"><scope>Processor</scope><name>p1_pub</name></member>
+      <member refid="classProcessor_1ace77cfbe4bc34f1704366b662f798e8c" prot="private" virt="non-virtual"><scope>Processor</scope><name>p2_pub</name></member>
+      <member refid="classProcessor_1ac2adb0a4bd305f85c98a5c0b60e21782" prot="private" virt="non-virtual"><scope>Processor</scope><name>p3_pub</name></member>
+      <member refid="classProcessor_1a65c205fad80987ed72216978e882cb80" prot="public" virt="non-virtual"><scope>Processor</scope><name>Processor</name></member>
+      <member refid="classProcessor_1abd818909057ac19f8f622258cb29e28b" prot="private" virt="non-virtual"><scope>Processor</scope><name>state_callback</name></member>
+      <member refid="classProcessor_1a4329d7ce1d8b70098f624fb0238cf9c1" prot="private" virt="non-virtual"><scope>Processor</scope><name>status_sub</name></member>
+      <member refid="classProcessor_1ae5e88546782dc0d19b94457f29576f37" prot="private" virt="non-virtual"><scope>Processor</scope><name>topic_callback</name></member>
+      <member refid="classProcessor_1a61365d6da00f9053e36b2ab7cf666e1b" prot="private" virt="non-virtual"><scope>Processor</scope><name>visual_pub</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

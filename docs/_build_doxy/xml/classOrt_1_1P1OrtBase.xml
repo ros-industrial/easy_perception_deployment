@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classOrt_1_1P1OrtBase" kind="class" language="C++" prot="public">
+    <compoundname>Ort::P1OrtBase</compoundname>
+    <basecompoundref refid="classOrt_1_1OrtBase" prot="public" virt="non-virtual">Ort::OrtBase</basecompoundref>
+    <includes local="no">p1_ort_base.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1a40909cc97bf43740f64d93e76d5ab034" prot="public" static="yes" mutable="no">
+        <type>constexpr int64_t</type>
+        <definition>constexpr int64_t Ort::P1OrtBase::MIN_IMAGE_SIZE</definition>
+        <argsstring></argsstring>
+        <name>MIN_IMAGE_SIZE</name>
+        <initializer>= 800</initializer>
+        <briefdescription>
+<para>A fixed minimal image size needed for a lower bound requirement for image classification of adequate result. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="39" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1a94681197c3c1d1247c04007f57731886" prot="private" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t Ort::P1OrtBase::m_numClasses</definition>
+        <argsstring></argsstring>
+        <name>m_numClasses</name>
+        <briefdescription>
+<para>The number of object text labels given an input label list. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="70" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1a01e49fa87cebce6a145d7a57f3f1933a" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Ort::P1OrtBase::m_ratio</definition>
+        <argsstring></argsstring>
+        <name>m_ratio</name>
+        <briefdescription>
+<para>The aspect ratio calculated from the dimension of an input image frame, which is provided when the first input image is received by <ref refid="classProcessor" kindref="compound">Processor</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="73" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1a34601011c38caa12257e795fe9ffd411" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P1OrtBase::m_newW</definition>
+        <argsstring></argsstring>
+        <name>m_newW</name>
+        <briefdescription>
+<para>The new padded frame dimensions of an input image. This is used for P2 and P3 object detection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="76" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1a7ae2e9037b0c770e61e4c76f41c42d47" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P1OrtBase::m_newH</definition>
+        <argsstring></argsstring>
+        <name>m_newH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="76" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1aa72585892eaa6674fe8303afb84eaf80" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P1OrtBase::m_paddedW</definition>
+        <argsstring></argsstring>
+        <name>m_paddedW</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="76" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1a3349f7146d6fc53007945cbf6121ae3d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P1OrtBase::m_paddedH</definition>
+        <argsstring></argsstring>
+        <name>m_paddedH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="76" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P1OrtBase_1ad87ef87ea22f18c2154c890e65f7ddfb" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; Ort::P1OrtBase::m_classNames</definition>
+        <argsstring></argsstring>
+        <name>m_classNames</name>
+        <briefdescription>
+<para>A vector of object text labels given an input label list. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="78" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1a05b148f3414980d6b8ac5a141ee13097" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Ort::P1OrtBase::P1OrtBase</definition>
+        <argsstring>(float ratio, int newW, int newH, int paddedW, int paddedH, const uint16_t numClasses, const std::string &amp;modelPath, const boost::optional&lt; size_t &gt; &amp;gpuIdx=boost::none, const boost::optional&lt; std::vector&lt; std::vector&lt; int64_t &gt;&gt;&gt; &amp;inputShapes=boost::none)</argsstring>
+        <name>P1OrtBase</name>
+        <param>
+          <type>float</type>
+          <declname>ratio</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newH</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedH</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>numClasses</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelPath</declname>
+        </param>
+        <param>
+          <type>const boost::optional&lt; size_t &gt; &amp;</type>
+          <declname>gpuIdx</declname>
+          <defval>boost::none</defval>
+        </param>
+        <param>
+          <type>const boost::optional&lt; std::vector&lt; std::vector&lt; int64_t &gt;&gt;&gt; &amp;</type>
+          <declname>inputShapes</declname>
+          <defval>boost::none</defval>
+        </param>
+        <briefdescription>
+<para>A Constructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1a19cf0a0880d10c89a23d8c4b81caacbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Ort::P1OrtBase::~P1OrtBase</definition>
+        <argsstring>()</argsstring>
+        <name>~P1OrtBase</name>
+        <briefdescription>
+<para>A Destructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="53" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1ade038de1967c2ac01af7ab617dbcea1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; Ort::P1OrtBase::infer</definition>
+        <argsstring>(const cv::Mat &amp;inputImg)</argsstring>
+        <name>infer</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>inputImg</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that runs the P1 Ort Session and gets P1 inference result. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1a7b4c1a46a93093056ab2f876a041cf51" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t Ort::P1OrtBase::getNumClasses</definition>
+        <argsstring>() const</argsstring>
+        <name>getNumClasses</name>
+        <briefdescription>
+<para>A Getter function that gets the number of object names used for an ongoing session. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="59" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1a7f2be8e4674922acb5a110592274bbd3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; std::string &gt; &amp;</type>
+        <definition>const std::vector&lt;std::string&gt;&amp; Ort::P1OrtBase::getClassNames</definition>
+        <argsstring>() const</argsstring>
+        <name>getClassNames</name>
+        <briefdescription>
+<para>A Getter function that gets the list of object text labels which will be used for outputting visualized inference result or for specific use-case filters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="63" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1a50b24dd8c6b24da94557eac897ea5457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Ort::P1OrtBase::initClassNames</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;classNames)</argsstring>
+        <name>initClassNames</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>classNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that sets the list of object text labels to be used for the P1 Ort Session. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="66" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1aca28daefa4cc4a3b3467c31e6719c67d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Ort::P1OrtBase::preprocess</definition>
+        <argsstring>(float *dst, const unsigned char *src, const int64_t targetImgWidth, const int64_t targetImgHeight, const size_t numChannels, const std::vector&lt; float &gt; &amp;meanVal={}, const std::vector&lt; float &gt; &amp;stdVal={}) const</argsstring>
+        <name>preprocess</name>
+        <param>
+          <type>float *</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const int64_t</type>
+          <declname>targetImgWidth</declname>
+        </param>
+        <param>
+          <type>const int64_t</type>
+          <declname>targetImgHeight</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>numChannels</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; float &gt; &amp;</type>
+          <declname>meanVal</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; float &gt; &amp;</type>
+          <declname>stdVal</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>A Mutator function that converts a 3-layered 2D RGB input image into a 1D input data tensor to be passed to the Ort Session for processing.<linebreak/>
+This variant takes a generic input image represented by a char pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="84" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1a5981f45d9c40392697f48ecfc01ef56d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::pair&lt; int, float &gt; &gt;</type>
+        <definition>std::vector&lt;std::pair&lt;int, float&gt; &gt; Ort::P1OrtBase::getTopKRaw</definition>
+        <argsstring>(const std::vector&lt; float *&gt; &amp;inferenceOutput, const uint16_t k=1, const bool useSoftmax=true) const</argsstring>
+        <name>getTopKRaw</name>
+        <param>
+          <type>const std::vector&lt; float *&gt; &amp;</type>
+          <declname>inferenceOutput</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>k</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>useSoftmax</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>An Mutator function that takes the inference output and determines the most possible object identity given an input label list. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="95" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P1OrtBase_1a7be731ea15a3295f543e918be88ba112" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; Ort::P1OrtBase::processTopK</definition>
+        <argsstring>(const std::vector&lt; float *&gt; &amp;inferenceOutput, const uint16_t k=1, const bool useSoftmax=true) const</argsstring>
+        <name>processTopK</name>
+        <param>
+          <type>const std::vector&lt; float *&gt; &amp;</type>
+          <declname>inferenceOutput</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>k</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>useSoftmax</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes the inference output and determines the most possible object identity given an input label list. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="103" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An Precision-Level 1 (P1) ONNXRuntime (Ort) Base class object. This class object instantiates a Precision Level 1 Ort Session which takes a typical ONNX model used for solely image classification and runs an inferenc engine. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="30">
+        <label>Ort::OrtBase</label>
+        <link refid="classOrt_1_1OrtBase"/>
+      </node>
+      <node id="29">
+        <label>Ort::P1OrtBase</label>
+        <link refid="classOrt_1_1P1OrtBase"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="32">
+        <label>Ort::OrtBase</label>
+        <link refid="classOrt_1_1OrtBase"/>
+      </node>
+      <node id="31">
+        <label>Ort::P1OrtBase</label>
+        <link refid="classOrt_1_1P1OrtBase"/>
+        <childnode refid="32" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" line="35" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p1_ort_base.hpp" bodystart="34" bodyend="107"/>
+    <listofallmembers>
+      <member refid="classOrt_1_1OrtBase_1adf2da264432541eb7cdf1122f742e9c4" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>DataOutputType</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a7f2be8e4674922acb5a110592274bbd3" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>getClassNames</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a7b4c1a46a93093056ab2f876a041cf51" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>getNumClasses</name></member>
+      <member refid="classOrt_1_1OrtBase_1a9d54c41654fed1d5bee18b089d5a6edd" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>getNumOutputs</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a5981f45d9c40392697f48ecfc01ef56d" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>getTopKRaw</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1ade038de1967c2ac01af7ab617dbcea1b" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>infer</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a50b24dd8c6b24da94557eac897ea5457" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>initClassNames</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1ad87ef87ea22f18c2154c890e65f7ddfb" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>m_classNames</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a7ae2e9037b0c770e61e4c76f41c42d47" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>m_newH</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a34601011c38caa12257e795fe9ffd411" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>m_newW</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a94681197c3c1d1247c04007f57731886" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>m_numClasses</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a3349f7146d6fc53007945cbf6121ae3d" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>m_paddedH</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1aa72585892eaa6674fe8303afb84eaf80" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>m_paddedW</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a01e49fa87cebce6a145d7a57f3f1933a" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>m_ratio</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a40909cc97bf43740f64d93e76d5ab034" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>MIN_IMAGE_SIZE</name></member>
+      <member refid="classOrt_1_1OrtBase_1a3fc8f611e4392faec49fea733b23ccb5" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>operator()</name></member>
+      <member refid="classOrt_1_1OrtBase_1ad81b15848098d8137f8816fb1a491dab" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>OrtBase</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a05b148f3414980d6b8ac5a141ee13097" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>P1OrtBase</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1aca28daefa4cc4a3b3467c31e6719c67d" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>preprocess</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a7be731ea15a3295f543e918be88ba112" prot="private" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>processTopK</name></member>
+      <member refid="classOrt_1_1OrtBase_1ab311e3e35bd05728ec48f5a42947d172" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>~OrtBase</name></member>
+      <member refid="classOrt_1_1P1OrtBase_1a19cf0a0880d10c89a23d8c4b81caacbe" prot="public" virt="non-virtual"><scope>Ort::P1OrtBase</scope><name>~P1OrtBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

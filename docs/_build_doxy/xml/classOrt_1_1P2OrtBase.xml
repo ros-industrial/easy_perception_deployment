@@ -1,0 +1,513 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classOrt_1_1P2OrtBase" kind="class" language="C++" prot="public">
+    <compoundname>Ort::P2OrtBase</compoundname>
+    <basecompoundref refid="classOrt_1_1OrtBase" prot="public" virt="non-virtual">Ort::OrtBase</basecompoundref>
+    <includes local="no">p2_ort_base.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1a4721a6e4cca7bd60b90143278ad7a2b2" prot="public" static="yes" mutable="no">
+        <type>constexpr int64_t</type>
+        <definition>constexpr int64_t Ort::P2OrtBase::MIN_IMAGE_SIZE</definition>
+        <argsstring></argsstring>
+        <name>MIN_IMAGE_SIZE</name>
+        <initializer>= 800</initializer>
+        <briefdescription>
+<para>A fixed minimal image size needed for a lower bound requirement for image classification of adequate result. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="40" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1aa75e0f0580414f2fc51be71e4a6438b3" prot="private" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t Ort::P2OrtBase::m_numClasses</definition>
+        <argsstring></argsstring>
+        <name>m_numClasses</name>
+        <briefdescription>
+<para>The number of object text labels given an input label list. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="74" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1a2cca8b3a61987dbd61b256c6783e9675" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Ort::P2OrtBase::m_ratio</definition>
+        <argsstring></argsstring>
+        <name>m_ratio</name>
+        <briefdescription>
+<para>The aspect ratio calculated from the dimension of an input image frame, which is provided when the first input image is received by <ref refid="classProcessor" kindref="compound">Processor</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="77" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1a60fccea90926277bf24e07755c7d6d66" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P2OrtBase::m_newW</definition>
+        <argsstring></argsstring>
+        <name>m_newW</name>
+        <briefdescription>
+<para>The new padded frame dimensions of an input image. This is used for P2 and P3 object detection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="80" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1aea8cd377365876275653bc55cfca0d81" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P2OrtBase::m_newH</definition>
+        <argsstring></argsstring>
+        <name>m_newH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="80" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1a32b6592157d3e99b34ae6674ec708173" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P2OrtBase::m_paddedW</definition>
+        <argsstring></argsstring>
+        <name>m_paddedW</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="80" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1a144e05345b9b98cf4c877cf8746b2b87" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Ort::P2OrtBase::m_paddedH</definition>
+        <argsstring></argsstring>
+        <name>m_paddedH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="80" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classOrt_1_1P2OrtBase_1ad4695a5227d13031811148b733e2a1b1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; Ort::P2OrtBase::m_classNames</definition>
+        <argsstring></argsstring>
+        <name>m_classNames</name>
+        <briefdescription>
+<para>A vector of object text labels given an input label list. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="82" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1a7de210a80972444587b5bfe8513a5501" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Ort::P2OrtBase::P2OrtBase</definition>
+        <argsstring>(float ratio, int newW, int newH, int paddedW, int paddedH, const uint16_t numClasses, const std::string &amp;modelPath, const boost::optional&lt; size_t &gt; &amp;gpuIdx=boost::none, const boost::optional&lt; std::vector&lt; std::vector&lt; int64_t &gt;&gt;&gt; &amp;inputShapes=boost::none)</argsstring>
+        <name>P2OrtBase</name>
+        <param>
+          <type>float</type>
+          <declname>ratio</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newH</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedH</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>numClasses</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelPath</declname>
+        </param>
+        <param>
+          <type>const boost::optional&lt; size_t &gt; &amp;</type>
+          <declname>gpuIdx</declname>
+          <defval>boost::none</defval>
+        </param>
+        <param>
+          <type>const boost::optional&lt; std::vector&lt; std::vector&lt; int64_t &gt;&gt;&gt; &amp;</type>
+          <declname>inputShapes</declname>
+          <defval>boost::none</defval>
+        </param>
+        <briefdescription>
+<para>A Constructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="42" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1ac8cc28f37ed1936e234d07c5e8e47e8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Ort::P2OrtBase::~P2OrtBase</definition>
+        <argsstring>()</argsstring>
+        <name>~P2OrtBase</name>
+        <briefdescription>
+<para>A Destructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="53" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1acf9dff96064c44f8a28065374418e589" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>cv::Mat</type>
+        <definition>cv::Mat Ort::P2OrtBase::infer_visualize</definition>
+        <argsstring>(const cv::Mat &amp;inputImg)</argsstring>
+        <name>infer_visualize</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>inputImg</declname>
+        </param>
+        <briefdescription>
+<para>A auxillary Mutator function that calls the internal overloading infer_visualize function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1a42373d699b170d9be763416554072c3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classEPD_1_1EPDObjectDetection" kindref="compound">EPD::EPDObjectDetection</ref></type>
+        <definition>EPD::EPDObjectDetection Ort::P2OrtBase::infer_action</definition>
+        <argsstring>(const cv::Mat &amp;inputImg)</argsstring>
+        <name>infer_action</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>inputImg</declname>
+        </param>
+        <briefdescription>
+<para>A auxillary Mutator function that calls the internal overloading infer_action function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1ab0ffafc5d9fe6fbd5670033eed582868" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t Ort::P2OrtBase::getNumClasses</definition>
+        <argsstring>() const</argsstring>
+        <name>getNumClasses</name>
+        <briefdescription>
+<para>A Getter function that gets the number of object names used for an ongoing session. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="63" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1a62519274b331a67e661e01fde9c7b4ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; std::string &gt; &amp;</type>
+        <definition>const std::vector&lt;std::string&gt;&amp; Ort::P2OrtBase::getClassNames</definition>
+        <argsstring>() const</argsstring>
+        <name>getClassNames</name>
+        <briefdescription>
+<para>A Getter function that gets the list of object text labels which will be used for outputting visualized inference result or for specific use-case filters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="67" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1abd05c26b896f4b83e83940f41a3d46c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Ort::P2OrtBase::initClassNames</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;classNames)</argsstring>
+        <name>initClassNames</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>classNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that sets the list of object text labels to be used for the P1 Ort Session. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="70" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1aa7c54074fd5f54ec8ef1e293595f2569" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Ort::P2OrtBase::preprocess</definition>
+        <argsstring>(float *dst, const float *src, const int64_t targetImgWidth, const int64_t targetImgHeight, const int numChannels) const</argsstring>
+        <name>preprocess</name>
+        <param>
+          <type>float *</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const int64_t</type>
+          <declname>targetImgWidth</declname>
+        </param>
+        <param>
+          <type>const int64_t</type>
+          <declname>targetImgHeight</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>numChannels</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that converts a 3-layered 2D RGB input image into a 1D input data tensor to be passed to the Ort Session for processing.<linebreak/>
+This variant takes a generic input image represented by a float pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="88" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1a2964a0f0a800d0f7512a7959192b4d6f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Ort::P2OrtBase::preprocess</definition>
+        <argsstring>(float *dst, const cv::Mat &amp;imgSrc, const int64_t targetImgWidth, const int64_t targetImgHeight, const int numChannels) const</argsstring>
+        <name>preprocess</name>
+        <param>
+          <type>float *</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>imgSrc</declname>
+        </param>
+        <param>
+          <type>const int64_t</type>
+          <declname>targetImgWidth</declname>
+        </param>
+        <param>
+          <type>const int64_t</type>
+          <declname>targetImgHeight</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>numChannels</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that converts a 3-layered 2D RGB input image into a 1D input data tensor to be passed to the Ort Session for processing.<linebreak/>
+This variant takes a generic input image represented by a conventional opencv Matrix. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="100" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1a6c3bb04ed8b2677d5443620fc543013d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>cv::Mat</type>
+        <definition>cv::Mat Ort::P2OrtBase::infer_visualize</definition>
+        <argsstring>(const cv::Mat &amp;inputImg, int newW, int newH, int paddedW, int paddedH, float ratio, float *dst, float confThresh, const cv::Scalar &amp;meanVal)</argsstring>
+        <name>infer_visualize</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>inputImg</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newH</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedH</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ratio</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>confThresh</declname>
+        </param>
+        <param>
+          <type>const cv::Scalar &amp;</type>
+          <declname>meanVal</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that runs a P2 Ort Session and gets P2 inference result for visualization purposes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="109" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1a40401db6edb894fbe42fd09bbc912ab3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classEPD_1_1EPDObjectDetection" kindref="compound">EPD::EPDObjectDetection</ref></type>
+        <definition>EPD::EPDObjectDetection Ort::P2OrtBase::infer_action</definition>
+        <argsstring>(const cv::Mat &amp;inputImg, int newW, int newH, int paddedW, int paddedH, float ratio, float *dst, float confThresh, const cv::Scalar &amp;meanVal)</argsstring>
+        <name>infer_action</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>inputImg</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newH</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedW</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>paddedH</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ratio</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>confThresh</declname>
+        </param>
+        <param>
+          <type>const cv::Scalar &amp;</type>
+          <declname>meanVal</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that runs a P2 Ort Session and gets P2 inference result for use by external agents. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="121" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classOrt_1_1P2OrtBase_1a678658cc642108795fc4f5a21f6873eb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>cv::Mat</type>
+        <definition>cv::Mat Ort::P2OrtBase::visualize</definition>
+        <argsstring>(const cv::Mat &amp;img, const std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;bboxes, const std::vector&lt; uint64_t &gt; &amp;classIndices, const std::vector&lt; std::string &gt; &amp;allClassNames)</argsstring>
+        <name>visualize</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>img</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;</type>
+          <declname>bboxes</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>classIndices</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>allClassNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes P2 inference outputs and illustrates derived bounding boxes with corresponding object labels for visualization purposes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="135" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An Precision-Level 2 (P2) ONNXRuntime (Ort) Base class object. This class object instantiates a Precision Level 2 Ort Session which takes a typical ONNX model used for solely object detection and runs an inference engine. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="36">
+        <label>Ort::OrtBase</label>
+        <link refid="classOrt_1_1OrtBase"/>
+      </node>
+      <node id="35">
+        <label>Ort::P2OrtBase</label>
+        <link refid="classOrt_1_1P2OrtBase"/>
+        <childnode refid="36" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="38">
+        <label>Ort::OrtBase</label>
+        <link refid="classOrt_1_1OrtBase"/>
+      </node>
+      <node id="37">
+        <label>Ort::P2OrtBase</label>
+        <link refid="classOrt_1_1P2OrtBase"/>
+        <childnode refid="38" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" line="36" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib/p2_ort_base.hpp" bodystart="35" bodyend="140"/>
+    <listofallmembers>
+      <member refid="classOrt_1_1OrtBase_1adf2da264432541eb7cdf1122f742e9c4" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>DataOutputType</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a62519274b331a67e661e01fde9c7b4ee" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>getClassNames</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1ab0ffafc5d9fe6fbd5670033eed582868" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>getNumClasses</name></member>
+      <member refid="classOrt_1_1OrtBase_1a9d54c41654fed1d5bee18b089d5a6edd" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>getNumOutputs</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a42373d699b170d9be763416554072c3d" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>infer_action</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a40401db6edb894fbe42fd09bbc912ab3" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>infer_action</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1acf9dff96064c44f8a28065374418e589" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>infer_visualize</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a6c3bb04ed8b2677d5443620fc543013d" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>infer_visualize</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1abd05c26b896f4b83e83940f41a3d46c5" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>initClassNames</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1ad4695a5227d13031811148b733e2a1b1" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>m_classNames</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1aea8cd377365876275653bc55cfca0d81" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>m_newH</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a60fccea90926277bf24e07755c7d6d66" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>m_newW</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1aa75e0f0580414f2fc51be71e4a6438b3" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>m_numClasses</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a144e05345b9b98cf4c877cf8746b2b87" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>m_paddedH</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a32b6592157d3e99b34ae6674ec708173" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>m_paddedW</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a2cca8b3a61987dbd61b256c6783e9675" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>m_ratio</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a4721a6e4cca7bd60b90143278ad7a2b2" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>MIN_IMAGE_SIZE</name></member>
+      <member refid="classOrt_1_1OrtBase_1a3fc8f611e4392faec49fea733b23ccb5" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>operator()</name></member>
+      <member refid="classOrt_1_1OrtBase_1ad81b15848098d8137f8816fb1a491dab" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>OrtBase</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a7de210a80972444587b5bfe8513a5501" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>P2OrtBase</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1aa7c54074fd5f54ec8ef1e293595f2569" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>preprocess</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a2964a0f0a800d0f7512a7959192b4d6f" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>preprocess</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1a678658cc642108795fc4f5a21f6873eb" prot="private" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>visualize</name></member>
+      <member refid="classOrt_1_1OrtBase_1ab311e3e35bd05728ec48f5a42947d172" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>~OrtBase</name></member>
+      <member refid="classOrt_1_1P2OrtBase_1ac8cc28f37ed1936e234d07c5e8e47e8b" prot="public" virt="non-virtual"><scope>Ort::P2OrtBase</scope><name>~P2OrtBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

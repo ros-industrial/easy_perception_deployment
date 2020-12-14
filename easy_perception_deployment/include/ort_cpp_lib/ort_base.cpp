@@ -163,8 +163,9 @@ void OrtBase::OrtBaseImpl::initSession()
   #if USE_GPU
   if (m_gpuIdx.is_initialized()) {
     Ort::ThrowOnError(
-      OrtSessionOptionsAppendExecutionProvider_CUDA(sessionOptions,
-      m_gpuIdx.value()));
+      OrtSessionOptionsAppendExecutionProvider_CUDA(
+        sessionOptions,
+        m_gpuIdx.value()));
   }
   #endif
 
@@ -197,10 +198,11 @@ void OrtBase::OrtBaseImpl::initModelInfo()
     const auto & curInputShape = m_inputShapes[i];
 
     m_inputTensorSizes.emplace_back(
-      std::accumulate(std::begin(curInputShape),
-      std::end(curInputShape),
-      1,
-      std::multiplies<int64_t>()));
+      std::accumulate(
+        std::begin(curInputShape),
+        std::end(curInputShape),
+        1,
+        std::multiplies<int64_t>()));
 
     // DEBUG
     // Identified potential failure point for loading point.
@@ -271,19 +273,23 @@ std::vector<OrtBase::DataOutputType> OrtBase::OrtBaseImpl::operator()(
   inputTensors.reserve(m_numInputs);
   // Populate inputTensors with device-specific memoryInfo, the input image and the inputShapes.
   for (int i = 0; i < m_numInputs; ++i) {
-    inputTensors.emplace_back(std::move(
-        Ort::Value::CreateTensor<float>(memoryInfo, const_cast<float *>(inputData[i]),
-        m_inputTensorSizes[i],
-        m_inputShapes[i].data(),
-        m_inputShapes[i].size())));
+    inputTensors.emplace_back(
+      std::move(
+        Ort::Value::CreateTensor<float>(
+          memoryInfo,
+          const_cast<float *>(inputData[i]),
+          m_inputTensorSizes[i],
+          m_inputShapes[i].data(),
+          m_inputShapes[i].size())));
   }
   // INFERENCE DONE HERE.
-  auto outputTensors = m_session.Run(Ort::RunOptions{nullptr},
-      m_inputNodeNames.data(),
-      inputTensors.data(),
-      m_numInputs,
-      m_outputNodeNames.data(),
-      m_numOutputs);
+  auto outputTensors = m_session.Run(
+    Ort::RunOptions{nullptr},
+    m_inputNodeNames.data(),
+    inputTensors.data(),
+    m_numInputs,
+    m_outputNodeNames.data(),
+    m_numOutputs);
 
   // Check if outputTensors is empty. It should not be, even if it is garbage.
   assert(outputTensors.size() == m_numOutputs);
@@ -293,8 +299,9 @@ std::vector<OrtBase::DataOutputType> OrtBase::OrtBaseImpl::operator()(
 
   for (auto & elem : outputTensors) {
     outputData.emplace_back(
-      std::make_pair(std::move(elem.GetTensorMutableData<float>()),
-      elem.GetTensorTypeAndShapeInfo().GetShape()));
+      std::make_pair(
+        std::move(elem.GetTensorMutableData<float>()),
+        elem.GetTensorTypeAndShapeInfo().GetShape()));
   }
   return outputData;
 }

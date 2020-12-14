@@ -22,10 +22,12 @@ find_library(onnxruntime_LIBS NAMES onnxruntime PATHS /usr/local/lib)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(epd_msgs REQUIRED)
+find_package(message_filters REQUIRED)
 
 include_directories(include
   ${onnxruntime_INCLUDE_DIRS}
@@ -75,13 +77,18 @@ else()
   add_definitions(-DPRINT_MODEL_INFO=false)
 endif()
 
+add_definitions(-DPATH_TO_PACKAGE="${CMAKE_CURRENT_LIST_DIR}")
+
 if(BUILD_TESTING)
+
   find_package(ament_lint_auto REQUIRED)
 
   # Excluding to avoid conflicting Doxygen python code blocks.
   list(APPEND AMENT_LINT_AUTO_EXCLUDE
     ament_cmake_pep257
+    ament_cmake_flake8
   )
+
   ament_lint_auto_find_test_dependencies()
 
   find_package(ament_cmake_gtest REQUIRED)
@@ -115,7 +122,7 @@ if(BUILD_TESTING)
 endif()
 
 add_executable(processor src/processor.cpp ${EPD_UTILS})
-ament_target_dependencies(processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge)
+ament_target_dependencies(processor rclcpp std_msgs sensor_msgs geometry_msgs epd_msgs OpenCV cv_bridge message_filters)
 target_link_libraries(processor ${onnxruntime_LIBS})
 
 add_executable(image_viewer src/image_viewer.cpp)

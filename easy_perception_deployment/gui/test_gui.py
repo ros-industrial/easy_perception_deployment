@@ -13,16 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from windows.Main import MainWindow
-from windows.Deploy import DeployWindow
-from windows.Train import TrainWindow
-from windows.Counting import CountingWindow
+import os
+import subprocess
+
 from trainer.P1Trainer import P1Trainer
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
 
-import os
-import subprocess
+from windows.Counting import CountingWindow
+from windows.Deploy import DeployWindow
+from windows.Main import MainWindow
+from windows.Train import TrainWindow
 
 from datetime import date
 from PySide2 import QtCore
@@ -111,13 +112,13 @@ def test_invalidSession_invalidUseCase_DeployWindow(qtbot):
     test_session_config_content = ['test_filepath_to_model\n',
                                    'test_filepath_to_label_list\n',
                                    'visualize\n']
-    outF = open("../data/session_config.txt", "w")
+    outF = open('../data/session_config.txt', 'w')
     for line in test_session_config_content:
         outF.write(line)
     outF.close()
 
     test_usecase_config_content = ['-1\n']
-    outF = open("../data/usecase_config.txt", "w")
+    outF = open('../data/usecase_config.txt', 'w')
     for line in test_usecase_config_content:
         outF.write(line)
     outF.close()
@@ -135,13 +136,13 @@ def test_validSession_validUseCase_DeployWindow(qtbot):
     test_session_config_content = ['../data/model/p1_example.onnx\n',
                                    '../data/label_list/imagenet_classes.txt\n',
                                    'visualize\n']
-    outF = open("../data/session_config.txt", "w")
+    outF = open('../data/session_config.txt', 'w')
     for line in test_session_config_content:
         outF.write(line)
     outF.close()
 
     test_usecase_config_content = ['0\n']
-    outF = open("../data/usecase_config.txt", "w")
+    outF = open('../data/usecase_config.txt', 'w')
     for line in test_usecase_config_content:
         outF.write(line)
     outF.close()
@@ -333,7 +334,7 @@ def test_validateDataset_TrainWindow(qtbot):
     qtbot.addWidget(widget)
 
     widget._precision_level = 1
-    widget._path_to_dataset = "invalid_path_to_dataset"
+    widget._path_to_dataset = 'invalid_path_to_dataset'
     qtbot.mouseClick(widget.validate_button, QtCore.Qt.LeftButton)
 
     assert widget._is_dataset_labelled is False
@@ -399,7 +400,7 @@ def test_setDataset_TrainWindow(qtbot):
 
 def test_conformDatasetToCOCO_TrainWindow(qtbot):
 
-    if not os.path.exists("../data/datasets/p2p3_dummy_dataset"):
+    if not os.path.exists('../data/datasets/p2p3_dummy_dataset'):
         p1 = subprocess.Popen(['mkdir', '-p', '../data/datasets/p2p3_dummy_dataset/train_dataset'])
         p1.communicate()
         p2 = subprocess.Popen(['mkdir', '-p', '../data/datasets/p2p3_dummy_dataset/val_dataset'])
@@ -459,25 +460,25 @@ def test_addObject_CountingWindow():
     widget = CountingWindow(path_to_labellist, path_to_usecase_config)
 
     widget.addObject(0)
-    assert len(widget._select_list) is 1
+    assert len(widget._select_list) == 1
 
     widget.addObject(0)
-    assert len(widget._select_list) is 1
+    assert len(widget._select_list) == 1
 
     widget.addObject(1)
-    assert len(widget._select_list) is 2
+    assert len(widget._select_list) == 2
 
     widget.removeObject(0)
     widget.removeObject(0)
-    assert len(widget._select_list) is 0
+    assert len(widget._select_list) == 0
 
     widget.removeObject(0)
-    assert len(widget._select_list) is 0
+    assert len(widget._select_list) == 0
 
 
 def test_P1Trainer():
 
-    if not os.path.exists("../data/datasets/hymenoptera_data"):
+    if not os.path.exists('../data/datasets/hymenoptera_data'):
         p1 = subprocess.Popen(['wget',
                                'https://download.pytorch.org/tutorial/hymenoptera_data.zip',
                                '--directory-prefix=../data/datasets/'])

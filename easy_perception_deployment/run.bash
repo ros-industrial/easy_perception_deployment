@@ -8,10 +8,10 @@ cd $START_DIR
 
 # Check if Anaconda has been installed in general.
 # If true, get the first digit of the string which should reflect the major version of conda.
-if output=$(conda --version); then
-    echo $output
+if detected_conda=$(conda --version); then
+    echo $detected_conda - FOUND
     declare -i conda_ver
-    conda_ver=$(echo $output | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//')
+    conda_ver=$(echo $detected_conda | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//')
 else
     echo "Please install Anaconda by refering to the installation docs."
     echo "Exiting terminal in 10 seconds."
@@ -56,27 +56,29 @@ if [ ! -f "$P3FILE" ]; then
 fi
 unset P3FILE
 
-# Checking if the epd_gui conda environment has been installed.
-env_exists=$(conda env list | grep epd_gui)
+# Checking if the m2_epd_gui conda environment has been installed.
+env_exists=$(conda env list | grep m2_epd_gui)
 
 if [ -z "$env_exists" ]
 then
-      echo "Installing epd_gui conda environment."
-      conda env create -f gui/epd_gui_env.yml
+      echo "Installing m2_epd_gui conda environment."
+      conda create -n m2_epd_gui python=3.6 -y
       eval "$(conda shell.bash hook)"
-      conda activate epd_gui
-      conda install pytest -y
-      pip install pytest-qt
-      pip install labelme
-      pip install lark-parser
+      conda activate m2_epd_gui
       pip install pyside2
+      pip install dateutils
+      pip install pycocotools
+      pip install labelme
+      pip install pytest-qt
+      conda install pytest -y
+      pip install lark-parser
       pip install empy
       conda deactivate
-      echo "[epd_gui] env created."
+      echo "[m2_epd_gui] env created."
 fi
 
 eval "$(conda shell.bash hook)"
-conda activate epd_gui
+conda activate m2_epd_gui
 cd $PWD/gui
 python main.py
 

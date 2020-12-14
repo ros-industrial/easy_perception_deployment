@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classwindows_1_1Counting_1_1CountingWindow" kind="class" language="Python" prot="public">
+    <compoundname>windows::Counting::CountingWindow</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QWidget</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1a576f589915a8bfa7fabc64b4469561e0" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::_COUNTING_WIN_H</definition>
+        <argsstring></argsstring>
+        <name>_COUNTING_WIN_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="39" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1a04659b99655b9eafc989b7338fdfc125" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::_COUNTING_WIN_W</definition>
+        <argsstring></argsstring>
+        <name>_COUNTING_WIN_W</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="40" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1ab6b0f08be114f2fe2b70f3849e69d232" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::_label_list</definition>
+        <argsstring></argsstring>
+        <name>_label_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="42" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1ad5b8cc61f42bf9c8546439468a7e6bb2" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::_select_list</definition>
+        <argsstring></argsstring>
+        <name>_select_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="43" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1ad8e21eaf380d6960a19dd79e81ff6231" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::_path_to_usecase_config</definition>
+        <argsstring></argsstring>
+        <name>_path_to_usecase_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="44" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1a7f775bb77acf7c4522e4068680af3f74" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::label_list_dropdown</definition>
+        <argsstring></argsstring>
+        <name>label_list_dropdown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="69" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1a96b5a7fd3c863620ead70e32dc1d4a9d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::label_list_dropdown_label</definition>
+        <argsstring></argsstring>
+        <name>label_list_dropdown_label</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="77" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1a4f3bd452726519dd4a7c9bd0dc8e980c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::selected_list_menu</definition>
+        <argsstring></argsstring>
+        <name>selected_list_menu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="83" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1aa20392693968654a54c8959de23ba184" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::selected_list_menu_label</definition>
+        <argsstring></argsstring>
+        <name>selected_list_menu_label</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="89" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1a498a0d43978499f8de19a94dd1691e10" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::finish_button</definition>
+        <argsstring></argsstring>
+        <name>finish_button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="95" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Counting_1_1CountingWindow_1a7837d2b02a79957e9a4ed1608d69ac8a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Counting.CountingWindow::cancel_button</definition>
+        <argsstring></argsstring>
+        <name>cancel_button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="103" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classwindows_1_1Counting_1_1CountingWindow_1a3360dd589799a79d38afc207dfed32cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Counting.CountingWindow.__init__</definition>
+        <argsstring>(self, path_to_labellist, _path_to_usecase_config)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>path_to_labellist</type>
+          <defname>path_to_labellist</defname>
+        </param>
+        <param>
+          <type>_path_to_usecase_config</type>
+          <defname>_path_to_usecase_config</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>The constructor.
+Sets the size of the window and configurations for usecase_config.
+Checks if the usecase_config.txt file exists. If true, configure
+accordingly. Otherwise, assign default values.
+Calls setButtons function to populate window with button.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="29" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="29" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Counting_1_1CountingWindow_1acf7a760ac4453bca6614a0532571c08d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Counting.CountingWindow.setButtons</definition>
+        <argsstring>(self)</argsstring>
+        <name>setButtons</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Mutator function that defines all buttons in CountingWindow.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="66" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="66" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Counting_1_1CountingWindow_1a4520405ae5505a048249b6d8f5b32922" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Counting.CountingWindow.writeToUseCaseConfig</definition>
+        <argsstring>(self)</argsstring>
+        <name>writeToUseCaseConfig</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function that is triggered by the button labelled, Finish.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="116" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="116" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Counting_1_1CountingWindow_1a60aa6ed9e20a297c3a1f7152679e31c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Counting.CountingWindow.closeWindow</definition>
+        <argsstring>(self)</argsstring>
+        <name>closeWindow</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function that is triggered by the button labelled, Cancel.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="125" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="125" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Counting_1_1CountingWindow_1a654e44387a6c38b1be5b83f2e1dc58b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Counting.CountingWindow.addObject</definition>
+        <argsstring>(self, index)</argsstring>
+        <name>addObject</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>index</type>
+          <defname>index</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function that is triggered by the DropDown Menu labelled, Available
+Objects
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="129" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="129" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Counting_1_1CountingWindow_1af0a48401e159cba3824b9205ff3b0eb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Counting.CountingWindow.removeObject</definition>
+        <argsstring>(self, index)</argsstring>
+        <name>removeObject</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>index</type>
+          <defname>index</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function that is triggered by the DropDown Menu labelled, Selected
+Objects
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="143" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="143" bodyend="154"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>The CountingWindow class is a PySide2 Graphical User Interface (GUI) window
+that is called by DeployWindow class in order to configure a custom Counting
+use-case and write to usecase_config.txt.
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>QWidget</label>
+      </node>
+      <node id="0">
+        <label>windows.Counting.CountingWindow</label>
+        <link refid="classwindows_1_1Counting_1_1CountingWindow"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>QWidget</label>
+      </node>
+      <node id="2">
+        <label>windows.Counting.CountingWindow</label>
+        <link refid="classwindows_1_1Counting_1_1CountingWindow"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" line="23" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Counting.py" bodystart="23" bodyend="154"/>
+    <listofallmembers>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a3360dd589799a79d38afc207dfed32cc" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>__init__</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a576f589915a8bfa7fabc64b4469561e0" prot="private" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>_COUNTING_WIN_H</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a04659b99655b9eafc989b7338fdfc125" prot="private" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>_COUNTING_WIN_W</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1ab6b0f08be114f2fe2b70f3849e69d232" prot="private" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>_label_list</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1ad8e21eaf380d6960a19dd79e81ff6231" prot="private" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>_path_to_usecase_config</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1ad5b8cc61f42bf9c8546439468a7e6bb2" prot="private" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>_select_list</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a654e44387a6c38b1be5b83f2e1dc58b6" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>addObject</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a7837d2b02a79957e9a4ed1608d69ac8a" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>cancel_button</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a60aa6ed9e20a297c3a1f7152679e31c7" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>closeWindow</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a498a0d43978499f8de19a94dd1691e10" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>finish_button</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a7f775bb77acf7c4522e4068680af3f74" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>label_list_dropdown</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a96b5a7fd3c863620ead70e32dc1d4a9d" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>label_list_dropdown_label</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1af0a48401e159cba3824b9205ff3b0eb1" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>removeObject</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a4f3bd452726519dd4a7c9bd0dc8e980c" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>selected_list_menu</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1aa20392693968654a54c8959de23ba184" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>selected_list_menu_label</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1acf7a760ac4453bca6614a0532571c08d" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>setButtons</name></member>
+      <member refid="classwindows_1_1Counting_1_1CountingWindow_1a4520405ae5505a048249b6d8f5b32922" prot="public" virt="non-virtual"><scope>windows::Counting::CountingWindow</scope><name>writeToUseCaseConfig</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
