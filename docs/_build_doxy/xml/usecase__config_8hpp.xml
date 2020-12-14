@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="usecase__config_8hpp" kind="file" language="C++">
+    <compoundname>usecase_config.hpp</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="yes">opencv2/opencv.hpp</includes>
+    <incdepgraph>
+      <node id="50">
+        <label>opencv2/opencv.hpp</label>
+      </node>
+      <node id="48">
+        <label>string</label>
+      </node>
+      <node id="47">
+        <label>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp</label>
+        <link refid="usecase__config_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceEPD">EPD</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Copyright<sp/>2020<sp/>ROS-Industrial<sp/>Consortium<sp/>Asia<sp/>Pacific</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0<sp/>(the<sp/>&quot;License&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>you<sp/>may<sp/>not<sp/>use<sp/>this<sp/>file<sp/>except<sp/>in<sp/>compliance<sp/>with<sp/>the<sp/>License.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>You<sp/>may<sp/>obtain<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>License<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>http://www.apache.org/licenses/LICENSE-2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Unless<sp/>required<sp/>by<sp/>applicable<sp/>law<sp/>or<sp/>agreed<sp/>to<sp/>in<sp/>writing,<sp/>software</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>distributed<sp/>under<sp/>the<sp/>License<sp/>is<sp/>distributed<sp/>on<sp/>an<sp/>&quot;AS<sp/>IS&quot;<sp/>BASIS,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>WITHOUT<sp/>WARRANTIES<sp/>OR<sp/>CONDITIONS<sp/>OF<sp/>ANY<sp/>KIND,<sp/>either<sp/>express<sp/>or<sp/>implied.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See<sp/>the<sp/>License<sp/>for<sp/>the<sp/>specific<sp/>language<sp/>governing<sp/>permissions<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>limitations<sp/>under<sp/>the<sp/>License.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>EPD_UTILS_LIB__USECASE_CONFIG_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>EPD_UTILS_LIB__USECASE_CONFIG_HPP_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;opencv2/opencv.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceEPD" kindref="compound">EPD</ref></highlight></codeline>
+<codeline lineno="26"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>CLASSIFICATION_MODE<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>COUNTING_MODE<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>COLOR_MATCHING_MODE<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>PATH_TO_USECASE_CONFIG[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;data/usecase_config.txt&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;std::string&gt;<sp/><ref refid="namespaceEPD_1afb1c40891573a4c9a49bf4026dffc352" kindref="member">generateCountClassNames</ref>()</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>countClassNames;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>std::string<sp/>s;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>std::fstream<sp/>infile;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>infile.open(PATH_TO_USECASE_CONFIG);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Read<sp/>and<sp/>throw<sp/>away<sp/>the<sp/>first<sp/>line<sp/>since<sp/>it<sp/>is<sp/>already<sp/>read.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>std::getline(infile,<sp/>s);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(std::getline(infile,<sp/>s))<sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>countClassNames.emplace_back(s);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>infile.close();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>countClassNames;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceEPD_1a3bd949f9f2c7eb127917d4eee49c00f0" kindref="member">count</ref>(</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>&amp;<sp/>bboxes,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>&amp;<sp/>classIndices,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>&amp;<sp/>scores,</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>allClassNames)</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>countClassNames<sp/>=<sp/><ref refid="namespaceEPD_1afb1c40891573a4c9a49bf4026dffc352" kindref="member">EPD::generateCountClassNames</ref>();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>max<sp/>number<sp/>of<sp/>object<sp/>to<sp/>detect<sp/>to<sp/>1000.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>local_scores;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*Iterate<sp/>through<sp/>bbboxes,<sp/>classIndices<sp/>and<sp/>allClassNames</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/>to<sp/>count<sp/>corresponding<sp/>detected<sp/>objects<sp/>with<sp/>the<sp/>same<sp/>labels.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>bboxes.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>curBbox<sp/>=<sp/>bboxes[i];</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>classIdx<sp/>=<sp/>classIndices[i];</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>curScore<sp/>=<sp/>scores[i];</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>curLabel<sp/>=<sp/>allClassNames.empty()<sp/>?</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::to_string(classIdx)<sp/>:<sp/>allClassNames[classIdx];</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>countClassNames.size();<sp/>j++)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>countLabel<sp/>=<sp/>countClassNames[j];</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(curLabel.compare(countLabel)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_bboxes.push_back(curBbox);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_classIndices.push_back(classIdx);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_scores.push_back(curScore);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>bboxes<sp/>=<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>classIndices<sp/>=<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>scores<sp/>=<sp/>local_scores;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceEPD_1a3cff6173c8ee68e4840be0a03efbf62e" kindref="member">matchColor</ref>(</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cv::Mat<sp/>&amp;<sp/>img,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>&amp;<sp/>bboxes,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>&amp;<sp/>classIndices,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>&amp;<sp/>scores,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>allClassNames)</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>reference<sp/>image<sp/>using<sp/>the<sp/>2nd<sp/>line<sp/>of<sp/>usecase_config.txt</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>std::string<sp/>s;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>std::fstream<sp/>infile;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>infile.open(PATH_TO_USECASE_CONFIG);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Read<sp/>and<sp/>throw<sp/>away<sp/>the<sp/>first<sp/>line<sp/>since<sp/>it<sp/>is<sp/>already<sp/>read.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>std::getline(infile,<sp/>s);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>std::getline(infile,<sp/>s);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>std::string<sp/>filepath_to_refcolor<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>ref_color_image<sp/>=<sp/>cv::imread(filepath_to_refcolor,<sp/>CV_LOAD_IMAGE_COLOR);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>hsv_base,<sp/>hsv_test1;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>cv::cvtColor(ref_color_image,<sp/>hsv_base,<sp/>cv::COLOR_BGR2HSV);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>hist_base,<sp/>hist_test1;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>h_bins<sp/>=<sp/>50,<sp/>s_bins<sp/>=<sp/>60;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>histSize[]<sp/>=<sp/>{h_bins,<sp/>s_bins};</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>channels[]<sp/>=<sp/>{0,<sp/>1};</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>hue<sp/>varies<sp/>from<sp/>0<sp/>to<sp/>179,<sp/>saturation<sp/>from<sp/>0<sp/>to<sp/>255</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>h_ranges[]<sp/>=<sp/>{0,<sp/>180};</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>s_ranges[]<sp/>=<sp/>{0,<sp/>256};</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>ranges[]<sp/>=<sp/>{h_ranges,<sp/>s_ranges};</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>cv::calcHist(&amp;hsv_base,<sp/>1,<sp/>channels,<sp/>cv::Mat(),<sp/>hist_base,<sp/>2,<sp/>histSize,<sp/>ranges,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>cv::normalize(hist_base,<sp/>hist_base,<sp/>0,<sp/>1,<sp/>cv::NORM_MINMAX,<sp/>-1,<sp/>cv::Mat());</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>base_base;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>croppedImage;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>local_scores;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>bboxes.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>curBbox<sp/>=<sp/>bboxes[i];</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>classIdx<sp/>=<sp/>classIndices[i];</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>curScore<sp/>=<sp/>scores[i];</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>curLabel<sp/>=<sp/>allClassNames.empty()<sp/>?</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::to_string(classIdx)<sp/>:<sp/>allClassNames[classIdx];</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::Rect<sp/>objectROI(cv::Point(curBbox[0],<sp/>curBbox[1]),<sp/>cv::Point(curBbox[2],<sp/>curBbox[3]));</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>croppedImage<sp/>=<sp/>img(objectROI);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::cvtColor(croppedImage,<sp/>hsv_test1,<sp/>cv::COLOR_BGR2HSV);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::calcHist(&amp;hsv_test1,<sp/>1,<sp/>channels,<sp/>cv::Mat(),</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>hist_test1,<sp/>2,<sp/>histSize,<sp/>ranges,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::normalize(hist_test1,<sp/>hist_test1,<sp/>0,<sp/>1,</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>cv::NORM_MINMAX,<sp/>-1,<sp/>cv::Mat());</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Can<sp/>change<sp/>3rd<sp/>arg<sp/>in<sp/>compareHist<sp/>function<sp/>call<sp/>to<sp/>[0,1,2,3],</highlight></codeline>
+<codeline lineno="155"><highlight class="comment"><sp/><sp/><sp/><sp/>[Correlation,<sp/>Chi-square,<sp/>Intersection,<sp/>Bhattacharyya]</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/><sp/><sp/><sp/>TODO(cardboardcode)<sp/>Require<sp/>benchmark<sp/>to<sp/>justify<sp/>use<sp/>of<sp/>metric<sp/>0:<sp/>Correlation.*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>base_base<sp/>=<sp/>compareHist(hist_base,<sp/>hist_test1,<sp/>0);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(base_base<sp/>&gt;<sp/>0.8)<sp/>{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>local_bboxes.push_back(curBbox);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>local_classIndices.push_back(classIdx);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>local_scores.push_back(curScore);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>bboxes<sp/>=<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/>classIndices<sp/>=<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>scores<sp/>=<sp/>local_scores;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/>infile.close();</highlight></codeline>
+<codeline lineno="169"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceEPD_1a452d019026c0f4e917028f28a75137c6" kindref="member">activateUseCase</ref>(</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cv::Mat<sp/>&amp;<sp/>img,</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>&amp;<sp/>bboxes,</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>&amp;<sp/>classIndices,</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>&amp;<sp/>scores,</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>allClassNames)</highlight></codeline>
+<codeline lineno="181"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>useCaseMode<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>std::string<sp/>s;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/>std::fstream<sp/>infile;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>infile.open(PATH_TO_USECASE_CONFIG);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>first<sp/>line<sp/>of<sp/>the<sp/>usecase_config.txt</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>std::getline(infile,<sp/>s);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!s.empty()<sp/>&amp;&amp;<sp/>std::all_of(s.begin(),<sp/>s.end(),<sp/>::isdigit))<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>std::stringstream<sp/>i(s);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>i<sp/>&gt;&gt;<sp/>useCaseMode;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>default<sp/>CLASSIFICATION_MODE<sp/>is<sp/>selected,<sp/>do<sp/>not<sp/>alter<sp/>anything<sp/>and<sp/>return.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(useCaseMode<sp/>==<sp/>EPD::CLASSIFICATION_MODE)<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(useCaseMode<sp/>==<sp/>EPD::COUNTING_MODE)<sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Use<sp/>Case:<sp/>[Counting]<sp/>selected.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceEPD_1a3bd949f9f2c7eb127917d4eee49c00f0" kindref="member">EPD::count</ref>(bboxes,<sp/>classIndices,<sp/>scores,<sp/>allClassNames);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(useCaseMode<sp/>==<sp/>EPD::COLOR_MATCHING_MODE)<sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Use<sp/>Case:<sp/>[Color-Matching]<sp/>selected.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceEPD_1a3cff6173c8ee68e4840be0a03efbf62e" kindref="member">EPD::matchColor</ref>(img,<sp/>bboxes,<sp/>classIndices,<sp/>scores,<sp/>allClassNames);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Invalid<sp/>Use<sp/>Case.<sp/>Can<sp/>only<sp/>be<sp/>[0,<sp/>1,<sp/>2].&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceEPD_1a3bd949f9f2c7eb127917d4eee49c00f0" kindref="member">count</ref>(</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>&amp;<sp/>bboxes,</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>&amp;<sp/>classIndices,</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>&amp;<sp/>scores,</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>std::vector&lt;cv::Mat&gt;<sp/>&amp;<sp/>masks,</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>allClassNames)</highlight></codeline>
+<codeline lineno="218"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>countClassNames<sp/>=<sp/><ref refid="namespaceEPD_1afb1c40891573a4c9a49bf4026dffc352" kindref="member">EPD::generateCountClassNames</ref>();</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>max<sp/>number<sp/>of<sp/>object<sp/>to<sp/>detect<sp/>to<sp/>1000.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>local_scores;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>std::vector&lt;cv::Mat&gt;<sp/>local_masks;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*Iterate<sp/>through<sp/>bbboxes,<sp/>classIndices<sp/>and<sp/>allClassNames</highlight></codeline>
+<codeline lineno="228"><highlight class="comment"><sp/><sp/>to<sp/>count<sp/>corresponding<sp/>detected<sp/>objects<sp/>with<sp/>the<sp/>same<sp/>labels.</highlight></codeline>
+<codeline lineno="229"><highlight class="comment"><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>bboxes.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>curBbox<sp/>=<sp/>bboxes[i];</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>classIdx<sp/>=<sp/>classIndices[i];</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>curScore<sp/>=<sp/>scores[i];</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cv::Mat<sp/>curMask<sp/>=<sp/>masks[i];</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>curLabel<sp/>=<sp/>allClassNames.empty()<sp/>?</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::to_string(classIdx)<sp/>:<sp/>allClassNames[classIdx];</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>countClassNames.size();<sp/>j++)<sp/>{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>countLabel<sp/>=<sp/>countClassNames[j];</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(curLabel.compare(countLabel)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_bboxes.push_back(curBbox);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_classIndices.push_back(classIdx);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_scores.push_back(curScore);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_masks.push_back(curMask);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/>bboxes<sp/>=<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>classIndices<sp/>=<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/>scores<sp/>=<sp/>local_scores;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/>masks<sp/>=<sp/>local_masks;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceEPD_1a3cff6173c8ee68e4840be0a03efbf62e" kindref="member">matchColor</ref>(</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cv::Mat<sp/>&amp;<sp/>img,</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>&amp;<sp/>bboxes,</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>&amp;<sp/>classIndices,</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>&amp;<sp/>scores,</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/>std::vector&lt;cv::Mat&gt;<sp/>&amp;<sp/>masks,</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>allClassNames)</highlight></codeline>
+<codeline lineno="266"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>reference<sp/>image<sp/>using<sp/>the<sp/>2nd<sp/>line<sp/>of<sp/>usecase_config.txt</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/>std::string<sp/>s;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>std::fstream<sp/>infile;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>infile.open(PATH_TO_USECASE_CONFIG);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Read<sp/>and<sp/>throw<sp/>away<sp/>the<sp/>first<sp/>line<sp/>since<sp/>it<sp/>is<sp/>already<sp/>read.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/>std::getline(infile,<sp/>s);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/>std::getline(infile,<sp/>s);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/>std::string<sp/>filepath_to_refcolor<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>ref_color_image<sp/>=<sp/>cv::imread(filepath_to_refcolor,<sp/>CV_LOAD_IMAGE_COLOR);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>hsv_base,<sp/>hsv_test1;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/>cv::cvtColor(ref_color_image,<sp/>hsv_base,<sp/>cv::COLOR_BGR2HSV);</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>hist_base,<sp/>hist_test1;</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>h_bins<sp/>=<sp/>50,<sp/>s_bins<sp/>=<sp/>60;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>histSize[]<sp/>=<sp/>{h_bins,<sp/>s_bins};</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>channels[]<sp/>=<sp/>{0,<sp/>1};</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>hue<sp/>varies<sp/>from<sp/>0<sp/>to<sp/>179,<sp/>saturation<sp/>from<sp/>0<sp/>to<sp/>255</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>h_ranges[]<sp/>=<sp/>{0,<sp/>180};</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>s_ranges[]<sp/>=<sp/>{0,<sp/>256};</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>ranges[]<sp/>=<sp/>{h_ranges,<sp/>s_ranges};</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/>cv::calcHist(&amp;hsv_base,<sp/>1,<sp/>channels,<sp/>cv::Mat(),<sp/>hist_base,<sp/>2,<sp/>histSize,<sp/>ranges,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/>cv::normalize(hist_base,<sp/>hist_base,<sp/>0,<sp/>1,<sp/>cv::NORM_MINMAX,<sp/>-1,<sp/>cv::Mat());</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>base_base;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/>cv::Mat<sp/>croppedImage;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>local_scores;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/>std::vector&lt;cv::Mat&gt;<sp/>local_masks;</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>bboxes.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>curBbox<sp/>=<sp/>bboxes[i];</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t<sp/>classIdx<sp/>=<sp/>classIndices[i];</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>curScore<sp/>=<sp/>scores[i];</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cv::Mat<sp/>curMask<sp/>=<sp/>masks[i];</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>curLabel<sp/>=<sp/>allClassNames.empty()<sp/>?</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::to_string(classIdx)<sp/>:<sp/>allClassNames[classIdx];</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::Rect<sp/>objectROI(cv::Point(curBbox[0],<sp/>curBbox[1]),<sp/>cv::Point(curBbox[2],<sp/>curBbox[3]));</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/>croppedImage<sp/>=<sp/>img(objectROI);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::cvtColor(croppedImage,<sp/>hsv_test1,<sp/>cv::COLOR_BGR2HSV);</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::calcHist(&amp;hsv_test1,<sp/>1,<sp/>channels,<sp/>cv::Mat(),</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>hist_test1,<sp/>2,<sp/>histSize,<sp/>ranges,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>cv::normalize(hist_test1,<sp/>hist_test1,<sp/>0,<sp/>1,</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>cv::NORM_MINMAX,<sp/>-1,<sp/>cv::Mat());</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Can<sp/>change<sp/>3rd<sp/>arg<sp/>in<sp/>compareHist<sp/>function<sp/>call<sp/>to<sp/>[0,1,2,3],</highlight></codeline>
+<codeline lineno="315"><highlight class="comment"><sp/><sp/><sp/><sp/>[Correlation,<sp/>Chi-square,<sp/>Intersection,<sp/>Bhattacharyya]</highlight></codeline>
+<codeline lineno="316"><highlight class="comment"><sp/><sp/><sp/><sp/>TODO(cardboardcode)<sp/>Require<sp/>benchmark<sp/>to<sp/>justify<sp/>use<sp/>of<sp/>metric<sp/>0:<sp/>Correlation.*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>base_base<sp/>=<sp/>compareHist(hist_base,<sp/>hist_test1,<sp/>0);</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(base_base<sp/>&gt;<sp/>0.8)<sp/>{</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>local_bboxes.push_back(curBbox);</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>local_classIndices.push_back(classIdx);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>local_scores.push_back(curScore);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>local_masks.push_back(curMask);</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/>bboxes<sp/>=<sp/>local_bboxes;</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/>classIndices<sp/>=<sp/>local_classIndices;</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/>scores<sp/>=<sp/>local_scores;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/>masks<sp/>=<sp/>local_masks;</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/>infile.close();</highlight></codeline>
+<codeline lineno="331"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceEPD_1a452d019026c0f4e917028f28a75137c6" kindref="member">activateUseCase</ref>(</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>cv::Mat<sp/>&amp;<sp/>img,</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/>std::vector&lt;std::array&lt;float,<sp/>4&gt;&gt;<sp/>&amp;<sp/>bboxes,</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/>std::vector&lt;uint64_t&gt;<sp/>&amp;<sp/>classIndices,</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>&amp;<sp/>scores,</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/>std::vector&lt;cv::Mat&gt;<sp/>&amp;<sp/>masks,</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/>std::vector&lt;std::string&gt;<sp/>allClassNames)</highlight></codeline>
+<codeline lineno="344"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>useCaseMode<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/>std::string<sp/>s;</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/>std::fstream<sp/>infile;</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/>infile.open(PATH_TO_USECASE_CONFIG);</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>first<sp/>line<sp/>of<sp/>the<sp/>usecase_config.txt</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/>std::getline(infile,<sp/>s);</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!s.empty()<sp/>&amp;&amp;<sp/>std::all_of(s.begin(),<sp/>s.end(),<sp/>::isdigit))<sp/>{</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>std::stringstream<sp/>i(s);</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/>i<sp/>&gt;&gt;<sp/>useCaseMode;</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>default<sp/>CLASSIFICATION_MODE<sp/>is<sp/>selected,<sp/>do<sp/>not<sp/>alter<sp/>anything<sp/>and<sp/>return.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(useCaseMode<sp/>==<sp/>EPD::CLASSIFICATION_MODE)<sp/>{</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(useCaseMode<sp/>==<sp/>EPD::COUNTING_MODE)<sp/>{</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Use<sp/>Case:<sp/>[Counting]<sp/>selected.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceEPD_1a3bd949f9f2c7eb127917d4eee49c00f0" kindref="member">EPD::count</ref>(bboxes,<sp/>classIndices,<sp/>scores,<sp/>masks,<sp/>allClassNames);</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(useCaseMode<sp/>==<sp/>EPD::COLOR_MATCHING_MODE)<sp/>{</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Use<sp/>Case:<sp/>[Color-Matching]<sp/>selected.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceEPD_1a3cff6173c8ee68e4840be0a03efbf62e" kindref="member">EPD::matchColor</ref>(img,<sp/>bboxes,<sp/>classIndices,<sp/>scores,<sp/>masks,<sp/>allClassNames);</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Invalid<sp/>Use<sp/>Case.<sp/>Can<sp/>only<sp/>be<sp/>[0,<sp/>1,<sp/>2].&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="369"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>EPD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="372"><highlight class="normal"></highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//<sp/>EPD_UTILS_LIB__USECASE_CONFIG_HPP_</highlight></codeline>
+    </programlisting>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp"/>
+  </compounddef>
+</doxygen>

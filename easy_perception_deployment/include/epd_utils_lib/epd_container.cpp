@@ -111,7 +111,6 @@ void EPDContainer::setModelConfigFile()
   std::string filepath;
   std::fstream infile;
   infile.open(PATH_TO_SESSION_CONFIG);
-
   // TODO(cardboardcode) Include check if file exist or file is empty.
 
   while (std::getline(infile, filepath)) {
@@ -123,14 +122,15 @@ void EPDContainer::setModelConfigFile()
       onlyVisualize = false;
       break;
     }
+
     // Check if file exists
     if (std::ifstream(filepath)) {
       // One of the  line in the .txt file should always be for the onnx model .onnx file.
       // The other line should always be for the class label .txt file.
-      if (filepath.substr(filepath.find_last_of(".") + 1) == "onnx") {
+      if (filepath.substr(filepath.length() - 4) == "onnx") {
         onnx_model_path = filepath;
       }
-      if (filepath.substr(filepath.find_last_of(".") + 1) == "txt") {
+      if (filepath.substr(filepath.length() - 3) == "txt") {
         class_label_path = filepath;
       }
     } else {
@@ -158,7 +158,15 @@ void EPDContainer::setUseCaseConfigFile()
       if (useCaseMode == EPD::CLASSIFICATION_MODE) {
         break;
       }
-      if (useCaseMode > 2) {
+      if (useCaseMode == EPD::LOCALISATION_MODE) {
+        // Check if model precision level is not 3.
+        // If true, issue critical error and close program.
+        if (precision_level != 3) {
+          throw std::runtime_error("Please use a Precision-Level 3 ONNX model.");
+        }
+        break;
+      }
+      if (useCaseMode > 3) {
         throw std::runtime_error("Invalid Use Case.");
       }
       continue;

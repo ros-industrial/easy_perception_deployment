@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_51a1827d092161232e7d2fb9bab68afb" kind="dir">
+    <compoundname>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer</compoundname>
+    <innerfile refid="P1Trainer_8py">P1Trainer.py</innerfile>
+    <innerfile refid="P2Trainer_8py">P2Trainer.py</innerfile>
+    <innerfile refid="P3Trainer_8py">P3Trainer.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/"/>
+  </compounddef>
+</doxygen>

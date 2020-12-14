@@ -50,7 +50,7 @@ private:
   void timer_callback()
   {
     // Process and publish test image as ROS message.
-    cv::Mat frame = cv::imread("./data/9544757988_991457c228_z.jpg", CV_LOAD_IMAGE_COLOR);
+    cv::Mat frame = cv::imread("./data/9544757988_991457c228_z.jpg", cv::IMREAD_COLOR);
 
     sensor_msgs::msg::Image::SharedPtr test_image =
       cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
@@ -69,7 +69,8 @@ int main(int argc, char ** argv)
 {
   if (!is_file_exist("./data/9544757988_991457c228_z.jpg")) {
     system("apt-get install -y wget");
-    system("wget "
+    system(
+      "wget "
       "https://farm8.staticflickr.com/7329/9544757988_991457c228_z.jpg "
       "--directory-prefix ./data/");
   }
@@ -118,8 +119,9 @@ int main(int argc, char ** argv)
       isEPDImageClassification_Received = true;
     };
 
-  auto test_result_sub = sub_node->create_subscription<sensor_msgs::msg::Image>("/processor/output",
-      qos, callback);
+  auto test_result_sub = sub_node->create_subscription<sensor_msgs::msg::Image>(
+    "/processor/output",
+    qos, callback);
 
   rclcpp::executors::SingleThreadedExecutor executor;
   executor.add_node(sub_node);

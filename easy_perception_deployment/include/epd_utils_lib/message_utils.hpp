@@ -19,6 +19,8 @@
 #include <string>
 #include <vector>
 #include "opencv2/opencv.hpp"
+#include "geometry_msgs/msg/pose_stamped.hpp"
+#include "sensor_msgs/msg/region_of_interest.hpp"
 
 namespace EPD
 {
@@ -58,9 +60,39 @@ public:
     scores.reserve(input_size);
     masks.reserve(input_size);
   }
-
-private:
 };
+
+class EPDObjectLocalization
+{
+public:
+  struct LocalizedObject
+  {
+    std::string name;
+    geometry_msgs::msg::PoseStamped pos;
+    sensor_msgs::msg::RegionOfInterest roi;
+    float breadth;
+    float length;
+    float height;
+  };
+
+  std::vector<LocalizedObject> objects;
+  /*! \brief A set size for all vectors in class.*/
+  size_t data_size;
+
+  // /*! \brief A Constructor function. This object can only be called a known
+  // size to minimize memory use for storage.*/
+  explicit EPDObjectLocalization(size_t input_size)
+  {
+    data_size = input_size;
+
+    objects.reserve(input_size);
+
+    for (size_t i = 0; i < input_size; i++) {
+      objects.push_back(LocalizedObject());
+    }
+  }
+};
+
 }  // namespace EPD
 
 #endif  // EPD_UTILS_LIB__MESSAGE_UTILS_HPP_

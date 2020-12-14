@@ -46,7 +46,7 @@ class DeployWindow(QWidget):
 
         self._is_running = False
 
-        self._DEPLOY_WIN_H = 300
+        self._DEPLOY_WIN_H = 400
         self._DEPLOY_WIN_W = 500
 
         self._deploy_process = None
@@ -54,10 +54,12 @@ class DeployWindow(QWidget):
 
         self.visualizeFlag = True
 
+        self.useCPU = True
+
         self._path_to_session_config = '../data/session_config.txt'
         self._path_to_usecase_config = '../data/usecase_config.txt'
 
-        self.usecase_list = ['Classification', 'Counting', 'Color-Matching']
+        self.usecase_list = ['Classification', 'Counting', 'Color-Matching', 'Localization']
 
         # Check if session_config.txt file exists.
         # If does not exist, assign default value.
@@ -67,7 +69,7 @@ class DeployWindow(QWidget):
 
             if len(self.session_config) == 3:
                 self._path_to_model = self.session_config[0]
-                self._path_to_label_list = self.session_config[1]
+                self._path_to_label_list = '.' + self.session_config[1]
                 self.visualizeFlag = True if self.session_config[2] == 'visualize' else False
             else:
                 self._path_to_model = 'filepath/to/onnx/model'
@@ -109,8 +111,10 @@ class DeployWindow(QWidget):
         self.model_button = QPushButton('ONNX Model', self)
         self.model_button.setIcon(QIcon('img/model.png'))
         self.model_button.setIconSize(QSize(75, 75))
-        self.model_button.setGeometry(0, 0, self._DEPLOY_WIN_W/2, self._DEPLOY_WIN_H/3)
-        if self.doesFileExist(self._path_to_model):
+        self.model_button.setGeometry(0, 0, self._DEPLOY_WIN_W/2, self._DEPLOY_WIN_H/4)
+
+        index = self._path_to_model.find('data/model')
+        if self.doesFileExist('../' + self._path_to_model[index:]):
             self.model_button.setStyleSheet('background-color: rgba(0,150,10,255);')
         else:
             self.model_button.setStyleSheet('background-color: rgba(200,10,0,255);')
@@ -122,8 +126,10 @@ class DeployWindow(QWidget):
         self.list_button.setGeometry(self._DEPLOY_WIN_W/2,
                                      0,
                                      self._DEPLOY_WIN_W/2,
-                                     self._DEPLOY_WIN_H/3)
-        if self.doesFileExist(self._path_to_label_list):
+                                     self._DEPLOY_WIN_H/4)
+
+        index = self._path_to_label_list.find('data/label_list')
+        if self.doesFileExist('../' + self._path_to_label_list[index:]):
             self.list_button.setStyleSheet('background-color: rgba(0,150,10,255);')
         else:
             self.list_button.setStyleSheet('background-color: rgba(200,10,0,255);')
@@ -131,9 +137,9 @@ class DeployWindow(QWidget):
         # UseCase Config Dropdown to select usecase mode
         self.usecase_config_button = QComboBox(self)
         self.usecase_config_button.setGeometry(self._DEPLOY_WIN_W/2,
-                                               self._DEPLOY_WIN_H/3,
+                                               self._DEPLOY_WIN_H/4,
                                                self._DEPLOY_WIN_W/2,
-                                               self._DEPLOY_WIN_H/3)
+                                               self._DEPLOY_WIN_H/4)
         for usecase in self.usecase_list:
             self.usecase_config_button.addItem(usecase)
 
@@ -142,11 +148,29 @@ class DeployWindow(QWidget):
         else:
             self.usecase_config_button.setStyleSheet('background-color: rgba(200,10,0,255);')
 
+        # UseCase button to select use case and write to usecase_config.txt
         self.usecase_config_label = QLabel(self)
         self.usecase_config_label.setText('Use Case =')
         self.usecase_config_label.move(self._DEPLOY_WIN_W/2 - 90,
-                                       self._DEPLOY_WIN_H/3 + 40)
+                                       self._DEPLOY_WIN_H/4 + 40)
         self.usecase_config_label.setBuddy(self.usecase_config_button)
+
+        self.visualize_button = QPushButton(self)
+        self.visualize_button.setGeometry(0,
+                                          self._DEPLOY_WIN_H/4,
+                                          self._DEPLOY_WIN_W/4,
+                                          self._DEPLOY_WIN_H/4)
+        if self.visualizeFlag:
+            self.visualize_button.setText('Visualize')
+        else:
+            self.visualize_button.setText('Action')
+
+        self.docker_button = QPushButton(self)
+        self.docker_button.setGeometry(0,
+                                       self._DEPLOY_WIN_H * 2/4,
+                                       self._DEPLOY_WIN_W,
+                                       self._DEPLOY_WIN_H/4)
+        self.docker_button.setText('CPU')
 
         # Run button to deploy ROS2 package with info
         # from usecase_config.txt and session_config.txt
@@ -154,21 +178,12 @@ class DeployWindow(QWidget):
         self.run_button.setIcon(QIcon('img/go.png'))
         self.run_button.setIconSize(QSize(100, 100))
         self.run_button.setGeometry(0,
-                                    self._DEPLOY_WIN_H * 2/3,
+                                    self._DEPLOY_WIN_H * 3/4,
                                     self._DEPLOY_WIN_W,
-                                    self._DEPLOY_WIN_H/3)
-
-        self.visualize_button = QPushButton(self)
-        self.visualize_button.setGeometry(0,
-                                          self._DEPLOY_WIN_H/3,
-                                          self._DEPLOY_WIN_W/4,
-                                          self._DEPLOY_WIN_H/3)
-        if self.visualizeFlag:
-            self.visualize_button.setText('Visualize')
-        else:
-            self.visualize_button.setText('Action')
+                                    self._DEPLOY_WIN_H/4)
 
         self.visualize_button.clicked.connect(self.setVisualizeFlag)
+        self.docker_button.clicked.connect(self.setDockerFlag)
         self.model_button.clicked.connect(self.setModel)
         self.list_button.clicked.connect(self.setLabelList)
         self.usecase_config_button.activated.connect(self.setUseCase)
@@ -183,14 +198,17 @@ class DeployWindow(QWidget):
         Otherwise, run bash script to kill ROS2 package processes remotely.
         '''
         if not self._is_running:
-            self._deploy_process = subprocess.Popen(['./scripts/deploy.bash'])
+            self._deploy_process = subprocess.Popen(['./scripts/deploy.sh',
+                                                     str(self.useCPU),
+                                                     str(self.visualizeFlag)])
             self.run_button.setText('Stop')
             self.run_button.setIcon(QIcon('img/quit.png'))
             self.run_button.setIconSize(QSize(100, 100))
             self.run_button.updateGeometry()
             self._is_running = True
         else:
-            self._kill_process = subprocess.Popen(['./scripts/kill.bash'])
+            print ("Killing epd_test_container docker.")
+            self._kill_process = subprocess.Popen(['./scripts/kill.sh'])
             self.run_button.setText('Run')
             self.run_button.setIcon(QIcon('img/go.png'))
             self.run_button.setIconSize(QSize(100, 100))
@@ -218,6 +236,16 @@ class DeployWindow(QWidget):
         self.visualize_button.updateGeometry()
         self.updateSessionConfig()
 
+    def setDockerFlag(self):
+        '''A function is triggered by the button labelled, CPU/GPU.'''
+        self.useCPU = not self.useCPU
+
+        if self.useCPU:
+            self.docker_button.setText('CPU')
+        else:
+            self.docker_button.setText('GPU')
+        self.docker_button.updateGeometry()
+
     def setUseCase(self, index):
         '''A function is triggered by the DropDown Menu labelled, UseCase.'''
         selected_usecase = self.usecase_list[index]
@@ -235,6 +263,9 @@ class DeployWindow(QWidget):
             self.counting_window = CountingWindow(self._path_to_label_list,
                                                   self._path_to_usecase_config)
             self.counting_window.show()
+        elif selected_usecase == 'Localization':
+            with open(self._path_to_usecase_config, 'w') as filehandle:
+                filehandle.write('3\n')
         else:
             if not self.debug:
                 input_refimage_filepath, ok = (
@@ -249,7 +280,10 @@ class DeployWindow(QWidget):
             self.usecase_config.clear()
             self.usecase_config.append(str(2))
             if ok:
-                self.usecase_config.append(input_refimage_filepath)
+
+                filepath_index = input_refimage_filepath.find('/data')
+
+                self.usecase_config.append('.' + input_refimage_filepath[filepath_index:])
             else:
                 print('No reference color template set.')
                 return
@@ -277,9 +311,13 @@ class DeployWindow(QWidget):
         else:
             input_model_filepath = 'dummy_model_filepath'
             ok = True
+
         if ok:
             self._path_to_model = input_model_filepath
-            self.session_config[0] = input_model_filepath
+
+            index = input_model_filepath.find('/data/model')
+
+            self.session_config[0] = '.' + input_model_filepath[index:]
         else:
             print('No ONNX model set.')
             return
@@ -301,7 +339,10 @@ class DeployWindow(QWidget):
 
         if ok:
             self._path_to_label_list = input_classes_filepath
-            self.session_config[1] = input_classes_filepath
+
+            index = input_classes_filepath.find('/data/label_list')
+
+            self.session_config[1] = '.' + input_classes_filepath[index:]
         else:
             print('No label list set.')
             return

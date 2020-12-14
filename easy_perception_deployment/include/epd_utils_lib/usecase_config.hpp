@@ -18,6 +18,7 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
 #include "opencv2/opencv.hpp"
 
 /*! \brief A collection of use-case filters, namely for parsing usecase_config.txt,
@@ -28,8 +29,9 @@ namespace EPD
 const unsigned int CLASSIFICATION_MODE = 0;
 const unsigned int COUNTING_MODE = 1;
 const unsigned int COLOR_MATCHING_MODE = 2;
+const unsigned int LOCALISATION_MODE = 3;
 
-const char PATH_TO_USECASE_CONFIG[] = "data/usecase_config.txt";
+const char PATH_TO_USECASE_CONFIG[] = PATH_TO_PACKAGE "/data/usecase_config.txt";
 
 /*! \brief A Getter function that parses the usecase_config.txt if a Counting
 usecaseMode is selected and populates a list of selected object names intended
@@ -116,7 +118,7 @@ inline void matchColor(
   std::getline(infile, s);
 
   std::string filepath_to_refcolor = s;
-  cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, CV_LOAD_IMAGE_COLOR);
+  cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, cv::IMREAD_COLOR);
   cv::Mat hsv_base, hsv_test1;
   cv::cvtColor(ref_color_image, hsv_base, cv::COLOR_BGR2HSV);
   cv::Mat hist_base, hist_test1;
@@ -147,9 +149,11 @@ inline void matchColor(
     cv::Rect objectROI(cv::Point(curBbox[0], curBbox[1]), cv::Point(curBbox[2], curBbox[3]));
     croppedImage = img(objectROI);
     cv::cvtColor(croppedImage, hsv_test1, cv::COLOR_BGR2HSV);
-    cv::calcHist(&hsv_test1, 1, channels, cv::Mat(),
+    cv::calcHist(
+      &hsv_test1, 1, channels, cv::Mat(),
       hist_test1, 2, histSize, ranges, true, false);
-    cv::normalize(hist_test1, hist_test1, 0, 1,
+    cv::normalize(
+      hist_test1, hist_test1, 0, 1,
       cv::NORM_MINMAX, -1, cv::Mat());
 
     /* Can change 3rd arg in compareHist function call to [0,1,2,3],
@@ -191,7 +195,6 @@ inline void activateUseCase(
     std::stringstream i(s);
     i >> useCaseMode;
   }
-
   // If default CLASSIFICATION_MODE is selected, do not alter anything and return.
   if (useCaseMode == EPD::CLASSIFICATION_MODE) {
     return;
@@ -274,7 +277,7 @@ inline void matchColor(
   std::getline(infile, s);
 
   std::string filepath_to_refcolor = s;
-  cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, CV_LOAD_IMAGE_COLOR);
+  cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, cv::IMREAD_COLOR);
   cv::Mat hsv_base, hsv_test1;
   cv::cvtColor(ref_color_image, hsv_base, cv::COLOR_BGR2HSV);
   cv::Mat hist_base, hist_test1;
@@ -307,9 +310,11 @@ inline void matchColor(
     cv::Rect objectROI(cv::Point(curBbox[0], curBbox[1]), cv::Point(curBbox[2], curBbox[3]));
     croppedImage = img(objectROI);
     cv::cvtColor(croppedImage, hsv_test1, cv::COLOR_BGR2HSV);
-    cv::calcHist(&hsv_test1, 1, channels, cv::Mat(),
+    cv::calcHist(
+      &hsv_test1, 1, channels, cv::Mat(),
       hist_test1, 2, histSize, ranges, true, false);
-    cv::normalize(hist_test1, hist_test1, 0, 1,
+    cv::normalize(
+      hist_test1, hist_test1, 0, 1,
       cv::NORM_MINMAX, -1, cv::Mat());
 
     /* Can change 3rd arg in compareHist function call to [0,1,2,3],
@@ -330,6 +335,20 @@ inline void matchColor(
   masks = local_masks;
   infile.close();
 }
+
+// /*! \brief A Mutator function that takes the base inference results from a P3
+// inference engine and produces 3D localization results.
+// */
+// inline void localize(
+//   const cv::Mat & img,
+//   std::vector<std::array<float, 4>> & bboxes,
+//   std::vector<uint64_t> & classIndices,
+//   std::vector<float> & scores,
+//   std::vector<cv::Mat> & masks,
+//   std::vector<std::string> allClassNames)
+// {
+//   printf("Entered localize usecase function.\n");
+// }
 
 /*! \brief A Mutator function that takes the base inference results from a P3
 inference engine and excludes any bounding boxes, classIndices and score
@@ -364,6 +383,8 @@ inline void activateUseCase(
   } else if (useCaseMode == EPD::COLOR_MATCHING_MODE) {
     printf("Use Case: [Color-Matching] selected.\n");
     EPD::matchColor(img, bboxes, classIndices, scores, masks, allClassNames);
+  } else if (useCaseMode == EPD::LOCALISATION_MODE) {
+    printf("Use Case: [Localization] selected.\n");
   } else {
     throw std::runtime_error("Invalid Use Case. Can only be [0, 1, 2].");
   }

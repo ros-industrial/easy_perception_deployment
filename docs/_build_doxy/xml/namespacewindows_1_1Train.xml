@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="namespacewindows_1_1Train" kind="namespace" language="Python">
+    <compoundname>windows::Train</compoundname>
+    <innerclass refid="classwindows_1_1Train_1_1TrainWindow" prot="public">windows::Train::TrainWindow</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Train.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

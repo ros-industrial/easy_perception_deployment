@@ -23,6 +23,12 @@
 // OpenCV LIB
 #include "opencv2/opencv.hpp"
 
+std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/data/session_config.txt");
+std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/data/usecase_config.txt");
+std::string PATH_TO_ONNX_MODEL(PATH_TO_PACKAGE "/data/model/squeezenet1.1-7.onnx");
+std::string PATH_TO_LABEL_LIST(PATH_TO_PACKAGE "/data/label_list/imagenet_classes.txt");
+std::string PATH_TO_TEST_IMAGE(PATH_TO_PACKAGE "/data/9544757988_991457c228_z.jpg");
+
 bool is_file_exist(const char * fileName)
 {
   std::ifstream infile(fileName);
@@ -31,26 +37,26 @@ bool is_file_exist(const char * fileName)
 
 TEST(EPD_TestSuite, Test_loadP1ONNXModel_EPDContainer)
 {
-  if (!is_file_exist("./data/session_config.txt")) {
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/squeezenet1.1-7.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/imagenet_classes.txt >> ./data/session_config.txt");
-    system("echo visualize >> ./data/session_config.txt");
+  if (!is_file_exist(PATH_TO_SESSION_CONFIG.c_str())) {
+    system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo visualize >> " + PATH_TO_SESSION_CONFIG).c_str());
   } else {
-    system("rm ./data/session_config.txt");
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/squeezenet1.1-7.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/imagenet_classes.txt >> ./data/session_config.txt");
-    system("echo visualize >> ./data/session_config.txt");
+    system(("rm " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo visualize >> " + PATH_TO_SESSION_CONFIG).c_str());
   }
 
-  if (!is_file_exist("./data/usecase_config.txt")) {
-    system("touch ./data/usecase_config.txt");
-    system("echo 0 >> ./data/usecase_config.txt");
+  if (!is_file_exist(PATH_TO_USECASE_CONFIG.c_str())) {
+    system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("echo 0 >> " + PATH_TO_USECASE_CONFIG).c_str());
   } else {
-    system("rm ./data/usecase_config.txt");
-    system("touch ./data/usecase_config.txt");
-    system("echo 0 >> ./data/usecase_config.txt");
+    system(("rm " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
+    system(("echo 0 >> " + PATH_TO_USECASE_CONFIG).c_str());
   }
 
   EPD::EPDContainer * ortAgent_;
@@ -66,28 +72,32 @@ TEST(EPD_TestSuite, Test_loadP1ONNXModel_EPDContainer)
   ASSERT_EQ(!ortAgent_->p1_ort_session, false);
 
   // Download and load test image
-  system("apt-get install -y wget");
-  system("wget https://farm8.staticflickr.com/7329/9544757988_991457c228_z.jpg"
-    " --directory-prefix ./data/");
+  if (!is_file_exist(PATH_TO_TEST_IMAGE.c_str())) {
+    system("apt-get install -y wget");
+    system(
+      "wget https://farm8.staticflickr.com/7329/9544757988_991457c228_z.jpg"
+      " --directory-prefix " PATH_TO_PACKAGE "/data/");
+  }
+
   cv::Mat frame = cv::imread(
-    "./data/9544757988_991457c228_z.jpg",
-    CV_LOAD_IMAGE_COLOR);
+    PATH_TO_TEST_IMAGE,
+    cv::IMREAD_COLOR);
   std::vector<std::string> topK_obj_identities = ortAgent_->p1_ort_session->infer(
     frame);
 
   ASSERT_EQ(topK_obj_identities[0], "Irish setter, red setter ");
 
-  if (!is_file_exist("./data/session_config.txt")) {
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/squeezenet1.1-7.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/imagenet_classes.txt >> ./data/session_config.txt");
-    system("echo action >> ./data/session_config.txt");
+  if (!is_file_exist(PATH_TO_SESSION_CONFIG.c_str())) {
+    system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo visualize >> " + PATH_TO_SESSION_CONFIG).c_str());
   } else {
-    system("rm ./data/session_config.txt");
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/squeezenet1.1-7.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/imagenet_classes.txt >> ./data/session_config.txt");
-    system("echo action >> ./data/session_config.txt");
+    system(("rm " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+    system(("echo robot >> " + PATH_TO_SESSION_CONFIG).c_str());
   }
 
   topK_obj_identities = ortAgent_->p1_ort_session->infer(frame);
