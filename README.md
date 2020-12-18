@@ -12,7 +12,7 @@ To get started using it, please run the following commands to start **viewing th
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
 git clone https://github.com/ros-industrial/easy_perception_deployment.git
-
+firefox ./docs/index.html
 ```
 
 ## **Setup**
