@@ -1,6 +1,7 @@
 
 # **easy_perception_deployment**
-[![Build Status](https://travis-ci.org/cardboardcode/easy_perception_deployment.svg?branch=master)](https://travis-ci.org/cardboardcode/easy_perception_deployment)[![codecov](https://codecov.io/gh/cardboardcode/easy_perception_deployment/branch/master/graph/badge.svg)](https://codecov.io/gh/cardboardcode/easy_perception_deployment)[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/cardboardcode/easy_perception_deployment.svg?branch=master)](https://travis-ci.org/cardboardcode/easy_perception_deployment)[![codecov](https://codecov.io/gh/cardboardcode/easy_perception_deployment/branch/master/graph/badge.svg)](https://codecov.io/gh/cardboardcode/easy_perception_deployment)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
 ## **What Is This?**
@@ -11,9 +12,13 @@ To get started using it, please run the following commands to start **viewing th
 ``` bash
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://github.com/cardboardcode/easy_perception_deployment
-
+git clone https://github.com/cardboardcode/easy_perception_deployment.git
+firefox /docs/_build/html/index.html
 ```
+
+## **Quality Declaration**
+
+This package claims to be in the Quality Level 5 category, see the Quality Declaration for more details.
 
 ## **Setup**
 
@@ -23,20 +28,7 @@ This section lists steps on how to build **easy_perception_deployment** package 
 # Download easy_perception_deployment
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://github.com/cardboardcode/easy_perception_deployment
-
-# Install ROS dependencies
-cd ../
-sudo apt-get update
-source /opt/ros/eloquent/setup.bash
-rosdep install --from-paths src --ignore-src --rosdistro=$ROS_DISTRO -y
-
-# Build packages and source them
-cd src/easy_perception_deployment/epd_msgs/
-colcon build && source install/setup.bash
-cd ../easy_perception_deployment
-colcon build && source install/setup.bash
-./scripts/create_desktop_shortcut.bash
-
-# Launch the program using the newly created desktop shortcut.
+git clone https://github.com/cardboardcode/easy_perception_deployment.git
+cd easy_perception_deployment/easy_perception_deployment
+bash run.bash
 ```

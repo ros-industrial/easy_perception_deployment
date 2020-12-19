@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classwindows_1_1Counting_1_1CountingWindow" kind="class"><name>windows::Counting::CountingWindow</name>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a576f589915a8bfa7fabc64b4469561e0" kind="variable"><name>_COUNTING_WIN_H</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a04659b99655b9eafc989b7338fdfc125" kind="variable"><name>_COUNTING_WIN_W</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1ab6b0f08be114f2fe2b70f3849e69d232" kind="variable"><name>_label_list</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1ad5b8cc61f42bf9c8546439468a7e6bb2" kind="variable"><name>_select_list</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1ad8e21eaf380d6960a19dd79e81ff6231" kind="variable"><name>_path_to_usecase_config</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a7f775bb77acf7c4522e4068680af3f74" kind="variable"><name>label_list_dropdown</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a96b5a7fd3c863620ead70e32dc1d4a9d" kind="variable"><name>label_list_dropdown_label</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a4f3bd452726519dd4a7c9bd0dc8e980c" kind="variable"><name>selected_list_menu</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1aa20392693968654a54c8959de23ba184" kind="variable"><name>selected_list_menu_label</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a498a0d43978499f8de19a94dd1691e10" kind="variable"><name>finish_button</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a7837d2b02a79957e9a4ed1608d69ac8a" kind="variable"><name>cancel_button</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a3360dd589799a79d38afc207dfed32cc" kind="function"><name>__init__</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1acf7a760ac4453bca6614a0532571c08d" kind="function"><name>setButtons</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a4520405ae5505a048249b6d8f5b32922" kind="function"><name>writeToUseCaseConfig</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a60aa6ed9e20a297c3a1f7152679e31c7" kind="function"><name>closeWindow</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1a654e44387a6c38b1be5b83f2e1dc58b6" kind="function"><name>addObject</name></member>
+    <member refid="classwindows_1_1Counting_1_1CountingWindow_1af0a48401e159cba3824b9205ff3b0eb1" kind="function"><name>removeObject</name></member>
+  </compound>
+  <compound refid="classwindows_1_1Deploy_1_1DeployWindow" kind="class"><name>windows::Deploy::DeployWindow</name>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1aab6b4c8ff4098a28efa81bb0b1e4f8e3" kind="variable"><name>debug</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac565134673847ec33791f00ee96a2588" kind="variable"><name>visualizeFlag</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a3a1acb10e779180b23b920d927bdc343" kind="variable"><name>usecase_list</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1afb626b68a7520b49160f5a27ba6288ab" kind="variable"><name>session_config</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a590abd6cc88576297add053391d99e2e" kind="variable"><name>usecase_config</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1abd8d59c8a078de8f2c88452e9e2ca1a0" kind="variable"><name>usecase_mode</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a45832f0508ec2d942331402f3717b29c" kind="variable"><name>model_button</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1aaf5bfa230d4c770e68fe1a6d5196ac3a" kind="variable"><name>list_button</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ad97e2abf945cd0f35cdb0bee399ffa54" kind="variable"><name>usecase_config_button</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac3d1c6ae54d0fdba65c9e15a2d572949" kind="variable"><name>usecase_config_label</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1abecda74798f9d914e6a583c0cf1ccb03" kind="variable"><name>run_button</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a5a87e850a36cac47b329e6fe8d359df2" kind="variable"><name>visualize_button</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a1553d20fa4ca3f0031d2b5f2f90225ac" kind="variable"><name>counting_window</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a2dd70a2b2243b31e3ec4b6aeb660c12d" kind="variable"><name>_path_to_model</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1acc63fbb43bd3731e116e431eabf515d6" kind="variable"><name>_path_to_label_list</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1af2d542c94fc47be14f7b689dca195f32" kind="variable"><name>_is_running</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a61baa45b2055d6383b4b5baa8b78b2ea" kind="variable"><name>_DEPLOY_WIN_H</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a2228169579d5079164251f17a843fac4" kind="variable"><name>_DEPLOY_WIN_W</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ae851475d86d0caf48337496882d06b26" kind="variable"><name>_deploy_process</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a16b2db99e8ed890b76dc26fc6ea35e1e" kind="variable"><name>_kill_process</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac882c7943bec17a7e5ae323365338474" kind="variable"><name>_path_to_session_config</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac8b2657a67225e2b555b1c47ff5cb8f9" kind="variable"><name>_path_to_usecase_config</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a476ba51fb0d265b29297c46cfa16334f" kind="function"><name>__init__</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a997b29f16888907fbcc559dba3ac9c56" kind="function"><name>setButtons</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a084a90928dee8871bc7e3f6c263860af" kind="function"><name>deployPackage</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a96cbf0265e853e5da8cc210a7befb8bd" kind="function"><name>doesFileExist</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a2e7a0a241cd29aabbf2f382248eef350" kind="function"><name>setVisualizeFlag</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1addabf8ccee64a0c8e23606f9352b8165" kind="function"><name>setUseCase</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ae44c600102e43afda152cac70bf40de6" kind="function"><name>updateSessionConfig</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac56777844560fab4d9175409a55a245f" kind="function"><name>setModel</name></member>
+    <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ad6cf96b44c11adecb999af730b918b35" kind="function"><name>setLabelList</name></member>
+  </compound>
+  <compound refid="classEPD_1_1EPDContainer" kind="class"><name>EPD::EPDContainer</name>
+    <member refid="classEPD_1_1EPDContainer_1a812461a71889963abc810167cc2a92b5" kind="variable"><name>p3_ort_session</name></member>
+    <member refid="classEPD_1_1EPDContainer_1add6c5c348b2aa94dd9dae5372bab16dc" kind="variable"><name>p2_ort_session</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a18b26c6078c688eec26e964884b14257" kind="variable"><name>p1_ort_session</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a8566251df1b00a088fcb00660cdb29cf" kind="variable"><name>precision_level</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a4ba5e40c755645e7760cfd1646532e3b" kind="variable"><name>IMG_CHANNEL</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a9b2389994554f7f94ba1fd1705dd2db6" kind="variable"><name>PATH_TO_SESSION_CONFIG</name></member>
+    <member refid="classEPD_1_1EPDContainer_1acb858143b2eff58ba80663198cceee5d" kind="variable"><name>PATH_TO_USECASE_CONFIG</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a3f9c8d24b14495e0396bbc8b9c2c7341" kind="variable"><name>template_color_path</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a66bd6e68c87efd8d7971a289295a63d1" kind="variable"><name>class_label_path</name></member>
+    <member refid="classEPD_1_1EPDContainer_1ad398442c8ebc7f201470b6196ac5642b" kind="variable"><name>onnx_model_path</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a5e651b1684c06ae5f7ce30e03e05e342" kind="variable"><name>useCaseMode</name></member>
+    <member refid="classEPD_1_1EPDContainer_1ac78dd903232216696b2e1c30b124cd97" kind="variable"><name>countClassNames</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a7c80d53a7248b0882ba49b1d8c3ba838" kind="variable"><name>classNames</name></member>
+    <member refid="classEPD_1_1EPDContainer_1afa63b71476c13d0cb70bc760f69df81d" kind="variable"><name>hasInitialized</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a820c145aa12093a5a2458560e4eec9af" kind="variable"><name>onlyVisualize</name></member>
+    <member refid="classEPD_1_1EPDContainer_1adb657b39462e20abb4b1246501ef078d" kind="variable"><name>frame_width</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a7d2cc09bf4a4c3ea85520a9a88e3b5ec" kind="variable"><name>frame_height</name></member>
+    <member refid="classEPD_1_1EPDContainer_1aa74885194dd74ac0b3be1cd0f7bac88f" kind="function"><name>EPDContainer</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a80e1cd062d494fc56ef2c7fc10b93e30" kind="function"><name>~EPDContainer</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a4c118d7f38da1c02033955bf73596cb0" kind="function"><name>isInit</name></member>
+    <member refid="classEPD_1_1EPDContainer_1af19c19ff8de6713b4cefbb94f47d4bd2" kind="function"><name>isVisualize</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a545f016afc427032ddd4d271c8ff6cb7" kind="function"><name>getHeight</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a122ce64ccbae3439b9f3c457ec5c73a5" kind="function"><name>getWidth</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a36d54211b5ded9a99dff338ca12dc590" kind="function"><name>setInitBoolean</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a371ffc46b938043ee4db5231bacb31d1" kind="function"><name>setFrameDimension</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a994f93ddc75986a817bec89b59a7c779" kind="function"><name>initORTSessionHandler</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a040763d940037334b2601ea1403a6dec" kind="function"><name>setModelConfigFile</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a6f54cd992d26df63e7739ddd6c7e79ad" kind="function"><name>setUseCaseConfigFile</name></member>
+    <member refid="classEPD_1_1EPDContainer_1afe42693d674c3fb6b1f6da53bc22c7fd" kind="function"><name>setPrecisionLevel</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a28e8021e5100816b3cfb2b3fe7f9629a" kind="function"><name>setLabelList</name></member>
+  </compound>
+  <compound refid="classEPD_1_1EPDObjectDetection" kind="class"><name>EPD::EPDObjectDetection</name>
+    <member refid="classEPD_1_1EPDObjectDetection_1a2ae7f229afbbeba810bae1e9a69c38b7" kind="variable"><name>bboxes</name></member>
+    <member refid="classEPD_1_1EPDObjectDetection_1afcb68e9efe2855b5c58b87f7b26a4129" kind="variable"><name>classIndices</name></member>
+    <member refid="classEPD_1_1EPDObjectDetection_1a2b12266233e2d87f61a730b692a46785" kind="variable"><name>scores</name></member>
+    <member refid="classEPD_1_1EPDObjectDetection_1afdb9138c1e27dfb472d2eb271dce59eb" kind="variable"><name>masks</name></member>
+    <member refid="classEPD_1_1EPDObjectDetection_1a80f2c8e86454b9e6009f26a87433b6da" kind="variable"><name>data_size</name></member>
+    <member refid="classEPD_1_1EPDObjectDetection_1a40b0710ad33ac50b93215536b19ddd1e" kind="function"><name>EPDObjectDetection</name></member>
+  </compound>
+  <compound refid="classImageViewer" kind="class"><name>ImageViewer</name>
+    <member refid="classImageViewer_1a2043be9b399137b023c93487a2cd0c4a" kind="variable"><name>sub_1_</name></member>
+    <member refid="classImageViewer_1a0b97f3ed5b0d8c9f166e4d0896704164" kind="variable"><name>sub_2_</name></member>
+    <member refid="classImageViewer_1a968687d70a4f15be8442212da98ad36b" kind="function"><name>ImageViewer</name></member>
+    <member refid="classImageViewer_1ad5179bd54d5bde2fe12b5f0cbf76c204" kind="function"><name>encoding2mat_type</name></member>
+    <member refid="classImageViewer_1aec81a9a8c06cecca37c376f67588bb2c" kind="function"><name>image_callback</name></member>
+    <member refid="classImageViewer_1a1ba06a0a1eeb1ff80cfd3b62ee968011" kind="function"><name>state_callback</name></member>
+  </compound>
+  <compound refid="classwindows_1_1Main_1_1MainWindow" kind="class"><name>windows::Main::MainWindow</name>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1affefb4a31f88f61517c5927292815ac7" kind="variable"><name>train_window</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1ab28561d666bff258bcf97c3c4f7cc0c4" kind="variable"><name>deploy_window</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1add35cb9afef0ab1d24ba20067aebca6c" kind="variable"><name>isTrainOpen</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1a78c1d0b8dc165d58791f94d18f300bce" kind="variable"><name>isDeployOpen</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1ab90b7d20ec8aaf413fa6a2781a7ca23f" kind="variable"><name>train_button</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1ae5f6b1981c161e723a34cbbbd93482be" kind="variable"><name>deploy_button</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1a3ec0ef903bb8387e5fc8ea95895430c7" kind="variable"><name>quit_button</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1ab6bc7241536232f8d96689c965b51d85" kind="variable"><name>_WINDOW_HEIGHT</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1a15d4d985aa9274a2da1bceb6a74fb0cd" kind="variable"><name>_WINDOW_WIDTH</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1aea3a840eb6252914dfcaf98696d72e8c" kind="function"><name>__init__</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1a0ac0c7a6531a953f3876ca0c4a379371" kind="function"><name>setButtons</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1a208e04169a995e71e036e327523118be" kind="function"><name>deployPackage</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1a3679f1fb3c7dbecf967caa064e70da11" kind="function"><name>openTrainWindow</name></member>
+    <member refid="classwindows_1_1Main_1_1MainWindow_1a33d07b3df9535d64dc4431f82dc9b1ef" kind="function"><name>closeWindow</name></member>
+  </compound>
+  <compound refid="classOrt_1_1OrtBase" kind="class"><name>Ort::OrtBase</name>
+    <member refid="classOrt_1_1OrtBase_1adf2da264432541eb7cdf1122f742e9c4" kind="typedef"><name>DataOutputType</name></member>
+    <member refid="classOrt_1_1OrtBase_1a7ba0b5c38421e3d43f0fd2d87b61b528" kind="variable"><name>base_impl_</name></member>
+    <member refid="classOrt_1_1OrtBase_1ad81b15848098d8137f8816fb1a491dab" kind="function"><name>OrtBase</name></member>
+    <member refid="classOrt_1_1OrtBase_1ab311e3e35bd05728ec48f5a42947d172" kind="function"><name>~OrtBase</name></member>
+    <member refid="classOrt_1_1OrtBase_1a3fc8f611e4392faec49fea733b23ccb5" kind="function"><name>operator()</name></member>
+    <member refid="classOrt_1_1OrtBase_1a9d54c41654fed1d5bee18b089d5a6edd" kind="function"><name>getNumOutputs</name></member>
+  </compound>
+  <compound refid="classOrt_1_1P1OrtBase" kind="class"><name>Ort::P1OrtBase</name>
+    <member refid="classOrt_1_1P1OrtBase_1a40909cc97bf43740f64d93e76d5ab034" kind="variable"><name>MIN_IMAGE_SIZE</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a94681197c3c1d1247c04007f57731886" kind="variable"><name>m_numClasses</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a01e49fa87cebce6a145d7a57f3f1933a" kind="variable"><name>m_ratio</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a34601011c38caa12257e795fe9ffd411" kind="variable"><name>m_newW</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a7ae2e9037b0c770e61e4c76f41c42d47" kind="variable"><name>m_newH</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1aa72585892eaa6674fe8303afb84eaf80" kind="variable"><name>m_paddedW</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a3349f7146d6fc53007945cbf6121ae3d" kind="variable"><name>m_paddedH</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1ad87ef87ea22f18c2154c890e65f7ddfb" kind="variable"><name>m_classNames</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a05b148f3414980d6b8ac5a141ee13097" kind="function"><name>P1OrtBase</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a19cf0a0880d10c89a23d8c4b81caacbe" kind="function"><name>~P1OrtBase</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1ade038de1967c2ac01af7ab617dbcea1b" kind="function"><name>infer</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a7b4c1a46a93093056ab2f876a041cf51" kind="function"><name>getNumClasses</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a7f2be8e4674922acb5a110592274bbd3" kind="function"><name>getClassNames</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a50b24dd8c6b24da94557eac897ea5457" kind="function"><name>initClassNames</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1aca28daefa4cc4a3b3467c31e6719c67d" kind="function"><name>preprocess</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a5981f45d9c40392697f48ecfc01ef56d" kind="function"><name>getTopKRaw</name></member>
+    <member refid="classOrt_1_1P1OrtBase_1a7be731ea15a3295f543e918be88ba112" kind="function"><name>processTopK</name></member>
+  </compound>
+  <compound refid="classtrainer_1_1P1Trainer_1_1P1Trainer" kind="class"><name>trainer::P1Trainer::P1Trainer</name>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8b6daa0252be06e79732b708701aee0a" kind="variable"><name>data_dir</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a5ef56dddd441c51171211464119be6ef" kind="variable"><name>model_name</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1abf46a37f4ce7a272a73d9fa0e330eb08" kind="variable"><name>num_classes</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaaedbd9ecf679c9cfb3007fc9a33e892" kind="variable"><name>class_names</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1d72863a13d9eeb8cfa8d6f265fef067" kind="variable"><name>path_to_trained_model</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a09373bcc1c564590462607640f272814" kind="variable"><name>feature_extract</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a291fdeb5d130259feb21ba82f1722ccc" kind="variable"><name>IMAGENET_MEAN</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8bcdcbb132357306264f5b8d21d86515" kind="variable"><name>IMAGENET_STD</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaf4e12c2ebeafd2c98cd0a3957d0f2fb" kind="variable"><name>data_transforms</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a00dea7e58a669964e81e4d642e60cf2b" kind="variable"><name>batch_size</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a7bcfd4156af7e0fef2f308304b2dc5c6" kind="variable"><name>num_epochs</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1adbc3526a3d55034d1f6900918facd5c9" kind="variable"><name>device</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1ac8e3ed1765ea0bd3d21acb89ab15a65b" kind="function"><name>__init__</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a9be82fefc6c3c50d7139be20cf4ff9a6" kind="function"><name>train</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a47e86d1eb8da09b70407e9605ac0f3e6" kind="function"><name>train_model</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1823cb45af6684a2af9bbdee5c64e001" kind="function"><name>set_parameter_requires_grad</name></member>
+    <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a460992c6c28f1d184e78b28332640592" kind="function"><name>initialize_model</name></member>
+  </compound>
+  <compound refid="classOrt_1_1P2OrtBase" kind="class"><name>Ort::P2OrtBase</name>
+    <member refid="classOrt_1_1P2OrtBase_1a4721a6e4cca7bd60b90143278ad7a2b2" kind="variable"><name>MIN_IMAGE_SIZE</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1aa75e0f0580414f2fc51be71e4a6438b3" kind="variable"><name>m_numClasses</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a2cca8b3a61987dbd61b256c6783e9675" kind="variable"><name>m_ratio</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a60fccea90926277bf24e07755c7d6d66" kind="variable"><name>m_newW</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1aea8cd377365876275653bc55cfca0d81" kind="variable"><name>m_newH</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a32b6592157d3e99b34ae6674ec708173" kind="variable"><name>m_paddedW</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a144e05345b9b98cf4c877cf8746b2b87" kind="variable"><name>m_paddedH</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1ad4695a5227d13031811148b733e2a1b1" kind="variable"><name>m_classNames</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a7de210a80972444587b5bfe8513a5501" kind="function"><name>P2OrtBase</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1ac8cc28f37ed1936e234d07c5e8e47e8b" kind="function"><name>~P2OrtBase</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1acf9dff96064c44f8a28065374418e589" kind="function"><name>infer_visualize</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a42373d699b170d9be763416554072c3d" kind="function"><name>infer_action</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1ab0ffafc5d9fe6fbd5670033eed582868" kind="function"><name>getNumClasses</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a62519274b331a67e661e01fde9c7b4ee" kind="function"><name>getClassNames</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1abd05c26b896f4b83e83940f41a3d46c5" kind="function"><name>initClassNames</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1aa7c54074fd5f54ec8ef1e293595f2569" kind="function"><name>preprocess</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a2964a0f0a800d0f7512a7959192b4d6f" kind="function"><name>preprocess</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a6c3bb04ed8b2677d5443620fc543013d" kind="function"><name>infer_visualize</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a40401db6edb894fbe42fd09bbc912ab3" kind="function"><name>infer_action</name></member>
+    <member refid="classOrt_1_1P2OrtBase_1a678658cc642108795fc4f5a21f6873eb" kind="function"><name>visualize</name></member>
+  </compound>
+  <compound refid="classtrainer_1_1P2Trainer_1_1P2Trainer" kind="class"><name>trainer::P2Trainer::P2Trainer</name>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1ab60d9f0b3003762a0ea978a8590d20ed" kind="variable"><name>model_name</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a4dad9fbe79430cc1c54bfb554c6f4b47" kind="variable"><name>label_list</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1acd2044c0c56da21e0685d4391495005b" kind="variable"><name>create_process</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1afb7e7123a66ba66ff1247d3a4ab9a4c6" kind="variable"><name>run_process</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1aaf47e4bbd408f135b3288123951f2fe5" kind="variable"><name>build_export_process</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a4129b232258188f050b0b082bd4eed31" kind="variable"><name>export_process</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a887129d57e228d2c8abdda4155554074" kind="variable"><name>path_to_dataset</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a36be3f1dabbffdaac2e26039cde93dc5" kind="variable"><name>path_to_modif</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a8e573dac3de96c092f9623bf0f373e9a" kind="variable"><name>path_to_training_config</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a137e80f752c7e75b72b7c15de453ef8f" kind="variable"><name>path_to_export_config</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1adf438715b48673dbb69752a1ef4650a1" kind="variable"><name>path_to_trim_tools</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a777336ffd7da63efa21f00486ad678b2" kind="variable"><name>path_to_remove_init_tool</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1aa920e57d187b3ec64e20aee66c3f78a5" kind="variable"><name>path_to_export_modif</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a6755b1d823dbb6ff9d853cf828e21a6c" kind="function"><name>__init__</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a3b90adcb68d6e1235c815c1fd8b350bc" kind="function"><name>setNumClassesInTrainingConfig</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a3f9cc1939d5f17d1821d204e2221cd77" kind="function"><name>train</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a36d0b1580563724cc904dea40fecf172" kind="function"><name>createTrainFarm</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a81ed3893cc28f8ab50e8832cdf5a489c" kind="function"><name>runTrainFarm</name></member>
+    <member refid="classtrainer_1_1P2Trainer_1_1P2Trainer_1a7ad1506ec8f2ddb8b2d7cbcf565207bd" kind="function"><name>exportONNX</name></member>
+  </compound>
+  <compound refid="classOrt_1_1P3OrtBase" kind="class"><name>Ort::P3OrtBase</name>
+    <member refid="classOrt_1_1P3OrtBase_1aab9945c2414deacf462ceae06840c4b8" kind="variable"><name>MIN_IMAGE_SIZE</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a1ce15772b64ec8ed0ff2e209db4f49fe" kind="variable"><name>m_numClasses</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1ad3803540e84203c9092872675a50b447" kind="variable"><name>m_ratio</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1afc42aa05812d50bd1d8622a79ad021a1" kind="variable"><name>m_newW</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1ad5752e07e82520174e64f3e426c10050" kind="variable"><name>m_newH</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1ab2423e968046b96741d064d4bc1d3f80" kind="variable"><name>m_paddedW</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a7308694dcb1fd8c7c5586d5fbef5ae29" kind="variable"><name>m_paddedH</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a8117d774d2cc2d3ab3179a49bcbc10a7" kind="variable"><name>m_classNames</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a21d41185cb36400a14a6550151b3ccb1" kind="function"><name>P3OrtBase</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1abd128c88792c766e0ee27b97b612cd37" kind="function"><name>~P3OrtBase</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1ac7dcd88c76e54e2a272fb9284bb789c4" kind="function"><name>infer_visualize</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1ac79040877c158d910e1bb68a072aef4a" kind="function"><name>infer_action</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a7ac8f3762d88e39134cba7194b6b5608" kind="function"><name>getNumClasses</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1ad02795fac7feaa29d7e56e1896ecd7de" kind="function"><name>getClassNames</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a1bedef82fae394460bf14761ae6a4ed0" kind="function"><name>initClassNames</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1aa762ada234c23e19298e43b429e70a87" kind="function"><name>preprocess</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a86dfafce3df78725358195542e087cd1" kind="function"><name>preprocess</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a5b6b4d8bddcb4c66e69ed7cac5f28ddc" kind="function"><name>infer_visualize</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1a9c710a5ca3b60fee63d7d7c209115382" kind="function"><name>infer_action</name></member>
+    <member refid="classOrt_1_1P3OrtBase_1ad4d4448514ac38cedb23b1c4d0b32254" kind="function"><name>visualize</name></member>
+  </compound>
+  <compound refid="classtrainer_1_1P3Trainer_1_1P3Trainer" kind="class"><name>trainer::P3Trainer::P3Trainer</name>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a69c52a8eaa3d2c67cbafee1e610b0fa6" kind="variable"><name>model_name</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1aaa754f90b946a18e6d9b570314b5b66c" kind="variable"><name>label_list</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1aa5ae2d3ea7b68409bef87cb5e49ec3b7" kind="variable"><name>create_process</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1ac7997972fe34a9a40b1356747c693c16" kind="variable"><name>run_process</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a61ec9f45636d266a337c3f5de16c6170" kind="variable"><name>build_export_process</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1af81930f416d04bf332a5dd02fb76fb9a" kind="variable"><name>export_process</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a86593e044e133b09b4739c2d3c7472f5" kind="variable"><name>path_to_dataset</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1ade5a065859588da42fd0f09a12610555" kind="variable"><name>path_to_modif</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a495ea9d88483e843573ee3a34803ab69" kind="variable"><name>path_to_training_config</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a3f3ee76d7439c18107b51dbaf7d20555" kind="variable"><name>path_to_export_config</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a95c830bb4742375dcb2cc26316ba6c97" kind="variable"><name>path_to_trim_tools</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a05ade1e08c05979047f4b07b7976a2fe" kind="variable"><name>path_to_remove_init_tool</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a7fcb7b3e44eb42977629808175f2453c" kind="variable"><name>path_to_export_modif</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1ad589a6c65ca88c696565afb7151d9443" kind="function"><name>__init__</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a2c9abc0b384d530e9c05261bcee7ea7d" kind="function"><name>setNumClassesInTrainingConfig</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1aece95f340dee287162a3e295ac0ad364" kind="function"><name>train</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a8b544d5d5989511b7261f0be3e8c5f4d" kind="function"><name>createTrainFarm</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1a0be3ffe13fa68ef6f0045caa6c864dfb" kind="function"><name>runTrainFarm</name></member>
+    <member refid="classtrainer_1_1P3Trainer_1_1P3Trainer_1afb8e2fdf08bf7fe1416c24d7652560c2" kind="function"><name>exportONNX</name></member>
+  </compound>
+  <compound refid="classProcessor" kind="class"><name>Processor</name>
+    <member refid="classProcessor_1a4329d7ce1d8b70098f624fb0238cf9c1" kind="variable"><name>status_sub</name></member>
+    <member refid="classProcessor_1ac9ec915fae6bacf723ee6b93b48d06cc" kind="variable"><name>image_sub</name></member>
+    <member refid="classProcessor_1a61365d6da00f9053e36b2ab7cf666e1b" kind="variable"><name>visual_pub</name></member>
+    <member refid="classProcessor_1a7d33a83eb12d67913c0a941f6f1c945a" kind="variable"><name>p1_pub</name></member>
+    <member refid="classProcessor_1ace77cfbe4bc34f1704366b662f798e8c" kind="variable"><name>p2_pub</name></member>
+    <member refid="classProcessor_1ac2adb0a4bd305f85c98a5c0b60e21782" kind="variable"><name>p3_pub</name></member>
+    <member refid="classProcessor_1ab8052dce81742f7806b2f258299970eb" kind="variable"><name>ortAgent_</name></member>
+    <member refid="classProcessor_1a65c205fad80987ed72216978e882cb80" kind="function"><name>Processor</name></member>
+    <member refid="classProcessor_1ae5e88546782dc0d19b94457f29576f37" kind="function"><name>topic_callback</name></member>
+    <member refid="classProcessor_1abd818909057ac19f8f622258cb29e28b" kind="function"><name>state_callback</name></member>
+  </compound>
+  <compound refid="classwindows_1_1Train_1_1TrainWindow" kind="class"><name>windows::Train::TrainWindow</name>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ad51e32a63d9f4527f7ed961fff5b4613" kind="variable"><name>debug</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a79e722793a902dc42c3d913a9b17eb28" kind="variable"><name>model_name</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a49997a1c7ccf2174742c0690513fbd87" kind="variable"><name>buttonConnected</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a53ec014866ebe9c12344433978f1e57e" kind="variable"><name>label_process</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a8cd05b569b89e745e4fb9ffd81351dc4" kind="variable"><name>label_train_process</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1aec68e4cf9d25dc7ccab24570317a08c3" kind="variable"><name>label_val_process</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a353188290ba23b72667f03ab9454c637" kind="variable"><name>p1_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ade6bfc3dada8604e9f418cacc338f286" kind="variable"><name>p2_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a28a903c109ca2b5264e98477a49c9f30" kind="variable"><name>p3_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1afc17bd110d0b7899b96c1961ccfc13c0" kind="variable"><name>model_selector</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a0773ac6080ec328f0df68a19ee0f4278" kind="variable"><name>model_selector_label</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a53dc073fdc3a09c91c0fc768a7cb4216" kind="variable"><name>label_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1aa8f96cdf834022d3b6cda04106fe9b0b" kind="variable"><name>generate_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a2cf1198fb89a3734f81c9a00747707ec" kind="variable"><name>validate_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a8153e33314707e6db8b0a7b448ade5ed" kind="variable"><name>dataset_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a7a97245adedd08280becfbf8686ce067" kind="variable"><name>train_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ae2470af73a87c9f4f796a2833d207345" kind="variable"><name>list_button</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ad6c1fc75c5f8c18a763bacb704db8b3d" kind="variable"><name>_TRAIN_WIN_H</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a923dc396ee00ca9636902a58c4cc5895" kind="variable"><name>_TRAIN_WIN_W</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ae71a5624a91b133b4aab5ab61a262852" kind="variable"><name>_model_list</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a17daf4c32bbd40f7965c493eb509d370" kind="variable"><name>_label_list</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a80d7c23e9d417a7426a4663cf874b9c0" kind="variable"><name>_precision_level</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1abc341ae7325dd8e32262e8e2a944d937" kind="variable"><name>_path_to_dataset</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a9443c786bfdecea396755cb90e729a42" kind="variable"><name>_path_to_label_list</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a0a7f686262d72cbe56e358987eaa6d0b" kind="variable"><name>_is_valid_dataset</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ab686c91a5873e5a66bbb5fcab2b1bc8e" kind="variable"><name>_is_model_ready</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a9e8a75edc96320d108c215ddd72c9b41" kind="variable"><name>_is_dataset_linked</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a2ee996eab45bd0392a63f8adf4cb6ed9" kind="variable"><name>_is_dataset_labelled</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1adca36cdfa7e339f705c1ae2a91200975" kind="variable"><name>_is_labellist_linked</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a9db537470330ef11771b6ec56d4bbeae" kind="function"><name>__init__</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1afceda8830f1d9d4e3cea3f04527169c9" kind="function"><name>setButtons</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ade3d68f94858480c83771262a4757ea4" kind="function"><name>setP1</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1acdb0ef04cb2d55be21d68777e7e22d12" kind="function"><name>setP2</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1af69ed5e932e113a874b18e4500288e23" kind="function"><name>setP3</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a6211074eba1c69a842eb9a00102be123" kind="function"><name>setModel</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a13b2c66b37c94e2eb8d6d66dc8368730" kind="function"><name>setLabelList</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a077fc8862a8a77dd055ffb1a2064b95d" kind="function"><name>setDataset</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1aaa6dc69cec3736fe4380d2635a83d28e" kind="function"><name>runLabelme</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ac1d828ed9162ab3749d8dce3ffa23ec6" kind="function"><name>initModel</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a83108e09586dbf5b048068d76c2bbce6" kind="function"><name>validateTraining</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1abcbdd3e27c6e815a475cefb8db58487c" kind="function"><name>validateDataset</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1aee939f9c2dabd4e9a4fe70f7278dc1ff" kind="function"><name>startTraining</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a5b3064263b22b46e40677805e9293f8e" kind="function"><name>conformDatasetToCOCO</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a56b6b4b5af9600343d566351e6594fb3" kind="function"><name>populateModelSelector</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1ae03c9f6ff889b337d03b4dc9307e5fa6" kind="function"><name>connectTrainingButton</name></member>
+    <member refid="classwindows_1_1Train_1_1TrainWindow_1a5e69f88e88ca7314fb4bf4f226603d7d" kind="function"><name>disconnectTrainingButton</name></member>
+  </compound>
+  <compound refid="namespaceEPD" kind="namespace"><name>EPD</name>
+    <member refid="namespaceEPD_1a0d5ba13808aa37984b6c6a47766a5397" kind="variable"><name>CLASSIFICATION_MODE</name></member>
+    <member refid="namespaceEPD_1a0795506538832367b6ef8db25eb7a018" kind="variable"><name>COUNTING_MODE</name></member>
+    <member refid="namespaceEPD_1a8be6e28a50846d29fcf4063c91ae31c2" kind="variable"><name>COLOR_MATCHING_MODE</name></member>
+    <member refid="namespaceEPD_1af8699ddc7d5306adaeb1e31d1f5a223b" kind="variable"><name>PATH_TO_USECASE_CONFIG</name></member>
+    <member refid="namespaceEPD_1afb1c40891573a4c9a49bf4026dffc352" kind="function"><name>generateCountClassNames</name></member>
+    <member refid="namespaceEPD_1a3bd949f9f2c7eb127917d4eee49c00f0" kind="function"><name>count</name></member>
+    <member refid="namespaceEPD_1a3cff6173c8ee68e4840be0a03efbf62e" kind="function"><name>matchColor</name></member>
+    <member refid="namespaceEPD_1a452d019026c0f4e917028f28a75137c6" kind="function"><name>activateUseCase</name></member>
+    <member refid="namespaceEPD_1ae0ef71ee91e4f05a655fb43c890ecc82" kind="function"><name>count</name></member>
+    <member refid="namespaceEPD_1a24e7fadf9857ca887790591020560232" kind="function"><name>matchColor</name></member>
+    <member refid="namespaceEPD_1a808c976c38e399ec36c8f731da6e65f4" kind="function"><name>activateUseCase</name></member>
+  </compound>
+  <compound refid="namespaceOrt" kind="namespace"><name>Ort</name>
+  </compound>
+  <compound refid="namespacetrainer" kind="namespace"><name>trainer</name>
+  </compound>
+  <compound refid="namespacetrainer_1_1P1Trainer" kind="namespace"><name>trainer::P1Trainer</name>
+  </compound>
+  <compound refid="namespacetrainer_1_1P2Trainer" kind="namespace"><name>trainer::P2Trainer</name>
+  </compound>
+  <compound refid="namespacetrainer_1_1P3Trainer" kind="namespace"><name>trainer::P3Trainer</name>
+  </compound>
+  <compound refid="namespacewindows" kind="namespace"><name>windows</name>
+  </compound>
+  <compound refid="namespacewindows_1_1Counting" kind="namespace"><name>windows::Counting</name>
+  </compound>
+  <compound refid="namespacewindows_1_1Deploy" kind="namespace"><name>windows::Deploy</name>
+  </compound>
+  <compound refid="namespacewindows_1_1Main" kind="namespace"><name>windows::Main</name>
+  </compound>
+  <compound refid="namespacewindows_1_1Train" kind="namespace"><name>windows::Train</name>
+  </compound>
+  <compound refid="P1Trainer_8py" kind="file"><name>P1Trainer.py</name>
+  </compound>
+  <compound refid="P2Trainer_8py" kind="file"><name>P2Trainer.py</name>
+  </compound>
+  <compound refid="P3Trainer_8py" kind="file"><name>P3Trainer.py</name>
+  </compound>
+  <compound refid="Counting_8py" kind="file"><name>Counting.py</name>
+  </compound>
+  <compound refid="Deploy_8py" kind="file"><name>Deploy.py</name>
+  </compound>
+  <compound refid="Main_8py" kind="file"><name>Main.py</name>
+  </compound>
+  <compound refid="Train_8py" kind="file"><name>Train.py</name>
+  </compound>
+  <compound refid="epd__container_8hpp" kind="file"><name>epd_container.hpp</name>
+  </compound>
+  <compound refid="image__viewer_8hpp" kind="file"><name>image_viewer.hpp</name>
+  </compound>
+  <compound refid="message__utils_8hpp" kind="file"><name>message_utils.hpp</name>
+  </compound>
+  <compound refid="processor_8hpp" kind="file"><name>processor.hpp</name>
+  </compound>
+  <compound refid="usecase__config_8hpp" kind="file"><name>usecase_config.hpp</name>
+  </compound>
+  <compound refid="ort__base_8hpp" kind="file"><name>ort_base.hpp</name>
+  </compound>
+  <compound refid="p1__ort__base_8hpp" kind="file"><name>p1_ort_base.hpp</name>
+  </compound>
+  <compound refid="p2__ort__base_8hpp" kind="file"><name>p2_ort_base.hpp</name>
+  </compound>
+  <compound refid="p3__ort__base_8hpp" kind="file"><name>p3_ort_base.hpp</name>
+  </compound>
+  <compound refid="dir_5d6237af71ac7ac5b06d922743bf3b38" kind="dir"><name>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment</name>
+  </compound>
+  <compound refid="dir_f2c9394854f846828b8ab101a65cb2dd" kind="dir"><name>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib</name>
+  </compound>
+  <compound refid="dir_92bc550398e4a388f50ecef33b3ffe3e" kind="dir"><name>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui</name>
+  </compound>
+  <compound refid="dir_16c8cad7a1935f89d54c14afb83e722f" kind="dir"><name>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include</name>
+  </compound>
+  <compound refid="dir_3b801b160e43ed72e87bab1c9ff8fe91" kind="dir"><name>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/ort_cpp_lib</name>
+  </compound>
+  <compound refid="dir_51a1827d092161232e7d2fb9bab68afb" kind="dir"><name>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer</name>
+  </compound>
+  <compound refid="dir_f74ec7fa4e56943e369a884f7ccc2560" kind="dir"><name>/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows</name>
+  </compound>
+</doxygenindex>

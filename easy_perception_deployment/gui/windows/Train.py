@@ -19,7 +19,7 @@ from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QComboBox, QFileDialog, QLabel, QPushButton, QWidget
 
-from trainer.P1Trainer import P1Trainer
+# from trainer.P1Trainer import P1Trainer
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
 
@@ -145,6 +145,9 @@ class TrainWindow(QWidget):
         self.generate_button.clicked.connect(self.conformDatasetToCOCO)
         self.validate_button.clicked.connect(self.validateDataset)
         self.list_button.clicked.connect(self.setLabelList)
+
+        # DEBUG Remove the line during Release.
+        # self.train_button.clicked.connect(self.startTraining)
 
     def setP1(self):
         '''A function that is triggered by the button labelled, P1.'''
@@ -311,9 +314,7 @@ class TrainWindow(QWidget):
                 self.validate_button.setStyleSheet('background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is ' +
-                      '/train and /val sub-directories ' +
-                      'in the selected dataset directory.')
+                print ('[ERROR] - Please ensure there is /train and /val sub-directories in the selected dataset directory.')
         elif self._precision_level == 2:
             isDatasetNamedRight = os.path.basename(self._path_to_dataset) == 'custom_dataset'
             trainDirExists = os.path.exists(self._path_to_dataset + '/train_dataset')
@@ -324,9 +325,7 @@ class TrainWindow(QWidget):
                 self.validate_button.setStyleSheet('background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is ' +
-                      '/train_dataset and /val_dataset sub-directories' +
-                      'in the selected dataset directory.')
+                print ('[ERROR] - Please ensure there is /train_dataset and /val_dataset sub-directories in the selected dataset directory.')
         elif self._precision_level == 3:
             isDatasetNamedRight = os.path.basename(self._path_to_dataset) == 'custom_dataset'
             trainDirExists = os.path.exists(self._path_to_dataset + '/train_dataset')
@@ -337,11 +336,11 @@ class TrainWindow(QWidget):
                 self.validate_button.setStyleSheet('background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is ' +
-                      '/train_dataset and /val_dataset sub-directories ' +
-                      'in the selected dataset directory.')
+                print ('[ERROR] - Please ensure there is /train_dataset and /val_dataset sub-directories in the selected dataset directory.')
 
         self.validateTraining()
+
+
 
     def startTraining(self):
         '''A function that is triggered by the button labelled, Train.'''
@@ -350,10 +349,11 @@ class TrainWindow(QWidget):
         self.train_button.updateGeometry()
 
         if self._precision_level == 1:
-            p1_trainer = P1Trainer(self._path_to_dataset,
-                                   self.model_name,
-                                   self._label_list)
-            p1_trainer.train(False)
+            print('WIP')
+            # p1_trainer = P1Trainer(self._path_to_dataset,
+            #                        self.model_name,
+            #                        self._label_list)
+            # p1_trainer.train(False)
         elif self._precision_level == 2:
             p2_trainer = P2Trainer(self._path_to_dataset,
                                    self.model_name,

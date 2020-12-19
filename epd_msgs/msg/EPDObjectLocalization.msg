@@ -1,0 +1,9 @@
+std_msgs/Header header
+LocalizedObject[] objects
+uint32 frame_width
+uint32 frame_height
+uint32 num_objects
+sensor_msgs/Image depth_image
+sensor_msgs/CameraInfo camera_info
+sensor_msgs/RegionOfInterest[] roi_array
+uint32 process_time

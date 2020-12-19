@@ -84,17 +84,6 @@ private:
 
   /*! \brief A Mutator function that converts a 3-layered 2D RGB input image
   into a 1D input data tensor to be passed to the Ort Session for processing.\n
-  This variant takes a generic input image represented by a float pointer.
-  */
-  void preprocess(
-    float * dst,
-    const float * src,
-    const int64_t targetImgWidth,
-    const int64_t targetImgHeight,
-    const int numChannels) const;
-
-  /*! \brief A Mutator function that converts a 3-layered 2D RGB input image
-  into a 1D input data tensor to be passed to the Ort Session for processing.\n
   This variant takes a generic input image represented by a conventional opencv
   Matrix.
   */

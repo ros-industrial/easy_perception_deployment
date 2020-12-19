@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="namespacetrainer_1_1P3Trainer" kind="namespace" language="Python">
+    <compoundname>trainer::P3Trainer</compoundname>
+    <innerclass refid="classtrainer_1_1P3Trainer_1_1P3Trainer" prot="public">trainer::P3Trainer::P3Trainer</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P3Trainer.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

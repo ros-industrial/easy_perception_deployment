@@ -15,45 +15,37 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "gtest/gtest.h"
 #include "bits/stdc++.h"
 #include "epd_utils_lib/epd_container.hpp"
 
-bool is_file_exist(const char * fileName)
-{
-  std::ifstream infile(fileName);
-  return infile.good();
-}
+std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/data/session_config.txt");
+std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/data/usecase_config.txt");
+std::string PATH_TO_ONNX_MODEL(PATH_TO_PACKAGE "/data/model/squeezenet1.1-7.onnx");
+std::string PATH_TO_LABEL_LIST(PATH_TO_PACKAGE "/data/label_list/imagenet_classes.txt");
 
-TEST(EPD_TestSuite, Test_emptySessionConfig_EPDContainer)
+TEST(EPD_TestSuite, Test_readSessionUseCaseConfigTextFile_EPDContainer)
 {
-  if (!is_file_exist("./data/session_config.txt")) {
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/squeezenet1.1-7.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/imagenet_classes.txt >> ./data/session_config.txt");
-  } else {
-    system("rm ./data/session_config.txt");
-    system("touch ./data/session_config.txt");
-    system("echo ./data/model/squeezenet1.1-7.onnx >> ./data/session_config.txt");
-    system("echo ./data/label_list/imagenet_classes.txt >> ./data/session_config.txt");
-  }
+  system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
 
-  if (!is_file_exist("./data/usecase_config.txt")) {
-    system("touch ./data/usecase_config.txt");
-    system("echo 0 >> ./data/usecase_config.txt");
-  } else {
-    system("rm ./data/usecase_config.txt");
-    system("touch ./data/usecase_config.txt");
-    system("echo 0 >> ./data/usecase_config.txt");
-  }
+  system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("echo 0 >> " + PATH_TO_USECASE_CONFIG).c_str());
+
   EPD::EPDContainer * ortAgent_;
 
   ortAgent_ = new EPD::EPDContainer();
 
-  EXPECT_EQ(ortAgent_->onnx_model_path, "./data/model/squeezenet1.1-7.onnx");
-  EXPECT_EQ(ortAgent_->class_label_path, "./data/label_list/imagenet_classes.txt");
-
-  delete ortAgent_;
+  EXPECT_EQ(
+    ortAgent_->onnx_model_path,
+    PATH_TO_PACKAGE "/data/model/squeezenet1.1-7.onnx");
+  EXPECT_EQ(
+    ortAgent_->class_label_path,
+    PATH_TO_PACKAGE "/data/label_list/imagenet_classes.txt");
 }
 
 TEST(EPD_TestSuite, Test_setFrameDimension_EPDContainer)
@@ -65,8 +57,6 @@ TEST(EPD_TestSuite, Test_setFrameDimension_EPDContainer)
 
   EXPECT_EQ(ortAgent_->getWidth(), 1920);
   EXPECT_EQ(ortAgent_->getHeight(), 1080);
-
-  delete ortAgent_;
 }
 
 TEST(EPD_TestSuite, Test_setInitBoolean_EPDContainer)
@@ -77,8 +67,6 @@ TEST(EPD_TestSuite, Test_setInitBoolean_EPDContainer)
   EXPECT_EQ(ortAgent_->isInit(), false);
   ortAgent_->setInitBoolean(true);
   EXPECT_EQ(ortAgent_->isInit(), true);
-
-  delete ortAgent_;
 }
 
 int main(int argc, char ** argv)
