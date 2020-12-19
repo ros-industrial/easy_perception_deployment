@@ -2,6 +2,16 @@
 
 # reference: https://github.com/microsoft/onnxruntime#installation
 
+# Check if wifi is on. This is to prevent early detection and
+# termination of faulty download procedure before any download is done.
+wget -q --spider http://google.com
+if [ $? -eq 0 ]; then
+    echo "[ WIFI ] - FOUND . Proceeding with download."
+else
+    echo "[ WIFI ] - NOTFOUND . Please ensure you are properly connected to the internet before running this script again."
+    exit
+fi
+
 sudo -l env "PATH=$PATH"
 
 export CUDA_HOME=/usr/local/cuda
@@ -94,7 +104,6 @@ else
 fi
 
 unset output
-
 
 echo "-------------------------------------------------------------------------"
 echo "Installing onnxruntime..."

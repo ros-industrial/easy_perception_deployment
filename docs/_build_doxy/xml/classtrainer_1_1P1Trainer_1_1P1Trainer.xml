@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classtrainer_1_1P1Trainer_1_1P1Trainer" kind="class" language="Python" prot="public">
+    <compoundname>trainer::P1Trainer::P1Trainer</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8b6daa0252be06e79732b708701aee0a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::data_dir</definition>
+        <argsstring></argsstring>
+        <name>data_dir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="48" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a5ef56dddd441c51171211464119be6ef" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::model_name</definition>
+        <argsstring></argsstring>
+        <name>model_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="49" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1abf46a37f4ce7a272a73d9fa0e330eb08" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::num_classes</definition>
+        <argsstring></argsstring>
+        <name>num_classes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="50" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaaedbd9ecf679c9cfb3007fc9a33e892" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::class_names</definition>
+        <argsstring></argsstring>
+        <name>class_names</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="51" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1d72863a13d9eeb8cfa8d6f265fef067" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::path_to_trained_model</definition>
+        <argsstring></argsstring>
+        <name>path_to_trained_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="53" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a09373bcc1c564590462607640f272814" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::feature_extract</definition>
+        <argsstring></argsstring>
+        <name>feature_extract</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="59" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a291fdeb5d130259feb21ba82f1722ccc" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::IMAGENET_MEAN</definition>
+        <argsstring></argsstring>
+        <name>IMAGENET_MEAN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="65" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8bcdcbb132357306264f5b8d21d86515" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::IMAGENET_STD</definition>
+        <argsstring></argsstring>
+        <name>IMAGENET_STD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="66" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaf4e12c2ebeafd2c98cd0a3957d0f2fb" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::data_transforms</definition>
+        <argsstring></argsstring>
+        <name>data_transforms</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="67" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a00dea7e58a669964e81e4d642e60cf2b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::batch_size</definition>
+        <argsstring></argsstring>
+        <name>batch_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="89" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a7bcfd4156af7e0fef2f308304b2dc5c6" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::num_epochs</definition>
+        <argsstring></argsstring>
+        <name>num_epochs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="90" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1adbc3526a3d55034d1f6900918facd5c9" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>trainer.P1Trainer.P1Trainer::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="104" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1ac8e3ed1765ea0bd3d21acb89ab15a65b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def trainer.P1Trainer.P1Trainer.__init__</definition>
+        <argsstring>(self, path_to_dataset, model_name, label_list)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>path_to_dataset</type>
+          <defname>path_to_dataset</defname>
+        </param>
+        <param>
+          <type>model_name</type>
+          <defname>model_name</defname>
+        </param>
+        <param>
+          <type>label_list</type>
+          <defname>label_list</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>The constructor.
+Calls the initialize model function based on the requested pretrained
+Pytorch model from PyTorch model zoo.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="42" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="42" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a9be82fefc6c3c50d7139be20cf4ff9a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def trainer.P1Trainer.P1Trainer.train</definition>
+        <argsstring>(self, debug)</argsstring>
+        <name>train</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>debug</type>
+          <defname>debug</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Mutator function that sets a fixed 15-epoch training session given
+prior session configuration set during initialization, calls train_model
+function.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="82" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="82" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a47e86d1eb8da09b70407e9605ac0f3e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def trainer.P1Trainer.P1Trainer.train_model</definition>
+        <argsstring>(self, model, dataloaders, criterion, optimizer, num_epochs=25, is_inception=False)</argsstring>
+        <name>train_model</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>model</type>
+          <defname>model</defname>
+        </param>
+        <param>
+          <type>dataloaders</type>
+          <defname>dataloaders</defname>
+        </param>
+        <param>
+          <type>criterion</type>
+          <defname>criterion</defname>
+        </param>
+        <param>
+          <type>optimizer</type>
+          <defname>optimizer</defname>
+        </param>
+        <param>
+          <type>num_epochs</type>
+          <defname>num_epochs</defname>
+          <defval>25</defval>
+        </param>
+        <param>
+          <type>is_inception</type>
+          <defname>is_inception</defname>
+          <defval>False</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>An internal Mutator function that conducts the training session
+given prior session configuration set during initialization.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="195" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="201" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1823cb45af6684a2af9bbdee5c64e001" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def trainer.P1Trainer.P1Trainer.set_parameter_requires_grad</definition>
+        <argsstring>(self, model, feature_extracting)</argsstring>
+        <name>set_parameter_requires_grad</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>model</type>
+          <defname>model</defname>
+        </param>
+        <param>
+          <type>feature_extracting</type>
+          <defname>feature_extracting</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Mutator function that sets param.requires_grad boolean to false if
+feature_extracting boolean flag is set to True.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="281" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="283" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a460992c6c28f1d184e78b28332640592" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def trainer.P1Trainer.P1Trainer.initialize_model</definition>
+        <argsstring>(self, model_name, num_classes, feature_extract, use_pretrained=True)</argsstring>
+        <name>initialize_model</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>model_name</type>
+          <defname>model_name</defname>
+        </param>
+        <param>
+          <type>num_classes</type>
+          <defname>num_classes</defname>
+        </param>
+        <param>
+          <type>feature_extract</type>
+          <defname>feature_extract</defname>
+        </param>
+        <param>
+          <type>use_pretrained</type>
+          <defname>use_pretrained</defname>
+          <defval>True</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Getter function that takes the requested session configuration and
+initializes corresponding pretrained model.\n
+Calls set_parameter_requires_grad function during initialization.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="292" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="296" bodyend="368"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>The Precision-Level 1 (P1) Trainer class object instantiates a training
+session using PyTorch for taking an input dataset and selected pretrained
+model from PyTorch model zoo in order to generate a custom-trained P1 ONNX
+model file.\n
+This model can then be deployed as a ROS2 package.
+</verbatim> </para>    </detaileddescription>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" line="34" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/trainer/P1Trainer.py" bodystart="34" bodyend="368"/>
+    <listofallmembers>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1ac8e3ed1765ea0bd3d21acb89ab15a65b" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>__init__</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a00dea7e58a669964e81e4d642e60cf2b" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>batch_size</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaaedbd9ecf679c9cfb3007fc9a33e892" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>class_names</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8b6daa0252be06e79732b708701aee0a" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>data_dir</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaf4e12c2ebeafd2c98cd0a3957d0f2fb" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>data_transforms</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1adbc3526a3d55034d1f6900918facd5c9" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>device</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a09373bcc1c564590462607640f272814" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>feature_extract</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a291fdeb5d130259feb21ba82f1722ccc" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>IMAGENET_MEAN</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8bcdcbb132357306264f5b8d21d86515" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>IMAGENET_STD</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a460992c6c28f1d184e78b28332640592" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>initialize_model</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a5ef56dddd441c51171211464119be6ef" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>model_name</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1abf46a37f4ce7a272a73d9fa0e330eb08" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>num_classes</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a7bcfd4156af7e0fef2f308304b2dc5c6" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>num_epochs</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1d72863a13d9eeb8cfa8d6f265fef067" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>path_to_trained_model</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1823cb45af6684a2af9bbdee5c64e001" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>set_parameter_requires_grad</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a9be82fefc6c3c50d7139be20cf4ff9a6" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>train</name></member>
+      <member refid="classtrainer_1_1P1Trainer_1_1P1Trainer_1a47e86d1eb8da09b70407e9605ac0f3e6" prot="public" virt="non-virtual"><scope>trainer::P1Trainer::P1Trainer</scope><name>train_model</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

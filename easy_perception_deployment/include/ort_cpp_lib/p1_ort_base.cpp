@@ -26,8 +26,9 @@ void softmax(float * input, const size_t inputLen)
 {
   const float maxVal = *std::max_element(input, input + inputLen);
 
-  const float sum = std::accumulate(input, input + inputLen, 0.0,
-      [&](float a, const float b) {return std::move(a) + expf(b - maxVal);});
+  const float sum = std::accumulate(
+    input, input + inputLen, 0.0,
+    [&](float a, const float b) {return std::move(a) + expf(b - maxVal);});
 
   const float offset = maxVal + logf(sum);
   for (auto it = input; it != (input + inputLen); ++it) {
@@ -72,7 +73,8 @@ std::vector<std::string> P1OrtBase::infer(const cv::Mat & inputImg)
   static const std::vector<float> IMAGENET_MEAN = {0.406, 0.456, 0.485};
   static const std::vector<float> IMAGENET_STD = {0.225, 0.224, 0.229};
 
-  this->preprocess(dst, tmpImg.data, m_newW, m_newH, IMG_CHANNEL,
+  this->preprocess(
+    dst, tmpImg.data, m_newW, m_newH, IMG_CHANNEL,
     IMAGENET_MEAN, IMAGENET_STD);
   auto inferenceOutput = (*this)({reinterpret_cast<float *>(dst)});
 
@@ -158,7 +160,8 @@ P1OrtBase::getTopKRaw(
     ps.emplace_back(std::make_pair(i, processData[i]));
   }
 
-  std::sort(ps.begin(), ps.end(), [](const auto & elem1, const auto & elem2)
+  std::sort(
+    ps.begin(), ps.end(), [](const auto & elem1, const auto & elem2)
     {return elem1.second > elem2.second;});
 
   return std::vector<std::pair<int, float>>(ps.begin(), ps.begin() + realK);

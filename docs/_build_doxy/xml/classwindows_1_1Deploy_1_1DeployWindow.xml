@@ -1,0 +1,538 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classwindows_1_1Deploy_1_1DeployWindow" kind="class" language="Python" prot="public">
+    <compoundname>windows::Deploy::DeployWindow</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QWidget</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1aab6b4c8ff4098a28efa81bb0b1e4f8e3" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::debug</definition>
+        <argsstring></argsstring>
+        <name>debug</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="42" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1ac565134673847ec33791f00ee96a2588" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::visualizeFlag</definition>
+        <argsstring></argsstring>
+        <name>visualizeFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="55" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a3a1acb10e779180b23b920d927bdc343" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::usecase_list</definition>
+        <argsstring></argsstring>
+        <name>usecase_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="60" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1afb626b68a7520b49160f5a27ba6288ab" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::session_config</definition>
+        <argsstring></argsstring>
+        <name>session_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="65" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a590abd6cc88576297add053391d99e2e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::usecase_config</definition>
+        <argsstring></argsstring>
+        <name>usecase_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="85" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1abd8d59c8a078de8f2c88452e9e2ca1a0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::usecase_mode</definition>
+        <argsstring></argsstring>
+        <name>usecase_mode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="87" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a45832f0508ec2d942331402f3717b29c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::model_button</definition>
+        <argsstring></argsstring>
+        <name>model_button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="109" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1aaf5bfa230d4c770e68fe1a6d5196ac3a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::list_button</definition>
+        <argsstring></argsstring>
+        <name>list_button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="119" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1ad97e2abf945cd0f35cdb0bee399ffa54" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::usecase_config_button</definition>
+        <argsstring></argsstring>
+        <name>usecase_config_button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="132" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1ac3d1c6ae54d0fdba65c9e15a2d572949" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::usecase_config_label</definition>
+        <argsstring></argsstring>
+        <name>usecase_config_label</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="145" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1abecda74798f9d914e6a583c0cf1ccb03" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::run_button</definition>
+        <argsstring></argsstring>
+        <name>run_button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="153" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a5a87e850a36cac47b329e6fe8d359df2" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::visualize_button</definition>
+        <argsstring></argsstring>
+        <name>visualize_button</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="161" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a1553d20fa4ca3f0031d2b5f2f90225ac" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::counting_window</definition>
+        <argsstring></argsstring>
+        <name>counting_window</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="235" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a2dd70a2b2243b31e3ec4b6aeb660c12d" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_path_to_model</definition>
+        <argsstring></argsstring>
+        <name>_path_to_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="44" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1acc63fbb43bd3731e116e431eabf515d6" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_path_to_label_list</definition>
+        <argsstring></argsstring>
+        <name>_path_to_label_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="45" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1af2d542c94fc47be14f7b689dca195f32" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_is_running</definition>
+        <argsstring></argsstring>
+        <name>_is_running</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="47" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a61baa45b2055d6383b4b5baa8b78b2ea" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_DEPLOY_WIN_H</definition>
+        <argsstring></argsstring>
+        <name>_DEPLOY_WIN_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="49" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a2228169579d5079164251f17a843fac4" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_DEPLOY_WIN_W</definition>
+        <argsstring></argsstring>
+        <name>_DEPLOY_WIN_W</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="50" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1ae851475d86d0caf48337496882d06b26" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_deploy_process</definition>
+        <argsstring></argsstring>
+        <name>_deploy_process</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="52" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1a16b2db99e8ed890b76dc26fc6ea35e1e" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_kill_process</definition>
+        <argsstring></argsstring>
+        <name>_kill_process</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="53" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1ac882c7943bec17a7e5ae323365338474" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_path_to_session_config</definition>
+        <argsstring></argsstring>
+        <name>_path_to_session_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="57" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwindows_1_1Deploy_1_1DeployWindow_1ac8b2657a67225e2b555b1c47ff5cb8f9" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>windows.Deploy.DeployWindow::_path_to_usecase_config</definition>
+        <argsstring></argsstring>
+        <name>_path_to_usecase_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="58" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1a476ba51fb0d265b29297c46cfa16334f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.__init__</definition>
+        <argsstring>(self, debug=False)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>debug</type>
+          <defname>debug</defname>
+          <defval>False</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>The constructor.
+Sets the size of the window and configurations for session_config.
+Checks if the session_config.txt file exists. If true, configure
+accordingly. Otherwise, assign default values.
+Calls setButtons function to populate window with button.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="32" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="32" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1a997b29f16888907fbcc559dba3ac9c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.setButtons</definition>
+        <argsstring>(self)</argsstring>
+        <name>setButtons</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Mutator function that defines all buttons in DeployWindow.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="106" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="106" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1a084a90928dee8871bc7e3f6c263860af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.deployPackage</definition>
+        <argsstring>(self)</argsstring>
+        <name>deployPackage</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Mutator function that runs a bash script that checks if the _is_running
+boolean flag is True or not.\n
+If False, run bash script to run ROS2 package with session_config.txt and
+usecase_config.txt
+Otherwise, run bash script to kill ROS2 package processes remotely.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="177" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="177" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1a96cbf0265e853e5da8cc210a7befb8bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.doesFileExist</definition>
+        <argsstring>(self, input_filepath)</argsstring>
+        <name>doesFileExist</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>input_filepath</type>
+          <defname>input_filepath</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Getter function that checks if a given file exists.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="200" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="200" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1a2e7a0a241cd29aabbf2f382248eef350" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.setVisualizeFlag</definition>
+        <argsstring>(self)</argsstring>
+        <name>setVisualizeFlag</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function is triggered by the button labelled, Visualize/Action.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="208" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="208" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1addabf8ccee64a0c8e23606f9352b8165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.setUseCase</definition>
+        <argsstring>(self, index)</argsstring>
+        <name>setUseCase</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>index</type>
+          <defname>index</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function is triggered by the DropDown Menu labelled, UseCase.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="221" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="221" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1ae44c600102e43afda152cac70bf40de6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.updateSessionConfig</definition>
+        <argsstring>(self)</argsstring>
+        <name>updateSessionConfig</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A Mutator function that updates the session_config.txt file.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="263" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="263" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1ac56777844560fab4d9175409a55a245f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.setModel</definition>
+        <argsstring>(self)</argsstring>
+        <name>setModel</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function is triggered by the button labelled, ONNX Model.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="269" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="269" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="classwindows_1_1Deploy_1_1DeployWindow_1ad6cf96b44c11adecb999af730b918b35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def windows.Deploy.DeployWindow.setLabelList</definition>
+        <argsstring>(self)</argsstring>
+        <name>setLabelList</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>A function is triggered by the button labelled, Label List.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="290" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="290" bodyend="311"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>The DeployWindow class is a PySide2 Graphical User Interface (GUI) window
+that is called by MainWindow class in order to configure a custom session
+and write to session_config.txt.
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>windows.Deploy.DeployWindow</label>
+        <link refid="classwindows_1_1Deploy_1_1DeployWindow"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>QWidget</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="6">
+        <label>windows.Deploy.DeployWindow</label>
+        <link refid="classwindows_1_1Deploy_1_1DeployWindow"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>QWidget</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" line="26" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/gui/windows/Deploy.py" bodystart="26" bodyend="311"/>
+    <listofallmembers>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a476ba51fb0d265b29297c46cfa16334f" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>__init__</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ae851475d86d0caf48337496882d06b26" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_deploy_process</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a61baa45b2055d6383b4b5baa8b78b2ea" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_DEPLOY_WIN_H</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a2228169579d5079164251f17a843fac4" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_DEPLOY_WIN_W</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1af2d542c94fc47be14f7b689dca195f32" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_is_running</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a16b2db99e8ed890b76dc26fc6ea35e1e" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_kill_process</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1acc63fbb43bd3731e116e431eabf515d6" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_path_to_label_list</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a2dd70a2b2243b31e3ec4b6aeb660c12d" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_path_to_model</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac882c7943bec17a7e5ae323365338474" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_path_to_session_config</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac8b2657a67225e2b555b1c47ff5cb8f9" prot="private" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>_path_to_usecase_config</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a1553d20fa4ca3f0031d2b5f2f90225ac" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>counting_window</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1aab6b4c8ff4098a28efa81bb0b1e4f8e3" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>debug</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a084a90928dee8871bc7e3f6c263860af" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>deployPackage</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a96cbf0265e853e5da8cc210a7befb8bd" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>doesFileExist</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1aaf5bfa230d4c770e68fe1a6d5196ac3a" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>list_button</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a45832f0508ec2d942331402f3717b29c" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>model_button</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1abecda74798f9d914e6a583c0cf1ccb03" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>run_button</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1afb626b68a7520b49160f5a27ba6288ab" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>session_config</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a997b29f16888907fbcc559dba3ac9c56" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>setButtons</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ad6cf96b44c11adecb999af730b918b35" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>setLabelList</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac56777844560fab4d9175409a55a245f" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>setModel</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1addabf8ccee64a0c8e23606f9352b8165" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>setUseCase</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a2e7a0a241cd29aabbf2f382248eef350" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>setVisualizeFlag</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ae44c600102e43afda152cac70bf40de6" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>updateSessionConfig</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a590abd6cc88576297add053391d99e2e" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>usecase_config</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ad97e2abf945cd0f35cdb0bee399ffa54" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>usecase_config_button</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac3d1c6ae54d0fdba65c9e15a2d572949" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>usecase_config_label</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a3a1acb10e779180b23b920d927bdc343" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>usecase_list</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1abd8d59c8a078de8f2c88452e9e2ca1a0" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>usecase_mode</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1a5a87e850a36cac47b329e6fe8d359df2" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>visualize_button</name></member>
+      <member refid="classwindows_1_1Deploy_1_1DeployWindow_1ac565134673847ec33791f00ee96a2588" prot="public" virt="non-virtual"><scope>windows::Deploy::DeployWindow</scope><name>visualizeFlag</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

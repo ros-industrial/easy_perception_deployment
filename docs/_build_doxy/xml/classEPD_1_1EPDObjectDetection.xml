@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classEPD_1_1EPDObjectDetection" kind="class" language="C++" prot="public">
+    <compoundname>EPD::EPDObjectDetection</compoundname>
+    <includes local="no">message_utils.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classEPD_1_1EPDObjectDetection_1a2ae7f229afbbeba810bae1e9a69c38b7" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::array&lt; float, 4 &gt; &gt;</type>
+        <definition>std::vector&lt;std::array&lt;float, 4&gt; &gt; EPD::EPDObjectDetection::bboxes</definition>
+        <argsstring></argsstring>
+        <name>bboxes</name>
+        <briefdescription>
+<para>A vector of bounding boxes with xmin, ymin, xmax, ymax. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" line="33" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDObjectDetection_1afcb68e9efe2855b5c58b87f7b26a4129" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint64_t &gt;</type>
+        <definition>std::vector&lt;uint64_t&gt; EPD::EPDObjectDetection::classIndices</definition>
+        <argsstring></argsstring>
+        <name>classIndices</name>
+        <briefdescription>
+<para>A vector of indices that indicate the numerical identities of corresponding bounding boxes of the same index. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" line="37" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDObjectDetection_1a2b12266233e2d87f61a730b692a46785" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; EPD::EPDObjectDetection::scores</definition>
+        <argsstring></argsstring>
+        <name>scores</name>
+        <briefdescription>
+<para>A vector of indices that indicate the float confidence scores of corresponding bounding boxes of the same index. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" line="41" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDObjectDetection_1afdb9138c1e27dfb472d2eb271dce59eb" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; cv::Mat &gt;</type>
+        <definition>std::vector&lt;cv::Mat&gt; EPD::EPDObjectDetection::masks</definition>
+        <argsstring></argsstring>
+        <name>masks</name>
+        <briefdescription>
+<para>A vector of image-encoded 32FC1 greyscale masks for P3 results only. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" line="44" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDObjectDetection_1a80f2c8e86454b9e6009f26a87433b6da" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t EPD::EPDObjectDetection::data_size</definition>
+        <argsstring></argsstring>
+        <name>data_size</name>
+        <briefdescription>
+<para>A set size for all vectors in class. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" line="47" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classEPD_1_1EPDObjectDetection_1a40b0710ad33ac50b93215536b19ddd1e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>EPD::EPDObjectDetection::EPDObjectDetection</definition>
+        <argsstring>(size_t input_size)</argsstring>
+        <name>EPDObjectDetection</name>
+        <param>
+          <type>size_t</type>
+          <declname>input_size</declname>
+        </param>
+        <briefdescription>
+<para>A Constructor function. This object can only be called a known size to minimize memory use for storage. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" line="51" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" bodystart="51" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An Easy Perception Deployment (<ref refid="namespaceEPD" kindref="compound">EPD</ref>) ObjectDetection class object. This object functions as a transient container of inference results to transport them for processing in by <ref refid="classProcessor" kindref="compound">Processor</ref> class object. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" line="30" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp" bodystart="29" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classEPD_1_1EPDObjectDetection_1a2ae7f229afbbeba810bae1e9a69c38b7" prot="public" virt="non-virtual"><scope>EPD::EPDObjectDetection</scope><name>bboxes</name></member>
+      <member refid="classEPD_1_1EPDObjectDetection_1afcb68e9efe2855b5c58b87f7b26a4129" prot="public" virt="non-virtual"><scope>EPD::EPDObjectDetection</scope><name>classIndices</name></member>
+      <member refid="classEPD_1_1EPDObjectDetection_1a80f2c8e86454b9e6009f26a87433b6da" prot="public" virt="non-virtual"><scope>EPD::EPDObjectDetection</scope><name>data_size</name></member>
+      <member refid="classEPD_1_1EPDObjectDetection_1a40b0710ad33ac50b93215536b19ddd1e" prot="public" virt="non-virtual"><scope>EPD::EPDObjectDetection</scope><name>EPDObjectDetection</name></member>
+      <member refid="classEPD_1_1EPDObjectDetection_1afdb9138c1e27dfb472d2eb271dce59eb" prot="public" virt="non-virtual"><scope>EPD::EPDObjectDetection</scope><name>masks</name></member>
+      <member refid="classEPD_1_1EPDObjectDetection_1a2b12266233e2d87f61a730b692a46785" prot="public" virt="non-virtual"><scope>EPD::EPDObjectDetection</scope><name>scores</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

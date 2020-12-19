@@ -53,21 +53,22 @@ cv::Mat P2OrtBase::infer_visualize(const cv::Mat & inputImg)
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
 
-  return this->infer_visualize(inputImg, m_newW, m_newH,
-           m_paddedW, m_paddedH, m_ratio,
-           dst.data(), 0.5, cv::Scalar(102.9801, 115.9465, 122.7717));
+  return this->infer_visualize(
+    inputImg, m_newW, m_newH,
+    m_paddedW, m_paddedH, m_ratio,
+    dst.data(), 0.5, cv::Scalar(102.9801, 115.9465, 122.7717));
 }
 
 EPD::EPDObjectDetection P2OrtBase::infer_action(const cv::Mat & inputImg)
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
 
-  return this->infer_action(inputImg, m_newW, m_newH,
-           m_paddedW, m_paddedH, m_ratio,
-           dst.data(), 0.5, cv::Scalar(102.9801, 115.9465, 122.7717));
+  return this->infer_action(
+    inputImg, m_newW, m_newH,
+    m_paddedW, m_paddedH, m_ratio,
+    dst.data(), 0.5, cv::Scalar(102.9801, 115.9465, 122.7717));
 }
 
-// Mutator 3
 void P2OrtBase::initClassNames(const std::vector<std::string> & classNames)
 {
   if (classNames.size() != m_numClasses) {
@@ -76,26 +77,6 @@ void P2OrtBase::initClassNames(const std::vector<std::string> & classNames)
   m_classNames = classNames;
 }
 
-// Mutator 1
-void P2OrtBase::preprocess(
-  float * dst,
-  const float * src,
-  const int64_t targetImgWidth,
-  const int64_t targetImgHeight,
-  const int numChannels) const
-{
-  for (int c = 0; c < numChannels; ++c) {
-    for (int i = 0; i < targetImgHeight; ++i) {
-      for (int j = 0; j < targetImgWidth; ++j) {
-        dst[c * targetImgHeight * targetImgWidth +
-          i * targetImgWidth + j] =
-          src[i * targetImgWidth * numChannels + j * numChannels + c];
-      }
-    }
-  }
-}
-
-// Mutator 2
 void P2OrtBase::preprocess(
   float * dst,
   const cv::Mat & imgSrc,
@@ -271,17 +252,22 @@ cv::Mat P2OrtBase::visualize(
     const std::string curLabel = allClassNames.empty() ?
       std::to_string(classIdx) : allClassNames[classIdx];
 
-    cv::rectangle(result, cv::Point(curBbox[0], curBbox[1]),
+    cv::rectangle(
+      result, cv::Point(curBbox[0], curBbox[1]),
       cv::Point(curBbox[2], curBbox[3]), curColor, 2);
 
     int baseLine = 0;
-    cv::Size labelSize = cv::getTextSize(curLabel,
-        cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
-    cv::rectangle(result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[0] + labelSize.width, curBbox[1] +
-      static_cast<int>(1.3 * labelSize.height)),
+    cv::Size labelSize = cv::getTextSize(
+      curLabel,
+      cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
+    cv::rectangle(
+      result, cv::Point(curBbox[0], curBbox[1]),
+      cv::Point(
+        curBbox[0] + labelSize.width, curBbox[1] +
+        static_cast<int>(1.3 * labelSize.height)),
       curColor, -1);
-    cv::putText(result, curLabel, cv::Point(curBbox[0], curBbox[1] + labelSize.height),
+    cv::putText(
+      result, curLabel, cv::Point(curBbox[0], curBbox[1] + labelSize.height),
       cv::FONT_HERSHEY_COMPLEX, 0.35, cv::Scalar(255, 255, 255));
   }
   return result;

@@ -50,8 +50,6 @@ private:
   int encoding2mat_type(const std::string & encoding) const;
   /*! \brief A ROS2 callback function utilized by sub_1.*/
   void image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const;
-  /*! \brief A ROS2 callback function utilized by sub_2.*/
-  void state_callback(const std_msgs::msg::String::SharedPtr msg) const;
 };
 
 ImageViewer::ImageViewer()
@@ -69,11 +67,9 @@ ImageViewer::ImageViewer()
     rclcpp::QoSInitialization(history_policy_, depth_));
   qos.reliability(reliability_policy_);
 
-  sub_1_ = this->create_subscription<sensor_msgs::msg::Image>("/image_viewer/image_input",
-      qos, std::bind(&ImageViewer::image_callback, this, std::placeholders::_1));
-
-  sub_2_ = this->create_subscription<std_msgs::msg::String>("/image_viewer/state_input",
-      qos, std::bind(&ImageViewer::state_callback, this, std::placeholders::_1));
+  sub_1_ = this->create_subscription<sensor_msgs::msg::Image>(
+    "/image_viewer/image_input",
+    qos, std::bind(&ImageViewer::image_callback, this, std::placeholders::_1));
 }
 
 int ImageViewer::encoding2mat_type(const std::string & encoding) const
@@ -111,17 +107,6 @@ void ImageViewer::image_callback(const sensor_msgs::msg::Image::SharedPtr msg) c
 
   cv::imshow("image_viewer", cvframe);
   cv::waitKey(1);
-}
-
-void ImageViewer::state_callback(const std_msgs::msg::String::SharedPtr msg) const
-{
-  std::string requested_state = msg->data.c_str();
-
-  if (requested_state.compare("shutdown") == 0) {
-    rclcpp::shutdown();
-  } else {
-    RCLCPP_WARN(this->get_logger(), "Invalid state requested.");
-  }
 }
 
 #endif  // EPD_UTILS_LIB__IMAGE_VIEWER_HPP_

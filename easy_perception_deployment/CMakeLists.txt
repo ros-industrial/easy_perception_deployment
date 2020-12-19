@@ -22,10 +22,12 @@ find_library(onnxruntime_LIBS NAMES onnxruntime PATHS /usr/local/lib)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(epd_msgs REQUIRED)
+find_package(message_filters REQUIRED)
 
 include_directories(include
   ${onnxruntime_INCLUDE_DIRS}
@@ -75,55 +77,78 @@ else()
   add_definitions(-DPRINT_MODEL_INFO=false)
 endif()
 
+add_definitions(-DPATH_TO_PACKAGE="${CMAKE_CURRENT_LIST_DIR}")
+
 if(BUILD_TESTING)
+
   find_package(ament_lint_auto REQUIRED)
 
   # Excluding to avoid conflicting Doxygen python code blocks.
   list(APPEND AMENT_LINT_AUTO_EXCLUDE
     ament_cmake_pep257
+    ament_cmake_flake8
   )
+
   ament_lint_auto_find_test_dependencies()
 
   find_package(ament_cmake_gtest REQUIRED)
-  ament_add_gtest(epd_test_1 test/test_init.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_1 OpenCV cv_bridge)
-  target_link_libraries(epd_test_1 ${onnxruntime_LIBS})
 
-  ament_add_gtest(epd_test_P1 test/test_P1Model.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_P1 OpenCV cv_bridge)
-  target_link_libraries(epd_test_P1 ${onnxruntime_LIBS})
+  ament_add_gtest(epd_test_init test/test_init.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_init OpenCV cv_bridge)
+  target_link_libraries(epd_test_init ${onnxruntime_LIBS})
 
-  ament_add_gtest(epd_test_P2_visualize test/test_P2Model_visualize.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_P2_visualize OpenCV cv_bridge)
-  target_link_libraries(epd_test_P2_visualize ${onnxruntime_LIBS})
+  ament_add_gtest(epd_test_invalid_usecase test/test_invalid_usecase.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_invalid_usecase OpenCV cv_bridge)
+  target_link_libraries(epd_test_invalid_usecase ${onnxruntime_LIBS})
 
-  ament_add_gtest(epd_test_P2_action test/test_P2Model_action.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_P2_action OpenCV cv_bridge)
-  target_link_libraries(epd_test_P2_action ${onnxruntime_LIBS})
+  ament_add_gtest(epd_test_P1_classification_action test/p1u0a.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P1_classification_action OpenCV cv_bridge)
+  target_link_libraries(epd_test_P1_classification_action ${onnxruntime_LIBS})
 
-  ament_add_gtest(epd_test_P3_visualize test/test_P3Model_visualize.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_P3_visualize OpenCV cv_bridge)
-  target_link_libraries(epd_test_P3_visualize ${onnxruntime_LIBS})
+  ament_add_gtest(epd_test_P2_counting_action test/p2u1a.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P2_counting_action OpenCV cv_bridge)
+  target_link_libraries(epd_test_P2_counting_action ${onnxruntime_LIBS})
 
-  ament_add_gtest(epd_test_P3_action test/test_P3Model_action.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_P3_action OpenCV cv_bridge)
-  target_link_libraries(epd_test_P3_action ${onnxruntime_LIBS})
+  ament_add_gtest(epd_test_P2_counting_visualize test/p2u1v.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P2_counting_visualize OpenCV cv_bridge)
+  target_link_libraries(epd_test_P2_counting_visualize ${onnxruntime_LIBS})
 
-  # ament_add_gtest(epd_test_processor test/test_processor.cpp ${EPD_UTILS})
-  # ament_target_dependencies(epd_test_processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge)
-  # target_link_libraries(epd_test_processor ${onnxruntime_LIBS})
+  ament_add_gtest(epd_test_P2_colormatch_action test/p2u2a.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P2_colormatch_action OpenCV cv_bridge)
+  target_link_libraries(epd_test_P2_colormatch_action ${onnxruntime_LIBS})
+
+  ament_add_gtest(epd_test_P3_counting_visualize test/p3u1v.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P3_counting_visualize OpenCV cv_bridge)
+  target_link_libraries(epd_test_P3_counting_visualize ${onnxruntime_LIBS})
+
+  ament_add_gtest(epd_test_P3_colormatch_visualize test/p3u2v.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P3_colormatch_visualize OpenCV cv_bridge)
+  target_link_libraries(epd_test_P3_colormatch_visualize ${onnxruntime_LIBS})
+
+  ament_add_gtest(epd_test_P3_colormatch_action test/p3u2a.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P3_colormatch_action OpenCV cv_bridge)
+  target_link_libraries(epd_test_P3_colormatch_action ${onnxruntime_LIBS})
+
+  ament_add_gtest(epd_test_P3_localize_action test/p3u3a.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P3_localize_action OpenCV cv_bridge)
+  target_link_libraries(epd_test_P3_localize_action ${onnxruntime_LIBS})
+
+  ament_add_gtest(epd_test_P3_localize_visualize test/p3u3v.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P3_localize_visualize OpenCV cv_bridge)
+  target_link_libraries(epd_test_P3_localize_visualize ${onnxruntime_LIBS})
+
+  ament_add_gtest(epd_test_processor test/test_processor.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge message_filters)
+  target_link_libraries(epd_test_processor ${onnxruntime_LIBS})
+
 endif()
 
 add_executable(processor src/processor.cpp ${EPD_UTILS})
-ament_target_dependencies(processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge)
+ament_target_dependencies(processor rclcpp std_msgs sensor_msgs geometry_msgs epd_msgs OpenCV cv_bridge message_filters)
 target_link_libraries(processor ${onnxruntime_LIBS})
-
-add_executable(image_viewer src/image_viewer.cpp)
-ament_target_dependencies(image_viewer rclcpp std_msgs sensor_msgs OpenCV cv_bridge)
 
 install(TARGETS
 
-  image_viewer
   processor
 
   DESTINATION lib/${PROJECT_NAME}

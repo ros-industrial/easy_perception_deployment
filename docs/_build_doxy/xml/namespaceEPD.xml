@@ -1,0 +1,288 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="namespaceEPD" kind="namespace" language="C++">
+    <compoundname>EPD</compoundname>
+    <innerclass refid="classEPD_1_1EPDContainer" prot="public">EPD::EPDContainer</innerclass>
+    <innerclass refid="classEPD_1_1EPDObjectDetection" prot="public">EPD::EPDObjectDetection</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaceEPD_1a0d5ba13808aa37984b6c6a47766a5397" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int EPD::CLASSIFICATION_MODE</definition>
+        <argsstring></argsstring>
+        <name>CLASSIFICATION_MODE</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="27" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceEPD_1a0795506538832367b6ef8db25eb7a018" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int EPD::COUNTING_MODE</definition>
+        <argsstring></argsstring>
+        <name>COUNTING_MODE</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="28" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceEPD_1a8be6e28a50846d29fcf4063c91ae31c2" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int EPD::COLOR_MATCHING_MODE</definition>
+        <argsstring></argsstring>
+        <name>COLOR_MATCHING_MODE</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="29" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceEPD_1af8699ddc7d5306adaeb1e31d1f5a223b" prot="public" static="no" mutable="no">
+        <type>const char</type>
+        <definition>const char EPD::PATH_TO_USECASE_CONFIG[]</definition>
+        <argsstring>[]</argsstring>
+        <name>PATH_TO_USECASE_CONFIG</name>
+        <initializer>= &quot;data/usecase_config.txt&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="31" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceEPD_1afb1c40891573a4c9a49bf4026dffc352" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; EPD::generateCountClassNames</definition>
+        <argsstring>()</argsstring>
+        <name>generateCountClassNames</name>
+        <briefdescription>
+<para>A Getter function that parses the usecase_config.txt if a Counting usecaseMode is selected and populates a list of selected object names intended to be counted. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="37" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="37" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceEPD_1a3bd949f9f2c7eb127917d4eee49c00f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::count</definition>
+        <argsstring>(std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;bboxes, std::vector&lt; uint64_t &gt; &amp;classIndices, std::vector&lt; float &gt; &amp;scores, std::vector&lt; std::string &gt; allClassNames)</argsstring>
+        <name>count</name>
+        <param>
+          <type>std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;</type>
+          <declname>bboxes</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>classIndices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt; &amp;</type>
+          <declname>scores</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>allClassNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes the base inference results from a P2 inference engine and excludes any bounding boxes, classIndices and score element that do not share the label of selected objects-to-be counted. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="60" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="60" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceEPD_1a3cff6173c8ee68e4840be0a03efbf62e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::matchColor</definition>
+        <argsstring>(const cv::Mat &amp;img, std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;bboxes, std::vector&lt; uint64_t &gt; &amp;classIndices, std::vector&lt; float &gt; &amp;scores, std::vector&lt; std::string &gt; allClassNames)</argsstring>
+        <name>matchColor</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>img</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;</type>
+          <declname>bboxes</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>classIndices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt; &amp;</type>
+          <declname>scores</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>allClassNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes the base inference results from a P2 inference engine and excludes any bounding boxes, classIndices and score element that is not similar enough to the template color.. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="102" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="102" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceEPD_1a452d019026c0f4e917028f28a75137c6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::activateUseCase</definition>
+        <argsstring>(const cv::Mat &amp;img, std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;bboxes, std::vector&lt; uint64_t &gt; &amp;classIndices, std::vector&lt; float &gt; &amp;scores, std::vector&lt; std::string &gt; allClassNames)</argsstring>
+        <name>activateUseCase</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>img</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;</type>
+          <declname>bboxes</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>classIndices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt; &amp;</type>
+          <declname>scores</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>allClassNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes the base inference results from a P2 inference engine and excludes any bounding boxes, classIndices and score element based on a selected use-case filter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="175" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="175" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceEPD_1ae0ef71ee91e4f05a655fb43c890ecc82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::count</definition>
+        <argsstring>(std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;bboxes, std::vector&lt; uint64_t &gt; &amp;classIndices, std::vector&lt; float &gt; &amp;scores, std::vector&lt; cv::Mat &gt; &amp;masks, std::vector&lt; std::string &gt; allClassNames)</argsstring>
+        <name>count</name>
+        <param>
+          <type>std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;</type>
+          <declname>bboxes</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>classIndices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt; &amp;</type>
+          <declname>scores</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; cv::Mat &gt; &amp;</type>
+          <declname>masks</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>allClassNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes the base inference results from a P3 inference engine and excludes any bounding boxes, classIndices and score element that do not share the label of selected objects-to-be counted. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="212" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="212" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceEPD_1a24e7fadf9857ca887790591020560232" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::matchColor</definition>
+        <argsstring>(const cv::Mat &amp;img, std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;bboxes, std::vector&lt; uint64_t &gt; &amp;classIndices, std::vector&lt; float &gt; &amp;scores, std::vector&lt; cv::Mat &gt; &amp;masks, std::vector&lt; std::string &gt; allClassNames)</argsstring>
+        <name>matchColor</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>img</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;</type>
+          <declname>bboxes</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>classIndices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt; &amp;</type>
+          <declname>scores</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; cv::Mat &gt; &amp;</type>
+          <declname>masks</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>allClassNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes the base inference results from a P3 inference engine and excludes any bounding boxes, classIndices and score element that is not similar enough to the template color.. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="259" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="259" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceEPD_1a808c976c38e399ec36c8f731da6e65f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::activateUseCase</definition>
+        <argsstring>(const cv::Mat &amp;img, std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;bboxes, std::vector&lt; uint64_t &gt; &amp;classIndices, std::vector&lt; float &gt; &amp;scores, std::vector&lt; cv::Mat &gt; &amp;masks, std::vector&lt; std::string &gt; allClassNames)</argsstring>
+        <name>activateUseCase</name>
+        <param>
+          <type>const cv::Mat &amp;</type>
+          <declname>img</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::array&lt; float, 4 &gt;&gt; &amp;</type>
+          <declname>bboxes</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint64_t &gt; &amp;</type>
+          <declname>classIndices</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt; &amp;</type>
+          <declname>scores</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; cv::Mat &gt; &amp;</type>
+          <declname>masks</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt;</type>
+          <declname>allClassNames</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that takes the base inference results from a P3 inference engine and excludes any bounding boxes, classIndices and score element based on a selected use-case filter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" line="337" column="1" bodyfile="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/usecase_config.hpp" bodystart="337" bodyend="369"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A collection of use-case filters, namely for parsing usecase_config.txt, Counting and Color-Matching usecaseMode. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/rosi/Desktop/rect_ws/src/epd/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="28" column="1"/>
+  </compounddef>
+</doxygen>
