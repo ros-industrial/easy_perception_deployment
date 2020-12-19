@@ -1,6 +1,6 @@
 
 # **easy_perception_deployment**
-[![Build Status](https://travis-ci.org/cardboardcode/easy_perception_deployment.svg?branch=master)](https://travis-ci.org/cardboardcode/easy_perception_deployment)[![codecov](https://codecov.io/gh/cardboardcode/easy_perception_deployment/branch/master/graph/badge.svg)](https://codecov.io/gh/cardboardcode/easy_perception_deployment)
+[![Build Status](https://travis-ci.org/cardboardcode/easy_perception_deployment.svg?branch=obj_localize_beta)](https://travis-ci.org/cardboardcode/easy_perception_deployment)[![codecov](https://codecov.io/gh/cardboardcode/easy_perception_deployment/branch/master/graph/badge.svg)](https://codecov.io/gh/cardboardcode/easy_perception_deployment)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
@@ -12,7 +12,7 @@ To get started using it, please run the following commands to start **viewing th
 ``` bash
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://gitlab.com/ROSI-AP/rosi-ap_rect/easy_perception_deployment
+git clone https://github.com/cardboardcode/easy_perception_deployment.git --branch obj_localize_beta
 firefox /docs/_build/html/index.html
 ```
 
@@ -24,7 +24,7 @@ This section lists steps on how to build **easy_perception_deployment** package 
 # Download easy_perception_deployment
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://gitlab.com/ROSI-AP/rosi-ap_rect/easy_perception_deployment
+git clone https://github.com/cardboardcode/easy_perception_deployment.git --branch obj_localize_beta
 cd easy_perception_deployment/easy_perception_deployment
 bash run.bash
 ```
