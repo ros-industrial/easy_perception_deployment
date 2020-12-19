@@ -12,7 +12,7 @@ To get started using it, please run the following commands to start **viewing th
 ``` bash
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://github.com/cardboardcode/easy_perception_deployment.git
+git clone https://github.com/ros-industrial/easy_perception_deployment.git
 firefox /docs/_build/html/index.html
 ```
 
@@ -28,7 +28,7 @@ This section lists steps on how to build **easy_perception_deployment** package 
 # Download easy_perception_deployment
 cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
-git clone https://github.com/cardboardcode/easy_perception_deployment.git
+git clone https://github.com/ros-industrial/easy_perception_deployment.git
 cd easy_perception_deployment/easy_perception_deployment
 bash run.bash
 ```
