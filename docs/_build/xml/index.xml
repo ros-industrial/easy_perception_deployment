@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classEPD_1_1EPDContainer" kind="class"><name>EPD::EPDContainer</name>
+    <member refid="classEPD_1_1EPDContainer_1a812461a71889963abc810167cc2a92b5" kind="variable"><name>p3_ort_session</name></member>
+    <member refid="classEPD_1_1EPDContainer_1add6c5c348b2aa94dd9dae5372bab16dc" kind="variable"><name>p2_ort_session</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a18b26c6078c688eec26e964884b14257" kind="variable"><name>p1_ort_session</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a8566251df1b00a088fcb00660cdb29cf" kind="variable"><name>precision_level</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a4ba5e40c755645e7760cfd1646532e3b" kind="variable"><name>IMG_CHANNEL</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a9b2389994554f7f94ba1fd1705dd2db6" kind="variable"><name>PATH_TO_SESSION_CONFIG</name></member>
+    <member refid="classEPD_1_1EPDContainer_1acb858143b2eff58ba80663198cceee5d" kind="variable"><name>PATH_TO_USECASE_CONFIG</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a3f9c8d24b14495e0396bbc8b9c2c7341" kind="variable"><name>template_color_path</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a66bd6e68c87efd8d7971a289295a63d1" kind="variable"><name>class_label_path</name></member>
+    <member refid="classEPD_1_1EPDContainer_1ad398442c8ebc7f201470b6196ac5642b" kind="variable"><name>onnx_model_path</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a5e651b1684c06ae5f7ce30e03e05e342" kind="variable"><name>useCaseMode</name></member>
+    <member refid="classEPD_1_1EPDContainer_1ac78dd903232216696b2e1c30b124cd97" kind="variable"><name>countClassNames</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a7c80d53a7248b0882ba49b1d8c3ba838" kind="variable"><name>classNames</name></member>
+    <member refid="classEPD_1_1EPDContainer_1afa63b71476c13d0cb70bc760f69df81d" kind="variable"><name>hasInitialized</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a820c145aa12093a5a2458560e4eec9af" kind="variable"><name>onlyVisualize</name></member>
+    <member refid="classEPD_1_1EPDContainer_1adb657b39462e20abb4b1246501ef078d" kind="variable"><name>frame_width</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a7d2cc09bf4a4c3ea85520a9a88e3b5ec" kind="variable"><name>frame_height</name></member>
+    <member refid="classEPD_1_1EPDContainer_1aa74885194dd74ac0b3be1cd0f7bac88f" kind="function"><name>EPDContainer</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a80e1cd062d494fc56ef2c7fc10b93e30" kind="function"><name>~EPDContainer</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a4c118d7f38da1c02033955bf73596cb0" kind="function"><name>isInit</name></member>
+    <member refid="classEPD_1_1EPDContainer_1af19c19ff8de6713b4cefbb94f47d4bd2" kind="function"><name>isVisualize</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a545f016afc427032ddd4d271c8ff6cb7" kind="function"><name>getHeight</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a122ce64ccbae3439b9f3c457ec5c73a5" kind="function"><name>getWidth</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a36d54211b5ded9a99dff338ca12dc590" kind="function"><name>setInitBoolean</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a371ffc46b938043ee4db5231bacb31d1" kind="function"><name>setFrameDimension</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a994f93ddc75986a817bec89b59a7c779" kind="function"><name>initORTSessionHandler</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a040763d940037334b2601ea1403a6dec" kind="function"><name>setModelConfigFile</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a6f54cd992d26df63e7739ddd6c7e79ad" kind="function"><name>setUseCaseConfigFile</name></member>
+    <member refid="classEPD_1_1EPDContainer_1afe42693d674c3fb6b1f6da53bc22c7fd" kind="function"><name>setPrecisionLevel</name></member>
+    <member refid="classEPD_1_1EPDContainer_1a28e8021e5100816b3cfb2b3fe7f9629a" kind="function"><name>setLabelList</name></member>
+  </compound>
+  <compound refid="namespaceEPD" kind="namespace"><name>EPD</name>
+  </compound>
+  <compound refid="epd__container_8hpp" kind="file"><name>epd_container.hpp</name>
+  </compound>
+  <compound refid="dir_5d6237af71ac7ac5b06d922743bf3b38" kind="dir"><name>/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment</name>
+  </compound>
+  <compound refid="dir_f2c9394854f846828b8ab101a65cb2dd" kind="dir"><name>/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib</name>
+  </compound>
+  <compound refid="dir_16c8cad7a1935f89d54c14afb83e722f" kind="dir"><name>/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include</name>
+  </compound>
+</doxygenindex>
