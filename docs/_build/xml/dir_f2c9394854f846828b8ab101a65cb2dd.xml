@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_f2c9394854f846828b8ab101a65cb2dd" kind="dir">
+    <compoundname>/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib</compoundname>
+    <innerfile refid="epd__container_8hpp">epd_container.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/"/>
+  </compounddef>
+</doxygen>

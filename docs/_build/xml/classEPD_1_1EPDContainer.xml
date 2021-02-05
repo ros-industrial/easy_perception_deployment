@@ -1,0 +1,477 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classEPD_1_1EPDContainer" kind="class" language="C++" prot="public">
+    <compoundname>EPD::EPDContainer</compoundname>
+    <includes local="no">epd_container.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a812461a71889963abc810167cc2a92b5" prot="public" static="no" mutable="no">
+        <type>Ort::P3OrtBase *</type>
+        <definition>Ort::P3OrtBase* EPD::EPDContainer::p3_ort_session</definition>
+        <argsstring></argsstring>
+        <name>p3_ort_session</name>
+        <briefdescription>
+<para>An pointer for a Precision Level 3 OrtBase object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="40" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1add6c5c348b2aa94dd9dae5372bab16dc" prot="public" static="no" mutable="no">
+        <type>Ort::P2OrtBase *</type>
+        <definition>Ort::P2OrtBase* EPD::EPDContainer::p2_ort_session</definition>
+        <argsstring></argsstring>
+        <name>p2_ort_session</name>
+        <briefdescription>
+<para>An pointer for a Precision Level 2 OrtBase object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="42" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a18b26c6078c688eec26e964884b14257" prot="public" static="no" mutable="no">
+        <type>Ort::P1OrtBase *</type>
+        <definition>Ort::P1OrtBase* EPD::EPDContainer::p1_ort_session</definition>
+        <argsstring></argsstring>
+        <name>p1_ort_session</name>
+        <briefdescription>
+<para>An pointer for a Precision Level 1 OrtBase object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="44" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a8566251df1b00a088fcb00660cdb29cf" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int EPD::EPDContainer::precision_level</definition>
+        <argsstring></argsstring>
+        <name>precision_level</name>
+        <briefdescription>
+<para>The determined precision_level for an input ONNX model file, stated by the session_config.txt. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="47" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a4ba5e40c755645e7760cfd1646532e3b" prot="public" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int EPD::EPDContainer::IMG_CHANNEL</definition>
+        <argsstring></argsstring>
+        <name>IMG_CHANNEL</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+<para>A fixed integer for expected RGB 2D images. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="49" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a9b2389994554f7f94ba1fd1705dd2db6" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string EPD::EPDContainer::PATH_TO_SESSION_CONFIG</definition>
+        <argsstring></argsstring>
+        <name>PATH_TO_SESSION_CONFIG</name>
+        <initializer>= PATH_TO_PACKAGE &quot;/data/session_config.txt&quot;</initializer>
+        <briefdescription>
+<para>The constant filepath to session_config.txt. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="51" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1acb858143b2eff58ba80663198cceee5d" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string EPD::EPDContainer::PATH_TO_USECASE_CONFIG</definition>
+        <argsstring></argsstring>
+        <name>PATH_TO_USECASE_CONFIG</name>
+        <initializer>= PATH_TO_PACKAGE &quot;/data/usecase_config.txt&quot;</initializer>
+        <briefdescription>
+<para>The constant filepath to usecase_config.txt. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="53" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a3f9c8d24b14495e0396bbc8b9c2c7341" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EPD::EPDContainer::template_color_path</definition>
+        <argsstring></argsstring>
+        <name>template_color_path</name>
+        <briefdescription>
+<para>The filepath to a template color image for Color-Matching use-case filter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="57" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a66bd6e68c87efd8d7971a289295a63d1" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EPD::EPDContainer::class_label_path</definition>
+        <argsstring></argsstring>
+        <name>class_label_path</name>
+        <briefdescription>
+<para>The filepath to the essential class label list, that maps classIndices to human-understandable object text labels. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="61" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1ad398442c8ebc7f201470b6196ac5642b" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EPD::EPDContainer::onnx_model_path</definition>
+        <argsstring></argsstring>
+        <name>onnx_model_path</name>
+        <briefdescription>
+<para>The filepath to an input ONNX model file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="63" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a5e651b1684c06ae5f7ce30e03e05e342" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int EPD::EPDContainer::useCaseMode</definition>
+        <argsstring></argsstring>
+        <name>useCaseMode</name>
+        <briefdescription>
+<para>The selected use-case mode. Values can only be 0,1,2.<linebreak/>
+See usecase_config.hpp for more details.<linebreak/>
+. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="68" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1ac78dd903232216696b2e1c30b124cd97" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; EPD::EPDContainer::countClassNames</definition>
+        <argsstring></argsstring>
+        <name>countClassNames</name>
+        <briefdescription>
+<para>A subset of selected object names from an input label list, used for Counting use-case filter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="73" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a7c80d53a7248b0882ba49b1d8c3ba838" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; EPD::EPDContainer::classNames</definition>
+        <argsstring></argsstring>
+        <name>classNames</name>
+        <briefdescription>
+<para>A list of human-understandable object text labels from input label list. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="77" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1afa63b71476c13d0cb70bc760f69df81d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool EPD::EPDContainer::hasInitialized</definition>
+        <argsstring></argsstring>
+        <name>hasInitialized</name>
+        <briefdescription>
+<para>A boolean to indicate that OrtBase object has been initialized. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="103" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a820c145aa12093a5a2458560e4eec9af" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool EPD::EPDContainer::onlyVisualize</definition>
+        <argsstring></argsstring>
+        <name>onlyVisualize</name>
+        <briefdescription>
+<para>A boolean to determine the type of final user output. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="105" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1adb657b39462e20abb4b1246501ef078d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int EPD::EPDContainer::frame_width</definition>
+        <argsstring></argsstring>
+        <name>frame_width</name>
+        <briefdescription>
+<para>Expected dimensions of the data provided by an input camera. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="107" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEPD_1_1EPDContainer_1a7d2cc09bf4a4c3ea85520a9a88e3b5ec" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int EPD::EPDContainer::frame_height</definition>
+        <argsstring></argsstring>
+        <name>frame_height</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="107" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1aa74885194dd74ac0b3be1cd0f7bac88f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EPD::EPDContainer::EPDContainer</definition>
+        <argsstring>(void)</argsstring>
+        <name>EPDContainer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A Constructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="80" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a80e1cd062d494fc56ef2c7fc10b93e30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EPD::EPDContainer::~EPDContainer</definition>
+        <argsstring>(void)</argsstring>
+        <name>~EPDContainer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A Destructor function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="82" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a4c118d7f38da1c02033955bf73596cb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EPD::EPDContainer::isInit</definition>
+        <argsstring>(void)</argsstring>
+        <name>isInit</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A Getter function that gets the bool variable, hasInitialized. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="85" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1af19c19ff8de6713b4cefbb94f47d4bd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EPD::EPDContainer::isVisualize</definition>
+        <argsstring>(void)</argsstring>
+        <name>isVisualize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A Getter function that gets the bool variable, onlyVisualize. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="87" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a545f016afc427032ddd4d271c8ff6cb7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EPD::EPDContainer::getHeight</definition>
+        <argsstring>(void)</argsstring>
+        <name>getHeight</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A Getter function that gets the int variable, frame_height. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="89" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a122ce64ccbae3439b9f3c457ec5c73a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EPD::EPDContainer::getWidth</definition>
+        <argsstring>(void)</argsstring>
+        <name>getWidth</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>A Getter function that gets the int variable, frame_width. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="91" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a36d54211b5ded9a99dff338ca12dc590" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::EPDContainer::setInitBoolean</definition>
+        <argsstring>(bool input)</argsstring>
+        <name>setInitBoolean</name>
+        <param>
+          <type>bool</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that sets the bool variable, hasInitialized. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="93" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a371ffc46b938043ee4db5231bacb31d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::EPDContainer::setFrameDimension</definition>
+        <argsstring>(int width, int height)</argsstring>
+        <name>setFrameDimension</name>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>A Mutator function that sets the int variables, frame_width &amp; frame_height. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="95" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a994f93ddc75986a817bec89b59a7c779" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::EPDContainer::initORTSessionHandler</definition>
+        <argsstring>()</argsstring>
+        <name>initORTSessionHandler</name>
+        <briefdescription>
+<para>A Mutator function that sets the appropriate precision-Level specific OrtBase object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="99" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a040763d940037334b2601ea1403a6dec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::EPDContainer::setModelConfigFile</definition>
+        <argsstring>()</argsstring>
+        <name>setModelConfigFile</name>
+        <briefdescription>
+<para>A Mutator function that parses the session_config.txt file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="110" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a6f54cd992d26df63e7739ddd6c7e79ad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::EPDContainer::setUseCaseConfigFile</definition>
+        <argsstring>()</argsstring>
+        <name>setUseCaseConfigFile</name>
+        <briefdescription>
+<para>A Mutator function that parses the usecase_config.txt file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="112" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1afe42693d674c3fb6b1f6da53bc22c7fd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::EPDContainer::setPrecisionLevel</definition>
+        <argsstring>()</argsstring>
+        <name>setPrecisionLevel</name>
+        <briefdescription>
+<para>A Mutator function that does a test initialization of an OrtBase object based on an input ONNX model file and determines the expected precision level. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="117" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEPD_1_1EPDContainer_1a28e8021e5100816b3cfb2b3fe7f9629a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EPD::EPDContainer::setLabelList</definition>
+        <argsstring>()</argsstring>
+        <name>setLabelList</name>
+        <briefdescription>
+<para>A Mutator function that parses the input label list .txt file into the variable, classNames. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="121" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An Easy Perception Deployment(EPD) Container class object. The <ref refid="classEPD_1_1EPDContainer" kindref="compound">EPDContainer</ref> class object parses the session_config.txt and usecase_config.txt files to determine how an ONNX model can be deployed as an inference engine using the ONNXRuntime library. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" line="37" column="1" bodyfile="/home/rosi/Desktop/repos/official_temp_github/easy_perception_deployment/include/epd_utils_lib/epd_container.hpp" bodystart="36" bodyend="122"/>
+    <listofallmembers>
+      <member refid="classEPD_1_1EPDContainer_1a66bd6e68c87efd8d7971a289295a63d1" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>class_label_path</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a7c80d53a7248b0882ba49b1d8c3ba838" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>classNames</name></member>
+      <member refid="classEPD_1_1EPDContainer_1ac78dd903232216696b2e1c30b124cd97" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>countClassNames</name></member>
+      <member refid="classEPD_1_1EPDContainer_1aa74885194dd74ac0b3be1cd0f7bac88f" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>EPDContainer</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a7d2cc09bf4a4c3ea85520a9a88e3b5ec" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>frame_height</name></member>
+      <member refid="classEPD_1_1EPDContainer_1adb657b39462e20abb4b1246501ef078d" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>frame_width</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a545f016afc427032ddd4d271c8ff6cb7" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>getHeight</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a122ce64ccbae3439b9f3c457ec5c73a5" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>getWidth</name></member>
+      <member refid="classEPD_1_1EPDContainer_1afa63b71476c13d0cb70bc760f69df81d" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>hasInitialized</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a4ba5e40c755645e7760cfd1646532e3b" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>IMG_CHANNEL</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a994f93ddc75986a817bec89b59a7c779" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>initORTSessionHandler</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a4c118d7f38da1c02033955bf73596cb0" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>isInit</name></member>
+      <member refid="classEPD_1_1EPDContainer_1af19c19ff8de6713b4cefbb94f47d4bd2" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>isVisualize</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a820c145aa12093a5a2458560e4eec9af" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>onlyVisualize</name></member>
+      <member refid="classEPD_1_1EPDContainer_1ad398442c8ebc7f201470b6196ac5642b" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>onnx_model_path</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a18b26c6078c688eec26e964884b14257" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>p1_ort_session</name></member>
+      <member refid="classEPD_1_1EPDContainer_1add6c5c348b2aa94dd9dae5372bab16dc" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>p2_ort_session</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a812461a71889963abc810167cc2a92b5" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>p3_ort_session</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a9b2389994554f7f94ba1fd1705dd2db6" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>PATH_TO_SESSION_CONFIG</name></member>
+      <member refid="classEPD_1_1EPDContainer_1acb858143b2eff58ba80663198cceee5d" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>PATH_TO_USECASE_CONFIG</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a8566251df1b00a088fcb00660cdb29cf" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>precision_level</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a371ffc46b938043ee4db5231bacb31d1" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>setFrameDimension</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a36d54211b5ded9a99dff338ca12dc590" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>setInitBoolean</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a28e8021e5100816b3cfb2b3fe7f9629a" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>setLabelList</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a040763d940037334b2601ea1403a6dec" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>setModelConfigFile</name></member>
+      <member refid="classEPD_1_1EPDContainer_1afe42693d674c3fb6b1f6da53bc22c7fd" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>setPrecisionLevel</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a6f54cd992d26df63e7739ddd6c7e79ad" prot="private" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>setUseCaseConfigFile</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a3f9c8d24b14495e0396bbc8b9c2c7341" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>template_color_path</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a5e651b1684c06ae5f7ce30e03e05e342" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>useCaseMode</name></member>
+      <member refid="classEPD_1_1EPDContainer_1a80e1cd062d494fc56ef2c7fc10b93e30" prot="public" virt="non-virtual"><scope>EPD::EPDContainer</scope><name>~EPDContainer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
