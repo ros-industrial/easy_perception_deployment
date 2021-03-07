@@ -1,0 +1,2 @@
+sphinx-sitemap==2.2.0
+breathe==4.20.0
