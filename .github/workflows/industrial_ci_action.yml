@@ -12,11 +12,10 @@ jobs:
     env:
       CCACHE_DIR: /github/home/.ccache
       CODE_COVERAGE: "codecov.io"
-      ISOLATION: shell
+      ISOLATION: docker
+      DOCKER_IMAGE: cardboardcode/epd-foxy-base:emd_compatible
 
     runs-on: ubuntu-20.04
-    container:
-      image: cardboardcode/epd-foxy-base:emd_compatible
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
