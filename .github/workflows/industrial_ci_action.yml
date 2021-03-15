@@ -11,6 +11,7 @@ jobs:
           - {ROS_DISTRO: foxy, ROS_REPO: main}
     env:
       CCACHE_DIR: /github/home/.ccache
+      CODE_COVERAGE: "codecov.io"
       ISOLATION: shell
 
     runs-on: ubuntu-20.04
@@ -23,5 +24,7 @@ jobs:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
       # Run industrial_ci
-      - uses: 'ros-industrial/industrial_ci@master'
+      - uses: 'cardboardcode/industrial_ci@pr-coverage'
         env: ${{ matrix.env }}
+      # Generate and upload code coverage report to codecov.
+      - uses: codecov/codecov-action@v1
