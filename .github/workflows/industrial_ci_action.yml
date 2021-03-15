@@ -1,0 +1,33 @@
+name: CI
+
+# Determines when this workflow is run
+on: [push, pull_request]
+
+jobs:
+  industrial_ci:
+    strategy:
+      matrix:
+        env:
+          - {ROS_DISTRO: foxy, ROS_REPO: testing}
+          - {ROS_DISTRO: foxy, ROS_REPO: main}
+    env:
+      CCACHE_DIR: /github/home/.ccache
+      # Use code-coverage
+      CODE_COVERAGE: "codecov.io"
+      # Use custom public docker image
+      ISOLATION: docker
+      DOCKER_IMAGE: cardboardcode/epd-foxy-base:emd_compatible
+
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      # Fetch/store the directory used by ccache before/after the ci run
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
+      # Run industrial_ci
+      - uses: 'cardboardcode/industrial_ci@pr-coverage'
+        env: ${{ matrix.env }}
+      # Generate and upload code coverage report to codecov.
+      - uses: codecov/codecov-action@v1
