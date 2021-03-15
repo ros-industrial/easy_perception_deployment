@@ -1,0 +1,27 @@
+name: CI
+
+on: [push, pull_request] # on all pushes and PRs
+
+jobs:
+  industrial_ci:
+    strategy:
+      matrix:
+        env:
+          - {ROS_DISTRO: foxy, ROS_REPO: testing}
+          - {ROS_DISTRO: foxy, ROS_REPO: main}
+    env:
+      CCACHE_DIR: /github/home/.ccache
+      ISOLATION: shell
+
+    runs-on: ubuntu-20.04
+    container:
+      image: cardboardcode/epd-foxy-base:emd_compatible
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
+      # Run industrial_ci
+      - uses: 'ros-industrial/industrial_ci@master'
+        env: ${{ matrix.env }}
