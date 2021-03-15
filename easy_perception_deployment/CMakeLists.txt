@@ -10,6 +10,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
+  set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
+endif()
+
 # Include onnxruntime C++ API Library
 set(onnxruntime_INSTALL_PREFIX /usr/local)
 set(onnxruntime_INCLUDE_DIRS
@@ -28,9 +32,12 @@ find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(epd_msgs REQUIRED)
 find_package(message_filters REQUIRED)
+find_package(PCL REQUIRED)
+find_package(pcl_conversions REQUIRED)
 
 include_directories(include
   ${onnxruntime_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}
 )
 
 # Add all custom library headers for compilation.
@@ -78,6 +85,7 @@ else()
 endif()
 
 add_definitions(-DPATH_TO_PACKAGE="${CMAKE_CURRENT_LIST_DIR}")
+add_definitions(${PCL_DEFINITIONS})
 
 if(BUILD_TESTING)
 
@@ -138,19 +146,29 @@ if(BUILD_TESTING)
   target_link_libraries(epd_test_P3_localize_visualize ${onnxruntime_LIBS})
 
   ament_add_gtest(epd_test_processor test/test_processor.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge message_filters)
+  ament_target_dependencies(epd_test_processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge message_filters pcl_conversions)
   target_link_libraries(epd_test_processor ${onnxruntime_LIBS})
 
 endif()
 
 add_executable(processor src/processor.cpp ${EPD_UTILS})
-ament_target_dependencies(processor rclcpp std_msgs sensor_msgs geometry_msgs epd_msgs OpenCV cv_bridge message_filters)
-target_link_libraries(processor ${onnxruntime_LIBS})
+ament_target_dependencies(
+  processor
+  rclcpp
+  std_msgs
+  sensor_msgs
+  geometry_msgs
+  epd_msgs
+  OpenCV
+  cv_bridge
+  message_filters
+  pcl_conversions
+)
+target_link_libraries(processor ${onnxruntime_LIBS} ${PCL_LIBRARIES})
+
 
 install(TARGETS
-
   processor
-
   DESTINATION lib/${PROJECT_NAME}
 )
 

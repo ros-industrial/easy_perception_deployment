@@ -181,6 +181,21 @@ void EPDContainer::setUseCaseConfigFile()
     }
   }
   infile.close();
+
+  switch (useCaseMode) {
+    case EPD::CLASSIFICATION_MODE:
+      printf("[-Use Case-]= EPD::CLASSIFICATION_MODE\n");
+      break;
+    case EPD::COUNTING_MODE:
+      printf("[-Use Case-]= EPD::COUNTING_MODE\n");
+      break;
+    case EPD::COLOR_MATCHING_MODE:
+      printf("[-Use Case-]= EPD::COLOR_MATCHING_MODE\n");
+      break;
+    case EPD::LOCALISATION_MODE:
+      printf("[-Use Case-]= EPD::LOCALISATION_MODE\n");
+      break;
+  }
 }
 
 void EPDContainer::setPrecisionLevel()
@@ -219,6 +234,7 @@ void EPDContainer::setLabelList()
   }
 
   infile.close();
+  printf("[-Label List-]= %s\n", class_label_path.c_str());
 }
 
 }  // namespace EPD

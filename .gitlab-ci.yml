@@ -14,7 +14,7 @@ before_script:
 variables:
   DOCKER_TLS_CERTDIR: ""
   BEFORE_INIT: "sh -c 'echo \"deb [arch=amd64] http://ftp-osl.osuosl.org/pub/ros2 focal main\" ' > /etc/apt/sources.list.d/ros2-latest.list"
-  DOCKER_IMAGE: "cardboardcode/epd-foxy-base:latest"
+  DOCKER_IMAGE: "cardboardcode/epd-foxy-base:emd_compatible"
   PARALLEL_TESTS: "true"  # Global Variable
 
 foxy-main:
