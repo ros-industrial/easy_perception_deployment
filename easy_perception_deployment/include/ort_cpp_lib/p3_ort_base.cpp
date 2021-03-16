@@ -17,11 +17,18 @@
 #include <cstring>
 #include <string>
 #include <vector>
+
+#include "pcl/point_cloud.h"
+#include "pcl/point_types.h"
+#include "pcl/common/centroid.h"
+#include "pcl/common/eigen.h"
+
 #include "opencv2/opencv.hpp"
+
+#include "tf2/LinearMath/Quaternion.h"
 
 #include "p3_ort_base.hpp"
 #include "epd_utils_lib/usecase_config.hpp"
-#include "tf2/LinearMath/Quaternion.h"
 
 
 namespace Ort
@@ -454,6 +461,35 @@ double P3OrtBase::findMedian(cv::Mat depthImg)
   return median;
 }
 
+double P3OrtBase::findMin(cv::Mat depthImg)
+{
+  int bin = 0;
+  double min = -1.0;
+
+  // Setting to hardcoded 2000 millimeters
+  // This is the limit of intel realsense D415.
+  int histSize = 2000;
+  float range[] = {0, 2000};
+  const float * histRange = {range};
+  bool uniform = true;
+  bool accumulate = false;
+  cv::Mat hist;
+  cv::calcHist(&depthImg, 1, 0, cv::Mat(), hist, 1, &histSize, &histRange, uniform, accumulate);
+
+  for (int i = 0; i < histSize; ++i) {
+    bin += cvRound(hist.at<float>(i));
+    // Store the first depth value that is shared among more than 1 point.
+    // Break and escape for loop.
+    if (i != 0 && cvRound(hist.at<float>(i)) > 0) {
+      // std::cout << "Depth Value = " << i << " has " << cvRound(hist.at<float>(i)) << std::endl;
+      min = i;
+      break;
+    }
+  }
+
+  return min;
+}
+
 cv::Mat P3OrtBase::localize_visualize(
   const cv::Mat & img,
   const cv::Mat & depthImg,
@@ -521,11 +557,11 @@ cv::Mat P3OrtBase::localize_visualize(
     cv::Mat hierarchy;
     cv::Mat tempFinalMask;
     finalMask.convertTo(tempFinalMask, CV_8U);
-    // Generate and draw contours on output image.
-    // Contours will be used later.
+    // Generate red contour lines of segmentation mask.
     cv::findContours(
       tempFinalMask, contours, hierarchy, cv::RETR_TREE,
       cv::CHAIN_APPROX_SIMPLE);
+    // Draw red contour lines on output image.
     cv::drawContours(
       coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 5, cv::LINE_8,
       hierarchy, 100);
@@ -539,8 +575,6 @@ cv::Mat P3OrtBase::localize_visualize(
 
     // Getting rotated rectangle and draw the major axis
     std::vector<cv::RotatedRect> minRect(contours.size());
-    std::vector<float> angles;
-    float angle;
     float obj_surface_depth;
     float object_length, object_breadth, object_height;
     cv::Point pt_a, pt_b, pt_c, pt_d;
@@ -583,21 +617,20 @@ cv::Mat P3OrtBase::localize_visualize(
 
       //  Get coordinates of the object center
       float table_depth = this->findMedian(depthImg) * 0.001;
-      obj_surface_depth = this->findMedian(depthImg(curBoxRect)) * 0.001;
+      obj_surface_depth = this->findMin(depthImg(curBoxRect)) * 0.001;
 
       float x = (rotated_mid.x - ppx) / fx * obj_surface_depth;
       float y = (rotated_mid.y - ppy) / fy * obj_surface_depth;
 
-      int x_axis_offset = -0.017;
-      int y_axis_offset = -0.01;
+      std::cout << "table_depth = " << table_depth << std::endl;
+      std::cout << "obj_surface_depth = " << obj_surface_depth << std::endl;
 
-      std::cout << "[-OBJ centroid x-] = " << x + x_axis_offset << std::endl;
-      std::cout << "[-OBJ centroid y-] = " << y + y_axis_offset << std::endl;
+      std::cout << "[-OBJ centroid x-] = " << x << std::endl;
+      std::cout << "[-OBJ centroid y-] = " << y << std::endl;
       std::cout << "[-OBJ centroid z-] = " << obj_surface_depth +
-      (table_depth - obj_surface_depth) / 2 <<
-        std::endl;
+      (table_depth - obj_surface_depth) / 2 << std::endl;
 
-      // Get Real Size and angle of object
+      // Get estimated size of object
       // Compare the length of 2 side of the rectangle,
       // the longer side will be the major axis
       if (cv::norm(rect_points[0] - rect_points[1]) >
@@ -607,8 +640,6 @@ cv::Mat P3OrtBase::localize_visualize(
         cv::line(coloredRoi, pt_a, pt_b, cv::Scalar(0, 0, 255), 2);
         // Draws the minor axis (green)
         cv::line(coloredRoi, pt_c, pt_d, cv::Scalar(0, 255, 0), 2);
-        // Calculates the angle
-        angle = round(atan2(pt_a.y - pt_b.y, pt_a.x - pt_b.x) * 100) / 100;
         // Calculates the length of the object
         object_length = obj_surface_depth * sqrt(
           pow((pt_a.x - pt_b.x) / fx, 2) +
@@ -627,8 +658,6 @@ cv::Mat P3OrtBase::localize_visualize(
         cv::line(coloredRoi, pt_c, pt_d, cv::Scalar(0, 0, 255), 2);
         // Draw the minor axis (green)
         cv::line(coloredRoi, pt_a, pt_b, cv::Scalar(0, 255, 0), 2);
-        // Calculate the angle
-        angle = round(atan2(pt_c.y - pt_d.y, pt_c.x - pt_d.x) * 100) / 100;
         // Get object breadth and length
         object_breadth = obj_surface_depth * sqrt(
           pow((pt_a.x - pt_b.x) / fx, 2) +
@@ -646,21 +675,8 @@ cv::Mat P3OrtBase::localize_visualize(
       std::cout << "[-OBJ Breadth-] = " << object_breadth << std::endl;
       std::cout << "[-OBJ Height-] = " << object_height << std::endl;
 
-      // mark the center point with blue dot
+      // Mark the center point with blue dot
       cv::circle(coloredRoi, rotated_mid, 1, cv::Scalar(255, 0, 0), 1);
-
-      angle = angle * 180 / CV_PI;
-      // Make angle value absolute for anti-clockwise angle
-      if (angle > 0) {
-        angle -= 180;
-        angle *= -1;
-      }
-
-      cv::putText(
-        result, cv::format("%.2f", angle),
-        cv::Point(curBbox[0], curBbox[1] - labelSize.height),
-        cv::FONT_HERSHEY_COMPLEX, 0.75,
-        cv::Scalar(0, 0, 255));
     }
 
     // Push each Region-Of-Interest (ROI) in sequence
@@ -780,6 +796,8 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
     // Bounding Box width as ROI
     output_obj.objects[i].roi.width = curBbox[2] - curBbox[0];
 
+    output_obj.objects[i].mask = curMask;
+
     // Visualizing masks
     const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
       cv::Point(curBbox[2], curBbox[3]));
@@ -793,8 +811,7 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
     cv::Mat hierarchy;
     cv::Mat tempFinalMask;
     finalMask.convertTo(tempFinalMask, CV_8U);
-    // Generate and draw contours on output image.
-    // Contours will be used later.
+    // Generate contours.
     cv::findContours(
       tempFinalMask, contours, hierarchy, cv::RETR_TREE,
       cv::CHAIN_APPROX_SIMPLE);
@@ -809,7 +826,7 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
     // Getting rotated rectangle and draw the major axis
     std::vector<cv::RotatedRect> minRect(contours.size());
     std::vector<float> angles;
-    float angle, obj_surface_depth;
+    float obj_surface_depth;
     cv::Point pt_a, pt_b, pt_c, pt_d;
     cv::Point rotated_mid;
 
@@ -846,15 +863,13 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
       rotated_mid = (cv::Point(curBbox[0], curBbox[1]) +
         cv::Point(curBbox[2], curBbox[3])) / 2;
 
-      obj_surface_depth = this->findMedian(depthImg(curBoxRect)) * 0.001;
+      obj_surface_depth = this->findMin(depthImg(curBoxRect)) * 0.001;
       float x = (rotated_mid.x - ppx) / fx * obj_surface_depth;
       float y = (rotated_mid.y - ppy) / fy * obj_surface_depth;
 
-      int x_axis_offset = -0.017;
-      int y_axis_offset = -0.01;
-      output_obj.objects[i].pos.pose.position.x = x + x_axis_offset;
-      output_obj.objects[i].pos.pose.position.y = y + y_axis_offset;
-      output_obj.objects[i].pos.pose.position.z = obj_surface_depth +
+      output_obj.objects[i].centroid.x = x;
+      output_obj.objects[i].centroid.y = y;
+      output_obj.objects[i].centroid.z = obj_surface_depth +
         (table_depth - obj_surface_depth) / 2;
 
       // Get Real Size and angle of object
@@ -863,8 +878,6 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
       if (cv::norm(rect_points[0] - rect_points[1]) >
         cv::norm(rect_points[1] - rect_points[2]))
       {
-        // Calculates the angle
-        angle = round(atan2(pt_a.y - pt_b.y, pt_a.x - pt_b.x) * 100) / 100;
         // Calculates the length of the object
         output_obj.objects[i].length = obj_surface_depth * sqrt(
           pow((pt_a.x - pt_b.x) / fx, 2) +
@@ -874,8 +887,6 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
           pow((pt_c.x - pt_d.x) / fx, 2) +
           pow((pt_c.y - pt_d.y) / fy, 2));
       } else {
-        // Calculates the angle
-        angle = round(atan2(pt_c.y - pt_d.y, pt_c.x - pt_d.x) * 100) / 100;
         // Gets object breadth and length
         output_obj.objects[i].breadth = obj_surface_depth * sqrt(
           pow((pt_a.x - pt_b.x) / fx, 2) +
@@ -887,23 +898,63 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
       // Setting height of object
       output_obj.objects[i].height = table_depth - obj_surface_depth;
 
-      angle = angle * 180 / CV_PI;
-      // Make angle value absolute for anti-clockwise angle
-      if (angle > 0) {
-        angle -= 180;
-        angle *= -1;
+      pcl::PointCloud<pcl::PointXYZ>::Ptr segmented_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+      segmented_cloud->header.frame_id = "camera_color_optical_frame";
+      segmented_cloud->is_dense = true;
+
+      cv::Mat tempImg = inputImg.clone();
+
+      // Converting Depth Image to PointCloud
+      for (int j = 0; j < tempFinalMask.rows; j++) {
+        for (int k = 0; k < tempFinalMask.cols; k++) {
+          // TODO(cardboardcode) convert segmented mask into segmented pointcloud
+          int pixelValue = static_cast<int>(tempFinalMask.at<uchar>(j, k));
+
+          if (pixelValue != 0) {
+            float z = static_cast<float>(depthImg.at<uint16_t>(
+                curBoxRect.y + j, curBoxRect.x + k) * 0.001);
+            float x = static_cast<float>((curBoxRect.x + k - ppx) / fx) * z;
+            float y = static_cast<float>((curBoxRect.y + j - ppy) / fy) * z;
+
+            pcl::PointXYZ curPoint(x, y, z);
+
+            segmented_cloud->points.push_back(curPoint);
+          }
+        }
       }
 
-      tf2::Quaternion myQuaternion;
-      myQuaternion.setRPY(0, 0, angle * CV_PI / 180);
-      output_obj.objects[i].pos.pose.orientation.x = myQuaternion[0];
-      output_obj.objects[i].pos.pose.orientation.y = myQuaternion[1];
-      output_obj.objects[i].pos.pose.orientation.z = myQuaternion[2];
-      output_obj.objects[i].pos.pose.orientation.w = myQuaternion[3];
+      output_obj.objects[i].segmented_pcl = *segmented_cloud;
 
-      // Populate Header in pos variable of custom_msgs object.
-      output_obj.objects[i].pos.header = std_msgs::msg::Header();
-      output_obj.objects[i].pos.header.frame_id = "detected_obj_" + std::to_string(i);
+      // Determine object axis of segmented_pcl
+      Eigen::Vector3f axis;
+      Eigen::Vector4f centerpoint;
+      Eigen::Vector3f eigenvalues;
+      Eigen::Matrix3f eigenvectors;
+      Eigen::Matrix3f covariance_matrix;
+
+      pcl::compute3DCentroid(output_obj.objects[i].segmented_pcl, centerpoint);
+
+      pcl::computeCovarianceMatrix(
+        output_obj.objects[i].segmented_pcl,
+        centerpoint,
+        covariance_matrix);
+      pcl::eigen33(covariance_matrix, eigenvectors, eigenvalues);
+
+      axis = Eigen::Vector3f(
+        eigenvectors.col(2)(0),
+        eigenvectors.col(2)(1),
+        eigenvectors.col(2)(2));
+
+      axis = axis.normalized();
+
+      output_obj.objects[i].axis.x = axis(0);
+      output_obj.objects[i].axis.y = axis(1);
+      output_obj.objects[i].axis.z = axis(2);
+
+      // DEBUG
+      // std::cout << "object axis = [ " << axis(0)
+      // << ", " << axis(1)
+      // << ", " << axis(2) << "]" << std::endl;
     }
   }
   // END of Populating EPDObjectLocalization object

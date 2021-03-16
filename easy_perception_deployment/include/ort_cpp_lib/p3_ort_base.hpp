@@ -179,6 +179,7 @@ private:
     const float maskThreshold);
 
   double findMedian(cv::Mat depthImg);
+  double findMin(cv::Mat depthImg);
 
   /*! \brief A Mutator function that takes P2 inference outputs and illustrates
   derived bounding boxes with corresponding object labels for visualization

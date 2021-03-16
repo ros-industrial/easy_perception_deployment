@@ -26,7 +26,7 @@ RUN echo "deb http://packages.ros.org/ros2/ubuntu focal main" > /etc/apt/sources
 # Set up environment
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-
+ENV DEBIAN_FRONTEND noninteractive
 ENV ROS_DISTRO foxy
 
 # Install ros2 packages
@@ -94,11 +94,12 @@ RUN git clone https://github.com/Microsoft/onnxruntime . \
     make install -C ./build/Linux/"${BUILDTYPE}" && \
     rm -rf ./*
 
-# Install OpenCV, libboost-dev, ros-foxy-cv-bridge
+# Install OpenCV, libboost-dev, ros-foxy-cv-bridge libpcl-dev
 RUN apt-get update && \
     apt-get install -y libopencv-dev && \
     apt-get install -y libboost-dev && \
     apt-get install -y ros-foxy-cv-bridge && \
+    apt-get install -y ros-foxy-pcl-conversions && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /

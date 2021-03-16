@@ -46,6 +46,8 @@ TEST(EPD_TestSuite, Test_readSessionUseCaseConfigTextFile_EPDContainer)
   } catch (...) {
     FAIL() << "Expected std::runtime_error.";
   }
+
+  ortAgent_->setFrameDimension(400, 500);
 }
 
 int main(int argc, char ** argv)

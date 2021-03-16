@@ -32,6 +32,8 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
 #include "sensor_msgs/msg/region_of_interest.hpp"
+#include "sensor_msgs/msg/point_cloud2.hpp"
+#include "geometry_msgs/msg/point.hpp"
 #include "message_filters/subscriber.h"
 #include "message_filters/synchronizer.h"
 #include "message_filters/sync_policies/approximate_time.h"
@@ -44,6 +46,7 @@
 #include "epd_msgs/msg/localized_object.hpp"
 #include "epd_utils_lib/message_utils.hpp"
 
+#include "pcl_conversions/pcl_conversions.h"
 /*! \class Processor
     \brief An Processor class object.
     This class object inherits rclcpp::Node object and acts the main bridge
@@ -81,6 +84,7 @@ private:
   /*! \brief A publisher member variable to output visualization of inference
   results*/
   rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr visual_pub;
+
   /*! \brief A publisher member variable to output Precision-Level 1 (P1)
   specific inference output suitable for external agents.*/
   rclcpp::Publisher<epd_msgs::msg::EPDImageClassification>::SharedPtr p1_pub;
@@ -119,7 +123,7 @@ Processor::Processor(void)
 {
   // Creating subscriber
   image_sub = this->create_subscription<sensor_msgs::msg::Image>(
-    "/processor/image_input",
+    "/virtual_camera/image_raw",
     10,
     std::bind(&Processor::image_callback, this, std::placeholders::_1));
 
@@ -127,6 +131,7 @@ Processor::Processor(void)
   visual_pub = this->create_publisher<sensor_msgs::msg::Image>(
     "/processor/output",
     10);
+
   p1_pub = this->create_publisher<epd_msgs::msg::EPDImageClassification>(
     "/processor/epd_p1_output",
     10);
@@ -148,6 +153,7 @@ Processor::Processor(void)
     localize_image_depth.subscribe();
     localize_cam_info.subscribe();
     sync_.registerCallback(&Processor::localize_callback, this);
+    image_sub.reset();
   }
 }
 
@@ -231,22 +237,28 @@ void Processor::localize_callback(
     output_msg.frame_width = img.cols;
     output_msg.frame_height = img.rows;
     output_msg.depth_image = *depth_msg;
-    output_msg.camera_info = *camera_info;
-
-    output_msg.num_objects = result.data_size;
 
     // Populate output_msg objects and roi_array
     for (size_t i = 0; i < result.data_size; i++) {
       epd_msgs::msg::LocalizedObject object;
       object.name = result.objects[i].name;
-      object.pos = result.objects[i].pos;
       object.roi = result.objects[i].roi;
-      object.breadth = result.objects[i].breadth;
+      sensor_msgs::msg::Image::SharedPtr mask_ptr = cv_bridge::CvImage(
+        std_msgs::msg::Header(),
+        "mono16",
+        result.objects[i].mask).toImageMsg();
+      object.segmented_binary_mask = *mask_ptr;
+      object.centroid = result.objects[i].centroid;
       object.length = result.objects[i].length;
+      object.breadth = result.objects[i].breadth;
       object.height = result.objects[i].height;
+      object.axis = result.objects[i].axis;
+
+      sensor_msgs::msg::PointCloud2 output_segmented_pcl;
+      pcl::toROSMsg(result.objects[i].segmented_pcl, output_segmented_pcl);
+      object.segmented_pcl = output_segmented_pcl;
 
       output_msg.objects.push_back(object);
-      output_msg.roi_array.push_back(result.objects[i].roi);
     }
     // DEBUG
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();

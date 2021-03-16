@@ -19,8 +19,13 @@
 #include <string>
 #include <vector>
 #include "opencv2/opencv.hpp"
-#include "geometry_msgs/msg/pose_stamped.hpp"
+#include "geometry_msgs/msg/point.hpp"
+#include "geometry_msgs/msg/vector3.hpp"
+#include "sensor_msgs/msg/image.hpp"
+#include "sensor_msgs/msg/point_cloud2.hpp"
 #include "sensor_msgs/msg/region_of_interest.hpp"
+#include "pcl/point_cloud.h"
+#include "pcl/point_types.h"
 
 namespace EPD
 {
@@ -68,11 +73,14 @@ public:
   struct LocalizedObject
   {
     std::string name;
-    geometry_msgs::msg::PoseStamped pos;
     sensor_msgs::msg::RegionOfInterest roi;
-    float breadth;
+    cv::Mat mask;
+    geometry_msgs::msg::Point centroid;
     float length;
+    float breadth;
     float height;
+    pcl::PointCloud<pcl::PointXYZ> segmented_pcl;
+    geometry_msgs::msg::Vector3 axis;
   };
 
   std::vector<LocalizedObject> objects;

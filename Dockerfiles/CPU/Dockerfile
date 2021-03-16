@@ -1,6 +1,7 @@
 FROM ros:foxy-ros-base-focal
 
 MAINTAINER Bey Hao Yun <beyhy@artc.a-star.edu.sg>
+ENV DEBIAN_FRONTEND noninteractive
 
 # Add user
 RUN adduser --quiet --disabled-password epduser
@@ -29,11 +30,12 @@ RUN git clone https://github.com/Microsoft/onnxruntime . \
     make install -C ./build/Linux/"${BUILDTYPE}" && \
     rm -rf ./*
 
-# Install OpenCV, libboost-dev, ros-foxy-cv-bridge
+# Install OpenCV, libboost-dev, ros-foxy-cv-bridge, ros-foxy-pcl-conversions
 RUN apt-get update && \
     apt-get install -y libopencv-dev && \
     apt-get install -y libboost-dev && \
     apt-get install -y ros-foxy-cv-bridge && \
+    apt-get install -y ros-foxy-pcl-conversions && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
