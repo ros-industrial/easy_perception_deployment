@@ -11,7 +11,6 @@ Welcome to easy_perception_deployment's documentation!
    :caption: Contents:
 
 
-
 Indices and tables
 ==================
 

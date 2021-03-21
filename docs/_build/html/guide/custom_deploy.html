@@ -254,6 +254,13 @@ be <em>currently incompatible</em> with that of <strong>easy_perception_deployme
 <p>This use-case allows users to find the determine the 3D euclidean centroid point, estimated object length, breadth, height and orientation.</p>
 <p>The inference output of a P3 model is then filtered to localize user-trained objects.</p>
 <p>Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found <a class="reference external" href="https://github.com/intel/ros2_intel_realsense">here with its own installation instructions</a>.</p>
+<p>For localization, a <strong>camera_to_plane_distance_mm</strong> ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.</p>
+<p>You can use the following commands to edit <strong>camera_to_plane_distance_mm</strong> ROS2 parameter.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /opt/ros/foxy/setup.bash
+ros2 param <span class="nb">set</span> /processor camera_to_plane_distance_mm &lt;double value&gt;
+<span class="c1">#eg. ros2 param set /processor camera_to_plane_distance_mm 450</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="incompatible-model-input-shape">

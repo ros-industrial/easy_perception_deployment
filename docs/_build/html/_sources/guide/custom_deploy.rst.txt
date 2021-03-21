@@ -83,6 +83,16 @@ The inference output of a P3 model is then filtered to localize user-trained obj
 
 Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found `here with its own installation instructions <https://github.com/intel/ros2_intel_realsense>`_.
 
+For localization, a **camera_to_plane_distance_mm** ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.
+
+You can use the following commands to edit **camera_to_plane_distance_mm** ROS2 parameter.
+
+.. code-block:: bash
+
+   source /opt/ros/foxy/setup.bash
+   ros2 param set /processor camera_to_plane_distance_mm <double value>
+   #eg. ros2 param set /processor camera_to_plane_distance_mm 450
+
 
 Incompatible Model Input Shape?
 ++++++++++++++++++++++++++++++++
