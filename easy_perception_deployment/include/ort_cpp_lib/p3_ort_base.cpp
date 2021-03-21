@@ -97,13 +97,14 @@ EPD::EPDObjectDetection P3OrtBase::infer_action(const cv::Mat & inputImg)
 EPD::EPDObjectLocalization P3OrtBase::infer_action(
   const cv::Mat & inputImg,
   const cv::Mat & depthImg,
-  sensor_msgs::msg::CameraInfo camera_info)
+  sensor_msgs::msg::CameraInfo camera_info,
+  double camera_to_plane_distance_mm)
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
 
   return this->infer_action(
-    inputImg, depthImg, camera_info, m_newW, m_newH,
-    m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
+    inputImg, depthImg, camera_info, camera_to_plane_distance_mm,
+    m_newW, m_newH, m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
     cv::Scalar(102.9801, 115.9465, 122.7717));
 }
 
@@ -693,6 +694,7 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
   const cv::Mat & inputImg,
   const cv::Mat & depthImg,
   sensor_msgs::msg::CameraInfo camera_info,
+  double camera_to_plane_distance_mm,
   int newW,
   int newH,
   int paddedW,
@@ -916,9 +918,13 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
             float x = static_cast<float>((curBoxRect.x + k - ppx) / fx) * z;
             float y = static_cast<float>((curBoxRect.y + j - ppy) / fy) * z;
 
-            pcl::PointXYZ curPoint(x, y, z);
-
-            segmented_cloud->points.push_back(curPoint);
+            // Ignore all points that has a value of less than 0.1mm in z.
+            if (std::abs(z) < 0.0001 || std::abs(z) > camera_to_plane_distance_mm * 0.001) {
+              continue;
+            } else {
+              pcl::PointXYZ curPoint(x, y, z);
+              segmented_cloud->points.push_back(curPoint);
+            }
           }
         }
       }

@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Main" href="Main.html" />
-    <link rel="prev" title="CountingWindow" href="Counting.html" /> 
+    <link rel="prev" title="Counting" href="Counting.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,9 +52,12 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+            <a href="../../index.html">
           
 
+          
+            
+            <img src="../../_static/epd_logo_short.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -93,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../guide/test.html">Test</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">windows</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="Counting.html">CountingWindow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Counting.html">Counting</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Deploy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Main.html">Main</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Train.html">Train</a></li>
@@ -204,6 +207,16 @@
 </dd></dl>
 
 <dl class="py function">
+<dt id="windows.Deploy.printDeployConfig">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a78f91b2beefd744b81eb630f63eee60f"></span><code class="sig-name descname">printDeployConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Deploy.printDeployConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Non</span><span class="o">-</span><span class="n">Return</span> <span class="n">Getter</span> <span class="n">function</span> <span class="n">that</span> <span class="n">prints</span> <span class="n">EPD</span> <span class="n">Deployment</span>
+<span class="n">configurations</span> <span class="n">that</span> <span class="n">are</span> <span class="n">not</span> <span class="n">displayed</span> <span class="n">clearly</span> <span class="n">in</span> <span class="n">EPD</span> <span class="n">GUI</span><span class="p">,</span> <span class="n">on</span> <span class="n">terminal</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="windows.Deploy.setButtons">
 <span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a997b29f16888907fbcc559dba3ac9c56"></span><code class="sig-name descname">setButtons</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Deploy.setButtons" title="Permalink to this definition">¶</a></dt>
 <dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">defines</span> <span class="n">all</span> <span class="n">buttons</span> <span class="n">in</span> <span class="n">DeployWindow</span><span class="p">.</span>
@@ -226,6 +239,16 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
 </dd></dl>
 
 <dl class="py function">
+<dt id="windows.Deploy.setImageInput">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1ab14368c02ba3f9b86894ac4e8cebcb66"></span><code class="sig-name descname">setImageInput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Deploy.setImageInput" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">writes</span> <span class="n">to</span> <span class="n">line</span> <span class="mi">25</span> <span class="n">of</span>
+<span class="n">run</span><span class="p">.</span><span class="n">launch</span><span class="p">.</span><span class="n">py</span> <span class="n">file</span> <span class="n">based</span> <span class="n">on</span> <span class="k">new</span> <span class="n">image</span> <span class="n">topic</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="windows.Deploy.doesFileExist">
 <span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a96cbf0265e853e5da8cc210a7befb8bd"></span><code class="sig-name descname">doesFileExist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">input_filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Deploy.doesFileExist" title="Permalink to this definition">¶</a></dt>
 <dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Getter</span> <span class="n">function</span> <span class="n">that</span> <span class="n">checks</span> <span class="k">if</span> <span class="n">a</span> <span class="n">given</span> <span class="n">file</span> <span class="n">exists</span><span class="p">.</span>
@@ -238,6 +261,15 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
 <dt id="windows.Deploy.setVisualizeFlag">
 <span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a2e7a0a241cd29aabbf2f382248eef350"></span><code class="sig-name descname">setVisualizeFlag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Deploy.setVisualizeFlag" title="Permalink to this definition">¶</a></dt>
 <dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">function</span> <span class="n">is</span> <span class="n">triggered</span> <span class="n">by</span> <span class="n">the</span> <span class="n">button</span> <span class="n">labelled</span><span class="p">,</span> <span class="n">Visualize</span><span class="o">/</span><span class="n">Action</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="windows.Deploy.setDockerFlag">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1af5dcad9bebd01f7a87ceb0a39c448dad"></span><code class="sig-name descname">setDockerFlag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Deploy.setDockerFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">function</span> <span class="n">is</span> <span class="n">triggered</span> <span class="n">by</span> <span class="n">the</span> <span class="n">button</span> <span class="n">labelled</span><span class="p">,</span> <span class="n">CPU</span><span class="o">/</span><span class="n">GPU</span><span class="p">.</span>
 </pre></div>
 </div>
  </p>
@@ -293,6 +325,11 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt id="windows.Deploy.useCPU">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a2b8fa8e18238b0b8d8afb38168331523"></span><code class="sig-name descname">useCPU</code><a class="headerlink" href="#windows.Deploy.useCPU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt id="windows.Deploy.usecase_list">
 <span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a3a1acb10e779180b23b920d927bdc343"></span><code class="sig-name descname">usecase_list</code><a class="headerlink" href="#windows.Deploy.usecase_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -310,6 +347,11 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
 <dl class="py attribute">
 <dt id="windows.Deploy.usecase_mode">
 <span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1abd8d59c8a078de8f2c88452e9e2ca1a0"></span><code class="sig-name descname">usecase_mode</code><a class="headerlink" href="#windows.Deploy.usecase_mode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="windows.Deploy.launch_file">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a04dd2b5c7ffa3634220b1cbc3e5e5102"></span><code class="sig-name descname">launch_file</code><a class="headerlink" href="#windows.Deploy.launch_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -333,13 +375,28 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="windows.Deploy.run_button">
-<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1abecda74798f9d914e6a583c0cf1ccb03"></span><code class="sig-name descname">run_button</code><a class="headerlink" href="#windows.Deploy.run_button" title="Permalink to this definition">¶</a></dt>
+<dt id="windows.Deploy.visualize_button">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a5a87e850a36cac47b329e6fe8d359df2"></span><code class="sig-name descname">visualize_button</code><a class="headerlink" href="#windows.Deploy.visualize_button" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="windows.Deploy.visualize_button">
-<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a5a87e850a36cac47b329e6fe8d359df2"></span><code class="sig-name descname">visualize_button</code><a class="headerlink" href="#windows.Deploy.visualize_button" title="Permalink to this definition">¶</a></dt>
+<dt id="windows.Deploy.register_topic_button">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a9557430d5f3d1c4a1966aa8ee7e5539e"></span><code class="sig-name descname">register_topic_button</code><a class="headerlink" href="#windows.Deploy.register_topic_button" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="windows.Deploy.topic_button">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1aaafab3044a9fc2af5808f8e70ed776ff"></span><code class="sig-name descname">topic_button</code><a class="headerlink" href="#windows.Deploy.topic_button" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="windows.Deploy.docker_button">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a3f16faea218be9395a8b40c2767f8736"></span><code class="sig-name descname">docker_button</code><a class="headerlink" href="#windows.Deploy.docker_button" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="windows.Deploy.run_button">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1abecda74798f9d914e6a583c0cf1ccb03"></span><code class="sig-name descname">run_button</code><a class="headerlink" href="#windows.Deploy.run_button" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -358,6 +415,11 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
 <dl class="py attribute">
 <dt id="windows.Deploy._path_to_label_list">
 <span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1acc63fbb43bd3731e116e431eabf515d6"></span><code class="sig-name descname">_path_to_label_list</code><a class="headerlink" href="#windows.Deploy._path_to_label_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="windows.Deploy._input_image_topic">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a37463b62767c9039ab06a4227a5c07ac"></span><code class="sig-name descname">_input_image_topic</code><a class="headerlink" href="#windows.Deploy._input_image_topic" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -395,6 +457,11 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
 <span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1ac8b2657a67225e2b555b1c47ff5cb8f9"></span><code class="sig-name descname">_path_to_usecase_config</code><a class="headerlink" href="#windows.Deploy._path_to_usecase_config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py attribute">
+<dt id="windows.Deploy._path_to_launch_file">
+<span class="target" id="classwindows_1_1Deploy_1_1DeployWindow_1a18f56429110638d1a072127ac060d9fa"></span><code class="sig-name descname">_path_to_launch_file</code><a class="headerlink" href="#windows.Deploy._path_to_launch_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </dd></dl>
 
@@ -413,7 +480,7 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
         <a href="Main.html" class="btn btn-neutral float-right" title="Main" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Counting.html" class="btn btn-neutral float-left" title="CountingWindow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Counting.html" class="btn btn-neutral float-left" title="Counting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -423,7 +490,7 @@ Otherwise, run bash script to kill ROS2 package processes remotely.
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020,  Bey Hao Yun
+        &copy; Copyright 2021, Bey Hao Yun
 
     </p>
   </div>

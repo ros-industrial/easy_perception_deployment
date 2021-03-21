@@ -52,9 +52,12 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+            <a href="../../index.html">
           
 
+          
+            
+            <img src="../../_static/epd_logo_short.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -247,10 +250,20 @@ Calls setNumClassesInTrainingConfig function.
 </dd></dl>
 
 <dl class="py function">
-<dt id="trainer.P3Trainer.P3Trainer.exportONNX">
-<span class="target" id="classtrainer_1_1P3Trainer_1_1P3Trainer_1afb8e2fdf08bf7fe1416c24d7652560c2"></span><code class="sig-name descname">exportONNX</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">debug</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P3Trainer.P3Trainer.exportONNX" title="Permalink to this definition">¶</a></dt>
-<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">runs</span> <span class="n">a</span> <span class="n">bash</span> <span class="n">script</span> <span class="n">that</span> <span class="n">downloads</span><span class="p">,</span> <span class="n">creates</span> <span class="n">and</span> <span class="n">runs</span>
-<span class="n">an</span> <span class="n">environment</span> <span class="k">for</span> <span class="n">exporting</span> <span class="n">the</span> <span class="n">trained</span> <span class="p">.</span><span class="n">pth</span> <span class="n">file</span> <span class="n">to</span> <span class="n">the</span> <span class="k">final</span> <span class="n">ONNX</span>
+<dt id="trainer.P3Trainer.P3Trainer.createExportFarm">
+<span class="target" id="classtrainer_1_1P3Trainer_1_1P3Trainer_1ae0f773253d09b67e3e1ef5f671009f46"></span><code class="sig-name descname">createExportFarm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">debug</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P3Trainer.P3Trainer.createExportFarm" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">runs</span> <span class="n">a</span> <span class="n">bash</span> <span class="n">script</span> <span class="n">that</span> <span class="n">downloads</span><span class="p">,</span> <span class="n">creates</span>
+<span class="n">an</span> <span class="n">Anaconda3</span> <span class="n">environment</span> <span class="n">called</span><span class="p">,</span> <span class="n">p3_exporter</span> <span class="k">for</span> <span class="n">exporting</span> <span class="n">the</span> <span class="n">trained</span>
+<span class="p">.</span><span class="n">pth</span> <span class="n">file</span> <span class="n">to</span> <span class="n">the</span> <span class="k">final</span> <span class="n">ONNX</span> <span class="n">model</span> <span class="n">file</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="trainer.P3Trainer.P3Trainer.runExportFarm">
+<span class="target" id="classtrainer_1_1P3Trainer_1_1P3Trainer_1a296d16d06fb84a6e78ba9b3cc4217e99"></span><code class="sig-name descname">runExportFarm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">debug</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P3Trainer.P3Trainer.runExportFarm" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">runs</span> <span class="n">a</span> <span class="n">bash</span> <span class="n">script</span> <span class="n">that</span> <span class="n">runs</span> <span class="n">p3_exporter</span> <span class="n">environment</span> <span class="k">for</span> <span class="n">exporting</span> <span class="n">the</span> <span class="n">trained</span> <span class="p">.</span><span class="n">pth</span> <span class="n">file</span> <span class="n">to</span> <span class="n">the</span> <span class="k">final</span> <span class="n">ONNX</span>
 <span class="n">model</span> <span class="n">file</span><span class="p">.</span>
 </pre></div>
 </div>
@@ -353,7 +366,7 @@ Calls setNumClassesInTrainingConfig function.
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020,  Bey Hao Yun
+        &copy; Copyright 2021, Bey Hao Yun
 
     </p>
   </div>

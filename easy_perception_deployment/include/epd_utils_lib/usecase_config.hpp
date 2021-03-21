@@ -336,20 +336,6 @@ inline void matchColor(
   infile.close();
 }
 
-// /*! \brief A Mutator function that takes the base inference results from a P3
-// inference engine and produces 3D localization results.
-// */
-// inline void localize(
-//   const cv::Mat & img,
-//   std::vector<std::array<float, 4>> & bboxes,
-//   std::vector<uint64_t> & classIndices,
-//   std::vector<float> & scores,
-//   std::vector<cv::Mat> & masks,
-//   std::vector<std::string> allClassNames)
-// {
-//   printf("Entered localize usecase function.\n");
-// }
-
 /*! \brief A Mutator function that takes the base inference results from a P3
 inference engine and excludes any bounding boxes, classIndices and score
 element based on a selected use-case filter.

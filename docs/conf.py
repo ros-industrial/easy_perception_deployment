@@ -21,8 +21,8 @@ subprocess.call('doxygen Doxyfile.in', shell=True)
 
 # -- Project information -----------------------------------------------------
 
-project = 'easy_perception_deployment'
-copyright = '2020,  Bey Hao Yun'
+project =  'easy_perception_deployment'
+copyright = '2021, Bey Hao Yun'
 author = 'Bey Hao Yun'
 
 
@@ -85,11 +85,15 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+html_logo = "img/epd_logo_short.png"
+html_theme_options = {
+    'logo_only': True,
+}
 
 # -- Breathe configuration -------------------------------------------------
 
 breathe_projects = {
-	"easy_perception_deployment": "./_build_doxy/xml/"
+	"easy_perception_deployment":                                           "../_build/xml/"
 }
-breathe_default_project = "easy_perception_deployment"
+breathe_default_project =                                           "easy_perception_deployment"
 breathe_default_members = ('members', 'undoc-members')

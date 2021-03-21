@@ -52,9 +52,12 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+            <a href="../../index.html">
           
 
+          
+            
+            <img src="../../_static/epd_logo_short.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -199,7 +202,7 @@
 
 <dl class="cpp function">
 <dt id="_CPPv4N3Ort9P1OrtBase5inferERKN2cv3MatE">
-<span id="_CPPv3N3Ort9P1OrtBase5inferERKN2cv3MatE"></span><span id="_CPPv2N3Ort9P1OrtBase5inferERKN2cv3MatE"></span><span id="Ort::P1OrtBase::infer__cv::MatCR"></span><span class="target" id="classOrt_1_1P1OrtBase_1ade038de1967c2ac01af7ab617dbcea1b"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">infer</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>inputImg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P1OrtBase5inferERKN2cv3MatE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N3Ort9P1OrtBase5inferERKN2cv3MatE"></span><span id="_CPPv2N3Ort9P1OrtBase5inferERKN2cv3MatE"></span><span id="Ort::P1OrtBase::infer__cv::MatCR"></span><span class="target" id="classOrt_1_1P1OrtBase_1a94e762774702bfa2aceef83e80aa33b3"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">infer</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>inputImg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P1OrtBase5inferERKN2cv3MatE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A Mutator function that runs the P1 Ort Session and gets P1 inference result. </p>
 </dd></dl>
 
@@ -242,13 +245,13 @@
 
 <dl class="cpp function">
 <dt id="_CPPv4NK3Ort9P1OrtBase10getTopKRawERKNSt6vectorIPfEEK8uint16_tKb">
-<span id="_CPPv3NK3Ort9P1OrtBase10getTopKRawERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="_CPPv2NK3Ort9P1OrtBase10getTopKRawERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="Ort::P1OrtBase::getTopKRaw__std::vector:floatP:CR.uint16_tC.bCC"></span><span class="target" id="classOrt_1_1P1OrtBase_1a5981f45d9c40392697f48ecfc01ef56d"></span>std::vector&lt;std::pair&lt;int, float&gt;&gt; <code class="sig-name descname">getTopKRaw</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;float*&gt; &amp;<em>inferenceOutput</em>, <em class="property">const</em> uint16_t <em>k</em> = 1, <em class="property">const</em> bool <em>useSoftmax</em> = true<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P1OrtBase10getTopKRawERKNSt6vectorIPfEEK8uint16_tKb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK3Ort9P1OrtBase10getTopKRawERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="_CPPv2NK3Ort9P1OrtBase10getTopKRawERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="Ort::P1OrtBase::getTopKRaw__std::vector:floatP:CR.uint16_tC.bCC"></span><span class="target" id="classOrt_1_1P1OrtBase_1a83be8f55291c741cd031eef6efecbd57"></span>std::vector&lt;std::pair&lt;int, float&gt;&gt; <code class="sig-name descname">getTopKRaw</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;float*&gt; &amp;<em>inferenceOutput</em>, <em class="property">const</em> uint16_t <em>k</em> = 1, <em class="property">const</em> bool <em>useSoftmax</em> = true<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P1OrtBase10getTopKRawERKNSt6vectorIPfEEK8uint16_tKb" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An Mutator function that takes the inference output and determines the most possible object identity given an input label list. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt id="_CPPv4NK3Ort9P1OrtBase11processTopKERKNSt6vectorIPfEEK8uint16_tKb">
-<span id="_CPPv3NK3Ort9P1OrtBase11processTopKERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="_CPPv2NK3Ort9P1OrtBase11processTopKERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="Ort::P1OrtBase::processTopK__std::vector:floatP:CR.uint16_tC.bCC"></span><span class="target" id="classOrt_1_1P1OrtBase_1a7be731ea15a3295f543e918be88ba112"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">processTopK</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;float*&gt; &amp;<em>inferenceOutput</em>, <em class="property">const</em> uint16_t <em>k</em> = 1, <em class="property">const</em> bool <em>useSoftmax</em> = true<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P1OrtBase11processTopKERKNSt6vectorIPfEEK8uint16_tKb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK3Ort9P1OrtBase11processTopKERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="_CPPv2NK3Ort9P1OrtBase11processTopKERKNSt6vectorIPfEEK8uint16_tKb"></span><span id="Ort::P1OrtBase::processTopK__std::vector:floatP:CR.uint16_tC.bCC"></span><span class="target" id="classOrt_1_1P1OrtBase_1a15cca4aac746a7d033ce8f60759baaa4"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">processTopK</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;float*&gt; &amp;<em>inferenceOutput</em>, <em class="property">const</em> uint16_t <em>k</em> = 1, <em class="property">const</em> bool <em>useSoftmax</em> = true<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P1OrtBase11processTopKERKNSt6vectorIPfEEK8uint16_tKb" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A Mutator function that takes the inference output and determines the most possible object identity given an input label list. </p>
 </dd></dl>
 
@@ -322,7 +325,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020,  Bey Hao Yun
+        &copy; Copyright 2021, Bey Hao Yun
 
     </p>
   </div>

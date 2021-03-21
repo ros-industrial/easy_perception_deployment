@@ -52,9 +52,12 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+            <a href="../../index.html">
           
 
+          
+            
+            <img src="../../_static/epd_logo_short.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -247,8 +250,19 @@ Calls setNumClassesInTrainingConfig function.
 </dd></dl>
 
 <dl class="py function">
-<dt id="trainer.P2Trainer.P2Trainer.exportONNX">
-<span class="target" id="classtrainer_1_1P2Trainer_1_1P2Trainer_1a7ad1506ec8f2ddb8b2d7cbcf565207bd"></span><code class="sig-name descname">exportONNX</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">debug</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P2Trainer.P2Trainer.exportONNX" title="Permalink to this definition">¶</a></dt>
+<dt id="trainer.P2Trainer.P2Trainer.createExportFarm">
+<span class="target" id="classtrainer_1_1P2Trainer_1_1P2Trainer_1a06ce494c80010c92016e7e47d7c92037"></span><code class="sig-name descname">createExportFarm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">debug</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P2Trainer.P2Trainer.createExportFarm" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">runs</span> <span class="n">a</span> <span class="n">bash</span> <span class="n">script</span> <span class="n">that</span> <span class="n">downloads</span><span class="p">,</span> <span class="n">creates</span> <span class="n">and</span> <span class="n">runs</span>
+<span class="n">an</span> <span class="n">environment</span> <span class="k">for</span> <span class="n">exporting</span> <span class="n">the</span> <span class="n">trained</span> <span class="p">.</span><span class="n">pth</span> <span class="n">file</span> <span class="n">to</span> <span class="n">the</span> <span class="k">final</span> <span class="n">ONNX</span>
+<span class="n">model</span> <span class="n">file</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="trainer.P2Trainer.P2Trainer.runExportFarm">
+<span class="target" id="classtrainer_1_1P2Trainer_1_1P2Trainer_1a34a42871382e6860b12e545366232f1c"></span><code class="sig-name descname">runExportFarm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">debug</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P2Trainer.P2Trainer.runExportFarm" title="Permalink to this definition">¶</a></dt>
 <dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">runs</span> <span class="n">a</span> <span class="n">bash</span> <span class="n">script</span> <span class="n">that</span> <span class="n">downloads</span><span class="p">,</span> <span class="n">creates</span> <span class="n">and</span> <span class="n">runs</span>
 <span class="n">an</span> <span class="n">environment</span> <span class="k">for</span> <span class="n">exporting</span> <span class="n">the</span> <span class="n">trained</span> <span class="p">.</span><span class="n">pth</span> <span class="n">file</span> <span class="n">to</span> <span class="n">the</span> <span class="k">final</span> <span class="n">ONNX</span>
 <span class="n">model</span> <span class="n">file</span><span class="p">.</span>
@@ -353,7 +367,7 @@ Calls setNumClassesInTrainingConfig function.
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020,  Bey Hao Yun
+        &copy; Copyright 2021, Bey Hao Yun
 
     </p>
   </div>

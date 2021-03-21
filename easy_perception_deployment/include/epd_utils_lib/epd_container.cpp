@@ -194,6 +194,11 @@ void EPDContainer::setUseCaseConfigFile()
       break;
     case EPD::LOCALISATION_MODE:
       printf("[-Use Case-]= EPD::LOCALISATION_MODE\n");
+      printf("[- Input RGB Image Topic -]= /camera/color/image_raw\n");
+      printf(
+        "[- Input Depth Image Topic -]= "
+        "/camera/aligned_depth_to_color/image_raw\n");
+      printf("[- Camera Info Topic -]= /camera/color/camera_info\n");
       break;
   }
 }

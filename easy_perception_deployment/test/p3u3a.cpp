@@ -65,7 +65,8 @@ TEST(EPD_TestSuite, Test_P3Model_Localize_Action)
   EPD::EPDObjectLocalization result = ortAgent_->p3_ort_session->infer_action(
     colored_img,
     depth_img,
-    camera_info);
+    camera_info,
+    0.1);
 
   ASSERT_NE(result.objects.size(), unsigned(0));
 }
