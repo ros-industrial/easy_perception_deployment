@@ -10,6 +10,7 @@ Welcome to easy_perception_deployment's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+Test
 
 Indices and tables
 ==================
