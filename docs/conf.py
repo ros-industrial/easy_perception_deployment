@@ -93,7 +93,7 @@ html_theme_options = {
 # -- Breathe configuration -------------------------------------------------
 
 breathe_projects = {
-	"easy_perception_deployment":                                           "../_build/xml/"
+	"easy_perception_deployment":                                           "./_build/xml/"
 }
 breathe_default_project =                                           "easy_perception_deployment"
 breathe_default_members = ('members', 'undoc-members')
