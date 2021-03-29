@@ -43,6 +43,8 @@ class TrainWindow(QWidget):
         self._TRAIN_WIN_H = 500
         self._TRAIN_WIN_W = 500
 
+        self.setWindowIcon(QIcon("img/epd_desktop.png"))
+
         self.model_name = ''
         self._model_list = []
         self._label_list = []

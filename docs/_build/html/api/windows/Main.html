@@ -52,9 +52,12 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+            <a href="../../index.html">
           
 
+          
+            
+            <img src="../../_static/epd_logo_short.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -93,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../guide/test.html">Test</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">windows</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="Counting.html">CountingWindow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Counting.html">Counting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Deploy.html">Deploy</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Main</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Train.html">Train</a></li>
@@ -176,122 +179,10 @@
             
   <div class="section" id="main">
 <span id="api-main"></span><h1>Main<a class="headerlink" href="#main" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="windows.Main">
-<span class="target" id="namespacewindows_1_1Main"></span><em class="property">module </em><code class="sig-prename descclassname">windows.</code><code class="sig-name descname">Main</code><a class="headerlink" href="#windows.Main" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py class">
-<dt>
-<span class="target" id="classwindows_1_1Main_1_1MainWindow"></span><code class="sig-name descname">MainWindow : public QWidget</code></dt>
-<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">MainWindow</span> <span class="k">class</span> <span class="nc">is</span> <span class="n">a</span> <span class="n">PySide2</span> <span class="n">Graphical</span> <span class="n">User</span> <span class="n">Interface</span> <span class="p">(</span><span class="n">GUI</span><span class="p">)</span> <span class="n">window</span>
-<span class="n">that</span> <span class="n">starts</span> <span class="n">up</span> <span class="n">as</span> <span class="n">the</span> <span class="n">first</span> <span class="n">user</span> <span class="n">interface</span><span class="p">.</span>
-</pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>doxygenfile: Cannot find file “Main.py </p>
 </div>
- </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="py function">
-<dt id="windows.Main.__init__">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1aea3a840eb6252914dfcaf98696d72e8c"></span><code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Main.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">constructor</span><span class="p">.</span>
-<span class="n">Sets</span> <span class="n">the</span> <span class="n">size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">window</span><span class="p">.</span>
-<span class="n">Calls</span> <span class="n">setButtons</span> <span class="n">function</span> <span class="n">to</span> <span class="n">populate</span> <span class="n">window</span> <span class="n">with</span> <span class="n">button</span><span class="p">.</span>
-</pre></div>
-</div>
- </p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="windows.Main.setButtons">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1a0ac0c7a6531a953f3876ca0c4a379371"></span><code class="sig-name descname">setButtons</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Main.setButtons" title="Permalink to this definition">¶</a></dt>
-<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">defines</span> <span class="n">all</span> <span class="n">buttons</span> <span class="n">in</span> <span class="n">MainWindow</span><span class="p">.</span>
-</pre></div>
-</div>
- </p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="windows.Main.deployPackage">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1a208e04169a995e71e036e327523118be"></span><code class="sig-name descname">deployPackage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Main.deployPackage" title="Permalink to this definition">¶</a></dt>
-<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">function</span> <span class="n">that</span> <span class="n">is</span> <span class="n">triggered</span> <span class="n">by</span> <span class="n">the</span> <span class="n">button</span> <span class="n">labelled</span><span class="p">,</span> <span class="n">Deploy</span><span class="p">.</span>
-</pre></div>
-</div>
- </p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="windows.Main.openTrainWindow">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1a3679f1fb3c7dbecf967caa064e70da11"></span><code class="sig-name descname">openTrainWindow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Main.openTrainWindow" title="Permalink to this definition">¶</a></dt>
-<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">function</span> <span class="n">that</span> <span class="n">is</span> <span class="n">triggered</span> <span class="n">by</span> <span class="n">the</span> <span class="n">button</span> <span class="n">labelled</span><span class="p">,</span> <span class="n">Train</span><span class="p">.</span>
-</pre></div>
-</div>
- </p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="windows.Main.closeWindow">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1a33d07b3df9535d64dc4431f82dc9b1ef"></span><code class="sig-name descname">closeWindow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#windows.Main.closeWindow" title="Permalink to this definition">¶</a></dt>
-<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">function</span> <span class="n">that</span> <span class="n">is</span> <span class="n">triggered</span> <span class="n">by</span> <span class="n">the</span> <span class="n">button</span> <span class="n">labelled</span><span class="p">,</span> <span class="n">Quit</span><span class="p">.</span>
-</pre></div>
-</div>
- </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="py attribute">
-<dt id="windows.Main.train_window">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1affefb4a31f88f61517c5927292815ac7"></span><code class="sig-name descname">train_window</code><a class="headerlink" href="#windows.Main.train_window" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="windows.Main.deploy_window">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1ab28561d666bff258bcf97c3c4f7cc0c4"></span><code class="sig-name descname">deploy_window</code><a class="headerlink" href="#windows.Main.deploy_window" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="windows.Main.isTrainOpen">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1add35cb9afef0ab1d24ba20067aebca6c"></span><code class="sig-name descname">isTrainOpen</code><a class="headerlink" href="#windows.Main.isTrainOpen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="windows.Main.isDeployOpen">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1a78c1d0b8dc165d58791f94d18f300bce"></span><code class="sig-name descname">isDeployOpen</code><a class="headerlink" href="#windows.Main.isDeployOpen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="windows.Main.train_button">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1ab90b7d20ec8aaf413fa6a2781a7ca23f"></span><code class="sig-name descname">train_button</code><a class="headerlink" href="#windows.Main.train_button" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="windows.Main.deploy_button">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1ae5f6b1981c161e723a34cbbbd93482be"></span><code class="sig-name descname">deploy_button</code><a class="headerlink" href="#windows.Main.deploy_button" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="windows.Main.quit_button">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1a3ec0ef903bb8387e5fc8ea95895430c7"></span><code class="sig-name descname">quit_button</code><a class="headerlink" href="#windows.Main.quit_button" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Members</p>
-<dl class="py attribute">
-<dt id="windows.Main._WINDOW_HEIGHT">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1ab6bc7241536232f8d96689c965b51d85"></span><code class="sig-name descname">_WINDOW_HEIGHT</code><a class="headerlink" href="#windows.Main._WINDOW_HEIGHT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="windows.Main._WINDOW_WIDTH">
-<span class="target" id="classwindows_1_1Main_1_1MainWindow_1a15d4d985aa9274a2da1bceb6a74fb0cd"></span><code class="sig-name descname">_WINDOW_WIDTH</code><a class="headerlink" href="#windows.Main._WINDOW_WIDTH" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -315,7 +206,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020,  Bey Hao Yun
+        &copy; Copyright 2021, Bey Hao Yun
 
     </p>
   </div>

@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>p2_ort_base &mdash; easy_perception_deployment  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p3_ort_base" href="p3_ort_base.html" />
+    <link rel="prev" title="p1_ort_base" href="p1_ort_base.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/epd_logo_short.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to easy_perception_deployment’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epd_container.html">epd_container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epd_container.html">epd_container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_viewer.html">image_viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_utils.html">message_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processor.html">processor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usecase_config.html">usecase_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ort_base.html">ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ort_base.html">ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p1_ort_base.html">p1_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p1_ort_base.html">p1_ort_base</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">p2_ort_base</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">p2_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p3_ort_base.html">p3_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p3_ort_base.html">p3_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Counting.html">Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Deploy.html">Deploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Main.html">Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Train.html">Train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P1Trainer.html">P1Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P2Trainer.html">P2Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P3Trainer.html">P3Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">easy_perception_deployment</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>p2_ort_base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/p2_ort_base.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="p2-ort-base">
+<span id="api-p2-ort-base"></span><h1>p2_ort_base<a class="headerlink" href="#p2-ort-base" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43Ort">
+<span id="_CPPv33Ort"></span><span id="_CPPv23Ort"></span><span id="Ort"></span><span class="target" id="namespaceOrt"></span><em class="property">namespace </em><code class="sig-name descname">Ort</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3Ort9P2OrtBaseE">
+<span id="_CPPv3N3Ort9P2OrtBaseE"></span><span id="_CPPv2N3Ort9P2OrtBaseE"></span><span id="Ort::P2OrtBase"></span><span class="target" id="classOrt_1_1P2OrtBase"></span><em class="property">class </em><code class="sig-name descname">P2OrtBase</code> : <em class="property">public</em> <a class="reference internal" href="ort_base.html#_CPPv43Ort" title="Ort">Ort</a>::<a class="reference internal" href="ort_base.html#_CPPv4N3Ort7OrtBaseE" title="Ort::OrtBase">OrtBase</a><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBaseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;p2_ort_base.hpp&gt;</em><p>An Precision-Level 2 (P2) ONNXRuntime (Ort) Base class object. This class object instantiates a Precision Level 2 Ort Session which takes a typical ONNX model used for solely object detection and runs an inference engine. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBase9P2OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE">
+<span id="_CPPv3N3Ort9P2OrtBase9P2OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE"></span><span id="_CPPv2N3Ort9P2OrtBase9P2OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE"></span><span id="Ort::P2OrtBase::P2OrtBase__float.i.i.i.i.uint16_tC.ssCR.boost::optional:s:CR.boost::optional:std::vector:std::vector:int64_t:::CR"></span><span class="target" id="classOrt_1_1P2OrtBase_1a7de210a80972444587b5bfe8513a5501"></span><code class="sig-name descname">P2OrtBase</code><span class="sig-paren">(</span>float <em>ratio</em>, int <em>newW</em>, int <em>newH</em>, int <em>paddedW</em>, int <em>paddedH</em>, <em class="property">const</em> uint16_t <em>numClasses</em>, <em class="property">const</em> std::string &amp;<em>modelPath</em>, <em class="property">const</em> boost::optional&lt;size_t&gt; &amp;<em>gpuIdx</em> = boost::none, <em class="property">const</em> boost::optional&lt;std::vector&lt;std::vector&lt;int64_t&gt;&gt;&gt; &amp;<em>inputShapes</em> = boost::none<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase9P2OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Constructor function. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBaseD0Ev">
+<span id="_CPPv3N3Ort9P2OrtBaseD0Ev"></span><span id="_CPPv2N3Ort9P2OrtBaseD0Ev"></span><span id="Ort::P2OrtBase::~P2OrtBase"></span><span class="target" id="classOrt_1_1P2OrtBase_1ac8cc28f37ed1936e234d07c5e8e47e8b"></span><code class="sig-name descname">~P2OrtBase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBaseD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Destructor function. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatE">
+<span id="_CPPv3N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatE"></span><span id="_CPPv2N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatE"></span><span id="Ort::P2OrtBase::infer_visualize__cv::MatCR"></span><span class="target" id="classOrt_1_1P2OrtBase_1acf9dff96064c44f8a28065374418e589"></span>cv::Mat <code class="sig-name descname">infer_visualize</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>inputImg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A auxillary Mutator function that calls the internal overloading infer_visualize function. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBase12infer_actionERKN2cv3MatE">
+<span id="_CPPv3N3Ort9P2OrtBase12infer_actionERKN2cv3MatE"></span><span id="_CPPv2N3Ort9P2OrtBase12infer_actionERKN2cv3MatE"></span><span id="Ort::P2OrtBase::infer_action__cv::MatCR"></span><span class="target" id="classOrt_1_1P2OrtBase_1a42373d699b170d9be763416554072c3d"></span><a class="reference internal" href="epd_container.html#_CPPv43EPD" title="EPD">EPD</a>::<a class="reference internal" href="message_utils.html#_CPPv4N3EPD18EPDObjectDetectionE" title="EPD::EPDObjectDetection">EPDObjectDetection</a> <code class="sig-name descname">infer_action</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>inputImg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase12infer_actionERKN2cv3MatE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A auxillary Mutator function that calls the internal overloading infer_action function. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3Ort9P2OrtBase13getNumClassesEv">
+<span id="_CPPv3NK3Ort9P2OrtBase13getNumClassesEv"></span><span id="_CPPv2NK3Ort9P2OrtBase13getNumClassesEv"></span><span id="Ort::P2OrtBase::getNumClassesC"></span><span class="target" id="classOrt_1_1P2OrtBase_1ab0ffafc5d9fe6fbd5670033eed582868"></span>uint16_t <code class="sig-name descname">getNumClasses</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P2OrtBase13getNumClassesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Getter function that gets the number of object names used for an ongoing session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3Ort9P2OrtBase13getClassNamesEv">
+<span id="_CPPv3NK3Ort9P2OrtBase13getClassNamesEv"></span><span id="_CPPv2NK3Ort9P2OrtBase13getClassNamesEv"></span><span id="Ort::P2OrtBase::getClassNamesC"></span><span class="target" id="classOrt_1_1P2OrtBase_1a62519274b331a67e661e01fde9c7b4ee"></span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<code class="sig-name descname">getClassNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P2OrtBase13getClassNamesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Getter function that gets the list of object text labels which will be used for outputting visualized inference result or for specific use-case filters. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBase14initClassNamesERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3Ort9P2OrtBase14initClassNamesERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3Ort9P2OrtBase14initClassNamesERKNSt6vectorINSt6stringEEE"></span><span id="Ort::P2OrtBase::initClassNames__std::vector:ss:CR"></span><span class="target" id="classOrt_1_1P2OrtBase_1abd05c26b896f4b83e83940f41a3d46c5"></span>void <code class="sig-name descname">initClassNames</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>classNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase14initClassNamesERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that sets the list of object text labels to be used for the P1 Ort Session. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Attributes</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase14MIN_IMAGE_SIZEE">
+<span id="_CPPv3N3Ort9P2OrtBase14MIN_IMAGE_SIZEE"></span><span id="_CPPv2N3Ort9P2OrtBase14MIN_IMAGE_SIZEE"></span><span id="Ort::P2OrtBase::MIN_IMAGE_SIZE__int64_t"></span><span class="target" id="classOrt_1_1P2OrtBase_1a4721a6e4cca7bd60b90143278ad7a2b2"></span><em class="property">constexpr</em> int64_t <code class="sig-name descname">MIN_IMAGE_SIZE</code> = 800<a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase14MIN_IMAGE_SIZEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A fixed minimal image size needed for a lower bound requirement for image classification of adequate result. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK3Ort9P2OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi">
+<span id="_CPPv3NK3Ort9P2OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi"></span><span id="_CPPv2NK3Ort9P2OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi"></span><span id="Ort::P2OrtBase::preprocess__floatP.cv::MatCR.int64_tC.int64_tC.iCC"></span><span class="target" id="classOrt_1_1P2OrtBase_1a2964a0f0a800d0f7512a7959192b4d6f"></span>void <code class="sig-name descname">preprocess</code><span class="sig-paren">(</span>float *<em>dst</em>, <em class="property">const</em> cv::Mat &amp;<em>imgSrc</em>, <em class="property">const</em> int64_t <em>targetImgWidth</em>, <em class="property">const</em> int64_t <em>targetImgHeight</em>, <em class="property">const</em> int <em>numChannels</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P2OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that converts a 3-layered 2D RGB input image into a 1D input data tensor to be passed to the Ort Session for processing.<p>This variant takes a generic input image represented by a conventional opencv Matrix. </p>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatEiiiifPffRKN2cv6ScalarE">
+<span id="_CPPv3N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatEiiiifPffRKN2cv6ScalarE"></span><span id="_CPPv2N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatEiiiifPffRKN2cv6ScalarE"></span><span id="Ort::P2OrtBase::infer_visualize__cv::MatCR.i.i.i.i.float.floatP.float.cv::ScalarCR"></span><span class="target" id="classOrt_1_1P2OrtBase_1a6c3bb04ed8b2677d5443620fc543013d"></span>cv::Mat <code class="sig-name descname">infer_visualize</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>inputImg</em>, int <em>newW</em>, int <em>newH</em>, int <em>paddedW</em>, int <em>paddedH</em>, float <em>ratio</em>, float *<em>dst</em>, float <em>confThresh</em>, <em class="property">const</em> cv::Scalar &amp;<em>meanVal</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase15infer_visualizeERKN2cv3MatEiiiifPffRKN2cv6ScalarE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that runs a P2 Ort Session and gets P2 inference result for visualization purposes. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBase12infer_actionERKN2cv3MatEiiiifPffRKN2cv6ScalarE">
+<span id="_CPPv3N3Ort9P2OrtBase12infer_actionERKN2cv3MatEiiiifPffRKN2cv6ScalarE"></span><span id="_CPPv2N3Ort9P2OrtBase12infer_actionERKN2cv3MatEiiiifPffRKN2cv6ScalarE"></span><span id="Ort::P2OrtBase::infer_action__cv::MatCR.i.i.i.i.float.floatP.float.cv::ScalarCR"></span><span class="target" id="classOrt_1_1P2OrtBase_1a40401db6edb894fbe42fd09bbc912ab3"></span><a class="reference internal" href="epd_container.html#_CPPv43EPD" title="EPD">EPD</a>::<a class="reference internal" href="message_utils.html#_CPPv4N3EPD18EPDObjectDetectionE" title="EPD::EPDObjectDetection">EPDObjectDetection</a> <code class="sig-name descname">infer_action</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>inputImg</em>, int <em>newW</em>, int <em>newH</em>, int <em>paddedW</em>, int <em>paddedH</em>, float <em>ratio</em>, float *<em>dst</em>, float <em>confThresh</em>, <em class="property">const</em> cv::Scalar &amp;<em>meanVal</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase12infer_actionERKN2cv3MatEiiiifPffRKN2cv6ScalarE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that runs a P2 Ort Session and gets P2 inference result for use by external agents. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort9P2OrtBase9visualizeERKN2cv3MatERKNSt6vectorINSt5arrayIfXL4EEEEEERKNSt6vectorI8uint64_tEERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3Ort9P2OrtBase9visualizeERKN2cv3MatERKNSt6vectorINSt5arrayIfXL4EEEEEERKNSt6vectorI8uint64_tEERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3Ort9P2OrtBase9visualizeERKN2cv3MatERKNSt6vectorINSt5arrayIfX4EEEEERKNSt6vectorI8uint64_tEERKNSt6vectorINSt6stringEEE"></span><span id="Ort::P2OrtBase::visualize__cv::MatCR.std::vector:std::array:float.4::CR.std::vector:uint64_t:CR.std::vector:ss:CR"></span><span class="target" id="classOrt_1_1P2OrtBase_1a678658cc642108795fc4f5a21f6873eb"></span>cv::Mat <code class="sig-name descname">visualize</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>img</em>, <em class="property">const</em> std::vector&lt;std::array&lt;float, 4&gt;&gt; &amp;<em>bboxes</em>, <em class="property">const</em> std::vector&lt;uint64_t&gt; &amp;<em>classIndices</em>, <em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>allClassNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase9visualizeERKN2cv3MatERKNSt6vectorINSt5arrayIfXL4EEEEEERKNSt6vectorI8uint64_tEERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that takes P2 inference outputs and illustrates derived bounding boxes with corresponding object labels for visualization purposes. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase12m_numClassesE">
+<span id="_CPPv3N3Ort9P2OrtBase12m_numClassesE"></span><span id="_CPPv2N3Ort9P2OrtBase12m_numClassesE"></span><span id="Ort::P2OrtBase::m_numClasses__uint16_tC"></span><span class="target" id="classOrt_1_1P2OrtBase_1aa75e0f0580414f2fc51be71e4a6438b3"></span><em class="property">const</em> uint16_t <code class="sig-name descname">m_numClasses</code><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase12m_numClassesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The number of object text labels given an input label list. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase7m_ratioE">
+<span id="_CPPv3N3Ort9P2OrtBase7m_ratioE"></span><span id="_CPPv2N3Ort9P2OrtBase7m_ratioE"></span><span id="Ort::P2OrtBase::m_ratio__float"></span><span class="target" id="classOrt_1_1P2OrtBase_1a2cca8b3a61987dbd61b256c6783e9675"></span>float <code class="sig-name descname">m_ratio</code><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase7m_ratioE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The aspect ratio calculated from the dimension of an input image frame, which is provided when the first input image is received by <a class="reference internal" href="processor.html#classProcessor"><span class="std std-ref">Processor</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase6m_newWE">
+<span id="_CPPv3N3Ort9P2OrtBase6m_newWE"></span><span id="_CPPv2N3Ort9P2OrtBase6m_newWE"></span><span id="Ort::P2OrtBase::m_newW__i"></span><span class="target" id="classOrt_1_1P2OrtBase_1a60fccea90926277bf24e07755c7d6d66"></span>int <code class="sig-name descname">m_newW</code><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase6m_newWE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The new padded frame dimensions of an input image. This is used for P2 and P3 object detection. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase6m_newHE">
+<span id="_CPPv3N3Ort9P2OrtBase6m_newHE"></span><span id="_CPPv2N3Ort9P2OrtBase6m_newHE"></span><span id="Ort::P2OrtBase::m_newH__i"></span><span class="target" id="classOrt_1_1P2OrtBase_1aea8cd377365876275653bc55cfca0d81"></span>int <code class="sig-name descname">m_newH</code><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase6m_newHE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase9m_paddedWE">
+<span id="_CPPv3N3Ort9P2OrtBase9m_paddedWE"></span><span id="_CPPv2N3Ort9P2OrtBase9m_paddedWE"></span><span id="Ort::P2OrtBase::m_paddedW__i"></span><span class="target" id="classOrt_1_1P2OrtBase_1a32b6592157d3e99b34ae6674ec708173"></span>int <code class="sig-name descname">m_paddedW</code><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase9m_paddedWE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase9m_paddedHE">
+<span id="_CPPv3N3Ort9P2OrtBase9m_paddedHE"></span><span id="_CPPv2N3Ort9P2OrtBase9m_paddedHE"></span><span id="Ort::P2OrtBase::m_paddedH__i"></span><span class="target" id="classOrt_1_1P2OrtBase_1a144e05345b9b98cf4c877cf8746b2b87"></span>int <code class="sig-name descname">m_paddedH</code><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase9m_paddedHE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort9P2OrtBase12m_classNamesE">
+<span id="_CPPv3N3Ort9P2OrtBase12m_classNamesE"></span><span id="_CPPv2N3Ort9P2OrtBase12m_classNamesE"></span><span id="Ort::P2OrtBase::m_classNames__std::vector:ss:"></span><span class="target" id="classOrt_1_1P2OrtBase_1ad4695a5227d13031811148b733e2a1b1"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">m_classNames</code><a class="headerlink" href="#_CPPv4N3Ort9P2OrtBase12m_classNamesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A vector of object text labels given an input label list. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="p3_ort_base.html" class="btn btn-neutral float-right" title="p3_ort_base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="p1_ort_base.html" class="btn btn-neutral float-left" title="p1_ort_base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2021, Bey Hao Yun
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

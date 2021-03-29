@@ -41,6 +41,8 @@ class MainWindow(QWidget):
         self._WINDOW_HEIGHT = 375
         self._WINDOW_WIDTH = 500
 
+        self.setWindowIcon(QIcon("img/epd_desktop.png"))
+
         self.setWindowTitle('easy_perception_deployment')
         self.setGeometry(0, 0, self._WINDOW_WIDTH, self._WINDOW_HEIGHT)
 

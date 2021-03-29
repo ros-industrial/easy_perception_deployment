@@ -39,6 +39,8 @@ class CountingWindow(QWidget):
         self._COUNTING_WIN_H = 300
         self._COUNTING_WIN_W = 500
 
+        self.setWindowIcon(QIcon("img/epd_desktop.png"))
+
         self._label_list = []
         self._select_list = []
         self._path_to_usecase_config = _path_to_usecase_config

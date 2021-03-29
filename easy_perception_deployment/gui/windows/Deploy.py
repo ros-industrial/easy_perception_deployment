@@ -50,6 +50,8 @@ class DeployWindow(QWidget):
         self._DEPLOY_WIN_H = 400
         self._DEPLOY_WIN_W = 500
 
+        self.setWindowIcon(QIcon("img/epd_desktop.png"))
+
         self._deploy_process = None
         self._kill_process = None
 
@@ -108,7 +110,6 @@ class DeployWindow(QWidget):
                                    line in open(self._path_to_launch_file)]
             self._input_image_topic = self.launch_file[24]
             self._input_image_topic = self._input_image_topic[52:-3]
-            print('Input image topic is : ' + self._input_image_topic)
         else:
             self._input_image_topic = '/camera/color/image_raw'
 
@@ -120,6 +121,17 @@ class DeployWindow(QWidget):
         self.setFixedSize(self._DEPLOY_WIN_W, self._DEPLOY_WIN_H)
 
         self.setButtons()
+        self.printDeployConfig()
+
+    def printDeployConfig(self):
+        '''
+        A Non-Return Getter function that prints EPD Deployment
+        configurations that are not displayed clearly in EPD GUI, on terminal.
+        '''
+        print ('[- EPD Deployment Configurations -]')
+        print('[ ONNX Model ] : ' + self._path_to_model )
+        print('[ Label List ] : ' + self._path_to_label_list )
+        print('[ Input Image Topic ] : ' + self._input_image_topic)
 
     def setButtons(self):
         '''A Mutator function that defines all buttons in DeployWindow.'''
@@ -255,7 +267,10 @@ class DeployWindow(QWidget):
             self._is_running = False
 
     def setImageInput(self):
-        # Write to line 25 of run.launch.py file based on new input image topic.
+        '''
+        A Mutator function that writes to line 25 of
+        run.launch.py file based on new image topic.
+        '''
         new_image_topic = self.topic_button.toPlainText()
         print('Rewriting Input Image Topic to: ' + new_image_topic)
 

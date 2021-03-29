@@ -52,9 +52,12 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> easy_perception_deployment
+            <a href="../../index.html">
           
 
+          
+            
+            <img src="../../_static/epd_logo_short.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -177,60 +180,10 @@
             
   <div class="section" id="message-utils">
 <span id="api-message-utils"></span><h1>message_utils<a class="headerlink" href="#message-utils" title="Permalink to this headline">¶</a></h1>
-<dl class="cpp type">
-<dt id="_CPPv43EPD">
-<span id="_CPPv33EPD"></span><span id="_CPPv23EPD"></span><span id="EPD"></span><span class="target" id="namespaceEPD"></span><em class="property">namespace </em><code class="sig-name descname">EPD</code><br /></dt>
-<dd><p>A collection of use-case filters, namely for parsing usecase_config.txt, Counting and Color-Matching usecaseMode. </p>
-<dl class="cpp class">
-<dt id="_CPPv4N3EPD18EPDObjectDetectionE">
-<span id="_CPPv3N3EPD18EPDObjectDetectionE"></span><span id="_CPPv2N3EPD18EPDObjectDetectionE"></span><span id="EPD::EPDObjectDetection"></span><span class="target" id="classEPD_1_1EPDObjectDetection"></span><em class="property">class </em><code class="sig-name descname">EPDObjectDetection</code><a class="headerlink" href="#_CPPv4N3EPD18EPDObjectDetectionE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;message_utils.hpp&gt;</em><p>An Easy Perception Deployment (<a class="reference internal" href="usecase_config.html#namespaceEPD"><span class="std std-ref">EPD</span></a>) ObjectDetection class object. This object functions as a transient container of inference results to transport them for processing in by <a class="reference internal" href="processor.html#classProcessor"><span class="std std-ref">Processor</span></a> class object. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4N3EPD18EPDObjectDetection18EPDObjectDetectionE6size_t">
-<span id="_CPPv3N3EPD18EPDObjectDetection18EPDObjectDetectionE6size_t"></span><span id="_CPPv2N3EPD18EPDObjectDetection18EPDObjectDetectionE6size_t"></span><span id="EPD::EPDObjectDetection::EPDObjectDetection__s"></span><span class="target" id="classEPD_1_1EPDObjectDetection_1a40b0710ad33ac50b93215536b19ddd1e"></span><code class="sig-name descname">EPDObjectDetection</code><span class="sig-paren">(</span>size_t <em>input_size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD18EPDObjectDetection18EPDObjectDetectionE6size_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A Constructor function. This object can only be called a known size to minimize memory use for storage. </p>
-</dd></dl>
-
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>doxygenfile: Cannot find file “message_utils.hpp </p>
 </div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N3EPD18EPDObjectDetection6bboxesE">
-<span id="_CPPv3N3EPD18EPDObjectDetection6bboxesE"></span><span id="_CPPv2N3EPD18EPDObjectDetection6bboxesE"></span><span id="EPD::EPDObjectDetection::bboxes__std::vector:std::array:float.4::"></span><span class="target" id="classEPD_1_1EPDObjectDetection_1a2ae7f229afbbeba810bae1e9a69c38b7"></span>std::vector&lt;std::array&lt;float, 4&gt;&gt; <code class="sig-name descname">bboxes</code><a class="headerlink" href="#_CPPv4N3EPD18EPDObjectDetection6bboxesE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A vector of bounding boxes with xmin, ymin, xmax, ymax. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N3EPD18EPDObjectDetection12classIndicesE">
-<span id="_CPPv3N3EPD18EPDObjectDetection12classIndicesE"></span><span id="_CPPv2N3EPD18EPDObjectDetection12classIndicesE"></span><span id="EPD::EPDObjectDetection::classIndices__std::vector:uint64_t:"></span><span class="target" id="classEPD_1_1EPDObjectDetection_1afcb68e9efe2855b5c58b87f7b26a4129"></span>std::vector&lt;uint64_t&gt; <code class="sig-name descname">classIndices</code><a class="headerlink" href="#_CPPv4N3EPD18EPDObjectDetection12classIndicesE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A vector of indices that indicate the numerical identities of corresponding bounding boxes of the same index. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N3EPD18EPDObjectDetection6scoresE">
-<span id="_CPPv3N3EPD18EPDObjectDetection6scoresE"></span><span id="_CPPv2N3EPD18EPDObjectDetection6scoresE"></span><span id="EPD::EPDObjectDetection::scores__std::vector:float:"></span><span class="target" id="classEPD_1_1EPDObjectDetection_1a2b12266233e2d87f61a730b692a46785"></span>std::vector&lt;float&gt; <code class="sig-name descname">scores</code><a class="headerlink" href="#_CPPv4N3EPD18EPDObjectDetection6scoresE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A vector of indices that indicate the float confidence scores of corresponding bounding boxes of the same index. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N3EPD18EPDObjectDetection5masksE">
-<span id="_CPPv3N3EPD18EPDObjectDetection5masksE"></span><span id="_CPPv2N3EPD18EPDObjectDetection5masksE"></span><span id="EPD::EPDObjectDetection::masks__std::vector:cv::Mat:"></span><span class="target" id="classEPD_1_1EPDObjectDetection_1afdb9138c1e27dfb472d2eb271dce59eb"></span>std::vector&lt;cv::Mat&gt; <code class="sig-name descname">masks</code><a class="headerlink" href="#_CPPv4N3EPD18EPDObjectDetection5masksE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A vector of image-encoded 32FC1 greyscale masks for P3 results only. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N3EPD18EPDObjectDetection9data_sizeE">
-<span id="_CPPv3N3EPD18EPDObjectDetection9data_sizeE"></span><span id="_CPPv2N3EPD18EPDObjectDetection9data_sizeE"></span><span id="EPD::EPDObjectDetection::data_size__s"></span><span class="target" id="classEPD_1_1EPDObjectDetection_1a80f2c8e86454b9e6009f26a87433b6da"></span>size_t <code class="sig-name descname">data_size</code><a class="headerlink" href="#_CPPv4N3EPD18EPDObjectDetection9data_sizeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A set size for all vectors in class. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -254,7 +207,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020,  Bey Hao Yun
+        &copy; Copyright 2021, Bey Hao Yun
 
     </p>
   </div>

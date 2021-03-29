@@ -58,33 +58,41 @@ class Processor : public rclcpp::Node
 public:
   /*! \brief A Constructor function*/
   Processor(void);
-
+  /*! \brief A mock callback function that calls image_callback for Testing.*/
   void activate_image_callback(sensor_msgs::msg::Image::SharedPtr msg);
-
+  /*! \brief A mock callback function that calls localize_callback for Testing.*/
   void activate_localize_callback(
     sensor_msgs::msg::Image::SharedPtr msg,
     sensor_msgs::msg::Image::SharedPtr depth_msg,
     sensor_msgs::msg::CameraInfo::SharedPtr camera_info);
 
 private:
-  /*! \brief A subscriber member variable to receive remote calls to shutdown.*/
-  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr status_sub;
   /*! \brief A subscriber member variable to receive 2D RGB images to receive.*/
   rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_sub;
-  /*! \brief A subscriber member variable to receive depth images to receive.*/
+
+  /*! \brief An alias definition for SyncPolicy that is used below for sync_ object.*/
   typedef message_filters::sync_policies::ApproximateTime
     <sensor_msgs::msg::Image, sensor_msgs::msg::Image,
       sensor_msgs::msg::CameraInfo> SyncPolicy;
 
+  /*! \brief A policy-synchronized subscriber member variable
+  to receive rectified 2D RGB images.
+  */
   message_filters::Subscriber<sensor_msgs::msg::Image> localize_image_rgb;
+  /*! \brief A policy-synchronized subscriber member variable
+  to receive rectified 2D Depth images.
+  */
   message_filters::Subscriber<sensor_msgs::msg::Image> localize_image_depth;
+  /*! \brief A policy-synchronized subscriber member variable
+  to receive camera information.
+  */
   message_filters::Subscriber<sensor_msgs::msg::CameraInfo> localize_cam_info;
+  /*! \brief A Synchronizer policy member variable.*/
   message_filters::Synchronizer<SyncPolicy> sync_;
 
   /*! \brief A publisher member variable to output visualization of inference
   results*/
   rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr visual_pub;
-
   /*! \brief A publisher member variable to output Precision-Level 1 (P1)
   specific inference output suitable for external agents.*/
   rclcpp::Publisher<epd_msgs::msg::EPDImageClassification>::SharedPtr p1_pub;
@@ -98,6 +106,9 @@ private:
   specific inference output suitable for external agents.*/
   rclcpp::Publisher<epd_msgs::msg::EPDObjectLocalization>::SharedPtr localize_pub;
 
+  /*! \brief A singular EPDContainer object that deploys a user-defined
+  ONNX model as an inference enginer using onnxruntime.
+  */
   mutable EPD::EPDContainer ortAgent_;
 
   /*! \brief A ROS2 callback function utilized by image_sub.\n
@@ -115,33 +126,35 @@ private:
 };
 
 Processor::Processor(void)
-: Node("processer"),
+: Node("processor"),
   localize_image_rgb(this, "/camera/color/image_raw"),
   localize_image_depth(this, "/camera/aligned_depth_to_color/image_raw"),
   localize_cam_info(this, "/camera/color/camera_info"),
   sync_(SyncPolicy(10), localize_image_rgb, localize_image_depth, localize_cam_info)
 {
-  // Creating subscriber
+  // Creating Subscriber to get Input Image.
   image_sub = this->create_subscription<sensor_msgs::msg::Image>(
-    "/virtual_camera/image_raw",
+    "/processor/image_input",
     10,
     std::bind(&Processor::image_callback, this, std::placeholders::_1));
 
-  // Creating publisher
+  // Creating Publisher to output Visualizable P2 and P3 Detection Results.
   visual_pub = this->create_publisher<sensor_msgs::msg::Image>(
     "/processor/output",
     10);
-
+  // Creating Publisher to output Action P1 Detection Results.
   p1_pub = this->create_publisher<epd_msgs::msg::EPDImageClassification>(
     "/processor/epd_p1_output",
     10);
+  // Creating Publisher to output Action P2 Detection Results.
   p2_pub = this->create_publisher<epd_msgs::msg::EPDObjectDetection>(
     "/processor/epd_p2_output",
     10);
+  // Creating Publisher to output Action P3 Detection Results.
   p3_pub = this->create_publisher<epd_msgs::msg::EPDObjectDetection>(
     "/processor/epd_p3_output",
     10);
-
+  // Creating Publisher to output Action P3 and Localization Detection Results.
   localize_pub = this->create_publisher<epd_msgs::msg::EPDObjectLocalization>(
     "/processor/epd_localize_output",
     10);
@@ -154,7 +167,14 @@ Processor::Processor(void)
     localize_cam_info.subscribe();
     sync_.registerCallback(&Processor::localize_callback, this);
     image_sub.reset();
+  } else {
+    localize_image_rgb.unsubscribe();
+    localize_image_depth.unsubscribe();
+    localize_cam_info.unsubscribe();
   }
+
+  this->declare_parameter("camera_to_plane_distance_mm");
+  this->set_parameter(rclcpp::Parameter("camera_to_plane_distance_mm", 1000.0));
 }
 
 void Processor::activate_image_callback(sensor_msgs::msg::Image::SharedPtr msg)
@@ -169,7 +189,6 @@ void Processor::activate_localize_callback(
 {
   this->localize_callback(msg, depth_msg, camera_info);
 }
-
 // WARNING: The use of message filter sychronization causes the intake of image
 // from a realsense D415 camera to be irregular. In other words, this callback cannot
 // be called at a fixed interval.
@@ -178,6 +197,8 @@ void Processor::localize_callback(
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
 {
+  rclcpp::Parameter double_param = this->get_parameter("camera_to_plane_distance_mm");
+  double camera_to_plane_distance_mm = double_param.as_double();
   /* Check if input image is empty or not.
   If empty, discard image and don't process.
   Otherwise, proceed with processing.
@@ -230,10 +251,13 @@ void Processor::localize_callback(
     EPD::EPDObjectLocalization result = ortAgent_.p3_ort_session->infer_action(
       img,
       depth_img,
-      *camera_info);
+      *camera_info,
+      camera_to_plane_distance_mm);
+
     epd_msgs::msg::EPDObjectLocalization output_msg;
 
     output_msg.header = std_msgs::msg::Header();
+    output_msg.header.frame_id = "camera_color_optical_frame";
     output_msg.frame_width = img.cols;
     output_msg.frame_height = img.rows;
     output_msg.depth_image = *depth_msg;
@@ -248,6 +272,7 @@ void Processor::localize_callback(
         "mono16",
         result.objects[i].mask).toImageMsg();
       object.segmented_binary_mask = *mask_ptr;
+      object.segmented_binary_mask.header.frame_id = "camera_color_optical_frame";
       object.centroid = result.objects[i].centroid;
       object.length = result.objects[i].length;
       object.breadth = result.objects[i].breadth;

@@ -74,7 +74,8 @@ public:
   EPD::EPDObjectLocalization infer_action(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info);
+    sensor_msgs::msg::CameraInfo camera_info,
+    double camera_to_plane_distance_mm);
 
   /*! \brief A Getter function that gets the number of object names used for an
   ongoing session.*/
@@ -153,11 +154,12 @@ private:
     const cv::Scalar & meanVal);
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
-  inference result for use by external agents.*/
+  inference result with Localization results for use by external agents.*/
   EPD::EPDObjectLocalization infer_action(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
+    double camera_to_plane_distance_mm,
     int newW,
     int newH,
     int paddedW,
@@ -181,9 +183,9 @@ private:
   double findMedian(cv::Mat depthImg);
   double findMin(cv::Mat depthImg);
 
-  /*! \brief A Mutator function that takes P2 inference outputs and illustrates
+  /*! \brief A Mutator function that takes P3 inference outputs and illustrates
   derived bounding boxes with corresponding object labels for visualization
-  purposes.*/
+  purposes and localization.*/
   cv::Mat localize_visualize(
     const cv::Mat & img,
     const cv::Mat & depthImg,

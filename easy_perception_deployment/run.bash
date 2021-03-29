@@ -9,7 +9,7 @@ cd $START_DIR
 # Check if Anaconda has been installed in general.
 # If true, get the first digit of the string which should reflect the major version of conda.
 if detected_conda=$(conda --version); then
-    echo $detected_conda - FOUND
+    # echo $detected_conda - FOUND
     declare -i conda_ver
     conda_ver=$(echo $detected_conda | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//')
 else

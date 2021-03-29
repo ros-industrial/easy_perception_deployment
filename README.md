@@ -1,4 +1,6 @@
 
+![](docs/img/epd_logo_long.png)
+
 # **easy_perception_deployment**
 [![CI](https://github.com/cardboardcode/easy_perception_deployment/actions/workflows/industrial_ci_action.yml/badge.svg)](https://github.com/cardboardcode/easy_perception_deployment/actions/workflows/industrial_ci_action.yml)
 [![codecov](https://codecov.io/gh/cardboardcode/easy_perception_deployment/branch/master/graph/badge.svg)](https://codecov.io/gh/cardboardcode/easy_perception_deployment)

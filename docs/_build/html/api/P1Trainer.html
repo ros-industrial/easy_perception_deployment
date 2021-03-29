@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>P1Trainer &mdash; easy_perception_deployment  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="P2Trainer" href="P2Trainer.html" />
+    <link rel="prev" title="Train" href="Train.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/epd_logo_short.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to easy_perception_deployment’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epd_container.html">epd_container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="epd_container.html">epd_container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_viewer.html">image_viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_utils.html">message_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processor.html">processor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usecase_config.html">usecase_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ort_base.html">ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ort_base.html">ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p1_ort_base.html">p1_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p1_ort_base.html">p1_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p2_ort_base.html">p2_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p2_ort_base.html">p2_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p3_ort_base.html">p3_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p3_ort_base.html">p3_ort_base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Counting.html">Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Deploy.html">Deploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Main.html">Main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Train.html">Train</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">P1Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P2Trainer.html">P2Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="P3Trainer.html">P3Trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">easy_perception_deployment</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>P1Trainer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/P1Trainer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="p1trainer">
+<span id="api-p1trainer"></span><h1>P1Trainer<a class="headerlink" href="#p1trainer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="trainer.P1Trainer">
+<span class="target" id="namespacetrainer_1_1P1Trainer"></span><em class="property">module </em><code class="sig-prename descclassname">trainer.</code><code class="sig-name descname">P1Trainer</code><a class="headerlink" href="#trainer.P1Trainer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py class">
+<dt id="trainer.P1Trainer.P1Trainer">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer"></span><em class="property">class </em><code class="sig-name descname">P1Trainer</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>The Precision-Level 1 (P1) Trainer class object instantiates a training
+session using PyTorch for taking an input dataset and selected pretrained
+model from PyTorch model zoo in order to generate a custom-trained P1 ONNX
+model file.\n
+This model can then be deployed as a ROS2 package.
+</pre></div>
+</div>
+ </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="py function">
+<dt id="trainer.P1Trainer.P1Trainer.__init__">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1ac8e3ed1765ea0bd3d21acb89ab15a65b"></span><code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">path_to_dataset</span></em>, <em class="sig-param"><span class="n">model_name</span></em>, <em class="sig-param"><span class="n">label_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">constructor</span><span class="p">.</span>
+<span class="n">Calls</span> <span class="n">the</span> <span class="n">initialize</span> <span class="n">model</span> <span class="n">function</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">requested</span> <span class="n">pretrained</span>
+<span class="n">Pytorch</span> <span class="n">model</span> <span class="n">from</span> <span class="n">PyTorch</span> <span class="n">model</span> <span class="n">zoo</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="trainer.P1Trainer.P1Trainer.train">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a9be82fefc6c3c50d7139be20cf4ff9a6"></span><code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">debug</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.train" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">sets</span> <span class="n">a</span> <span class="n">fixed</span> <span class="mi">15</span><span class="o">-</span><span class="n">epoch</span> <span class="n">training</span> <span class="n">session</span> <span class="n">given</span>
+<span class="n">prior</span> <span class="n">session</span> <span class="n">configuration</span> <span class="n">set</span> <span class="n">during</span> <span class="n">initialization</span><span class="p">,</span> <span class="n">calls</span> <span class="n">train_model</span>
+<span class="n">function</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="trainer.P1Trainer.P1Trainer.train_model">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a47e86d1eb8da09b70407e9605ac0f3e6"></span><code class="sig-name descname">train_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">dataloaders</span></em>, <em class="sig-param"><span class="n">criterion</span></em>, <em class="sig-param"><span class="n">optimizer</span></em>, <em class="sig-param"><span class="n">num_epochs</span><span class="o">=</span><span class="default_value">25</span></em>, <em class="sig-param"><span class="n">is_inception</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.train_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">An</span> <span class="n">internal</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">conducts</span> <span class="n">the</span> <span class="n">training</span> <span class="n">session</span>
+<span class="n">given</span> <span class="n">prior</span> <span class="n">session</span> <span class="n">configuration</span> <span class="n">set</span> <span class="n">during</span> <span class="n">initialization</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="trainer.P1Trainer.P1Trainer.set_parameter_requires_grad">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1823cb45af6684a2af9bbdee5c64e001"></span><code class="sig-name descname">set_parameter_requires_grad</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">feature_extracting</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.set_parameter_requires_grad" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Mutator</span> <span class="n">function</span> <span class="n">that</span> <span class="n">sets</span> <span class="n">param</span><span class="p">.</span><span class="n">requires_grad</span> <span class="n">boolean</span> <span class="n">to</span> <span class="nb">false</span> <span class="k">if</span>
+<span class="n">feature_extracting</span> <span class="n">boolean</span> <span class="n">flag</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">True</span><span class="p">.</span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="trainer.P1Trainer.P1Trainer.initialize_model">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a460992c6c28f1d184e78b28332640592"></span><code class="sig-name descname">initialize_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">model_name</span></em>, <em class="sig-param"><span class="n">num_classes</span></em>, <em class="sig-param"><span class="n">feature_extract</span></em>, <em class="sig-param"><span class="n">use_pretrained</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.initialize_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span>A Getter function that takes the requested session configuration and
+initializes corresponding pretrained model.\n
+Calls set_parameter_requires_grad function during initialization.
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.data_dir">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8b6daa0252be06e79732b708701aee0a"></span><code class="sig-name descname">data_dir</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.data_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.model_name">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a5ef56dddd441c51171211464119be6ef"></span><code class="sig-name descname">model_name</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.model_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.num_classes">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1abf46a37f4ce7a272a73d9fa0e330eb08"></span><code class="sig-name descname">num_classes</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.num_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.class_names">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaaedbd9ecf679c9cfb3007fc9a33e892"></span><code class="sig-name descname">class_names</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.class_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.path_to_trained_model">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a1d72863a13d9eeb8cfa8d6f265fef067"></span><code class="sig-name descname">path_to_trained_model</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.path_to_trained_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.feature_extract">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a09373bcc1c564590462607640f272814"></span><code class="sig-name descname">feature_extract</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.feature_extract" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.IMAGENET_MEAN">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a291fdeb5d130259feb21ba82f1722ccc"></span><code class="sig-name descname">IMAGENET_MEAN</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.IMAGENET_MEAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.IMAGENET_STD">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a8bcdcbb132357306264f5b8d21d86515"></span><code class="sig-name descname">IMAGENET_STD</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.IMAGENET_STD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.data_transforms">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1aaf4e12c2ebeafd2c98cd0a3957d0f2fb"></span><code class="sig-name descname">data_transforms</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.data_transforms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.batch_size">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a00dea7e58a669964e81e4d642e60cf2b"></span><code class="sig-name descname">batch_size</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.batch_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.num_epochs">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1a7bcfd4156af7e0fef2f308304b2dc5c6"></span><code class="sig-name descname">num_epochs</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.num_epochs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="trainer.P1Trainer.P1Trainer.device">
+<span class="target" id="classtrainer_1_1P1Trainer_1_1P1Trainer_1adbc3526a3d55034d1f6900918facd5c9"></span><code class="sig-name descname">device</code><a class="headerlink" href="#trainer.P1Trainer.P1Trainer.device" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="P2Trainer.html" class="btn btn-neutral float-right" title="P2Trainer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Train.html" class="btn btn-neutral float-left" title="Train" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2021, Bey Hao Yun
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
