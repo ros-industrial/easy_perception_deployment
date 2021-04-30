@@ -41,20 +41,36 @@ echo "Docker [ FOUND ]"
 if [ "$useCPU" = True ] ; then
   # Check if epd-foxy-base:CPU Docker Image has NOT been built.
   # If true, build it.
-  if output=$(docker images | grep epd-foxy-base | grep CPU > /dev/null 2>&1); then
+  if output=$(docker images | grep cardboardcode/epd-foxy-base | grep CPU > /dev/null 2>&1); then
       echo "epd-foxy-base:CPU  Docker Image [ FOUND ]"
   else
-      docker build --tag epd-foxy-base:CPU ../../Dockerfiles/CPU/
+      # If there is internet connection,
+      # Download public docker image.
+      wget -q --spider http://google.com
+      if [ $? -eq 0 ]; then
+        docker pull cardboardcode/epd-foxy-base:CPU
+      # Otherwise, build locally
+      else
+        docker build --tag cardboardcode/epd-foxy-base:CPU ../../Dockerfiles/CPU/
+      fi
       echo "epd-foxy-base:CPU  Docker Image [ CREATED ]"
   fi
 
 else
   # Check if epd-foxy-base:GPU Docker Image has NOT been built.
   # If true, build it.
-  if output=$(docker images | grep epd-foxy-base | grep GPU > /dev/null 2>&1); then
+  if output=$(docker images | grep cardboardcode/epd-foxy-base | grep GPU > /dev/null 2>&1); then
       echo "epd-foxy-base:GPU  Docker Image [ FOUND ]"
   else
-      docker build --tag epd-foxy-base:GPU ../../Dockerfiles/GPU/
+      # If there is internet connection,
+      # Download public docker image.
+      wget -q --spider http://google.com
+      if [ $? -eq 0 ]; then
+        docker pull cardboardcode/epd-foxy-base:GPU
+      # Otherwise, build locally
+      else
+        docker build --tag cardboardcode/epd-foxy-base:GPU ../../Dockerfiles/GPU/
+      fi
       echo "epd-foxy-base:GPU  Docker Image [ CREATED ]"
   fi
 fi
@@ -90,7 +106,7 @@ if [ "$useCPU" = True ] ; then
   --name epd_test_container \
   -v $(pwd):/root/epd_ros2_ws/src/easy_perception_deployment \
   -u 0 \
-  epd-foxy-base:CPU \
+  cardboardcode/epd-foxy-base:CPU \
   $launch_script
 else
   docker run -it --rm \
@@ -98,7 +114,7 @@ else
   -v $(pwd):/root/epd_ros2_ws/src/easy_perception_deployment \
   --gpus all \
   -u 0 \
-  epd-foxy-base:GPU \
+  cardboardcode/epd-foxy-base:GPU \
   $launch_script
 fi
 
