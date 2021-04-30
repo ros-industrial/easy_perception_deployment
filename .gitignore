@@ -7,6 +7,8 @@ easy_perception_deployment/gui/trainer/P3TrainFarm/*
 epd_msgs/build/*
 epd_msgs/log/*
 epd_msgs/install/*
+docs/_build/doctrees/*
+docs/_build/xml/*
 
 # testing or other data
 *.mp4

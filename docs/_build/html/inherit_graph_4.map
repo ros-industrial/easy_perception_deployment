@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,61,57"/>
+<area shape="rect" id="node2" href="$classImageViewer.html" title="An ImageViewer class object. The ImageViewer class object inherits from the rclcpp::Node object to pr..." alt="" coords="109,5,217,32"/>
+<area shape="rect" id="node3" href="$classProcessor.html" title="An Processor class object. This class object inherits rclcpp::Node object and acts the main bridge be..." alt="" coords="121,56,206,83"/>
+</map>

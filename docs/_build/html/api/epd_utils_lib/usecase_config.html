@@ -180,10 +180,85 @@
             
   <div class="section" id="usecase-config">
 <span id="api-usecase-config"></span><h1>usecase_config<a class="headerlink" href="#usecase-config" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfile: Cannot find file “usecase_config.hpp </p>
+<dl class="cpp type">
+<dt id="_CPPv43EPD">
+<span id="_CPPv33EPD"></span><span id="_CPPv23EPD"></span><span id="EPD"></span><span class="target" id="namespaceEPD"></span><em class="property">namespace </em><code class="sig-name descname">EPD</code><br /></dt>
+<dd><p>A collection of use-case filters, namely for parsing usecase_config.txt, Counting and Color-Matching usecaseMode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3EPD23generateCountClassNamesEv">
+<span id="_CPPv3N3EPD23generateCountClassNamesEv"></span><span id="_CPPv2N3EPD23generateCountClassNamesEv"></span><span id="EPD::generateCountClassNames"></span><span class="target" id="namespaceEPD_1afb1c40891573a4c9a49bf4026dffc352"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">generateCountClassNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD23generateCountClassNamesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Getter function that parses the usecase_config.txt if a Counting usecaseMode is selected and populates a list of selected object names intended to be counted. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3EPD5countERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3EPD5countERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3EPD5countERNSt6vectorINSt5arrayIfX4EEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE"></span><span id="EPD::count__std::vector:std::array:float.4::R.std::vector:uint64_t:R.std::vector:float:R.std::vector:ss:"></span><span class="target" id="namespaceEPD_1a3bd949f9f2c7eb127917d4eee49c00f0"></span>void <code class="sig-name descname">count</code><span class="sig-paren">(</span>std::vector&lt;std::array&lt;float, 4&gt;&gt; &amp;<em>bboxes</em>, std::vector&lt;uint64_t&gt; &amp;<em>classIndices</em>, std::vector&lt;float&gt; &amp;<em>scores</em>, std::vector&lt;std::string&gt; <em>allClassNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD5countERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that takes the base inference results from a P2 inference engine and excludes any bounding boxes, classIndices and score element that do not share the label of selected objects-to-be counted. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfX4EEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE"></span><span id="EPD::matchColor__cv::MatCR.std::vector:std::array:float.4::R.std::vector:uint64_t:R.std::vector:float:R.std::vector:ss:"></span><span class="target" id="namespaceEPD_1a3cff6173c8ee68e4840be0a03efbf62e"></span>void <code class="sig-name descname">matchColor</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>img</em>, std::vector&lt;std::array&lt;float, 4&gt;&gt; &amp;<em>bboxes</em>, std::vector&lt;uint64_t&gt; &amp;<em>classIndices</em>, std::vector&lt;float&gt; &amp;<em>scores</em>, std::vector&lt;std::string&gt; <em>allClassNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that takes the base inference results from a P2 inference engine and excludes any bounding boxes, classIndices and score element that is not similar enough to the template color.. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfX4EEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE"></span><span id="EPD::activateUseCase__cv::MatCR.std::vector:std::array:float.4::R.std::vector:uint64_t:R.std::vector:float:R.std::vector:ss:"></span><span class="target" id="namespaceEPD_1a452d019026c0f4e917028f28a75137c6"></span>void <code class="sig-name descname">activateUseCase</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>img</em>, std::vector&lt;std::array&lt;float, 4&gt;&gt; &amp;<em>bboxes</em>, std::vector&lt;uint64_t&gt; &amp;<em>classIndices</em>, std::vector&lt;float&gt; &amp;<em>scores</em>, std::vector&lt;std::string&gt; <em>allClassNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEENSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that takes the base inference results from a P2 inference engine and excludes any bounding boxes, classIndices and score element based on a selected use-case filter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3EPD5countERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3EPD5countERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3EPD5countERNSt6vectorINSt5arrayIfX4EEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE"></span><span id="EPD::count__std::vector:std::array:float.4::R.std::vector:uint64_t:R.std::vector:float:R.std::vector:cv::Mat:R.std::vector:ss:"></span><span class="target" id="namespaceEPD_1ae0ef71ee91e4f05a655fb43c890ecc82"></span>void <code class="sig-name descname">count</code><span class="sig-paren">(</span>std::vector&lt;std::array&lt;float, 4&gt;&gt; &amp;<em>bboxes</em>, std::vector&lt;uint64_t&gt; &amp;<em>classIndices</em>, std::vector&lt;float&gt; &amp;<em>scores</em>, std::vector&lt;cv::Mat&gt; &amp;<em>masks</em>, std::vector&lt;std::string&gt; <em>allClassNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD5countERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that takes the base inference results from a P3 inference engine and excludes any bounding boxes, classIndices and score element that do not share the label of selected objects-to-be counted. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfX4EEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE"></span><span id="EPD::matchColor__cv::MatCR.std::vector:std::array:float.4::R.std::vector:uint64_t:R.std::vector:float:R.std::vector:cv::Mat:R.std::vector:ss:"></span><span class="target" id="namespaceEPD_1a24e7fadf9857ca887790591020560232"></span>void <code class="sig-name descname">matchColor</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>img</em>, std::vector&lt;std::array&lt;float, 4&gt;&gt; &amp;<em>bboxes</em>, std::vector&lt;uint64_t&gt; &amp;<em>classIndices</em>, std::vector&lt;float&gt; &amp;<em>scores</em>, std::vector&lt;cv::Mat&gt; &amp;<em>masks</em>, std::vector&lt;std::string&gt; <em>allClassNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD10matchColorERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that takes the base inference results from a P3 inference engine and excludes any bounding boxes, classIndices and score element that is not similar enough to the template color.. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfX4EEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE"></span><span id="EPD::activateUseCase__cv::MatCR.std::vector:std::array:float.4::R.std::vector:uint64_t:R.std::vector:float:R.std::vector:cv::Mat:R.std::vector:ss:"></span><span class="target" id="namespaceEPD_1a808c976c38e399ec36c8f731da6e65f4"></span>void <code class="sig-name descname">activateUseCase</code><span class="sig-paren">(</span><em class="property">const</em> cv::Mat &amp;<em>img</em>, std::vector&lt;std::array&lt;float, 4&gt;&gt; &amp;<em>bboxes</em>, std::vector&lt;uint64_t&gt; &amp;<em>classIndices</em>, std::vector&lt;float&gt; &amp;<em>scores</em>, std::vector&lt;cv::Mat&gt; &amp;<em>masks</em>, std::vector&lt;std::string&gt; <em>allClassNames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3EPD15activateUseCaseERKN2cv3MatERNSt6vectorINSt5arrayIfXL4EEEEEERNSt6vectorI8uint64_tEERNSt6vectorIfEERNSt6vectorIN2cv3MatEEENSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator function that takes the base inference results from a P3 inference engine and excludes any bounding boxes, classIndices and score element based on a selected use-case filter. </p>
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3EPD19CLASSIFICATION_MODEE">
+<span id="_CPPv3N3EPD19CLASSIFICATION_MODEE"></span><span id="_CPPv2N3EPD19CLASSIFICATION_MODEE"></span><span id="EPD::CLASSIFICATION_MODE__unsigned-iC"></span><span class="target" id="namespaceEPD_1a0d5ba13808aa37984b6c6a47766a5397"></span><em class="property">const</em> unsigned int <code class="sig-name descname">CLASSIFICATION_MODE</code> = 0<a class="headerlink" href="#_CPPv4N3EPD19CLASSIFICATION_MODEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3EPD13COUNTING_MODEE">
+<span id="_CPPv3N3EPD13COUNTING_MODEE"></span><span id="_CPPv2N3EPD13COUNTING_MODEE"></span><span id="EPD::COUNTING_MODE__unsigned-iC"></span><span class="target" id="namespaceEPD_1a0795506538832367b6ef8db25eb7a018"></span><em class="property">const</em> unsigned int <code class="sig-name descname">COUNTING_MODE</code> = 1<a class="headerlink" href="#_CPPv4N3EPD13COUNTING_MODEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3EPD19COLOR_MATCHING_MODEE">
+<span id="_CPPv3N3EPD19COLOR_MATCHING_MODEE"></span><span id="_CPPv2N3EPD19COLOR_MATCHING_MODEE"></span><span id="EPD::COLOR_MATCHING_MODE__unsigned-iC"></span><span class="target" id="namespaceEPD_1a8be6e28a50846d29fcf4063c91ae31c2"></span><em class="property">const</em> unsigned int <code class="sig-name descname">COLOR_MATCHING_MODE</code> = 2<a class="headerlink" href="#_CPPv4N3EPD19COLOR_MATCHING_MODEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3EPD17LOCALISATION_MODEE">
+<span id="_CPPv3N3EPD17LOCALISATION_MODEE"></span><span id="_CPPv2N3EPD17LOCALISATION_MODEE"></span><span id="EPD::LOCALISATION_MODE__unsigned-iC"></span><span class="target" id="namespaceEPD_1ac02aea9a20b20e6beed00601a9d6102f"></span><em class="property">const</em> unsigned int <code class="sig-name descname">LOCALISATION_MODE</code> = 3<a class="headerlink" href="#_CPPv4N3EPD17LOCALISATION_MODEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt>
+<span class="target" id="namespaceEPD_1af8699ddc7d5306adaeb1e31d1f5a223b"></span><code class="sig-name descname">const char PATH_TO_USECASE_CONFIG []  = PATH_TO_PACKAGE &quot;/data/usecase_config.txt&quot;</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
 </div>
 
 

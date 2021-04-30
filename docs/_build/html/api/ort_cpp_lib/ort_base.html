@@ -179,10 +179,63 @@
             
   <div class="section" id="ort-base">
 <span id="api-ort-base"></span><h1>ort_base<a class="headerlink" href="#ort-base" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfile: Cannot find file “ort_base.hpp </p>
+<dl class="cpp type">
+<dt id="_CPPv43Ort">
+<span id="_CPPv33Ort"></span><span id="_CPPv23Ort"></span><span id="Ort"></span><span class="target" id="namespaceOrt"></span><em class="property">namespace </em><code class="sig-name descname">Ort</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3Ort7OrtBaseE">
+<span id="_CPPv3N3Ort7OrtBaseE"></span><span id="_CPPv2N3Ort7OrtBaseE"></span><span id="Ort::OrtBase"></span><span class="target" id="classOrt_1_1OrtBase"></span><em class="property">class </em><code class="sig-name descname">OrtBase</code><a class="headerlink" href="#_CPPv4N3Ort7OrtBaseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;ort_base.hpp&gt;</em><p>An ONNXRuntime (Ort) Base class object. This is the base class for <a class="reference internal" href="p1_ort_base.html#classOrt_1_1P1OrtBase"><span class="std std-ref">P1OrtBase</span></a>, <a class="reference internal" href="p2_ort_base.html#classOrt_1_1P2OrtBase"><span class="std std-ref">P2OrtBase</span></a> and <a class="reference internal" href="p3_ort_base.html#classOrt_1_1P3OrtBase"><span class="std std-ref">P3OrtBase</span></a>. It serves an auxillary class object to directly interface with the ONNXRuntime CPP API to instantiate an Ort session to run as an inference engine. </p>
+<p>Subclassed by <a class="reference internal" href="p1_ort_base.html#classOrt_1_1P1OrtBase"><span class="std std-ref">Ort::P1OrtBase</span></a>, <a class="reference internal" href="p2_ort_base.html#classOrt_1_1P2OrtBase"><span class="std std-ref">Ort::P2OrtBase</span></a>, <a class="reference internal" href="p3_ort_base.html#classOrt_1_1P3OrtBase"><span class="std std-ref">Ort::P3OrtBase</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3Ort7OrtBase14DataOutputTypeE">
+<span id="_CPPv3N3Ort7OrtBase14DataOutputTypeE"></span><span id="_CPPv2N3Ort7OrtBase14DataOutputTypeE"></span><span class="target" id="classOrt_1_1OrtBase_1adf2da264432541eb7cdf1122f742e9c4"></span><em class="property">using </em><code class="sig-name descname">DataOutputType</code> = std::pair&lt;float*, std::vector&lt;std::int64_t&gt;&gt;<a class="headerlink" href="#_CPPv4N3Ort7OrtBase14DataOutputTypeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A convienence datatype to store output inference result. </p>
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort7OrtBase7OrtBaseERKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorINSt7int64_tEEEEEEE">
+<span id="_CPPv3N3Ort7OrtBase7OrtBaseERKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorINSt7int64_tEEEEEEE"></span><span id="_CPPv2N3Ort7OrtBase7OrtBaseERKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorINSt7int64_tEEEEEEE"></span><span id="Ort::OrtBase::OrtBase__ssCR.boost::optional:s:CR.boost::optional:std::vector:std::vector:std::int64_t:::CR"></span><span class="target" id="classOrt_1_1OrtBase_1ad81b15848098d8137f8816fb1a491dab"></span><code class="sig-name descname">OrtBase</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>modelPath</em>, <em class="property">const</em> boost::optional&lt;size_t&gt; &amp;<em>gpuIdx</em> = boost::none, <em class="property">const</em> boost::optional&lt;std::vector&lt;std::vector&lt;std::int64_t&gt;&gt;&gt; &amp;<em>inputShapes</em> = boost::none<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort7OrtBase7OrtBaseERKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorINSt7int64_tEEEEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Constructor function. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort7OrtBaseD0Ev">
+<span id="_CPPv3N3Ort7OrtBaseD0Ev"></span><span id="_CPPv2N3Ort7OrtBaseD0Ev"></span><span id="Ort::OrtBase::~OrtBase"></span><span class="target" id="classOrt_1_1OrtBase_1ab311e3e35bd05728ec48f5a42947d172"></span><code class="sig-name descname">~OrtBase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort7OrtBaseD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Destructor function. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort7OrtBaseclERKNSt6vectorIPfEE">
+<span id="_CPPv3N3Ort7OrtBaseclERKNSt6vectorIPfEE"></span><span id="_CPPv2N3Ort7OrtBaseclERKNSt6vectorIPfEE"></span><span id="Ort::OrtBase::call-operator__std::vector:floatP:CR"></span><span class="target" id="classOrt_1_1OrtBase_1a944cc33276cfa30f662ec906827cfafd"></span>std::vector&lt;<a class="reference internal" href="#_CPPv4N3Ort7OrtBase14DataOutputTypeE" title="Ort::OrtBase::DataOutputType">DataOutputType</a>&gt; <code class="sig-name descname">operator()</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;float*&gt; &amp;<em>inputImgData</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort7OrtBaseclERKNSt6vectorIPfEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Mutator operator function that conducts inference with preprocessed input image data. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3Ort7OrtBase13getNumOutputsEv">
+<span id="_CPPv3N3Ort7OrtBase13getNumOutputsEv"></span><span id="_CPPv2N3Ort7OrtBase13getNumOutputsEv"></span><span id="Ort::OrtBase::getNumOutputs__void"></span><span class="target" id="classOrt_1_1OrtBase_1a9d54c41654fed1d5bee18b089d5a6edd"></span>int <code class="sig-name descname">getNumOutputs</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort7OrtBase13getNumOutputsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A Getter function that gets the number of outputs which is used to determine the level of precision in EPDContainer class object. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3Ort7OrtBase10base_impl_E">
+<span id="_CPPv3N3Ort7OrtBase10base_impl_E"></span><span id="_CPPv2N3Ort7OrtBase10base_impl_E"></span><span id="Ort::OrtBase::base_impl___std::unique_ptr:OrtBaseImpl:"></span><span class="target" id="classOrt_1_1OrtBase_1a7ba0b5c38421e3d43f0fd2d87b61b528"></span>std::unique_ptr&lt;OrtBaseImpl&gt; <code class="sig-name descname">base_impl_</code><a class="headerlink" href="#_CPPv4N3Ort7OrtBase10base_impl_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A pointer to the OrtBaseImpl. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
