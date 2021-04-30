@@ -112,13 +112,14 @@ def test_invalidSession_invalidUseCase_DeployWindow(qtbot):
     test_session_config_content = ['test_filepath_to_model\n',
                                    'test_filepath_to_label_list\n',
                                    'visualize\n']
-    outF = open('../data/session_config.txt', 'w')
+    # If session_config.txt is not present, create one.
+    outF = open('../data/session_config.txt', 'w+')
     for line in test_session_config_content:
         outF.write(line)
     outF.close()
 
     test_usecase_config_content = ['-1\n']
-    outF = open('../data/usecase_config.txt', 'w')
+    outF = open('../data/usecase_config.txt', 'w+')
     for line in test_usecase_config_content:
         outF.write(line)
     outF.close()
@@ -126,23 +127,24 @@ def test_invalidSession_invalidUseCase_DeployWindow(qtbot):
     widget = DeployWindow()
     qtbot.addWidget(widget)
 
-    assert widget._path_to_model == 'test_filepath_to_model'
-    assert widget._path_to_label_list == 'test_filepath_to_label_list'
+    assert widget._path_to_model == 'filepath/to/onnx/model'
+    assert widget._path_to_label_list == 'filepath/to/classes/list/txt'
     assert widget.usecase_mode == '-1'
 
 
 def test_validSession_validUseCase_DeployWindow(qtbot):
 
-    test_session_config_content = ['../data/model/p1_example.onnx\n',
-                                   '../data/label_list/imagenet_classes.txt\n',
-                                   'visualize\n']
-    outF = open('../data/session_config.txt', 'w')
+    test_session_config_content = ['./data/model/squeezenet1.1-7.onnx\n',
+                                   '/data/label_list/imagenet_classes.txt\n',
+                                   'visualize\n',
+                                   'CPU\n']
+    outF = open('../data/session_config.txt', 'w+')
     for line in test_session_config_content:
         outF.write(line)
     outF.close()
 
     test_usecase_config_content = ['0\n']
-    outF = open('../data/usecase_config.txt', 'w')
+    outF = open('../data/usecase_config.txt', 'w+')
     for line in test_usecase_config_content:
         outF.write(line)
     outF.close()
@@ -150,8 +152,8 @@ def test_validSession_validUseCase_DeployWindow(qtbot):
     widget = DeployWindow()
     qtbot.addWidget(widget)
 
-    assert widget._path_to_model == '../data/model/p1_example.onnx'
-    assert widget._path_to_label_list == '../data/label_list/imagenet_classes.txt'
+    assert widget._path_to_model == './data/model/squeezenet1.1-7.onnx'
+    assert widget._path_to_label_list == './data/label_list/imagenet_classes.txt'
     assert widget.usecase_mode == '0'
 
 
@@ -319,7 +321,7 @@ def test_validateTraining_TrainWindow(qtbot):
 
     widget._precision_level = 1
     widget.validateTraining()
-    assert widget.buttonConnected is True
+    assert widget.buttonConnected is False
 
     widget.buttonConnected = False
     widget._precision_level = 2

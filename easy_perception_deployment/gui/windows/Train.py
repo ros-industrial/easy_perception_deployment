@@ -19,7 +19,7 @@ from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QComboBox, QFileDialog, QLabel, QPushButton, QWidget
 
-# from trainer.P1Trainer import P1Trainer
+from trainer.P1Trainer import P1Trainer
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
 
@@ -351,11 +351,10 @@ class TrainWindow(QWidget):
         self.train_button.updateGeometry()
 
         if self._precision_level == 1:
-            print('WIP')
-            # p1_trainer = P1Trainer(self._path_to_dataset,
-            #                        self.model_name,
-            #                        self._label_list)
-            # p1_trainer.train(False)
+            p1_trainer = P1Trainer(self._path_to_dataset,
+                                   self.model_name,
+                                   self._label_list)
+            p1_trainer.train(False)
         elif self._precision_level == 2:
             p2_trainer = P2Trainer(self._path_to_dataset,
                                    self.model_name,
