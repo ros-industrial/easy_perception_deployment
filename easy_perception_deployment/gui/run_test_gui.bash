@@ -26,24 +26,30 @@ else
 fi
 
 # Checking if the epd_gui conda environment has been installed.
-env_exists=$(conda env list | grep epd_gui)
+env_exists=$(conda env list | grep epd_gui_env)
 
 if [ -z "$env_exists" ]
 then
-      echo "Installing epd_gui conda environment."
-      conda env create -f epd_gui_env.yml
+      echo "Installing epd_gui_env conda environment."
+      conda create -n epd_gui_env python=3.6 -y
       eval "$(conda shell.bash hook)"
-      conda activate epd_gui
-      conda install pytest -y
-      pip install pytest-qt
+      conda activate epd_gui_env
+      pip install pyside2
+      pip install dateutils
+      pip install pycocotools
       pip install labelme
+      pip install pytest-qt
+      conda install pytest -y
+      conda install pytorch torchvision cpuonly -c pytorch -y
+      pip install lark-parser
+      pip install empy
       conda deactivate
-      echo "[epd_gui] env created."
+      echo "[epd_gui_env] env created."
 fi
 
 if $conda_installed; then
   eval "$(conda shell.bash hook)"
-  conda activate epd_gui
+  conda activate epd_gui_env
   unset PYTHONPATH
   pytest --cov-report term-missing --cov=windows --cov=trainer test_gui.py
 fi

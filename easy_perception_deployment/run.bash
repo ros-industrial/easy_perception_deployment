@@ -56,29 +56,30 @@ if [ ! -f "$P3FILE" ]; then
 fi
 unset P3FILE
 
-# Checking if the m2_epd_gui conda environment has been installed.
-env_exists=$(conda env list | grep m2_epd_gui)
+# Checking if the epd_gui_env conda environment has been installed.
+env_exists=$(conda env list | grep epd_gui_env)
 
 if [ -z "$env_exists" ]
 then
-      echo "Installing m2_epd_gui conda environment."
-      conda create -n m2_epd_gui python=3.6 -y
+      echo "Installing epd_gui_env conda environment."
+      conda create -n epd_gui_env python=3.6 -y
       eval "$(conda shell.bash hook)"
-      conda activate m2_epd_gui
+      conda activate epd_gui_env
       pip install pyside2
       pip install dateutils
       pip install pycocotools
       pip install labelme
       pip install pytest-qt
       conda install pytest -y
+      conda install pytorch torchvision cpuonly -c pytorch -y
       pip install lark-parser
       pip install empy
       conda deactivate
-      echo "[m2_epd_gui] env created."
+      echo "[epd_gui_env] env created."
 fi
 
 eval "$(conda shell.bash hook)"
-conda activate m2_epd_gui
+conda activate epd_gui_env
 cd $PWD/gui
 python main.py
 
