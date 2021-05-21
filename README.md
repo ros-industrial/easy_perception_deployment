@@ -41,3 +41,9 @@ bash run.bash
 ## **Docs**
 
 [Check out the full documentation here.](https://easy-perception-deployment.readthedocs.io/en/latest/)
+
+## **Acknowledgements**
+
+We would like to acknowledge the Singapore government for their vision and support to start this ambitious research and development project, "Accelerating Open Source Technologies for Cross Domain Adoption through the Robot Operating System". The project is supported by Singapore National Robotics Programme (NRP).
+
+Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not reflect the views of the NR2PO.
