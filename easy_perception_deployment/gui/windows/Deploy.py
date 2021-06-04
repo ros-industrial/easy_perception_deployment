@@ -21,6 +21,7 @@ from PySide2.QtWidgets import QComboBox, QFileDialog, QLabel, QTextEdit
 from PySide2.QtWidgets import QMessageBox, QPushButton, QWidget
 
 from windows.Counting import CountingWindow
+from windows.Tracking import TrackingWindow
 
 
 class DeployWindow(QWidget):
@@ -63,7 +64,7 @@ class DeployWindow(QWidget):
         self._path_to_usecase_config = '../data/usecase_config.txt'
         self._path_to_launch_file = '../launch/run.launch.py'
 
-        self.usecase_list = ['Classification', 'Counting', 'Color-Matching', 'Localization']
+        self.usecase_list = ['Classification', 'Counting', 'Color-Matching', 'Localization', 'Tracking']
 
         # Check if session_config.txt file exists.
         # If does not exist, assign default value.
@@ -334,6 +335,9 @@ class DeployWindow(QWidget):
         elif selected_usecase == 'Localization':
             with open(self._path_to_usecase_config, 'w') as filehandle:
                 filehandle.write('3\n')
+        elif selected_usecase == 'Tracking':
+            self.tracking_window = TrackingWindow(self._path_to_usecase_config)
+            self.tracking_window.show()
         else:
             if not self.debug:
                 input_refimage_filepath, ok = (

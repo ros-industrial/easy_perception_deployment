@@ -101,6 +101,47 @@ public:
   }
 };
 
+class EPDObjectTracking
+{
+public:
+  struct LocalizedObject
+  {
+    std::string name;
+    sensor_msgs::msg::RegionOfInterest roi;
+    cv::Mat mask;
+    geometry_msgs::msg::Point centroid;
+    float length;
+    float breadth;
+    float height;
+    pcl::PointCloud<pcl::PointXYZ> segmented_pcl;
+    geometry_msgs::msg::Vector3 axis;
+  };
+  std::vector<std::string> object_ids;
+  std::vector<LocalizedObject> objects;
+  /*! \brief A set size for all vectors in class.*/
+  size_t data_size;
+
+  // /*! \brief A Constructor function. This object can only be called a known
+  // size to minimize memory use for storage.*/
+  explicit EPDObjectTracking(size_t input_size)
+  {
+    data_size = input_size;
+
+    objects.reserve(input_size);
+
+    for (size_t i = 0; i < input_size; i++) {
+      objects.push_back(LocalizedObject());
+      object_ids.push_back("a");
+    }
+  }
+};
+
+struct LabelledRect2d
+{
+  std::string obj_tag;
+  cv::Rect2d obj_bounding_box;
+};
+
 }  // namespace EPD
 
 #endif  // EPD_UTILS_LIB__MESSAGE_UTILS_HPP_

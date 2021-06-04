@@ -145,6 +145,14 @@ if(BUILD_TESTING)
   ament_target_dependencies(epd_test_P3_localize_visualize OpenCV cv_bridge)
   target_link_libraries(epd_test_P3_localize_visualize ${onnxruntime_LIBS})
 
+  ament_add_gtest(epd_test_P3_tracking_visualize test/p3u4v.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P3_tracking_visualize OpenCV cv_bridge)
+  target_link_libraries(epd_test_P3_tracking_visualize ${onnxruntime_LIBS})
+
+  ament_add_gtest(epd_test_P3_tracking_action test/p3u4a.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_P3_tracking_action OpenCV cv_bridge)
+  target_link_libraries(epd_test_P3_tracking_action ${onnxruntime_LIBS})
+
   ament_add_gtest(epd_test_processor test/test_processor.cpp ${EPD_UTILS})
   ament_target_dependencies(epd_test_processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge message_filters pcl_conversions)
   target_link_libraries(epd_test_processor ${onnxruntime_LIBS})

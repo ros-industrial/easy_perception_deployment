@@ -34,7 +34,7 @@ TEST(EPD_TestSuite, Test_readSessionUseCaseConfigTextFile_EPDContainer)
 
   system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
-  system(("echo 4 >> " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("echo 5 >> " + PATH_TO_USECASE_CONFIG).c_str());
 
   EPD::EPDContainer * ortAgent_;
 

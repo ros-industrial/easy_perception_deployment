@@ -30,6 +30,7 @@ const unsigned int CLASSIFICATION_MODE = 0;
 const unsigned int COUNTING_MODE = 1;
 const unsigned int COLOR_MATCHING_MODE = 2;
 const unsigned int LOCALISATION_MODE = 3;
+const unsigned int TRACKING_MODE = 4;
 
 const char PATH_TO_USECASE_CONFIG[] = PATH_TO_PACKAGE "/data/usecase_config.txt";
 
@@ -205,7 +206,7 @@ inline void activateUseCase(
     printf("Use Case: [Color-Matching] selected.\n");
     EPD::matchColor(img, bboxes, classIndices, scores, allClassNames);
   } else {
-    throw std::runtime_error("Invalid Use Case. Can only be [0, 1, 2].");
+    throw std::runtime_error("Invalid Use Case. Can only be [0, 1, 2, 3, 4].");
   }
 }
 

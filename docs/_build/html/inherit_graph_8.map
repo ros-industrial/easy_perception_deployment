@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtrainer_1_1P2Trainer_1_1P2Trainer.html" title=" " alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node1" href="$classOrt_1_1OrtBase.html" title="An ONNXRuntime (Ort) Base class object. This is the base class for P1OrtBase, P2OrtBase and P3OrtBase..." alt="" coords="5,56,108,83"/>
+<area shape="rect" id="node2" href="$classOrt_1_1P1OrtBase.html" title="An Precision&#45;Level 1 (P1) ONNXRuntime (Ort) Base class object. This class object instantiates a Preci..." alt="" coords="156,5,275,32"/>
+<area shape="rect" id="node3" href="$classOrt_1_1P2OrtBase.html" title="An Precision&#45;Level 2 (P2) ONNXRuntime (Ort) Base class object. This class object instantiates a Preci..." alt="" coords="156,56,275,83"/>
+<area shape="rect" id="node4" href="$classOrt_1_1P3OrtBase.html" title="An Precision&#45;Level 3 (P3) ONNXRuntime (Ort) Base class object. This class object instantiates a Preci..." alt="" coords="156,107,275,133"/>
 </map>

@@ -16,6 +16,8 @@
 #ifndef EPD_UTILS_LIB__EPD_CONTAINER_HPP_
 #define EPD_UTILS_LIB__EPD_CONTAINER_HPP_
 
+#include <opencv2/tracking.hpp>
+#include <opencv2/core/ocl.hpp>
 #include <string>
 #include <vector>
 
@@ -23,6 +25,7 @@
 #include "ort_cpp_lib/p1_ort_base.hpp"
 #include "ort_cpp_lib/p2_ort_base.hpp"
 #include "ort_cpp_lib/p3_ort_base.hpp"
+#include "epd_utils_lib/message_utils.hpp"
 
 
 namespace EPD
@@ -71,6 +74,13 @@ public:
   * for Counting use-case filter.
   */
   std::vector<std::string> countClassNames;
+  /*! \brief A string name for user-selected OpenCV tracker, used
+  * for Tracking use-case filter.
+  */
+  std::vector<cv::Ptr<cv::Tracker>> trackers;
+  std::string tracker_type;
+  std::vector<int> tracker_logs;
+  std::vector<EPD::LabelledRect2d> tracker_results;
   /*! \brief A list of human-understandable object text labels from input
   * label list.
   */

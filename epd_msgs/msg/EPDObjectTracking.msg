@@ -2,6 +2,8 @@
 std_msgs/Header header
 # Array of LocalizedObject objects. See LocalizedObject.msg for further details.
 LocalizedObject[] objects
+# Array of unique string ids given to each object tracked.
+string[] object_ids
 # Intrinsic camera parameters
 float64 ppx
 float64 ppy
