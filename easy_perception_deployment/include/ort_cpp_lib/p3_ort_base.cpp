@@ -1823,7 +1823,7 @@ void P3OrtBase::tracking_evaluate(
   }
 }
 
-double P3OrtBase::getIOU(cv::Rect2d detected_box, cv::Rect2d tracked_box)
+double P3OrtBase::getIOU(cv::Rect2d detected_box, cv::Rect2d tracked_box) const
 {
   cv::Rect2d intersection = detected_box & tracked_box;
   return intersection.area();

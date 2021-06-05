@@ -249,7 +249,7 @@ private:
   double findMin(cv::Mat depthImg);
   /*! \brief A Getter function that returns the Intersection-over-Union (IoU)
   area between two Rect2d objects.*/
-  double getIOU(cv::Rect2d detected_box, cv::Rect2d tracked_box);
+  double getIOU(cv::Rect2d detected_box, cv::Rect2d tracked_box) const;
   /*! \brief A Mutator function that add a user-defined OpenCV tracker. The
   tracker can be KCF, MedianFlow or CSRT.*/
   cv::Ptr<cv::Tracker> create_tracker(std::string tracker_type);
