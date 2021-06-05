@@ -115,6 +115,10 @@ cv::Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 cv::Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrt_1_1P3OrtBase.html#a3397d0e0249b8ebb921fc575cf31e920">infer_visualize</a> (const cv::Mat &amp;inputImg, const cv::Mat &amp;depthImg, sensor_msgs::msg::CameraInfo camera_info)</td></tr>
 <tr class="memdesc:a3397d0e0249b8ebb921fc575cf31e920"><td class="mdescLeft">&#160;</td><td class="mdescRight">A auxillary Mutator function that calls the internal overloading infer_visualize function with depth_msg and camera_info. <br /></td></tr>
 <tr class="separator:a3397d0e0249b8ebb921fc575cf31e920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac94f8eb7c65327fea74f4cf8169256b9"><td class="memItemLeft" align="right" valign="top"><a id="ac94f8eb7c65327fea74f4cf8169256b9"></a>
+cv::Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrt_1_1P3OrtBase.html#ac94f8eb7c65327fea74f4cf8169256b9">infer_visualize</a> (const cv::Mat &amp;inputImg, const cv::Mat &amp;depthImg, sensor_msgs::msg::CameraInfo camera_info, const std::string tracker_type, std::vector&lt; cv::Ptr&lt; cv::Tracker &gt;&gt; &amp;trackers, std::vector&lt; int &gt; &amp;tracker_logs, std::vector&lt; <a class="el" href="structEPD_1_1LabelledRect2d.html">EPD::LabelledRect2d</a> &gt; &amp;tracker_results)</td></tr>
+<tr class="memdesc:ac94f8eb7c65327fea74f4cf8169256b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">A auxillary Mutator function that calls the internal overloading infer_visualize function with depth_msg and camera_info. <br /></td></tr>
+<tr class="separator:ac94f8eb7c65327fea74f4cf8169256b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac79040877c158d910e1bb68a072aef4a"><td class="memItemLeft" align="right" valign="top"><a id="ac79040877c158d910e1bb68a072aef4a"></a>
 <a class="el" href="classEPD_1_1EPDObjectDetection.html">EPD::EPDObjectDetection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrt_1_1P3OrtBase.html#ac79040877c158d910e1bb68a072aef4a">infer_action</a> (const cv::Mat &amp;inputImg)</td></tr>
 <tr class="memdesc:ac79040877c158d910e1bb68a072aef4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A auxillary Mutator function that calls the internal overloading infer_action function. <br /></td></tr>
@@ -123,6 +127,10 @@ cv::Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <a class="el" href="classEPD_1_1EPDObjectLocalization.html">EPD::EPDObjectLocalization</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrt_1_1P3OrtBase.html#a8ea422aa015a0ad31b59c2ae7c52e1c5">infer_action</a> (const cv::Mat &amp;inputImg, const cv::Mat &amp;depthImg, sensor_msgs::msg::CameraInfo camera_info, double camera_to_plane_distance_mm)</td></tr>
 <tr class="memdesc:a8ea422aa015a0ad31b59c2ae7c52e1c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">A auxillary Mutator function that calls the internal overloading infer_action function. <br /></td></tr>
 <tr class="separator:a8ea422aa015a0ad31b59c2ae7c52e1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a56184ae103d31c010875161e44ab97"><td class="memItemLeft" align="right" valign="top"><a id="a2a56184ae103d31c010875161e44ab97"></a>
+<a class="el" href="classEPD_1_1EPDObjectTracking.html">EPD::EPDObjectTracking</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrt_1_1P3OrtBase.html#a2a56184ae103d31c010875161e44ab97">infer_action</a> (const cv::Mat &amp;inputImg, const cv::Mat &amp;depthImg, sensor_msgs::msg::CameraInfo camera_info, double camera_to_plane_distance_mm, const std::string tracker_type, std::vector&lt; cv::Ptr&lt; cv::Tracker &gt;&gt; &amp;trackers, std::vector&lt; int &gt; &amp;tracker_logs, std::vector&lt; <a class="el" href="structEPD_1_1LabelledRect2d.html">EPD::LabelledRect2d</a> &gt; &amp;tracker_results)</td></tr>
+<tr class="memdesc:a2a56184ae103d31c010875161e44ab97"><td class="mdescLeft">&#160;</td><td class="mdescRight">A auxillary Mutator function that calls the internal overloading infer_action function. <br /></td></tr>
+<tr class="separator:a2a56184ae103d31c010875161e44ab97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ac8f3762d88e39134cba7194b6b5608"><td class="memItemLeft" align="right" valign="top"><a id="a7ac8f3762d88e39134cba7194b6b5608"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrt_1_1P3OrtBase.html#a7ac8f3762d88e39134cba7194b6b5608">getNumClasses</a> () const</td></tr>
 <tr class="memdesc:a7ac8f3762d88e39134cba7194b6b5608"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Getter function that gets the number of object names used for an ongoing session. <br /></td></tr>
@@ -171,8 +179,8 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An Precision-Level 3 (P3) ONNXRuntime (Ort) Base class object. This class object instantiates a Precision Level 3 Ort Session which takes a typical ONNX model used for solely object detection and runs an inference engine. </p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/cardboardvoice/epd_workspace/2_github_epd/easy_perception_deployment/include/ort_cpp_lib/p3_ort_base.hpp</li>
-<li>/home/cardboardvoice/epd_workspace/2_github_epd/easy_perception_deployment/include/ort_cpp_lib/p3_ort_base.cpp</li>
+<li>/home/cardboardvoice/epd_workspace/6_milestone3_epd/easy_perception_deployment/include/ort_cpp_lib/p3_ort_base.hpp</li>
+<li>/home/cardboardvoice/epd_workspace/6_milestone3_epd/easy_perception_deployment/include/ort_cpp_lib/p3_ort_base.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

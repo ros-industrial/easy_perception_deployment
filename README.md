@@ -18,7 +18,7 @@
 
 ## **Quality Declaration**
 
-This package claims to be in the **Quality Level 5** category, see the **Quality Declaration** for more details.
+This package claims to be in the **Quality Level 4** category, see the **Quality Declaration** for more details.
 
 ## **Setup**
 

@@ -30,7 +30,7 @@ then
       conda install pytorch==1.2.0 torchvision -y # Temp for magic fix.
 
       # Download maskrcnn-benchmark. Await modification later before building.
-      git clone https://github.com/BowenBao/maskrcnn-benchmark.git --branch onnx_stage_mrcnn --single-branch p3_exporter
+      git clone https://github.com/BowenBao/maskrcnn-benchmark.git --branch onnx_stage_mrcnn --single-branch p3_exporter --depth 1
       cd p3_exporter
       export INSTALL_DIR=$PWD
       python3 setup.py build develop
@@ -63,6 +63,27 @@ then
       echo "[p3_exporter] conda env created."
 else
       echo "[p3_exporter] - FOUND. Skipping installation."
+      eval "$(conda shell.bash hook)"
+      conda activate p3_exporter
+
+      # Download maskrcnn-benchmark. Await modification later before building.
+      git clone https://github.com/BowenBao/maskrcnn-benchmark.git --branch onnx_stage_mrcnn --single-branch p3_exporter --depth 1
+      cd p3_exporter
+      export INSTALL_DIR=$PWD
+      python3 setup.py build develop
+
+      cd $INSTALL_DIR
+      mkdir -p configs/custom
+      # cd $START_DIR
+      # cp $path_to_export_config $INSTALL_DIR/configs/custom/maskrcnn_export.yaml
+
+      cd $INSTALL_DIR
+      mkdir -p weights/custom
+
+      # Copy in remove_initializer.py into the maskrcnn-benchmark folder
+      cd $START_DIR
+      cp $path_to_remove_init_tool $INSTALL_DIR/demo/remove_initializer.py
+      cp $path_to_export_modif $INSTALL_DIR/demo/export_to_onnx.py
 fi
 
 unset env_exists INSTALL_DIR START_DIR

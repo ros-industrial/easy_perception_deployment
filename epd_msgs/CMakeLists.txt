@@ -26,6 +26,7 @@ rosidl_generate_interfaces( ${PROJECT_NAME}
   "msg/EPDImageClassification.msg"
   "msg/EPDObjectDetection.msg"
   "msg/EPDObjectLocalization.msg"
+  "msg/EPDObjectTracking.msg"
   "msg/LocalizedObject.msg"
   DEPENDENCIES
   std_msgs

@@ -99,6 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#counting">Counting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#color-matching">Color-Matching</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#localization">Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tracking">Tracking</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#incompatible-model-input-shape">Incompatible Model Input Shape?</a></li>
@@ -233,25 +234,94 @@ be <em>currently incompatible</em> with that of <strong>easy_perception_deployme
 <tr class="row-odd"><td><p>3</p></td>
 <td><p>Localization</p></td>
 </tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Tracking</p></td>
+</tr>
 </tbody>
 </table>
 <div class="section" id="classification">
 <h3>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
 <p>This use-case runs default and does not alter the inference output of the input ONNX model.</p>
+<p>Its results are outputted as <strong>EPDObjectDetection.msg</strong>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>EPDObjectDetection.msg</strong> Message Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>std_msgs/Header</strong> header</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uint64[]</strong> class_indices</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64[]</strong> scores</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/RegionOfInterest[]</strong> bboxes</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sensor_msgs/Image[]</strong> masks</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="counting">
 <h3>Counting<a class="headerlink" href="#counting" title="Permalink to this headline">¶</a></h3>
 <p>This use-case allows users to select a subset of object labels from the original list of object labels which the input ONNX model is designed to detect.</p>
 <p>The inference output of a P2 or P3 model is then filtered to only show the user-selected objects.</p>
+<p>Its results are outputted as <strong>EPDObjectDetection.msg</strong>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>EPDObjectDetection.msg</strong> Message Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>std_msgs/Header</strong> header</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uint64[]</strong> class_indices</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64[]</strong> scores</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/RegionOfInterest[]</strong> bboxes</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sensor_msgs/Image[]</strong> masks</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="color-matching">
 <h3>Color-Matching<a class="headerlink" href="#color-matching" title="Permalink to this headline">¶</a></h3>
 <p>This use-case allows users to select a template reference image in the form of a <code class="docutils literal notranslate"><span class="pre">.png/.jpeg/.jpg</span></code> image file.</p>
 <p>The inference output of a P2 or P3 model is then filtered to only show detections that share similiarity with the reference image.</p>
+<p>Its results are outputted as <strong>EPDObjectDetection.msg</strong>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>EPDObjectDetection.msg</strong> Message Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>std_msgs/Header</strong> header</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uint64[]</strong> class_indices</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64[]</strong> scores</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/RegionOfInterest[]</strong> bboxes</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sensor_msgs/Image[]</strong> masks</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="localization">
 <h3>Localization<a class="headerlink" href="#localization" title="Permalink to this headline">¶</a></h3>
-<p>This use-case allows users to find the determine the 3D euclidean centroid point, estimated object length, breadth, height and orientation.</p>
+<p>This use-case allows users to find the determine a detected object’s 3D euclidean centroid point, estimated object length, breadth, height and orientation.</p>
 <p>The inference output of a P3 model is then filtered to localize user-trained objects.</p>
 <p>Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found <a class="reference external" href="https://github.com/intel/ros2_intel_realsense">here with its own installation instructions</a>.</p>
 <p>For localization, a <strong>camera_to_plane_distance_mm</strong> ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.</p>
@@ -261,6 +331,142 @@ ros2 param <span class="nb">set</span> /processor camera_to_plane_distance_mm &l
 <span class="c1">#eg. ros2 param set /processor camera_to_plane_distance_mm 450</span>
 </pre></div>
 </div>
+<p>Its results are outputted as <strong>EPDObjectLocalization.msg</strong> with each object represented as <strong>LocalizedObject.msg</strong>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>EPDObjectLocalization.msg</strong> Message Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>std_msgs/Header</strong> header</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>LocalizedObject[]</strong> objects</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> ppx</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>float64</strong> ppy</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> fx</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>float64</strong> fy</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>uint32</strong> frame_width</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uint32</strong> frame_height</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sensor_msgs/Image</strong> depth_image</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uint32</strong> process_time</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>LocalizedObject.msg</strong> Message Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>string</strong> name</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/RegionOfInterest</strong> roi</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sensor_msgs/Image</strong> segmented_binary_mask</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>geometry_msgs/Point</strong> centroid</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> length</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>float64</strong> breadth</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> height</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/PointCloud2</strong> segmented_pcl</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>geometry_msgs/Vector3</strong> axis</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tracking">
+<h3>Tracking<a class="headerlink" href="#tracking" title="Permalink to this headline">¶</a></h3>
+<p>This use case allows users to find the determine a detected object’s 3D euclidean centroid point, estimated object length, breadth, height and orientation. This use case extends the Localization feature and uniquely tag each new objects that appear in front of the camera.</p>
+<p>Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found <a class="reference external" href="https://github.com/intel/ros2_intel_realsense">here with its own installation instructions</a>.</p>
+<p>For localization, a <strong>camera_to_plane_distance_mm</strong> ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.</p>
+<p>You can use the following commands to edit <strong>camera_to_plane_distance_mm</strong> ROS2 parameter.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /opt/ros/foxy/setup.bash
+ros2 param <span class="nb">set</span> /processor camera_to_plane_distance_mm &lt;double value&gt;
+<span class="c1">#eg. ros2 param set /processor camera_to_plane_distance_mm 450</span>
+</pre></div>
+</div>
+<p>Its results are outputted as <strong>EPDObjectTracking.msg</strong> with each object represented as <strong>LocalizedObject.msg</strong> and tagged uniquely with corresponding integer label.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>EPDObjectTracking.msg</strong> Message Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>std_msgs/Header</strong> header</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>LocalizedObject[]</strong> objects</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>string[]</strong> object_ids</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>float64</strong> ppx</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> ppy</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>float64</strong> fx</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> fy</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>uint32</strong> frame_width</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>uint32</strong> frame_height</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/Image</strong> depth_image</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>uint32</strong> process_time</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>LocalizedObject.msg</strong> Message Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>string</strong> name</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/RegionOfInterest</strong> roi</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sensor_msgs/Image</strong> segmented_binary_mask</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>geometry_msgs/Point</strong> centroid</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> length</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>float64</strong> breadth</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>float64</strong> height</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sensor_msgs/PointCloud2</strong> segmented_pcl</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>geometry_msgs/Vector3</strong> axis</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="incompatible-model-input-shape">

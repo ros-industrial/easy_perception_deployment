@@ -58,10 +58,29 @@ There are currently **4 modes** available.
 +------------------+------------------+
 | 3                | Localization     |
 +------------------+------------------+
+| 4                | Tracking         |
++------------------+------------------+
 
 Classification
 ^^^^^^^^^^^^^^
 This use-case runs default and does not alter the inference output of the input ONNX model.
+
+Its results are outputted as **EPDObjectDetection.msg**.
+
++------------------------------------------+
+|**EPDObjectDetection.msg** Message Format |
++==========================================+
+| **std_msgs/Header** header               |
++------------------------------------------+
+| **uint64[]** class_indices               |
++------------------------------------------+
+| **float64[]** scores                     |
++------------------------------------------+
+| **sensor_msgs/RegionOfInterest[]** bboxes|
++------------------------------------------+
+| **sensor_msgs/Image[]** masks            |
++------------------------------------------+
+
 
 Counting
 ^^^^^^^^
@@ -69,15 +88,47 @@ This use-case allows users to select a subset of object labels from the original
 
 The inference output of a P2 or P3 model is then filtered to only show the user-selected objects.
 
+Its results are outputted as **EPDObjectDetection.msg**.
+
++------------------------------------------+
+|**EPDObjectDetection.msg** Message Format |
++==========================================+
+| **std_msgs/Header** header               |
++------------------------------------------+
+| **uint64[]** class_indices               |
++------------------------------------------+
+| **float64[]** scores                     |
++------------------------------------------+
+| **sensor_msgs/RegionOfInterest[]** bboxes|
++------------------------------------------+
+| **sensor_msgs/Image[]** masks            |
++------------------------------------------+
+
 Color-Matching
 ^^^^^^^^^^^^^^
 This use-case allows users to select a template reference image in the form of a ``.png/.jpeg/.jpg`` image file.
 
 The inference output of a P2 or P3 model is then filtered to only show detections that share similiarity with the reference image.
 
+Its results are outputted as **EPDObjectDetection.msg**.
+
++------------------------------------------+
+|**EPDObjectDetection.msg** Message Format |
++==========================================+
+| **std_msgs/Header** header               |
++------------------------------------------+
+| **uint64[]** class_indices               |
++------------------------------------------+
+| **float64[]** scores                     |
++------------------------------------------+
+| **sensor_msgs/RegionOfInterest[]** bboxes|
++------------------------------------------+
+| **sensor_msgs/Image[]** masks            |
++------------------------------------------+
+
 Localization
 ^^^^^^^^^^^^^^
-This use-case allows users to find the determine the 3D euclidean centroid point, estimated object length, breadth, height and orientation.
+This use-case allows users to find the determine a detected object's 3D euclidean centroid point, estimated object length, breadth, height and orientation.
 
 The inference output of a P3 model is then filtered to localize user-trained objects.
 
@@ -93,6 +144,126 @@ You can use the following commands to edit **camera_to_plane_distance_mm** ROS2 
    ros2 param set /processor camera_to_plane_distance_mm <double value>
    #eg. ros2 param set /processor camera_to_plane_distance_mm 450
 
+Its results are outputted as **EPDObjectLocalization.msg** with each object represented as **LocalizedObject.msg**.
+
+
++---------------------------------------------+
+|**EPDObjectLocalization.msg** Message Format |
++=============================================+
+| **std_msgs/Header** header                  |
++---------------------------------------------+
+| **LocalizedObject[]** objects               |
++---------------------------------------------+
+| **float64** ppx                             |
++---------------------------------------------+
+| **float64** ppy                             |
++---------------------------------------------+
+| **float64** fx                              |
++---------------------------------------------+
+| **float64** fy                              |
++---------------------------------------------+
+| **uint32** frame_width                      |
++---------------------------------------------+
+| **uint32** frame_height                     |
++---------------------------------------------+
+| **sensor_msgs/Image** depth_image           |
++---------------------------------------------+
+| **uint32** process_time                     |
++---------------------------------------------+
+
+
+
++--------------------------------------------+
+|**LocalizedObject.msg** Message Format      |
++============================================+
+| **string** name                            |
++--------------------------------------------+
+| **sensor_msgs/RegionOfInterest** roi       |
++--------------------------------------------+
+| **sensor_msgs/Image** segmented_binary_mask|
++--------------------------------------------+
+| **geometry_msgs/Point** centroid           |
++--------------------------------------------+
+| **float64** length                         |
++--------------------------------------------+
+| **float64** breadth                        |
++--------------------------------------------+
+| **float64** height                         |
++--------------------------------------------+
+| **sensor_msgs/PointCloud2** segmented_pcl  |
++--------------------------------------------+
+| **geometry_msgs/Vector3** axis             |
++--------------------------------------------+
+
+
+
+Tracking
+^^^^^^^^^^^^^^
+This use case allows users to find the determine a detected object's 3D euclidean centroid point, estimated object length, breadth, height and orientation. This use case extends the Localization feature and uniquely tag each new objects that appear in front of the camera.
+
+Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found `here with its own installation instructions <https://github.com/intel/ros2_intel_realsense>`_.
+
+For localization, a **camera_to_plane_distance_mm** ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.
+
+You can use the following commands to edit **camera_to_plane_distance_mm** ROS2 parameter.
+
+.. code-block:: bash
+
+   source /opt/ros/foxy/setup.bash
+   ros2 param set /processor camera_to_plane_distance_mm <double value>
+   #eg. ros2 param set /processor camera_to_plane_distance_mm 450
+
+
+Its results are outputted as **EPDObjectTracking.msg** with each object represented as **LocalizedObject.msg** and tagged uniquely with corresponding integer label.
+
++---------------------------------------------+
+|**EPDObjectTracking.msg** Message Format     |
++=============================================+
+| **std_msgs/Header** header                  |
++---------------------------------------------+
+| **LocalizedObject[]** objects               |
++---------------------------------------------+
+| **string[]** object_ids                     |
++---------------------------------------------+
+| **float64** ppx                             |
++---------------------------------------------+
+| **float64** ppy                             |
++---------------------------------------------+
+| **float64** fx                              |
++---------------------------------------------+
+| **float64** fy                              |
++---------------------------------------------+
+| **uint32** frame_width                      |
++---------------------------------------------+
+| **uint32** frame_height                     |
++---------------------------------------------+
+| **sensor_msgs/Image** depth_image           |
++---------------------------------------------+
+| **uint32** process_time                     |
++---------------------------------------------+
+
+
++--------------------------------------------+
+|**LocalizedObject.msg** Message Format      |
++============================================+
+| **string** name                            |
++--------------------------------------------+
+| **sensor_msgs/RegionOfInterest** roi       |
++--------------------------------------------+
+| **sensor_msgs/Image** segmented_binary_mask|
++--------------------------------------------+
+| **geometry_msgs/Point** centroid           |
++--------------------------------------------+
+| **float64** length                         |
++--------------------------------------------+
+| **float64** breadth                        |
++--------------------------------------------+
+| **float64** height                         |
++--------------------------------------------+
+| **sensor_msgs/PointCloud2** segmented_pcl  |
++--------------------------------------------+
+| **geometry_msgs/Vector3** axis             |
++--------------------------------------------+
 
 Incompatible Model Input Shape?
 ++++++++++++++++++++++++++++++++

@@ -32,7 +32,7 @@ then
       conda install pytorch==1.2.0 torchvision -y # Temp for magic fix.
 
       # Download maskrcnn-benchmark. Await modification later before building.
-      git clone https://github.com/facebookresearch/maskrcnn-benchmark.git
+      git clone https://github.com/facebookresearch/maskrcnn-benchmark.git --depth 1 --single-branch
       cd maskrcnn-benchmark
       export INSTALL_DIR=$PWD
 
@@ -95,6 +95,33 @@ then
       echo "[p3_trainer] conda env created."
 else
       echo "[p3_trainer] - FOUND. Skipping installation."
+      eval "$(conda shell.bash hook)"
+      conda activate p3_trainer
+      # Download maskrcnn-benchmark.
+      git clone https://github.com/facebookresearch/maskrcnn-benchmark.git --depth 1 --single-branch
+      cd maskrcnn-benchmark
+      export INSTALL_DIR=$PWD
+
+      cd $INSTALL_DIR
+      mkdir -p configs/custom
+
+      cd $INSTALL_DIR
+      mkdir weights
+      cd weights
+      FILE="e2e_mask_rcnn_R_50_FPN_1x.pth"
+      if [ ! -f "$FILE" ]; then
+          echo "Downloading MaskRCNN pretrained weights."
+          wget https://download.pytorch.org/models/maskrcnn/e2e_mask_rcnn_R_50_FPN_1x.pth
+      fi
+      unset FILE
+      cd $START_DIR
+      cp $path_to_trim_tool $INSTALL_DIR/weights/trim_mask_rcnn.py
+      cd $INSTALL_DIR/weights
+      python3 trim_mask_rcnn.py
+
+      cd $INSTALL_DIR
+      mkdir datasets
+
 fi
 
 # cd $START_DIR

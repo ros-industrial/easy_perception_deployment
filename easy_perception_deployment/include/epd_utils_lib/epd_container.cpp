@@ -166,7 +166,7 @@ void EPDContainer::setUseCaseConfigFile()
         }
         break;
       }
-      if (useCaseMode > 3) {
+      if (useCaseMode > 4) {
         throw std::runtime_error("Invalid Use Case.");
       }
       continue;
@@ -177,6 +177,15 @@ void EPDContainer::setUseCaseConfigFile()
     }
     if (useCaseMode == EPD::COLOR_MATCHING_MODE) {
       template_color_path = s;
+      break;
+    }
+    if (useCaseMode == EPD::TRACKING_MODE) {
+      if (precision_level != 3) {
+        throw std::runtime_error("Please use a Precision-Level 3 ONNX model.");
+        break;
+      }
+
+      tracker_type = s;
       break;
     }
   }
@@ -199,6 +208,9 @@ void EPDContainer::setUseCaseConfigFile()
         "[- Input Depth Image Topic -]= "
         "/camera/aligned_depth_to_color/image_raw\n");
       printf("[- Camera Info Topic -]= /camera/color/camera_info\n");
+      break;
+    case EPD::TRACKING_MODE:
+      printf("[-Use Case-]= EPD::TRACKING_MODE\n");
       break;
   }
 }

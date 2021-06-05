@@ -17,6 +17,8 @@
 #define ORT_CPP_LIB__P3_ORT_BASE_HPP_
 
 #include <opencv2/opencv.hpp>
+#include <opencv2/tracking.hpp>
+#include <opencv2/core/ocl.hpp>
 #include <optional>
 #include <string>
 #include <vector>
@@ -64,6 +66,16 @@ public:
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info);
+  /*! \brief A auxillary Mutator function that calls the internal overloading
+  infer_visualize function with depth_msg and camera_info.*/
+  cv::Mat infer_visualize(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
+    const std::string tracker_type,
+    std::vector<cv::Ptr<cv::Tracker>> & trackers,
+    std::vector<int> & tracker_logs,
+    std::vector<EPD::LabelledRect2d> & tracker_results);
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
   infer_action function.*/
@@ -76,6 +88,18 @@ public:
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
     double camera_to_plane_distance_mm);
+
+  /*! \brief A auxillary Mutator function that calls the internal overloading
+  infer_action function.*/
+  EPD::EPDObjectTracking infer_action(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
+    double camera_to_plane_distance_mm,
+    const std::string tracker_type,
+    std::vector<cv::Ptr<cv::Tracker>> & trackers,
+    std::vector<int> & tracker_logs,
+    std::vector<EPD::LabelledRect2d> & tracker_results);
 
   /*! \brief A Getter function that gets the number of object names used for an
   ongoing session.*/
@@ -141,6 +165,25 @@ private:
     const cv::Scalar & meanVal);
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
+  inference result for visualization purposes with localization results.*/
+  cv::Mat infer_visualize(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
+    const std::string tracker_type,
+    std::vector<cv::Ptr<cv::Tracker>> & trackers,
+    std::vector<int> & tracker_logs,
+    std::vector<EPD::LabelledRect2d> & tracker_results,
+    int newW,
+    int newH,
+    int paddedW,
+    int paddedH,
+    float ratio,
+    float * dst,
+    float confThresh,
+    const cv::Scalar & meanVal);
+
+  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result for use by external agents.*/
   EPD::EPDObjectDetection infer_action(
     const cv::Mat & inputImg,
@@ -169,6 +212,26 @@ private:
     float confThresh,
     const cv::Scalar & meanVal);
 
+  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
+  inference result with Tracking results for use by external agents.*/
+  EPD::EPDObjectTracking infer_action(
+    const cv::Mat & inputImg,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
+    double camera_to_plane_distance_mm,
+    const std::string tracker_type,
+    std::vector<cv::Ptr<cv::Tracker>> & trackers,
+    std::vector<int> & tracker_logs,
+    std::vector<EPD::LabelledRect2d> & tracker_results,
+    int newW,
+    int newH,
+    int paddedW,
+    int paddedH,
+    float ratio,
+    float * dst,
+    float confThresh,
+    const cv::Scalar & meanVal);
+
   /*! \brief A Mutator function that takes P2 inference outputs and illustrates
   derived bounding boxes with corresponding object labels for visualization
   purposes.*/
@@ -180,8 +243,29 @@ private:
     const std::vector<std::string> & allClassNames,
     const float maskThreshold);
 
+  /*! \brief A Getter function that returns the median z-value of the scene.*/
   double findMedian(cv::Mat depthImg);
+  /*! \brief A Getter function that returns the largest z-value of the scene.*/
   double findMin(cv::Mat depthImg);
+  /*! \brief A Getter function that returns the Intersection-over-Union (IoU)
+  area between two Rect2d objects.*/
+  double getIOU(cv::Rect2d detected_box, cv::Rect2d tracked_box) const;
+  /*! \brief A Mutator function that add a user-defined OpenCV tracker. The
+  tracker can be KCF, MedianFlow or CSRT.*/
+  cv::Ptr<cv::Tracker> create_tracker(std::string tracker_type);
+  /*! \brief A Mutator function that create an integer tracker tag and add it
+  to a session-persistent log of tracker tags.*/
+  void create_tracker_tag(std::vector<int> & tracker_logs);
+
+  /*! \brief A Mutator function that updates, adds or removes tracked
+  objects by comparing trackers to new detections.*/
+  void tracking_evaluate(
+    const std::vector<std::array<float, 4>> & bboxes,
+    const cv::Mat & img,
+    const std::string tracker_type,
+    std::vector<cv::Ptr<cv::Tracker>> & trackers,
+    std::vector<int> & tracker_logs,
+    std::vector<EPD::LabelledRect2d> & tracker_results);
 
   /*! \brief A Mutator function that takes P3 inference outputs and illustrates
   derived bounding boxes with corresponding object labels for visualization
@@ -190,6 +274,20 @@ private:
     const cv::Mat & img,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
+    const std::vector<std::array<float, 4>> & bboxes,
+    const std::vector<uint64_t> & classIndices,
+    const std::vector<cv::Mat> & masks,
+    const std::vector<std::string> & allClassNames,
+    const float maskThreshold);
+
+  /*! \brief A Mutator function that takes P3 inference outputs and illustrates
+  derived bounding boxes with corresponding object labels for visualization
+  purposes and tracked localization.*/
+  cv::Mat tracking_visualize(
+    const cv::Mat & img,
+    const cv::Mat & depthImg,
+    sensor_msgs::msg::CameraInfo camera_info,
+    std::vector<EPD::LabelledRect2d> & tracker_results,
     const std::vector<std::array<float, 4>> & bboxes,
     const std::vector<uint64_t> & classIndices,
     const std::vector<cv::Mat> & masks,
