@@ -376,7 +376,6 @@ cv::Mat P3OrtBase::infer_visualize(
   scores.reserve(nBoxes);
   masks.reserve(nBoxes);
 
-
   for (size_t i = 0; i < nBoxes; ++i) {
     if (inferenceOutput[2].first[i] > confThresh) {
       float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
