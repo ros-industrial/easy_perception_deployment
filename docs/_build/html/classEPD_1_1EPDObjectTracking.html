@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>easy_perception_deployment: Ort::OrtBase::OrtBaseImpl Class Reference</title>
+<title>easy_perception_deployment: EPD::EPDObjectTracking Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,32 +61,39 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>Ort</b></li><li class="navelem"><a class="el" href="classOrt_1_1OrtBase.html">OrtBase</a></li><li class="navelem"><a class="el" href="classOrt_1_1OrtBase_1_1OrtBaseImpl.html">OrtBaseImpl</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceEPD.html">EPD</a></li><li class="navelem"><a class="el" href="classEPD_1_1EPDObjectTracking.html">EPDObjectTracking</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classOrt_1_1OrtBase_1_1OrtBaseImpl-members.html">List of all members</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="classEPD_1_1EPDObjectTracking-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Ort::OrtBase::OrtBaseImpl Class Reference</div>  </div>
+<div class="title">EPD::EPDObjectTracking Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ae5c1cb6b77e6b90da4447a9f26e3e37b"><td class="memItemLeft" align="right" valign="top"><a id="ae5c1cb6b77e6b90da4447a9f26e3e37b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>OrtBaseImpl</b> (const std::string &amp;modelPath, const boost::optional&lt; size_t &gt; &amp;gpuIdx, const boost::optional&lt; std::vector&lt; std::vector&lt; int64_t &gt;&gt;&gt; &amp;inputShapes)</td></tr>
-<tr class="separator:ae5c1cb6b77e6b90da4447a9f26e3e37b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a315291fd7642878c6ac46656db04533c"><td class="memItemLeft" align="right" valign="top"><a id="a315291fd7642878c6ac46656db04533c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumOutputs</b> (void)</td></tr>
-<tr class="separator:a315291fd7642878c6ac46656db04533c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70f1692e0cd97c014bb35cea8d05c5f4"><td class="memItemLeft" align="right" valign="top"><a id="a70f1692e0cd97c014bb35cea8d05c5f4"></a>
-std::vector&lt; <a class="el" href="classOrt_1_1OrtBase.html#adf2da264432541eb7cdf1122f742e9c4">DataOutputType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (const std::vector&lt; float * &gt; &amp;inputData)</td></tr>
-<tr class="separator:a70f1692e0cd97c014bb35cea8d05c5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEPD_1_1EPDObjectTracking_1_1LocalizedObject.html">LocalizedObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a62d64380255d248316c1f4591e2bef5f"><td class="memItemLeft" align="right" valign="top"><a id="a62d64380255d248316c1f4591e2bef5f"></a>
+std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>object_ids</b></td></tr>
+<tr class="separator:a62d64380255d248316c1f4591e2bef5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d434314ab87ce097d6a28b4424a6c76"><td class="memItemLeft" align="right" valign="top"><a id="a2d434314ab87ce097d6a28b4424a6c76"></a>
+std::vector&lt; <a class="el" href="structEPD_1_1EPDObjectTracking_1_1LocalizedObject.html">LocalizedObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>objects</b></td></tr>
+<tr class="separator:a2d434314ab87ce097d6a28b4424a6c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e8cca0de3fef2e7f23829f0ab0a2ff9"><td class="memItemLeft" align="right" valign="top"><a id="a8e8cca0de3fef2e7f23829f0ab0a2ff9"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEPD_1_1EPDObjectTracking.html#a8e8cca0de3fef2e7f23829f0ab0a2ff9">data_size</a></td></tr>
+<tr class="memdesc:a8e8cca0de3fef2e7f23829f0ab0a2ff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">A set size for all vectors in class. <br /></td></tr>
+<tr class="separator:a8e8cca0de3fef2e7f23829f0ab0a2ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/cardboardvoice/epd_workspace/2_github_epd/easy_perception_deployment/include/ort_cpp_lib/ort_base.cpp</li>
+<li>/home/cardboardvoice/epd_workspace/2_github_epd/easy_perception_deployment/include/epd_utils_lib/message_utils.hpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
