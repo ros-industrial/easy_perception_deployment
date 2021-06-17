@@ -185,7 +185,7 @@
 <span id="_CPPv39Processor"></span><span id="_CPPv29Processor"></span><span id="Processor"></span><span class="target" id="classProcessor"></span><em class="property">class </em><code class="sig-name descname">Processor</code> : <em class="property">public</em> Node<a class="headerlink" href="#_CPPv49Processor" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;processor.hpp&gt;</em><p>An <a class="reference internal" href="#classProcessor"><span class="std std-ref">Processor</span></a> class object. This class object inherits rclcpp::Node object and acts the main bridge between the ROS2 interface and the underlying ort_cpp_lib library that is based on ONNXRuntime Library. </p>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4N9Processor9ProcessorEv">
 <span id="_CPPv3N9Processor9ProcessorEv"></span><span id="_CPPv2N9Processor9ProcessorEv"></span><span id="Processor::Processor__void"></span><span class="target" id="classProcessor_1a65c205fad80987ed72216978e882cb80"></span><code class="sig-name descname">Processor</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Processor9ProcessorEv" title="Permalink to this definition">¶</a><br /></dt>
@@ -193,20 +193,26 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N9Processor23activate_image_callbackEN11sensor_msgs3msg5Image9SharedPtrE">
-<span id="_CPPv3N9Processor23activate_image_callbackEN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="_CPPv2N9Processor23activate_image_callbackEN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="Processor::activate_image_callback__sensor_msgs::msg::Image::SharedPtr"></span><span class="target" id="classProcessor_1abd2bce0d72402cee4482e1b5abdfcae2"></span>void <code class="sig-name descname">activate_image_callback</code><span class="sig-paren">(</span>sensor_msgs::msg::Image::SharedPtr <em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Processor23activate_image_callbackEN11sensor_msgs3msg5Image9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A mock callback function that calls image_callback for Testing. </p>
+<dt id="_CPPv4NK9Processor22process_image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE">
+<span id="_CPPv3NK9Processor22process_image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="_CPPv2NK9Processor22process_image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="Processor::process_image_callback__sensor_msgs::msg::Image::SharedPtrCC"></span><span class="target" id="classProcessor_1a2011fad60bb2afb3f7e199a2b1333850"></span>void <code class="sig-name descname">process_image_callback</code><span class="sig-paren">(</span><em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>msg</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK9Processor22process_image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A function that abstracts processing of input image in image_callback. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N9Processor26activate_localize_callbackEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg10CameraInfo9SharedPtrE">
-<span id="_CPPv3N9Processor26activate_localize_callbackEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="_CPPv2N9Processor26activate_localize_callbackEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="Processor::activate_localize_callback__sensor_msgs::msg::Image::SharedPtr.sensor_msgs::msg::Image::SharedPtr.sensor_msgs::msg::CameraInfo::SharedPtr"></span><span class="target" id="classProcessor_1ade0f2bbf8acba3a5414f80fe10becd79"></span>void <code class="sig-name descname">activate_localize_callback</code><span class="sig-paren">(</span>sensor_msgs::msg::Image::SharedPtr <em>msg</em>, sensor_msgs::msg::Image::SharedPtr <em>depth_msg</em>, sensor_msgs::msg::CameraInfo::SharedPtr <em>camera_info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Processor26activate_localize_callbackEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg5Image9SharedPtrEN11sensor_msgs3msg10CameraInfo9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A mock callback function that calls localize_callback for Testing. </p>
+<dt id="_CPPv4N9Processor25process_localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE">
+<span id="_CPPv3N9Processor25process_localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="_CPPv2N9Processor25process_localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="Processor::process_localize_callback__sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::CameraInfo::SharedPtrC"></span><span class="target" id="classProcessor_1aa0e6274b0fda02c8c5f3d3791b6c0b54"></span>void <code class="sig-name descname">process_localize_callback</code><span class="sig-paren">(</span><em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>msg</em>, <em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>depth_msg</em>, <em class="property">const</em> sensor_msgs::msg::CameraInfo::SharedPtr <em>camera_info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Processor25process_localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A function that abstracts processing of input image in localize_callback. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N9Processor25process_tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE">
+<span id="_CPPv3N9Processor25process_tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="_CPPv2N9Processor25process_tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="Processor::process_tracking_callback__sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::CameraInfo::SharedPtrC"></span><span class="target" id="classProcessor_1a4c094aefaf65c5d0c18793822ae08a0e"></span>void <code class="sig-name descname">process_tracking_callback</code><span class="sig-paren">(</span><em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>msg</em>, <em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>depth_msg</em>, <em class="property">const</em> sensor_msgs::msg::CameraInfo::SharedPtr <em>camera_info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Processor25process_tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A function that abstracts processing of input image in tracking_callback. </p>
 </dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Types</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-types">Private Types</p>
 <dl class="cpp type">
 <dt id="_CPPv4N9Processor10SyncPolicyE">
 <span id="_CPPv3N9Processor10SyncPolicyE"></span><span id="_CPPv2N9Processor10SyncPolicyE"></span><span id="Processor::SyncPolicy"></span><span class="target" id="classProcessor_1ae620c92d9ea03c8d5f73e7cf3c7b78f2"></span><em class="property">typedef </em>message_filters::sync_policies::ApproximateTime&lt;sensor_msgs::msg::Image, sensor_msgs::msg::Image, sensor_msgs::msg::CameraInfo&gt; <code class="sig-name descname">SyncPolicy</code><a class="headerlink" href="#_CPPv4N9Processor10SyncPolicyE" title="Permalink to this definition">¶</a><br /></dt>
@@ -215,37 +221,52 @@
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4N9Processor17localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE">
 <span id="_CPPv3N9Processor17localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="_CPPv2N9Processor17localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="Processor::localize_callback__sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::CameraInfo::SharedPtrC"></span><span class="target" id="classProcessor_1a64cb4c8685585601b8995d95a675bc19"></span>void <code class="sig-name descname">localize_callback</code><span class="sig-paren">(</span><em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>msg</em>, <em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>depth_msg</em>, <em class="property">const</em> sensor_msgs::msg::CameraInfo::SharedPtr <em>camera_info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Processor17localize_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A ROS2 callback function utilized by Localization Use case.<p>It gets ortAgent_ to initialize once and only once when the first input image is received.</p>
+<dd><p><p>A ROS2 callback function utilized by Localization Use case.</p>
+<p>It gets ortAgent_ to initialize once and only once when the first input image is received.</p>
 <p>It also populates the appropriate ROS messages with EPDObjectLocalization when the onlyVisualize boolean flag is set to false.</p>
-<p>. </p>
+<p>.</p>
 </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt id="_CPPv4N9Processor17tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE">
 <span id="_CPPv3N9Processor17tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="_CPPv2N9Processor17tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE"></span><span id="Processor::tracking_callback__sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::Image::SharedPtrC.sensor_msgs::msg::CameraInfo::SharedPtrC"></span><span class="target" id="classProcessor_1ae7f6f866a13cd980326e9cb1eb089504"></span>void <code class="sig-name descname">tracking_callback</code><span class="sig-paren">(</span><em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>msg</em>, <em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>depth_msg</em>, <em class="property">const</em> sensor_msgs::msg::CameraInfo::SharedPtr <em>camera_info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Processor17tracking_callbackEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg5Image9SharedPtrEKN11sensor_msgs3msg10CameraInfo9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A ROS2 callback function utilized by Tracking Use case.<p>It gets ortAgent_ to initialize once and only once when the first input image is received.</p>
+<dd><p><p>A ROS2 callback function utilized by Tracking Use case.</p>
+<p>It gets ortAgent_ to initialize once and only once when the first input image is received.</p>
 <p>It also populates the appropriate ROS messages with EPDObjectTracking when the onlyVisualize boolean flag is set to false.</p>
-<p>. </p>
+<p>.</p>
 </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt id="_CPPv4NK9Processor14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE">
 <span id="_CPPv3NK9Processor14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="_CPPv2NK9Processor14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE"></span><span id="Processor::image_callback__sensor_msgs::msg::Image::SharedPtrCC"></span><span class="target" id="classProcessor_1ade5da990a5a6a17a4c58388841c4c386"></span>void <code class="sig-name descname">image_callback</code><span class="sig-paren">(</span><em class="property">const</em> sensor_msgs::msg::Image::SharedPtr <em>msg</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK9Processor14image_callbackEKN11sensor_msgs3msg5Image9SharedPtrE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A ROS2 callback function utilized by Classification Use case.<p>It gets ortAgent_ to initialize once and only once when the first input image is received.</p>
+<dd><p><p>A ROS2 callback function utilized by Classification Use case.</p>
+<p>It gets ortAgent_ to initialize once and only once when the first input image is received.</p>
 <p>It also populates the appropriate ROS messages with EPDObjectDetection when the onlyVisualize boolean flag is set to false.</p>
-<p>. </p>
+<p>.</p>
 </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK9Processor16hasCameraChangedEKiKi">
+<span id="_CPPv3NK9Processor16hasCameraChangedEKiKi"></span><span id="_CPPv2NK9Processor16hasCameraChangedEKiKi"></span><span id="Processor::hasCameraChanged__iC.iCC"></span><span class="target" id="classProcessor_1a74f0d17903abb79c7cefa4ca03d9d1a0"></span>void <code class="sig-name descname">hasCameraChanged</code><span class="sig-paren">(</span><em class="property">const</em> int <em>img_height</em>, <em class="property">const</em> int <em>img_width</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK9Processor16hasCameraChangedEKiKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A function that throws an error if there is a unexpected change in camera frame dimensions. This is done to safeguard an OrtSession and allow it to fail clearly. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK9Processor26checkOrtAgentIsInitializedEKiKi">
+<span id="_CPPv3NK9Processor26checkOrtAgentIsInitializedEKiKi"></span><span id="_CPPv2NK9Processor26checkOrtAgentIsInitializedEKiKi"></span><span id="Processor::checkOrtAgentIsInitialized__iC.iCC"></span><span class="target" id="classProcessor_1a0eae5e4f8673814e1c3494c9a1a11a95"></span>void <code class="sig-name descname">checkOrtAgentIsInitialized</code><span class="sig-paren">(</span><em class="property">const</em> int <em>img_height</em>, <em class="property">const</em> int <em>img_width</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK9Processor26checkOrtAgentIsInitializedEKiKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A mutator function that checks if an OrtSession is initialized or not. If it is, check if camera frame dimensions is unchanged. Refer to hasCameraChanged function. Otherwise, initialize an OrtSession. </p>
 </dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Members</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N9Processor9image_subE">
 <span id="_CPPv3N9Processor9image_subE"></span><span id="_CPPv2N9Processor9image_subE"></span><span id="Processor::image_sub__rclcpp::Subscription:sensor_msgs::msg::Image:::SharedPtr"></span><span class="target" id="classProcessor_1ac9ec915fae6bacf723ee6b93b48d06cc"></span>rclcpp::Subscription&lt;sensor_msgs::msg::Image&gt;::SharedPtr <code class="sig-name descname">image_sub</code><a class="headerlink" href="#_CPPv4N9Processor9image_subE" title="Permalink to this definition">¶</a><br /></dt>
@@ -313,7 +334,7 @@
 
 <dl class="cpp var">
 <dt id="_CPPv4N9Processor9ortAgent_E">
-<span id="_CPPv3N9Processor9ortAgent_E"></span><span id="_CPPv2N9Processor9ortAgent_E"></span><span id="Processor::ortAgent___EPD::EPDContainer"></span><span class="target" id="classProcessor_1ab8052dce81742f7806b2f258299970eb"></span><a class="reference internal" href="epd_container.html#_CPPv43EPD" title="EPD">EPD</a>::<a class="reference internal" href="epd_container.html#_CPPv4N3EPD12EPDContainerE" title="EPD::EPDContainer">EPDContainer</a> <code class="sig-name descname">ortAgent_</code><a class="headerlink" href="#_CPPv4N9Processor9ortAgent_E" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N9Processor9ortAgent_E"></span><span id="_CPPv2N9Processor9ortAgent_E"></span><span id="Processor::ortAgent___EPD::EPDContainer"></span><span class="target" id="classProcessor_1ab8052dce81742f7806b2f258299970eb"></span><em class="property">mutable</em> <a class="reference internal" href="epd_container.html#_CPPv43EPD" title="EPD">EPD</a>::<a class="reference internal" href="epd_container.html#_CPPv4N3EPD12EPDContainerE" title="EPD::EPDContainer">EPDContainer</a> <code class="sig-name descname">ortAgent_</code><a class="headerlink" href="#_CPPv4N9Processor9ortAgent_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A singular EPDContainer object that deploys a user-defined ONNX model as an inference enginer using onnxruntime. </p>
 </dd></dl>
 
@@ -343,7 +364,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2021, Bey Hao Yun
+        &copy; Copyright 2021, Advanced Remanufacturing and Technology Center / ROS-Industrial Consortium Asia Pacific
 
     </p>
   </div>

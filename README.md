@@ -12,7 +12,7 @@
 
 **easy_perception_deployment** is a ROS2 package that accelerates the **training** and **deployment** of **Computer Vision** (CV) models for industries.
 
-<img src="docs/img/tc.gif" alt="drawing" width="500"/>
+<img src="docs/img/p3_localize.gif" alt="drawing" width="500"/>
 <img src="docs/img/dc.gif" alt="drawing" width="500"/>
 
 

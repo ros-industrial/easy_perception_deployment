@@ -187,7 +187,7 @@
 <span id="_CPPv3N3Ort9P3OrtBaseE"></span><span id="_CPPv2N3Ort9P3OrtBaseE"></span><span id="Ort::P3OrtBase"></span><span class="target" id="classOrt_1_1P3OrtBase"></span><em class="property">class </em><code class="sig-name descname">P3OrtBase</code> : <em class="property">public</em> <a class="reference internal" href="ort_base.html#_CPPv43Ort" title="Ort">Ort</a>::<a class="reference internal" href="ort_base.html#_CPPv4N3Ort7OrtBaseE" title="Ort::OrtBase">OrtBase</a><a class="headerlink" href="#_CPPv4N3Ort9P3OrtBaseE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;p3_ort_base.hpp&gt;</em><p>An Precision-Level 3 (P3) ONNXRuntime (Ort) Base class object. This class object instantiates a Precision Level 3 Ort Session which takes a typical ONNX model used for solely object detection and runs an inference engine. </p>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4N3Ort9P3OrtBase9P3OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE">
 <span id="_CPPv3N3Ort9P3OrtBase9P3OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE"></span><span id="_CPPv2N3Ort9P3OrtBase9P3OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE"></span><span id="Ort::P3OrtBase::P3OrtBase__float.i.i.i.i.uint16_tC.ssCR.boost::optional:s:CR.boost::optional:std::vector:std::vector:int64_t:::CR"></span><span class="target" id="classOrt_1_1P3OrtBase_1a21d41185cb36400a14a6550151b3ccb1"></span><code class="sig-name descname">P3OrtBase</code><span class="sig-paren">(</span>float <em>ratio</em>, int <em>newW</em>, int <em>newH</em>, int <em>paddedW</em>, int <em>paddedH</em>, <em class="property">const</em> uint16_t <em>numClasses</em>, <em class="property">const</em> std::string &amp;<em>modelPath</em>, <em class="property">const</em> boost::optional&lt;size_t&gt; &amp;<em>gpuIdx</em> = boost::none, <em class="property">const</em> boost::optional&lt;std::vector&lt;std::vector&lt;int64_t&gt;&gt;&gt; &amp;<em>inputShapes</em> = boost::none<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P3OrtBase9P3OrtBaseEfiiiiK8uint16_tRKNSt6stringERKN5boost8optionalI6size_tEERKN5boost8optionalINSt6vectorINSt6vectorI7int64_tEEEEEE" title="Permalink to this definition">¶</a><br /></dt>
@@ -238,13 +238,13 @@
 
 <dl class="cpp function">
 <dt id="_CPPv4NK3Ort9P3OrtBase13getNumClassesEv">
-<span id="_CPPv3NK3Ort9P3OrtBase13getNumClassesEv"></span><span id="_CPPv2NK3Ort9P3OrtBase13getNumClassesEv"></span><span id="Ort::P3OrtBase::getNumClassesC"></span><span class="target" id="classOrt_1_1P3OrtBase_1a7ac8f3762d88e39134cba7194b6b5608"></span>uint16_t <code class="sig-name descname">getNumClasses</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P3OrtBase13getNumClassesEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK3Ort9P3OrtBase13getNumClassesEv"></span><span id="_CPPv2NK3Ort9P3OrtBase13getNumClassesEv"></span><span id="Ort::P3OrtBase::getNumClassesC"></span><span class="target" id="classOrt_1_1P3OrtBase_1a7ac8f3762d88e39134cba7194b6b5608"></span><em class="property">inline</em> uint16_t <code class="sig-name descname">getNumClasses</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P3OrtBase13getNumClassesEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A Getter function that gets the number of object names used for an ongoing session. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt id="_CPPv4NK3Ort9P3OrtBase13getClassNamesEv">
-<span id="_CPPv3NK3Ort9P3OrtBase13getClassNamesEv"></span><span id="_CPPv2NK3Ort9P3OrtBase13getClassNamesEv"></span><span id="Ort::P3OrtBase::getClassNamesC"></span><span class="target" id="classOrt_1_1P3OrtBase_1ad02795fac7feaa29d7e56e1896ecd7de"></span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<code class="sig-name descname">getClassNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P3OrtBase13getClassNamesEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK3Ort9P3OrtBase13getClassNamesEv"></span><span id="_CPPv2NK3Ort9P3OrtBase13getClassNamesEv"></span><span id="Ort::P3OrtBase::getClassNamesC"></span><span class="target" id="classOrt_1_1P3OrtBase_1ad02795fac7feaa29d7e56e1896ecd7de"></span><em class="property">inline</em> <em class="property">const</em> std::vector&lt;std::string&gt; &amp;<code class="sig-name descname">getClassNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P3OrtBase13getClassNamesEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A Getter function that gets the list of object text labels which will be used for outputting visualized inference result or for specific use-case filters. </p>
 </dd></dl>
 
@@ -256,20 +256,21 @@
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Static Attributes</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
 <dl class="cpp var">
 <dt id="_CPPv4N3Ort9P3OrtBase14MIN_IMAGE_SIZEE">
-<span id="_CPPv3N3Ort9P3OrtBase14MIN_IMAGE_SIZEE"></span><span id="_CPPv2N3Ort9P3OrtBase14MIN_IMAGE_SIZEE"></span><span id="Ort::P3OrtBase::MIN_IMAGE_SIZE__int64_t"></span><span class="target" id="classOrt_1_1P3OrtBase_1aab9945c2414deacf462ceae06840c4b8"></span><em class="property">constexpr</em> int64_t <code class="sig-name descname">MIN_IMAGE_SIZE</code> = 800<a class="headerlink" href="#_CPPv4N3Ort9P3OrtBase14MIN_IMAGE_SIZEE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N3Ort9P3OrtBase14MIN_IMAGE_SIZEE"></span><span id="_CPPv2N3Ort9P3OrtBase14MIN_IMAGE_SIZEE"></span><span id="Ort::P3OrtBase::MIN_IMAGE_SIZE__int64_t"></span><span class="target" id="classOrt_1_1P3OrtBase_1aab9945c2414deacf462ceae06840c4b8"></span><em class="property">static</em> <em class="property">constexpr</em> int64_t <code class="sig-name descname">MIN_IMAGE_SIZE</code> = 800<a class="headerlink" href="#_CPPv4N3Ort9P3OrtBase14MIN_IMAGE_SIZEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A fixed minimal image size needed for a lower bound requirement for image classification of adequate result. </p>
 </dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4NK3Ort9P3OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi">
 <span id="_CPPv3NK3Ort9P3OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi"></span><span id="_CPPv2NK3Ort9P3OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi"></span><span id="Ort::P3OrtBase::preprocess__floatP.cv::MatCR.int64_tC.int64_tC.iCC"></span><span class="target" id="classOrt_1_1P3OrtBase_1a86dfafce3df78725358195542e087cd1"></span>void <code class="sig-name descname">preprocess</code><span class="sig-paren">(</span>float *<em>dst</em>, <em class="property">const</em> cv::Mat &amp;<em>imgSrc</em>, <em class="property">const</em> int64_t <em>targetImgWidth</em>, <em class="property">const</em> int64_t <em>targetImgHeight</em>, <em class="property">const</em> int <em>numChannels</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P3OrtBase10preprocessEPfRKN2cv3MatEK7int64_tK7int64_tKi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A Mutator function that converts a 3-layered 2D RGB input image into a 1D input data tensor to be passed to the Ort Session for processing.<p>This variant takes a generic input image represented by a conventional opencv Matrix. </p>
+<dd><p><p>A Mutator function that converts a 3-layered 2D RGB input image into a 1D input data tensor to be passed to the Ort Session for processing.</p>
+<p>This variant takes a generic input image represented by a conventional opencv Matrix.</p>
 </p>
 </dd></dl>
 
@@ -328,8 +329,8 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE">
-<span id="_CPPv3N3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE"></span><span id="_CPPv2N3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE"></span><span id="Ort::P3OrtBase::getIOU__cv::Rect2d.cv::Rect2d"></span><span class="target" id="classOrt_1_1P3OrtBase_1a914ca2e515ff7a58c63911205623a751"></span>double <code class="sig-name descname">getIOU</code><span class="sig-paren">(</span>cv::Rect2d <em>detected_box</em>, cv::Rect2d <em>tracked_box</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NK3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE">
+<span id="_CPPv3NK3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE"></span><span id="_CPPv2NK3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE"></span><span id="Ort::P3OrtBase::getIOU__cv::Rect2d.cv::Rect2dC"></span><span class="target" id="classOrt_1_1P3OrtBase_1a68d93e95cb3599c3926be04c3220ee23"></span>double <code class="sig-name descname">getIOU</code><span class="sig-paren">(</span>cv::Rect2d <em>detected_box</em>, cv::Rect2d <em>tracked_box</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3Ort9P3OrtBase6getIOUEN2cv6Rect2dEN2cv6Rect2dE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A Getter function that returns the Intersection-over-Union (IoU) area between two Rect2d objects. </p>
 </dd></dl>
 
@@ -365,7 +366,7 @@
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Members</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N3Ort9P3OrtBase12m_numClassesE">
 <span id="_CPPv3N3Ort9P3OrtBase12m_numClassesE"></span><span id="_CPPv2N3Ort9P3OrtBase12m_numClassesE"></span><span id="Ort::P3OrtBase::m_numClasses__uint16_tC"></span><span class="target" id="classOrt_1_1P3OrtBase_1a1ce15772b64ec8ed0ff2e209db4f49fe"></span><em class="property">const</em> uint16_t <code class="sig-name descname">m_numClasses</code><a class="headerlink" href="#_CPPv4N3Ort9P3OrtBase12m_numClassesE" title="Permalink to this definition">¶</a><br /></dt>
@@ -433,7 +434,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2021, Bey Hao Yun
+        &copy; Copyright 2021, Advanced Remanufacturing and Technology Center / ROS-Industrial Consortium Asia Pacific
 
     </p>
   </div>

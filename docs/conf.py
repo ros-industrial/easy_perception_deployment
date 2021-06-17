@@ -22,7 +22,7 @@ subprocess.call('doxygen Doxyfile.in', shell=True)
 # -- Project information -----------------------------------------------------
 
 project =  'easy_perception_deployment'
-copyright = '2021, Bey Hao Yun'
+copyright = '2021, Advanced Remanufacturing and Technology Center / ROS-Industrial Consortium Asia Pacific'
 author = 'Bey Hao Yun'
 
 

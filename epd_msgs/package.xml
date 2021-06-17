@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>epd_msgs</name>
-  <version>0.0.0</version>
+  <version>0.1.0</version>
   <description>A ROS2 package that accelerates the training and deployment of CV models in industries</description>
   <maintainer email="beyhy@artc.a-star.edu.sg">rosi</maintainer>
   <license>Apache License 2.0</license>
