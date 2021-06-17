@@ -30,8 +30,9 @@ RUN git clone https://github.com/Microsoft/onnxruntime . \
     make install -C ./build/Linux/"${BUILDTYPE}" && \
     rm -rf ./*
 
-# Install OpenCV, libboost-dev, ros-foxy-cv-bridge, ros-foxy-pcl-conversions
+# Install wget, OpenCV, libboost-dev, ros-foxy-cv-bridge, ros-foxy-pcl-conversions
 RUN apt-get update && \
+    apt-get install -y wget && \
     apt-get install -y libopencv-dev && \
     apt-get install -y libboost-dev && \
     apt-get install -y ros-foxy-cv-bridge && \

@@ -35,36 +35,70 @@ std::string PATH_TO_TEST_IMAGE(PATH_TO_PACKAGE "/test/nadezhda_diskant.jpg");
 std::string PATH_TO_TEST_COLORED_IMAGE(PATH_TO_PACKAGE "/test/colored_img.png");
 std::string PATH_TO_TEST_DEPTH_IMAGE(PATH_TO_PACKAGE "/test/depth_img.png");
 
-// TEST(EPD_TestSuite, Test_Processor_P3Model_Localization_Action)
-// {
-//   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
-//   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
-//   system(("echo " + PATH_TO_ONNX_P3_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
-//   system(("echo " + PATH_TO_COCO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
-//   system(("echo robot >> " + PATH_TO_SESSION_CONFIG).c_str());
-//
-//   system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
-//   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
-//   system(("echo 3 >> " + PATH_TO_USECASE_CONFIG).c_str());
-//
-//   auto processor_node = std::make_shared<Processor>();
-//   cv::Mat rgb_frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
-//   cv::Mat depth_frame = cv::imread(PATH_TO_TEST_DEPTH_IMAGE, cv::IMREAD_UNCHANGED);
-//
-//   sensor_msgs::msg::CameraInfo::SharedPtr camera_info;
-//   camera_info->k.at(2) = 323.3077697753906;
-//   camera_info->k.at(0) = 610.3740844726562;
-//   camera_info->k.at(5) = 235.43516540527344;
-//   camera_info->k.at(4) = 609.8685913085938;
-//
-//   sensor_msgs::msg::Image::SharedPtr input_msg =
-//     cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", rgb_frame).toImageMsg();
-//
-//   sensor_msgs::msg::Image::SharedPtr depth_msg =
-//     cv_bridge::CvImage(std_msgs::msg::Header(), "mono16", depth_frame).toImageMsg();
-//
-//   processor_node->activate_localize_callback(input_msg, depth_msg, camera_info);
-// }
+TEST(EPD_TestSuite, Test_Processor_P3Model_Tracking_Action)
+{
+  system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo " + PATH_TO_ONNX_P3_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo " + PATH_TO_COCO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo robot >> " + PATH_TO_SESSION_CONFIG).c_str());
+
+  system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("echo 4 >> " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("echo CSRT >> " + PATH_TO_USECASE_CONFIG).c_str());
+
+  auto processor_node = std::make_shared<Processor>();
+  cv::Mat rgb_frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
+  cv::Mat depth_frame = cv::imread(PATH_TO_TEST_DEPTH_IMAGE, cv::IMREAD_UNCHANGED);
+
+  sensor_msgs::msg::CameraInfo::SharedPtr camera_info =
+    std::make_shared<sensor_msgs::msg::CameraInfo>();
+  camera_info->k.at(2) = 323.3077697753906;
+  camera_info->k.at(0) = 610.3740844726562;
+  camera_info->k.at(5) = 235.43516540527344;
+  camera_info->k.at(4) = 609.8685913085938;
+
+  sensor_msgs::msg::Image::SharedPtr input_msg =
+    cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", rgb_frame).toImageMsg();
+
+  sensor_msgs::msg::Image::SharedPtr depth_msg =
+    cv_bridge::CvImage(std_msgs::msg::Header(), "mono16", depth_frame).toImageMsg();
+
+  processor_node->process_tracking_callback(input_msg, depth_msg, camera_info);
+}
+
+TEST(EPD_TestSuite, Test_Processor_P3Model_Localization_Action)
+{
+  system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo " + PATH_TO_ONNX_P3_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo " + PATH_TO_COCO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
+  system(("echo robot >> " + PATH_TO_SESSION_CONFIG).c_str());
+
+  system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
+  system(("echo 3 >> " + PATH_TO_USECASE_CONFIG).c_str());
+
+  auto processor_node = std::make_shared<Processor>();
+  cv::Mat rgb_frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
+  cv::Mat depth_frame = cv::imread(PATH_TO_TEST_DEPTH_IMAGE, cv::IMREAD_UNCHANGED);
+
+  sensor_msgs::msg::CameraInfo::SharedPtr camera_info =
+    std::make_shared<sensor_msgs::msg::CameraInfo>();
+  camera_info->k.at(2) = 323.3077697753906;
+  camera_info->k.at(0) = 610.3740844726562;
+  camera_info->k.at(5) = 235.43516540527344;
+  camera_info->k.at(4) = 609.8685913085938;
+
+  sensor_msgs::msg::Image::SharedPtr input_msg =
+    cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", rgb_frame).toImageMsg();
+
+  sensor_msgs::msg::Image::SharedPtr depth_msg =
+    cv_bridge::CvImage(std_msgs::msg::Header(), "mono16", depth_frame).toImageMsg();
+
+  processor_node->process_localize_callback(input_msg, depth_msg, camera_info);
+}
 
 TEST(EPD_TestSuite, Test_Processor_P3Model_Classification_Action)
 {
@@ -84,7 +118,7 @@ TEST(EPD_TestSuite, Test_Processor_P3Model_Classification_Action)
   sensor_msgs::msg::Image::SharedPtr input_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
 
-  processor_node->activate_image_callback(input_msg);
+  processor_node->process_image_callback(input_msg);
 }
 
 TEST(EPD_TestSuite, Test_Processor_P2Model_Classification_Action)
@@ -105,7 +139,7 @@ TEST(EPD_TestSuite, Test_Processor_P2Model_Classification_Action)
   sensor_msgs::msg::Image::SharedPtr input_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
 
-  processor_node->activate_image_callback(input_msg);
+  processor_node->process_image_callback(input_msg);
 }
 
 TEST(EPD_TestSuite, Test_Processor_P1Model_Classification_Action)
@@ -126,7 +160,7 @@ TEST(EPD_TestSuite, Test_Processor_P1Model_Classification_Action)
   sensor_msgs::msg::Image::SharedPtr input_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
 
-  processor_node->activate_image_callback(input_msg);
+  processor_node->process_image_callback(input_msg);
 }
 
 int main(int argc, char ** argv)

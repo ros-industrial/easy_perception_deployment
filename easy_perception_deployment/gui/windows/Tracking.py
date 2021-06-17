@@ -46,7 +46,7 @@ class TrackingWindow(QWidget):
         self._path_to_usecase_config = _path_to_usecase_config
 
         self._selected_tracker_index = 0
-        self._tracker_label_list = ['KCF', 'MedianFlow', 'CSRT']
+        self._tracker_label_list = ['KCF', 'MEDIANFLOW', 'CSRT']
         self._tracker_description_list = ['KCF - General Purpose Tracker.',
                                     'MedianFlow - For objects with predictable movements.',
                                     'CSRT - For objects with unpredictable movements.']

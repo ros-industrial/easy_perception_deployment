@@ -59,13 +59,18 @@ class Processor : public rclcpp::Node
 public:
   /*! \brief A Constructor function*/
   Processor(void);
-  /*! \brief A mock callback function that calls image_callback for Testing.*/
-  void activate_image_callback(sensor_msgs::msg::Image::SharedPtr msg);
-  /*! \brief A mock callback function that calls localize_callback for Testing.*/
-  void activate_localize_callback(
-    sensor_msgs::msg::Image::SharedPtr msg,
-    sensor_msgs::msg::Image::SharedPtr depth_msg,
-    sensor_msgs::msg::CameraInfo::SharedPtr camera_info);
+  /*! \brief A function that abstracts processing of input image in image_callback.*/
+  void process_image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const;
+  /*! \brief A function that abstracts processing of input image in localize_callback.*/
+  void process_localize_callback(
+    const sensor_msgs::msg::Image::SharedPtr msg,
+    const sensor_msgs::msg::Image::SharedPtr depth_msg,
+    const sensor_msgs::msg::CameraInfo::SharedPtr camera_info);
+  /*! \brief A function that abstracts processing of input image in tracking_callback.*/
+  void process_tracking_callback(
+    const sensor_msgs::msg::Image::SharedPtr msg,
+    const sensor_msgs::msg::Image::SharedPtr depth_msg,
+    const sensor_msgs::msg::CameraInfo::SharedPtr camera_info);
 
 private:
   /*! \brief A subscriber member variable to receive 2D RGB images to receive.*/
@@ -142,6 +147,23 @@ private:
   when the onlyVisualize boolean flag is set to false.\n
   */
   void image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const;
+
+  /*! \brief A function that throws an error if there is a unexpected change in
+  camera frame dimensions. This is done to safeguard an OrtSession and allow it
+  to fail clearly.
+  */
+  void hasCameraChanged(
+    const int img_height,
+    const int img_width) const;
+
+  /*! \brief A mutator function that checks if an OrtSession is initialized or not.
+  If it is, check if camera frame dimensions is unchanged. Refer to
+  hasCameraChanged function.
+  Otherwise, initialize an OrtSession.
+  */
+  void checkOrtAgentIsInitialized(
+    const int img_height,
+    const int img_width) const;
 };
 
 Processor::Processor(void)
@@ -206,22 +228,31 @@ Processor::Processor(void)
   this->set_parameter(rclcpp::Parameter("camera_to_plane_distance_mm", 1000.0));
 }
 
-void Processor::activate_image_callback(sensor_msgs::msg::Image::SharedPtr msg)
+void Processor::hasCameraChanged(const int img_height, const int img_width) const
 {
-  this->image_callback(msg);
+  // TODO(cardboardcode) Implement auto reinitialization of Ort Session.
+  /*
+  Check if height and width has changed or not.
+  If either dim changed, throw runtime error.
+  Otherwise, proceed.
+  */
+  if (ortAgent_.getWidth() != img_width && ortAgent_.getHeight() != img_height) {
+    throw std::runtime_error("Input camera changed. Please restart.");
+  }
 }
 
-void Processor::activate_localize_callback(
-  sensor_msgs::msg::Image::SharedPtr msg,
-  sensor_msgs::msg::Image::SharedPtr depth_msg,
-  sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
+void Processor::checkOrtAgentIsInitialized(const int img_height, const int img_width) const
 {
-  this->localize_callback(msg, depth_msg, camera_info);
+  if (!ortAgent_.isInit()) {
+    ortAgent_.setFrameDimension(img_width, img_height);
+    ortAgent_.initORTSessionHandler();
+    ortAgent_.setInitBoolean(true);
+  } else {
+    hasCameraChanged(img_height, img_width);
+  }
 }
-// WARNING: The use of message filter sychronization causes the intake of image
-// from a realsense D415 or D435 camera to be irregular. In other words, this callback cannot
-// be called at a fixed interval.
-void Processor::localize_callback(
+
+void Processor::process_localize_callback(
   const sensor_msgs::msg::Image::SharedPtr msg,
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
@@ -245,21 +276,8 @@ void Processor::localize_callback(
     depth_msg, sensor_msgs::image_encodings::TYPE_16UC1);
   cv::Mat depth_img = depth_imageptr->image;
 
-  if (!ortAgent_.isInit()) {
-    ortAgent_.setFrameDimension(img.cols, img.rows);
-    ortAgent_.initORTSessionHandler();
-    ortAgent_.setInitBoolean(true);
-  } else {
-    // TODO(cardboardcode) Implement auto reinitialization of Ort Session.
-    /*
-    Check if height and width has changed or not.
-    If either dim changed, throw runtime error.
-    Otherwise, proceed.
-    */
-    if (ortAgent_.getWidth() != img.cols && ortAgent_.getHeight() != img.rows) {
-      throw std::runtime_error("Input camera changed. Please restart.");
-    }
-  }
+  checkOrtAgentIsInitialized(img.rows, img.cols);
+
   // Initialize timer
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
@@ -331,7 +349,18 @@ void Processor::localize_callback(
   }
 }
 
-void Processor::tracking_callback(
+// WARNING: The use of message filter sychronization causes the intake of image
+// from a realsense D415 or D435 camera to be irregular. In other words, this callback cannot
+// be called at a fixed interval.
+void Processor::localize_callback(
+  const sensor_msgs::msg::Image::SharedPtr msg,
+  const sensor_msgs::msg::Image::SharedPtr depth_msg,
+  const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
+{
+  this->process_localize_callback(msg, depth_msg, camera_info);
+}
+
+void Processor::process_tracking_callback(
   const sensor_msgs::msg::Image::SharedPtr msg,
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
@@ -355,21 +384,8 @@ void Processor::tracking_callback(
     depth_msg, sensor_msgs::image_encodings::TYPE_16UC1);
   cv::Mat depth_img = depth_imageptr->image;
 
-  if (!ortAgent_.isInit()) {
-    ortAgent_.setFrameDimension(img.cols, img.rows);
-    ortAgent_.initORTSessionHandler();
-    ortAgent_.setInitBoolean(true);
-  } else {
-    // TODO(cardboardcode) Implement auto reinitialization of Ort Session.
-    /*
-    Check if height and width has changed or not.
-    If either dim changed, throw runtime error.
-    Otherwise, proceed.
-    */
-    if (ortAgent_.getWidth() != img.cols && ortAgent_.getHeight() != img.rows) {
-      throw std::runtime_error("Input camera changed. Please restart.");
-    }
-  }
+  checkOrtAgentIsInitialized(img.rows, img.cols);
+
   // Initialize timer
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
@@ -467,10 +483,16 @@ void Processor::tracking_callback(
   }
 }
 
-void Processor::image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
+void Processor::tracking_callback(
+  const sensor_msgs::msg::Image::SharedPtr msg,
+  const sensor_msgs::msg::Image::SharedPtr depth_msg,
+  const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
 {
-  // RCLCPP_INFO(this->get_logger(), "Image received");
+  this->process_tracking_callback(msg, depth_msg, camera_info);
+}
 
+void Processor::process_image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
+{
   /* Check if input image is empty or not.
   If empty, discard image and don't process.
   Otherwise, proceed with processing.
@@ -484,22 +506,9 @@ void Processor::image_callback(const sensor_msgs::msg::Image::SharedPtr msg) con
   std::shared_ptr<cv_bridge::CvImage> imgptr = cv_bridge::toCvCopy(msg, "bgr8");
   cv::Mat img = imgptr->image;
 
-  if (!ortAgent_.isInit()) {
-    ortAgent_.setFrameDimension(img.cols, img.rows);
-    ortAgent_.initORTSessionHandler();
-    ortAgent_.setInitBoolean(true);
-  } else {
-    // TODO(cardboardcode) Implement auto reinitialization of Ort Session.
-    /*
-    Check if height and width has changed or not.
-    If either dim changed, throw runtime error.
-    Otherwise, proceed.
-    */
-    if (ortAgent_.getWidth() != img.cols && ortAgent_.getHeight() != img.rows) {
-      throw std::runtime_error("Input camera changed. Please restart.");
-    }
-  }
+  checkOrtAgentIsInitialized(img.rows, img.cols);
   // DEBUG
+
   // Initialize timer
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
@@ -582,6 +591,11 @@ void Processor::image_callback(const sensor_msgs::msg::Image::SharedPtr msg) con
   std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
   auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
   RCLCPP_INFO(this->get_logger(), "[-FPS-]= %f\n", 1000.0 / elapsedTime.count());
+}
+
+void Processor::image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
+{
+  this->process_image_callback(msg);
 }
 
 #endif  // EPD_UTILS_LIB__PROCESSOR_HPP_
