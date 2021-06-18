@@ -28,7 +28,8 @@ then
 
       conda install -c pytorch pytorch-nightly cudatoolkit=10.0 -y
       conda install pytorch==1.2.0 torchvision -y # Temp for magic fix.
-
+      pip3 uninstall numpy -y
+      pip3 install numpy==1.19.2
       # Download maskrcnn-benchmark. Await modification later before building.
       git clone https://github.com/BowenBao/maskrcnn-benchmark.git --branch onnx_stage_mrcnn --single-branch p3_exporter --depth 1
       cd p3_exporter
