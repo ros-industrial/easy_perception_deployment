@@ -87,7 +87,8 @@ Once you have arranged your file like as shown above, create a ``.txt`` label li
 
 Ensure that the object names are sorted in lexicographical order.
 
-Note that P2 and P3 training datasets will adopt a slightly different label list format.
+.. note::
+    P2 and P3 training datasets will adopt a slightly different label list format.
 
 
 Train Model

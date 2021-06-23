@@ -754,8 +754,10 @@ cv::Mat P3OrtBase::localize_visualize(
       float x = (rotated_mid.x - ppx) / fx * obj_surface_depth;
       float y = (rotated_mid.y - ppy) / fy * obj_surface_depth;
 
-      std::cout << "table_depth = " << table_depth << std::endl;
-      std::cout << "obj_surface_depth = " << obj_surface_depth << std::endl;
+      std::cout << "[-cam -> table-] = " << table_depth <<
+        " meters" << std::endl;
+      std::cout << "[-cam -> obj_top-] = " << obj_surface_depth <<
+        " meters" << std::endl;
 
       std::cout << "[-OBJ centroid x-] = " << x << std::endl;
       std::cout << "[-OBJ centroid y-] = " << y << std::endl;
@@ -803,9 +805,9 @@ cv::Mat P3OrtBase::localize_visualize(
 
       // TODO(cardboardcode): To provide optimized debug prints in future iterations.
       std::cout << "[-OBJ Name-] = " << curLabel << std::endl;
-      std::cout << "[-OBJ Length-] = " << object_length << std::endl;
-      std::cout << "[-OBJ Breadth-] = " << object_breadth << std::endl;
-      std::cout << "[-OBJ Height-] = " << object_height << std::endl;
+      std::cout << "[-OBJ Length-] = " << object_length << " meters" << std::endl;
+      std::cout << "[-OBJ Breadth-] = " << object_breadth << " meters" << std::endl;
+      std::cout << "[-OBJ Height-] = " << object_height << " meters" << std::endl;
 
       // Mark the center point with blue dot
       cv::circle(coloredRoi, rotated_mid, 1, cv::Scalar(255, 0, 0), 1);

@@ -27,7 +27,8 @@ The window labelled, **Deploy** should appear.
 
 4. Click on the button labelled, **Label List**, and select your ``.txt`` file.
 
-Note that your label list should contain the object text labels that are sorted such that they are correctly mapped to the way the model has been trained to classify. See ``data/label_list/coco_classes.txt`` for an example.
+.. note::
+    Our label list should contain the object text labels that are sorted such that they are correctly mapped to the way the model has been trained to classify. See ``data/label_list/coco_classes.txt`` for an example.
 
 5. Click on the DropDown menu labelled, **Use Case**, and select the Use-Case mode you wish to use.
 
@@ -132,7 +133,10 @@ This use-case allows users to find the determine a detected object's 3D euclidea
 
 The inference output of a P3 model is then filtered to localize user-trained objects.
 
-Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found `here with its own installation instructions <https://github.com/intel/ros2_intel_realsense>`_.
+.. note::
+    The current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found `here with its own installation instructions <https://github.com/IntelRealSense/realsense-ros>`_.
+
+    For the exact steps to set this up in ROS2 Foxy, please refer to `this link <https://github.com/intel/ros2_intel_realsense/issues/171#issuecomment-847813857>`_.
 
 For localization, a **camera_to_plane_distance_mm** ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.
 
@@ -201,7 +205,10 @@ Tracking
 ^^^^^^^^^^^^^^
 This use case allows users to find the determine a detected object's 3D euclidean centroid point, estimated object length, breadth, height and orientation. This use case extends the Localization feature and uniquely tag each new objects that appear in front of the camera.
 
-Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found `here with its own installation instructions <https://github.com/intel/ros2_intel_realsense>`_.
+.. note::
+    The current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found `here with its own installation instructions <https://github.com/IntelRealSense/realsense-ros>`_.
+
+    For the exact steps to set this up in ROS2 Foxy, please refer to `this link <https://github.com/intel/ros2_intel_realsense/issues/171#issuecomment-847813857>`_.
 
 For localization, a **camera_to_plane_distance_mm** ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.
 

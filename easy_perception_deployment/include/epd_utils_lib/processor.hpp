@@ -169,7 +169,7 @@ private:
 Processor::Processor(void)
 : Node("processor"),
   localize_image_rgb(this, "/camera/color/image_raw"),
-  localize_image_depth(this, "/camera/aligned_depth_to_color/image_raw"),
+  localize_image_depth(this, "/camera/depth/image_rect_raw"),
   localize_cam_info(this, "/camera/color/camera_info"),
   sync_(SyncPolicy(10), localize_image_rgb, localize_image_depth, localize_cam_info)
 {

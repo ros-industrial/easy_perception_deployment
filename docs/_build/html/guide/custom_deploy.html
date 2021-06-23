@@ -195,7 +195,10 @@ be <em>currently incompatible</em> with that of <strong>easy_perception_deployme
 <li><p>Click on the button labelled, <strong>ONNX Model</strong>, and select your <code class="docutils literal notranslate"><span class="pre">.onnx</span></code> model file.</p></li>
 <li><p>Click on the button labelled, <strong>Label List</strong>, and select your <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file.</p></li>
 </ol>
-<p>Note that your label list should contain the object text labels that are sorted such that they are correctly mapped to the way the model has been trained to classify. See <code class="docutils literal notranslate"><span class="pre">data/label_list/coco_classes.txt</span></code> for an example.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our label list should contain the object text labels that are sorted such that they are correctly mapped to the way the model has been trained to classify. See <code class="docutils literal notranslate"><span class="pre">data/label_list/coco_classes.txt</span></code> for an example.</p>
+</div>
 <ol class="arabic simple" start="5">
 <li><p>Click on the DropDown menu labelled, <strong>Use Case</strong>, and select the Use-Case mode you wish to use.</p></li>
 </ol>
@@ -323,7 +326,11 @@ be <em>currently incompatible</em> with that of <strong>easy_perception_deployme
 <h3>Localization<a class="headerlink" href="#localization" title="Permalink to this headline">¶</a></h3>
 <p>This use-case allows users to find the determine a detected object’s 3D euclidean centroid point, estimated object length, breadth, height and orientation.</p>
 <p>The inference output of a P3 model is then filtered to localize user-trained objects.</p>
-<p>Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found <a class="reference external" href="https://github.com/intel/ros2_intel_realsense">here with its own installation instructions</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found <a class="reference external" href="https://github.com/IntelRealSense/realsense-ros">here with its own installation instructions</a>.</p>
+<p>For the exact steps to set this up in ROS2 Foxy, please refer to <a class="reference external" href="https://github.com/intel/ros2_intel_realsense/issues/171#issuecomment-847813857">this link</a>.</p>
+</div>
 <p>For localization, a <strong>camera_to_plane_distance_mm</strong> ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.</p>
 <p>You can use the following commands to edit <strong>camera_to_plane_distance_mm</strong> ROS2 parameter.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /opt/ros/foxy/setup.bash
@@ -396,7 +403,11 @@ ros2 param <span class="nb">set</span> /processor camera_to_plane_distance_mm &l
 <div class="section" id="tracking">
 <h3>Tracking<a class="headerlink" href="#tracking" title="Permalink to this headline">¶</a></h3>
 <p>This use case allows users to find the determine a detected object’s 3D euclidean centroid point, estimated object length, breadth, height and orientation. This use case extends the Localization feature and uniquely tag each new objects that appear in front of the camera.</p>
-<p>Note that the current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found <a class="reference external" href="https://github.com/intel/ros2_intel_realsense">here with its own installation instructions</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current use-case strongly relies on Intel Realsense 3D cameras. The ROS2 driver package can be found <a class="reference external" href="https://github.com/IntelRealSense/realsense-ros">here with its own installation instructions</a>.</p>
+<p>For the exact steps to set this up in ROS2 Foxy, please refer to <a class="reference external" href="https://github.com/intel/ros2_intel_realsense/issues/171#issuecomment-847813857">this link</a>.</p>
+</div>
 <p>For localization, a <strong>camera_to_plane_distance_mm</strong> ROS2 parameter has been made available to provide a quick pass-through filter that allows you to remove an underlying detection plane to obtain a representative PointCloud cluster of an object.</p>
 <p>You can use the following commands to edit <strong>camera_to_plane_distance_mm</strong> ROS2 parameter.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /opt/ros/foxy/setup.bash
