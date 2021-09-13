@@ -1,4 +1,0 @@
-<map id="Ort::P3OrtBase" name="Ort::P3OrtBase">
-<area shape="rect" id="node1" title="An Precision&#45;Level 3 (P3) ONNXRuntime (Ort) Base class object. This class object instantiates a Preci..." alt="" coords="5,80,124,107"/>
-<area shape="rect" id="node2" href="$classOrt_1_1OrtBase.html" title="An ONNXRuntime (Ort) Base class object. This is the base class for P1OrtBase, P2OrtBase and P3OrtBase..." alt="" coords="13,5,116,32"/>
-</map>

@@ -1,7 +1,0 @@
-.. _api_main:
-
-main
-====
-
-.. doxygenfile:: main.py
-   :project: easy_perception_deployment
