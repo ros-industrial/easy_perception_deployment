@@ -1,4 +1,0 @@
-<map id="Processor" name="Processor">
-<area shape="rect" id="node1" title="An Processor class object. This class object inherits rclcpp::Node object and acts the main bridge be..." alt="" coords="5,80,91,107"/>
-<area shape="rect" id="node2" title=" " alt="" coords="20,5,76,32"/>
-</map>
