@@ -81,6 +81,8 @@ public:
   std::string tracker_type;
   std::vector<int> tracker_logs;
   std::vector<EPD::LabelledRect2d> tracker_results;
+
+  bool requestAddressed;
   /*! \brief A list of human-understandable object text labels from input
   * label list.
   */
@@ -95,6 +97,8 @@ public:
   bool isInit(void);
   /*! \brief A Getter function that gets the bool variable, onlyVisualize*/
   bool isVisualize(void);
+  /*! \brief A Getter function that gets the bool variable, isService*/
+  bool isService(void);
   /*! \brief A Getter function that gets the int variable, frame_height*/
   int getHeight(void);
   /*! \brief A Getter function that gets the int variable, frame_width*/
@@ -113,6 +117,9 @@ private:
   bool hasInitialized;
   /*! \brief A boolean to determine the type of final user output.*/
   bool onlyVisualize;
+  /*! \brief A boolean to determine whether EPD acts
+  as a service or a publisher*/
+  bool onlyService;
   /*! \brief Expected dimensions of the data provided by an input camera.*/
   int frame_width, frame_height;
 

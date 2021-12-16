@@ -48,6 +48,11 @@ bool EPDContainer::isVisualize(void)
   return onlyVisualize;
 }
 
+bool EPDContainer::isService(void)
+{
+  return onlyService;
+}
+
 int EPDContainer::getHeight() {return frame_height;}
 
 int EPDContainer::getWidth() {return frame_width;}
