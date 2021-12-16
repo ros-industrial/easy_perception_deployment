@@ -2,9 +2,14 @@
 std_msgs/Header header
 # Array of LocalizedObject objects. See LocalizedObject.msg for further details.
 LocalizedObject[] objects
-# Scene PointCloud2 information
+# Intrinsic camera parameters
+float64 ppx
+float64 ppy
+float64 fx
+float64 fy
+# Depth image information
 uint32 frame_width
 uint32 frame_height
-sensor_msgs/PointCloud2 scene_pcl
+sensor_msgs/Image depth_image
 # Time taken to process image in milliseconds
 uint32 process_time
