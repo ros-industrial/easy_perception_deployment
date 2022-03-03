@@ -42,6 +42,14 @@ bash run.bash
 
 [Check out the full documentation here.](https://easy-perception-deployment.readthedocs.io/en/latest/)
 
+## **Contributions & Feedback**
+
+**We welcome contributions!** Please see the [contribution guidelines](https://github.com/ros-industrial/easy_perception_deployment/blob/master/CONTRIBUTING.md).
+
+For **feature requests** or **bug reports**, please file a [GitHub Issue](https://github.com/ros-industrial/easy_perception_deployment/issues).
+
+For **general discussion** or **questions**, please use [GitHub Discussions](https://github.com/ros-industrial/easy_perception_deployment/discussions).
+
 ## **Acknowledgements**
 
 We would like to acknowledge the Singapore government for their vision and support to start this ambitious research and development project, "Accelerating Open Source Technologies for Cross Domain Adoption through the Robot Operating System". The project is supported by Singapore National Robotics Programme (NRP).
