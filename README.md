@@ -42,13 +42,13 @@ bash run.bash
 
 [Check out the full documentation here.](https://easy-perception-deployment.readthedocs.io/en/latest/)
 
-## **Contributions and Feedback**
+## **Contributions & Feedback**
 
-We welcome contributions! Please see the [contribution guidelines](https://github.com/ros-industrial/easy_perception_deployment/blob/master/CONTRIBUTING.md).
+**We welcome contributions!** Please see the [contribution guidelines](https://github.com/ros-industrial/easy_perception_deployment/blob/master/CONTRIBUTING.md).
 
-For feature requests or bug reports, please file a [GitHub Issue](https://github.com/ros-industrial/easy_perception_deployment/issues).
+For **feature requests** or **bug reports**, please file a [GitHub Issue](https://github.com/ros-industrial/easy_perception_deployment/issues).
 
-For general discussion or questions, please use [GitHub Discussions](https://github.com/ros-industrial/easy_perception_deployment/discussions).
+For **general discussion** or **questions**, please use [GitHub Discussions](https://github.com/ros-industrial/easy_perception_deployment/discussions).
 
 ## **Acknowledgements**
 
