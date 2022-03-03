@@ -59,13 +59,13 @@ if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/data/model/squeezenet1.1-7.onnx")
 else()
   message(AUTHOR_WARNING "Downloading pretrained ONNX model from ONNX Model Zoo.")
   execute_process(COMMAND wget
-  https://github.com/onnx/models/raw/master/vision/classification/squeezenet/model/squeezenet1.1-7.onnx
+  https://github.com/onnx/models/raw/main/vision/classification/squeezenet/model/squeezenet1.1-7.onnx
   --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
   execute_process(COMMAND wget
-  https://github.com/onnx/models/raw/master/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx
+  https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx
   --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
   execute_process(COMMAND wget
-  https://github.com/onnx/models/raw/master/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx
+  https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx
   --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
 endif()
 

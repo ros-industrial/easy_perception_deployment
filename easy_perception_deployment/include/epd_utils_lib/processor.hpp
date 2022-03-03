@@ -45,6 +45,7 @@
 #include "epd_msgs/msg/epd_object_localization.hpp"
 #include "epd_msgs/msg/epd_object_tracking.hpp"
 #include "epd_msgs/msg/localized_object.hpp"
+#include "epd_msgs/srv/perception.hpp"
 #include "epd_utils_lib/message_utils.hpp"
 
 #include "pcl_conversions/pcl_conversions.h"
@@ -111,8 +112,10 @@ private:
   /*! \brief A publisher member variable to output Precision-Level 3 (P3)
   specific inference output suitable for external agents.*/
   rclcpp::Publisher<epd_msgs::msg::EPDObjectLocalization>::SharedPtr localize_pub;
+
   rclcpp::Publisher<epd_msgs::msg::EPDObjectTracking>::SharedPtr tracking_pub;
 
+  rclcpp::Service<epd_msgs::srv::Perception>::SharedPtr srv_;
   /*! \brief A singular EPDContainer object that deploys a user-defined
   ONNX model as an inference enginer using onnxruntime.
   */
@@ -226,6 +229,45 @@ Processor::Processor(void)
 
   this->declare_parameter("camera_to_plane_distance_mm");
   this->set_parameter(rclcpp::Parameter("camera_to_plane_distance_mm", 1000.0));
+
+  auto handle_emd_request =
+    [this](
+    const std::shared_ptr<epd_msgs::srv::Perception::Request> request,
+    std::shared_ptr<epd_msgs::srv::Perception::Response> response) -> void
+    {
+      (void)request;
+      RCLCPP_INFO(this->get_logger(), "[ RECEIVED ] - EMD Grasp-Planner Request");
+      response->success = true;
+
+      if (ortAgent_.useCaseMode == 4) {
+        response->tracking_enabled = true;
+      } else {
+        response->tracking_enabled = false;
+      }
+
+      if (ortAgent_.useCaseMode == 3) {
+        localize_image_rgb.subscribe();
+        localize_image_depth.subscribe();
+        localize_cam_info.subscribe();
+        sync_.registerCallback(&Processor::localize_callback, this);
+      } else if (ortAgent_.useCaseMode == 4) {
+        localize_image_rgb.subscribe();
+        localize_image_depth.subscribe();
+        localize_cam_info.subscribe();
+        sync_.registerCallback(&Processor::tracking_callback, this);
+      } else {
+        image_sub = this->create_subscription<sensor_msgs::msg::Image>(
+          "/processor/image_input",
+          10,
+          std::bind(&Processor::image_callback, this, std::placeholders::_1));
+      }
+
+      ortAgent_.requestAddressed = false;
+    };
+
+  srv_ = this->create_service<epd_msgs::srv::Perception>(
+    "epd_perception_service",
+    handle_emd_request);
 }
 
 void Processor::hasCameraChanged(const int img_height, const int img_width) const
@@ -257,6 +299,10 @@ void Processor::process_localize_callback(
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
 {
+  if (ortAgent_.requestAddressed) {
+    return;
+  }
+
   rclcpp::Parameter double_param = this->get_parameter("camera_to_plane_distance_mm");
   double camera_to_plane_distance_mm = double_param.as_double();
   /* Check if input image is empty or not.
@@ -347,6 +393,13 @@ void Processor::process_localize_callback(
 
     localize_pub->publish(output_msg);
   }
+
+  if (ortAgent_.isService()) {
+    localize_image_rgb.subscribe();
+    localize_image_depth.subscribe();
+    localize_cam_info.subscribe();
+    ortAgent_.requestAddressed = true;
+  }
 }
 
 // WARNING: The use of message filter sychronization causes the intake of image
@@ -365,6 +418,10 @@ void Processor::process_tracking_callback(
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
 {
+  if (ortAgent_.requestAddressed) {
+    return;
+  }
+
   rclcpp::Parameter double_param = this->get_parameter("camera_to_plane_distance_mm");
   double camera_to_plane_distance_mm = double_param.as_double();
   /* Check if input image is empty or not.
@@ -480,6 +537,13 @@ void Processor::process_tracking_callback(
     output_msg.process_time = elapsedTime.count();
 
     tracking_pub->publish(output_msg);
+  }
+
+  if (ortAgent_.isService()) {
+    localize_image_rgb.subscribe();
+    localize_image_depth.subscribe();
+    localize_cam_info.subscribe();
+    ortAgent_.requestAddressed = true;
   }
 }
 

@@ -1,0 +1,6 @@
+bool ready   # indicate if EMD pipeline is ready
+---
+bool success   # indicate if EPD pipeline has successfully completed
+bool tracking_enabled   # Whether or not grasp planner should use EPDObjectLocalization or EPDObjectTracking. 
+EPDObjectLocalization epd_localization # informational, e.g. for error messages.
+EPDObjectTracking epd_tracking # informational, e.g. for error messages.
