@@ -1,5 +1,5 @@
 
-![](docs/img/epd_logo_long.png)
+![](img/epd_logo_long.png)
 
 # **easy_perception_deployment**
 [![CI](https://github.com/cardboardcode/easy_perception_deployment/actions/workflows/industrial_ci_action.yml/badge.svg)](https://github.com/cardboardcode/easy_perception_deployment/actions/workflows/industrial_ci_action.yml)
@@ -12,8 +12,8 @@
 
 **easy_perception_deployment** is a ROS2 package that accelerates the **training** and **deployment** of **Computer Vision** (CV) models for industries.
 
-<img src="docs/img/p3_localize.gif" alt="drawing" width="500"/>
-<img src="docs/img/dc.gif" alt="drawing" width="500"/>
+<img src="img/demo_1.gif" alt="drawing" width="500"/>
+<img src="img/demo_2.gif" alt="drawing" width="500"/>
 
 
 ## **Quality Declaration**
@@ -40,7 +40,7 @@ bash run.bash
 
 ## **Docs**
 
-[Check out the full documentation here.](https://easy-perception-deployment.readthedocs.io/en/latest/)
+[Check out the full documentation here.](https://epd-docs.readthedocs.io/en/latest/)
 
 ## **Contributions & Feedback**
 
