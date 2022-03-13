@@ -33,7 +33,7 @@ P1FILE=./data/model/squeezenet1.1-7.onnx
 if [ ! -f "$P1FILE" ]; then
     echo "Downloading $P1FILE."
     wget \
-    https://github.com/onnx/models/raw/master/vision/classification/squeezenet/model/squeezenet1.1-7.onnx \
+    https://github.com/onnx/models/raw/main/vision/classification/squeezenet/model/squeezenet1.1-7.onnx \
     --directory-prefix=./data/model/
 fi
 unset P1FILE
@@ -42,7 +42,7 @@ P2FILE=./data/model/FasterRCNN-10.onnx
 if [ ! -f "$P2FILE" ]; then
     echo "Downloading $P2FILE."
     wget \
-    https://github.com/onnx/models/raw/master/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx \
+    https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx \
     --directory-prefix=./data/model/
 fi
 unset P2FILE
@@ -51,7 +51,7 @@ P3FILE=./data/model/MaskRCNN-10.onnx
 if [ ! -f "$P3FILE" ]; then
     echo "Downloading $P3FILE."
     wget \
-    https://github.com/onnx/models/raw/master/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx \
+    https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx \
     --directory-prefix=./data/model/
 fi
 unset P3FILE
