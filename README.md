@@ -18,7 +18,7 @@
 
 ## **Quality Declaration**
 
-This package claims to be in the **Quality Level 4** category, see the **Quality Declaration** for more details.
+This package claims to be in the **Quality Level 4** category, see the [**Quality Declaration**](https://github.com/cardboardcode/easy_perception_deployment/blob/master/QUALITY_DECLARATION.md) for more details.
 
 ## **Setup**
 
