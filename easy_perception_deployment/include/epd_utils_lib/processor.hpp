@@ -185,7 +185,7 @@ Processor::Processor(void)
   // Creating Publisher to output Visualizable P2 and P3 Detection Results.
   visual_pub = this->create_publisher<sensor_msgs::msg::Image>(
     "/processor/output",
-    rclcpp::SensorDataQoS());
+    10);
   // Creating Publisher to output Action P1 Detection Results.
   p1_pub = this->create_publisher<epd_msgs::msg::EPDImageClassification>(
     "/processor/epd_p1_output",
