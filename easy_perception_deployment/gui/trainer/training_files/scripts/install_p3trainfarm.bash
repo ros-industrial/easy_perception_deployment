@@ -37,19 +37,19 @@ then
       export INSTALL_DIR=$PWD
 
       # Install pycocotools
-      git clone https://github.com/cardboardcode/cocoapi.git
+      git clone https://github.com/sahil-cmd/cocoapi.git
       cd cocoapi/PythonAPI
       python3 setup.py build_ext install
 
       # Install cityscapeScripts
       cd $INSTALL_DIR
-      git clone https://github.com/cardboardcode/cityscapesScripts.git
+      git clone https://github.com/sahil-cmd/cityscapesScripts.git
       cd cityscapesScripts/
       python3 setup.py build_ext install
 
       # Install apex
       cd $INSTALL_DIR
-      git clone https://github.com/cardboardcode/apex.git
+      git clone https://github.com/sahil-cmd/apex.git
       cd apex
       python3 setup.py install
 
