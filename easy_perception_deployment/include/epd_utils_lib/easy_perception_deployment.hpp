@@ -283,7 +283,9 @@ void EasyPerceptionDeployment::hasCameraChanged(const int img_height, const int 
   }
 }
 
-void EasyPerceptionDeployment::checkOrtAgentIsInitialized(const int img_height, const int img_width) const
+void EasyPerceptionDeployment::checkOrtAgentIsInitialized(
+  const int img_height,
+  const int img_width) const
 {
   if (!ortAgent_.isInit()) {
     ortAgent_.setFrameDimension(img_width, img_height);
@@ -555,7 +557,8 @@ void EasyPerceptionDeployment::tracking_callback(
   this->process_tracking_callback(msg, depth_msg, camera_info);
 }
 
-void EasyPerceptionDeployment::process_image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
+void EasyPerceptionDeployment::process_image_callback(const sensor_msgs::msg::Image::SharedPtr msg)
+const
 {
   /* Check if input image is empty or not.
   If empty, discard image and don't process.
