@@ -18,7 +18,7 @@
 #include "rclcpp/rclcpp.hpp"
 
 // EPD_UTILS LIB
-#include "epd_utils_lib/processor.hpp"
+#include "epd_utils_lib/easy_perception_deployment.hpp"
 
 int main(int argc, char * argv[])
 {

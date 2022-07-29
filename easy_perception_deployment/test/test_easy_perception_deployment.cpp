@@ -22,7 +22,7 @@
 #include "epd_utils_lib/epd_container.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
 #include "cv_bridge/cv_bridge.h"
-#include "epd_utils_lib/processor.hpp"
+#include "epd_utils_lib/easy_perception_deployment.hpp"
 
 std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/data/session_config.txt");
 std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/data/usecase_config.txt");

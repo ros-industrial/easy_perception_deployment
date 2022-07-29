@@ -14,8 +14,8 @@
 // limitations under the License.
 
 
-#ifndef EPD_UTILS_LIB__PROCESSOR_HPP_
-#define EPD_UTILS_LIB__PROCESSOR_HPP_
+#ifndef EPD_UTILS_LIB__EASY_PERCEPTION_DEPLOYMENT_HPP_
+#define EPD_UTILS_LIB__EASY_PERCEPTION_DEPLOYMENT_HPP_
 
 #include <chrono>
 #include <string>
@@ -170,7 +170,7 @@ private:
 };
 
 Processor::Processor(void)
-: Node("processor"),
+: Node("easy_perception_deployment"),
   localize_image_rgb(this, "/camera/color/image_raw"),
   localize_image_depth(this, "/camera/depth/image_rect_raw"),
   localize_cam_info(this, "/camera/color/camera_info"),
@@ -178,33 +178,33 @@ Processor::Processor(void)
 {
   // Creating Subscriber to get Input Image.
   image_sub = this->create_subscription<sensor_msgs::msg::Image>(
-    "/processor/image_input",
+    "/easy_perception_deployment/image_input",
     rclcpp::SensorDataQoS(),
     std::bind(&Processor::image_callback, this, std::placeholders::_1));
 
   // Creating Publisher to output Visualizable P2 and P3 Detection Results.
   visual_pub = this->create_publisher<sensor_msgs::msg::Image>(
-    "/processor/output",
+    "/easy_perception_deployment/image_output",
     10);
   // Creating Publisher to output Action P1 Detection Results.
   p1_pub = this->create_publisher<epd_msgs::msg::EPDImageClassification>(
-    "/processor/epd_p1_output",
+    "/easy_perception_deployment/epd_p1_output",
     10);
   // Creating Publisher to output Action P2 Detection Results.
   p2_pub = this->create_publisher<epd_msgs::msg::EPDObjectDetection>(
-    "/processor/epd_p2_output",
+    "/easy_perception_deployment/epd_p2_output",
     10);
   // Creating Publisher to output Action P3 Detection Results.
   p3_pub = this->create_publisher<epd_msgs::msg::EPDObjectDetection>(
-    "/processor/epd_p3_output",
+    "/easy_perception_deployment/epd_p3_output",
     10);
   // Creating Publisher to output Action P3 and Localization Detection Results.
   localize_pub = this->create_publisher<epd_msgs::msg::EPDObjectLocalization>(
-    "/processor/epd_localize_output",
+    "/easy_perception_deployment/epd_localize_output",
     10);
   // Creating Publisher to output Action P3 and Tracking Detection Results.
   tracking_pub = this->create_publisher<epd_msgs::msg::EPDObjectTracking>(
-    "/processor/epd_tracking_output",
+    "/easy_perception_deployment/epd_tracking_output",
     10);
 
   // If useCaseMode is detected to be Localization or Tracking,
@@ -257,7 +257,7 @@ Processor::Processor(void)
         sync_.registerCallback(&Processor::tracking_callback, this);
       } else {
         image_sub = this->create_subscription<sensor_msgs::msg::Image>(
-          "/processor/image_input",
+          "/easy_perception_deployment/image_input",
           10,
           std::bind(&Processor::image_callback, this, std::placeholders::_1));
       }
