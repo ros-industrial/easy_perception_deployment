@@ -32,7 +32,7 @@ namespace EPD
 /*! \class EPDObjectDetection
     \brief An Easy Perception Deployment (EPD) ObjectDetection class object.
     This object functions as a transient container of inference results to
-    transport them for processing in by Processor class object.
+    transport them for processing in by EasyPerceptionDeployment class object.
 */
 class EPDObjectDetection
 {

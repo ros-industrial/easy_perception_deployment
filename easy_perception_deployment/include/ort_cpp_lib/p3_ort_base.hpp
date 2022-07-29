@@ -116,7 +116,7 @@ private:
   /*! \brief The number of object text labels given an input label list.*/
   const uint16_t m_numClasses;
   /*! \brief The aspect ratio calculated from the dimension of an input image
-  frame, which is provided when the first input image is received by Processor.*/
+  frame, which is provided when the first input image is received by EasyPerceptionDeployment.*/
   float m_ratio;
   /*! \brief The new padded frame dimensions of an input image. This is used for
   P2 and P3 object detection.*/

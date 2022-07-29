@@ -49,17 +49,17 @@
 #include "epd_utils_lib/message_utils.hpp"
 
 #include "pcl_conversions/pcl_conversions.h"
-/*! \class Processor
-    \brief An Processor class object.
+/*! \class EasyPerceptionDeployment
+    \brief An EasyPerceptionDeployment class object.
     This class object inherits rclcpp::Node object and acts the main bridge
     between the ROS2 interface and the underlying ort_cpp_lib library that is
     based on ONNXRuntime Library.
 */
-class Processor : public rclcpp::Node
+class EasyPerceptionDeployment : public rclcpp::Node
 {
 public:
   /*! \brief A Constructor function*/
-  Processor(void);
+  EasyPerceptionDeployment(void);
   /*! \brief A function that abstracts processing of input image in image_callback.*/
   void process_image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const;
   /*! \brief A function that abstracts processing of input image in localize_callback.*/
@@ -169,7 +169,7 @@ private:
     const int img_width) const;
 };
 
-Processor::Processor(void)
+EasyPerceptionDeployment::EasyPerceptionDeployment(void)
 : Node("easy_perception_deployment"),
   localize_image_rgb(this, "/camera/color/image_raw"),
   localize_image_depth(this, "/camera/depth/image_rect_raw"),
@@ -180,7 +180,7 @@ Processor::Processor(void)
   image_sub = this->create_subscription<sensor_msgs::msg::Image>(
     "/easy_perception_deployment/image_input",
     rclcpp::SensorDataQoS(),
-    std::bind(&Processor::image_callback, this, std::placeholders::_1));
+    std::bind(&EasyPerceptionDeployment::image_callback, this, std::placeholders::_1));
 
   // Creating Publisher to output Visualizable P2 and P3 Detection Results.
   visual_pub = this->create_publisher<sensor_msgs::msg::Image>(
@@ -213,13 +213,13 @@ Processor::Processor(void)
     localize_image_rgb.subscribe();
     localize_image_depth.subscribe();
     localize_cam_info.subscribe();
-    sync_.registerCallback(&Processor::localize_callback, this);
+    sync_.registerCallback(&EasyPerceptionDeployment::localize_callback, this);
     image_sub.reset();
   } else if (ortAgent_.useCaseMode == 4) {
     localize_image_rgb.subscribe();
     localize_image_depth.subscribe();
     localize_cam_info.subscribe();
-    sync_.registerCallback(&Processor::tracking_callback, this);
+    sync_.registerCallback(&EasyPerceptionDeployment::tracking_callback, this);
     image_sub.reset();
   } else {
     localize_image_rgb.unsubscribe();
@@ -249,17 +249,17 @@ Processor::Processor(void)
         localize_image_rgb.subscribe();
         localize_image_depth.subscribe();
         localize_cam_info.subscribe();
-        sync_.registerCallback(&Processor::localize_callback, this);
+        sync_.registerCallback(&EasyPerceptionDeployment::localize_callback, this);
       } else if (ortAgent_.useCaseMode == 4) {
         localize_image_rgb.subscribe();
         localize_image_depth.subscribe();
         localize_cam_info.subscribe();
-        sync_.registerCallback(&Processor::tracking_callback, this);
+        sync_.registerCallback(&EasyPerceptionDeployment::tracking_callback, this);
       } else {
         image_sub = this->create_subscription<sensor_msgs::msg::Image>(
           "/easy_perception_deployment/image_input",
           10,
-          std::bind(&Processor::image_callback, this, std::placeholders::_1));
+          std::bind(&EasyPerceptionDeployment::image_callback, this, std::placeholders::_1));
       }
 
       ortAgent_.requestAddressed = false;
@@ -270,7 +270,7 @@ Processor::Processor(void)
     handle_emd_request);
 }
 
-void Processor::hasCameraChanged(const int img_height, const int img_width) const
+void EasyPerceptionDeployment::hasCameraChanged(const int img_height, const int img_width) const
 {
   // TODO(cardboardcode) Implement auto reinitialization of Ort Session.
   /*
@@ -283,7 +283,7 @@ void Processor::hasCameraChanged(const int img_height, const int img_width) cons
   }
 }
 
-void Processor::checkOrtAgentIsInitialized(const int img_height, const int img_width) const
+void EasyPerceptionDeployment::checkOrtAgentIsInitialized(const int img_height, const int img_width) const
 {
   if (!ortAgent_.isInit()) {
     ortAgent_.setFrameDimension(img_width, img_height);
@@ -294,7 +294,7 @@ void Processor::checkOrtAgentIsInitialized(const int img_height, const int img_w
   }
 }
 
-void Processor::process_localize_callback(
+void EasyPerceptionDeployment::process_localize_callback(
   const sensor_msgs::msg::Image::SharedPtr msg,
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
@@ -405,7 +405,7 @@ void Processor::process_localize_callback(
 // WARNING: The use of message filter sychronization causes the intake of image
 // from a realsense D415 or D435 camera to be irregular. In other words, this callback cannot
 // be called at a fixed interval.
-void Processor::localize_callback(
+void EasyPerceptionDeployment::localize_callback(
   const sensor_msgs::msg::Image::SharedPtr msg,
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
@@ -413,7 +413,7 @@ void Processor::localize_callback(
   this->process_localize_callback(msg, depth_msg, camera_info);
 }
 
-void Processor::process_tracking_callback(
+void EasyPerceptionDeployment::process_tracking_callback(
   const sensor_msgs::msg::Image::SharedPtr msg,
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
@@ -547,7 +547,7 @@ void Processor::process_tracking_callback(
   }
 }
 
-void Processor::tracking_callback(
+void EasyPerceptionDeployment::tracking_callback(
   const sensor_msgs::msg::Image::SharedPtr msg,
   const sensor_msgs::msg::Image::SharedPtr depth_msg,
   const sensor_msgs::msg::CameraInfo::SharedPtr camera_info)
@@ -555,7 +555,7 @@ void Processor::tracking_callback(
   this->process_tracking_callback(msg, depth_msg, camera_info);
 }
 
-void Processor::process_image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
+void EasyPerceptionDeployment::process_image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
 {
   /* Check if input image is empty or not.
   If empty, discard image and don't process.
@@ -657,9 +657,9 @@ void Processor::process_image_callback(const sensor_msgs::msg::Image::SharedPtr 
   RCLCPP_INFO(this->get_logger(), "[-FPS-]= %f\n", 1000.0 / elapsedTime.count());
 }
 
-void Processor::image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
+void EasyPerceptionDeployment::image_callback(const sensor_msgs::msg::Image::SharedPtr msg) const
 {
   this->process_image_callback(msg);
 }
 
-#endif  // EPD_UTILS_LIB__PROCESSOR_HPP_
+#endif  // EPD_UTILS_LIB__EASY_PERCEPTION_DEPLOYMENT_HPP_

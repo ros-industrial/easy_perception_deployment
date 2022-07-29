@@ -25,9 +25,9 @@ int main(int argc, char * argv[])
   setlinebuf(stdout);
   rclcpp::init(argc, argv);
 
-  auto processor_node = std::make_shared<Processor>();
+  auto epd_node = std::make_shared<EasyPerceptionDeployment>();
 
-  rclcpp::spin(processor_node);
+  rclcpp::spin(epd_node);
   rclcpp::shutdown();
   return 0;
 }

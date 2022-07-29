@@ -35,7 +35,7 @@ std::string PATH_TO_TEST_IMAGE(PATH_TO_PACKAGE "/test/nadezhda_diskant.jpg");
 std::string PATH_TO_TEST_COLORED_IMAGE(PATH_TO_PACKAGE "/test/colored_img.png");
 std::string PATH_TO_TEST_DEPTH_IMAGE(PATH_TO_PACKAGE "/test/depth_img.png");
 
-TEST(EPD_TestSuite, Test_Processor_P3Model_Tracking_Action)
+TEST(EPD_TestSuite, Test_EasyPerceptionDeployment_P3Model_Tracking_Action)
 {
   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
@@ -48,7 +48,7 @@ TEST(EPD_TestSuite, Test_Processor_P3Model_Tracking_Action)
   system(("echo 4 >> " + PATH_TO_USECASE_CONFIG).c_str());
   system(("echo CSRT >> " + PATH_TO_USECASE_CONFIG).c_str());
 
-  auto processor_node = std::make_shared<Processor>();
+  auto epd_node = std::make_shared<EasyPerceptionDeployment>();
   cv::Mat rgb_frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
   cv::Mat depth_frame = cv::imread(PATH_TO_TEST_DEPTH_IMAGE, cv::IMREAD_UNCHANGED);
 
@@ -65,10 +65,10 @@ TEST(EPD_TestSuite, Test_Processor_P3Model_Tracking_Action)
   sensor_msgs::msg::Image::SharedPtr depth_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "mono16", depth_frame).toImageMsg();
 
-  processor_node->process_tracking_callback(input_msg, depth_msg, camera_info);
+  epd_node->process_tracking_callback(input_msg, depth_msg, camera_info);
 }
 
-TEST(EPD_TestSuite, Test_Processor_P3Model_Localization_Action)
+TEST(EPD_TestSuite, Test_EasyPerceptionDeployment_P3Model_Localization_Action)
 {
   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
@@ -80,7 +80,7 @@ TEST(EPD_TestSuite, Test_Processor_P3Model_Localization_Action)
   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
   system(("echo 3 >> " + PATH_TO_USECASE_CONFIG).c_str());
 
-  auto processor_node = std::make_shared<Processor>();
+  auto epd_node = std::make_shared<EasyPerceptionDeployment>();
   cv::Mat rgb_frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
   cv::Mat depth_frame = cv::imread(PATH_TO_TEST_DEPTH_IMAGE, cv::IMREAD_UNCHANGED);
 
@@ -97,10 +97,10 @@ TEST(EPD_TestSuite, Test_Processor_P3Model_Localization_Action)
   sensor_msgs::msg::Image::SharedPtr depth_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "mono16", depth_frame).toImageMsg();
 
-  processor_node->process_localize_callback(input_msg, depth_msg, camera_info);
+  epd_node->process_localize_callback(input_msg, depth_msg, camera_info);
 }
 
-TEST(EPD_TestSuite, Test_Processor_P3Model_Classification_Action)
+TEST(EPD_TestSuite, Test_EasyPerceptionDeployment_P3Model_Classification_Action)
 {
   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
@@ -112,16 +112,16 @@ TEST(EPD_TestSuite, Test_Processor_P3Model_Classification_Action)
   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
   system(("echo 0 >> " + PATH_TO_USECASE_CONFIG).c_str());
 
-  auto processor_node = std::make_shared<Processor>();
+  auto epd_node = std::make_shared<EasyPerceptionDeployment>();
   cv::Mat frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
 
   sensor_msgs::msg::Image::SharedPtr input_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
 
-  processor_node->process_image_callback(input_msg);
+  epd_node->process_image_callback(input_msg);
 }
 
-TEST(EPD_TestSuite, Test_Processor_P2Model_Classification_Action)
+TEST(EPD_TestSuite, Test_EasyPerceptionDeployment_P2Model_Classification_Action)
 {
   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
@@ -133,16 +133,16 @@ TEST(EPD_TestSuite, Test_Processor_P2Model_Classification_Action)
   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
   system(("echo 0 >> " + PATH_TO_USECASE_CONFIG).c_str());
 
-  auto processor_node = std::make_shared<Processor>();
+  auto epd_node = std::make_shared<EasyPerceptionDeployment>();
   cv::Mat frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
 
   sensor_msgs::msg::Image::SharedPtr input_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
 
-  processor_node->process_image_callback(input_msg);
+  epd_node->process_image_callback(input_msg);
 }
 
-TEST(EPD_TestSuite, Test_Processor_P1Model_Classification_Action)
+TEST(EPD_TestSuite, Test_EasyPerceptionDeployment_P1Model_Classification_Action)
 {
   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
@@ -154,13 +154,13 @@ TEST(EPD_TestSuite, Test_Processor_P1Model_Classification_Action)
   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
   system(("echo 0 >> " + PATH_TO_USECASE_CONFIG).c_str());
 
-  auto processor_node = std::make_shared<Processor>();
+  auto epd_node = std::make_shared<EasyPerceptionDeployment>();
   cv::Mat frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
 
   sensor_msgs::msg::Image::SharedPtr input_msg =
     cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
 
-  processor_node->process_image_callback(input_msg);
+  epd_node->process_image_callback(input_msg);
 }
 
 int main(int argc, char ** argv)
