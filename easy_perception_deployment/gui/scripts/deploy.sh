@@ -87,7 +87,7 @@ if [ "$showImage" = True ] ; then
       source /opt/ros/foxy/setup.bash
   fi
 
-  ros2 run image_tools showimage --ros-args --remap /image:=/processor/output > /dev/null 2>&1 &
+  ros2 run image_tools showimage --ros-args --remap /image:=/easy_perception_deployment/output > /dev/null 2>&1 &
 fi
 
 START_DIR=$(pwd)

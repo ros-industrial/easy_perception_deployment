@@ -153,15 +153,15 @@ if(BUILD_TESTING)
   ament_target_dependencies(epd_test_P3_tracking_action OpenCV cv_bridge)
   target_link_libraries(epd_test_P3_tracking_action ${onnxruntime_LIBS})
 
-  ament_add_gtest(epd_test_processor test/test_processor.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_processor rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge message_filters pcl_conversions)
-  target_link_libraries(epd_test_processor ${onnxruntime_LIBS})
+  ament_add_gtest(epd_test_easy_perception_deployment test/test_easy_perception_deployment.cpp ${EPD_UTILS})
+  ament_target_dependencies(epd_test_easy_perception_deployment rclcpp std_msgs sensor_msgs epd_msgs OpenCV cv_bridge message_filters pcl_conversions)
+  target_link_libraries(epd_test_easy_perception_deployment ${onnxruntime_LIBS})
 
 endif()
 
-add_executable(processor src/processor.cpp ${EPD_UTILS})
+add_executable(easy_perception_deployment src/main.cpp ${EPD_UTILS})
 ament_target_dependencies(
-  processor
+  easy_perception_deployment
   rclcpp
   std_msgs
   sensor_msgs
@@ -172,11 +172,11 @@ ament_target_dependencies(
   message_filters
   pcl_conversions
 )
-target_link_libraries(processor ${onnxruntime_LIBS} ${PCL_LIBRARIES})
+target_link_libraries(easy_perception_deployment ${onnxruntime_LIBS} ${PCL_LIBRARIES})
 
 
 install(TARGETS
-  processor
+  easy_perception_deployment
   DESTINATION lib/${PROJECT_NAME}
 )
 

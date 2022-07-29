@@ -20,8 +20,8 @@ def generate_launch_description():
     return LaunchDescription([
         launch_ros.actions.Node(
             package='easy_perception_deployment',
-            executable='processor',
+            executable='easy_perception_deployment',
             output='screen',
-            remappings=[('/processor/image_input', '/virtual_camera/image_raw')]
+            remappings=[('/easy_perception_deployment/image_input', '/virtual_camera/image_raw')]
             ),
     ])
