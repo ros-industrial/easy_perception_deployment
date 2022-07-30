@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import json
 import subprocess
 
 from PySide2.QtCore import QSize
@@ -62,7 +63,7 @@ class DeployWindow(QWidget):
 
         self._path_to_session_config = '../data/session_config.txt'
         self._path_to_usecase_config = '../data/usecase_config.txt'
-        self._path_to_launch_file = '../launch/run.launch.py'
+        self._path_to_input_image_json_file = '../config/input_image_topic.json'
 
         self.usecase_list = ['Classification', 'Counting', 'Color-Matching', 'Localization', 'Tracking']
 
@@ -106,11 +107,11 @@ class DeployWindow(QWidget):
                   'Assigning default Use Case MODE : [CLASSIFICATION] ')
             self.usecase_mode = 0
 
-        if self.doesFileExist(self._path_to_launch_file):
-            self.launch_file = [line.rstrip('\n') for
-                                   line in open(self._path_to_launch_file)]
-            self._input_image_topic = self.launch_file[24]
-            self._input_image_topic = self._input_image_topic[69:-3]
+        if self.doesFileExist(self._path_to_input_image_json_file):
+            # Load input_image_topic.json
+            f = open(self._path_to_input_image_json_file)
+            data = json.load(f)
+            self._input_image_topic = data['input_image_topic']
         else:
             self._input_image_topic = '/camera/color/image_raw'
 
@@ -275,11 +276,11 @@ class DeployWindow(QWidget):
         new_image_topic = self.topic_button.toPlainText()
         print('Rewriting Input Image Topic to: ' + new_image_topic)
 
-        self.launch_file[24] = self.launch_file[24][:52] + new_image_topic + self.launch_file[24][-3:]
+        dict = {"input_image_topic": new_image_topic}
+        json_object = json.dumps(dict, indent=4)
 
-        with open(self._path_to_launch_file, 'w') as filehandle:
-            for line in self.launch_file:
-                filehandle.write(line + '\n')
+        with open(self._path_to_input_image_json_file, 'w') as outfile:
+            outfile.write(json_object)
 
     def doesFileExist(self, input_filepath):
         ''' A Getter function that checks if a given file exists.'''
