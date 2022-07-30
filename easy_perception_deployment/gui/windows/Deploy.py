@@ -110,7 +110,7 @@ class DeployWindow(QWidget):
             self.launch_file = [line.rstrip('\n') for
                                    line in open(self._path_to_launch_file)]
             self._input_image_topic = self.launch_file[24]
-            self._input_image_topic = self._input_image_topic[52:-3]
+            self._input_image_topic = self._input_image_topic[69:-3]
         else:
             self._input_image_topic = '/camera/color/image_raw'
 
