@@ -148,7 +148,7 @@ void EPDContainer::setUseCaseConfigFile()
   // Counting Mode
   if (useCaseMode == EPD::COUNTING_MODE) {
     Json::Value class_list = obj["class_list"];
-    for ( size_t index = 0; index < class_list.size(); index++ )
+    for (int index = 0; index < int(class_list.size()); index++)
     {
         countClassNames.emplace_back(class_list[index].asString());
     }
