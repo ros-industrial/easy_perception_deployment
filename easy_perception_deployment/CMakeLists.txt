@@ -22,6 +22,11 @@ set(onnxruntime_INCLUDE_DIRS
 )
 find_library(onnxruntime_LIBS NAMES onnxruntime PATHS /usr/local/lib)
 
+# Json CPP libraries
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
+link_libraries(${JSONCPP_LIBRARIES})
+
 # Include external ROS packages.
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -172,7 +177,7 @@ ament_target_dependencies(
   message_filters
   pcl_conversions
 )
-target_link_libraries(easy_perception_deployment ${onnxruntime_LIBS} ${PCL_LIBRARIES})
+target_link_libraries(easy_perception_deployment ${onnxruntime_LIBS} ${PCL_LIBRARIES} ${JSONCPP_LIBRARIES})
 
 
 install(TARGETS

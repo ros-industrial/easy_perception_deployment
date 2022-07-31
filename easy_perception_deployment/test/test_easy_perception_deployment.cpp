@@ -24,8 +24,8 @@
 #include "cv_bridge/cv_bridge.h"
 #include "epd_utils_lib/easy_perception_deployment.hpp"
 
-std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/data/session_config.txt");
-std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/data/usecase_config.txt");
+std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/config/session_config.json");
+std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/config/usecase_config.json");
 std::string PATH_TO_ONNX_P3_MODEL(PATH_TO_PACKAGE "/data/model/MaskRCNN-10.onnx");
 std::string PATH_TO_ONNX_P2_MODEL(PATH_TO_PACKAGE "/data/model/FasterRCNN-10.onnx");
 std::string PATH_TO_ONNX_P1_MODEL(PATH_TO_PACKAGE "/data/model/squeezenet1.1-7.onnx");

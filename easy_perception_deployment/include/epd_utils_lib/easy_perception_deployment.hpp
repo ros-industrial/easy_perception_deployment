@@ -46,6 +46,7 @@
 #include "epd_msgs/msg/epd_object_tracking.hpp"
 #include "epd_msgs/msg/localized_object.hpp"
 #include "epd_msgs/srv/perception.hpp"
+#include "epd_utils_lib/usecase_config.hpp"
 #include "epd_utils_lib/message_utils.hpp"
 
 #include "pcl_conversions/pcl_conversions.h"
@@ -268,6 +269,39 @@ EasyPerceptionDeployment::EasyPerceptionDeployment(void)
   srv_ = this->create_service<epd_msgs::srv::Perception>(
     "epd_perception_service",
     handle_emd_request);
+
+  // Log all session_config and usecase_config configurations for user to check on system boot
+  RCLCPP_INFO(this->get_logger(), "[-ONNX Model-] - %s", ortAgent_.onnx_model_path.c_str());
+  RCLCPP_INFO(this->get_logger(), "[-Label List-] - %s", ortAgent_.class_label_path.c_str());
+  RCLCPP_INFO(this->get_logger(), "[-Precision Level-] - %d", ortAgent_.precision_level);
+  if (ortAgent_.isVisualize()){
+      RCLCPP_INFO(this->get_logger(), "[-Mode-] - VISUALISE");
+  } else {
+      RCLCPP_INFO(this->get_logger(), "[-Mode-] - ACTION");
+  }
+
+  switch (ortAgent_.useCaseMode) {
+    case EPD::CLASSIFICATION_MODE:
+      RCLCPP_INFO(this->get_logger(), "[-Use Case-] - EPD::CLASSIFICATION_MODE");
+      break;
+    case EPD::COUNTING_MODE:
+      RCLCPP_INFO(this->get_logger(), "[-Use Case-] - EPD::COUNTING_MODE");
+      break;
+    case EPD::COLOR_MATCHING_MODE:
+      RCLCPP_INFO(this->get_logger(), "[-Use Case-] - EPD::COLOR_MATCHING_MODE");
+      break;
+    case EPD::LOCALISATION_MODE:
+      RCLCPP_INFO(this->get_logger(), "[-Use Case-] - EPD::LOCALISATION_MODE");
+      RCLCPP_INFO(this->get_logger(), "[- Input RGB Image Topic -] - /camera/color/image_raw");
+      RCLCPP_INFO(this->get_logger(),
+        "[- Input Depth Image Topic -] - "
+        "/camera/aligned_depth_to_color/image_raw");
+      RCLCPP_INFO(this->get_logger(), "[- Camera Info Topic -] - /camera/color/camera_info");
+      break;
+    case EPD::TRACKING_MODE:
+      RCLCPP_INFO(this->get_logger(), "[-Use Case-] - EPD::TRACKING_MODE");
+      break;
+  }
 }
 
 void EasyPerceptionDeployment::hasCameraChanged(const int img_height, const int img_width) const

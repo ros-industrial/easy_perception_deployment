@@ -1,6 +1,4 @@
 {
-    "usecase_mode": 1,
-    "class_list": [
-        "person"
-    ]
+    "usecase_mode": 2,
+    "path_to_color_template": "./data/red.png"
 }
