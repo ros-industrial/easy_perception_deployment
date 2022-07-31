@@ -1,0 +1,6 @@
+{
+    "path_to_model": "./data/model/MaskRCNN-10.onnx",
+    "path_to_label_list": "./data/label_list/coco_classes.txt",
+    "visualizeFlag": "visualize",
+    "useCPU": "CPU"
+}

@@ -20,7 +20,7 @@ MODEL:
     POOLER_SAMPLING_RATIO: 2
     FEATURE_EXTRACTOR: "FPN2MLPFeatureExtractor"
     PREDICTOR: "FPNPredictor"
-    NUM_CLASSES: 81 #Change to your number of objects +2
+    NUM_CLASSES: 83 #Change to your number of objects +2
 DATASETS:
   TEST: ("coco_custom_val",)
   TRAIN: ("coco_custom_train",)

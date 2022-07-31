@@ -14,6 +14,7 @@
 # limitations under the License.
 
 import os
+import json
 import subprocess
 
 from trainer.P1Trainer import P1Trainer
@@ -28,12 +29,27 @@ from windows.Train import TrainWindow
 from datetime import date
 from PySide2 import QtCore
 
-# Clear all stored session_config.txt usecase_config.txt
-if os.path.exists('../data/session_config.txt') and os.path.exists('../data/session_config.txt'):
-    p1 = subprocess.Popen(['rm', '../data/session_config.txt'])
+# Clear all stored session_config.json usecase_config.txt
+if os.path.exists('../config/session_config.json') and os.path.exists('../config/usecase_config.json'):
+    p1 = subprocess.Popen(['rm', '../config/session_config.json'])
     p1.communicate()
-    p2 = subprocess.Popen(['rm', '../data/usecase_config.txt'])
+    p2 = subprocess.Popen(['rm', '../config/usecase_config.json'])
     p2.communicate()
+
+    dict = {
+        "path_to_model": './data/model/squeezenet1.1-7.onnx',
+        "path_to_label_list": './data/label_list/imagenet_classes.txt',
+        "visualizeFlag": 'visualize',
+        "useCPU": 'CPU'
+        }
+    json_object = json.dumps(dict, indent=4)
+    with open('../config/session_config.json', 'w') as outfile:
+        outfile.write(json_object)
+
+    dict = {"usecase_mode": 0}
+    json_object = json.dumps(dict, indent=4)
+    with open('../config/usecase_config.json', 'w') as outfile:
+        outfile.write(json_object)
 
 
 def test_init_MainWindow(qtbot):
@@ -92,15 +108,15 @@ def test_closeAll_MainWindow(qtbot):
 
 def test_emptySession_emptyUseCase_DeployWindow(qtbot):
 
+    if (os.path.exists('../config/session_config.json') and
+            os.path.exists('../config/usecase_config.json')):
+        p1 = subprocess.Popen(['rm', '../config/session_config.json'])
+        p1.communicate()
+        p2 = subprocess.Popen(['rm', '../config/usecase_config.json'])
+        p2.communicate()
+
     widget = DeployWindow()
     qtbot.addWidget(widget)
-
-    if (os.path.exists('../data/session_config.txt') and
-            os.path.exists('../data/session_config.txt')):
-        p1 = subprocess.Popen(['rm', '../data/session_config.txt'])
-        p1.communicate()
-        p2 = subprocess.Popen(['rm', '../data/usecase_config.txt'])
-        p2.communicate()
 
     assert widget._path_to_model == 'filepath/to/onnx/model'
     assert widget._path_to_label_list == 'filepath/to/classes/list/txt'
@@ -109,52 +125,53 @@ def test_emptySession_emptyUseCase_DeployWindow(qtbot):
 
 def test_invalidSession_invalidUseCase_DeployWindow(qtbot):
 
-    test_session_config_content = ['test_filepath_to_model\n',
-                                   'test_filepath_to_label_list\n',
-                                   'visualize\n']
-    # If session_config.txt is not present, create one.
-    outF = open('../data/session_config.txt', 'w+')
-    for line in test_session_config_content:
-        outF.write(line)
-    outF.close()
+    dict = {
+        "path_to_model": 'test_filepath_to_model',
+        "path_to_label_list": 'test_filepath_to_label_list',
+        "visualizeFlag": 'visualize',
+        "throwCPU": 'CPU'
+        }
+    json_object = json.dumps(dict, indent=4)
+    with open('../config/session_config.json', 'w') as outfile:
+        outfile.write(json_object)
 
-    test_usecase_config_content = ['-1\n']
-    outF = open('../data/usecase_config.txt', 'w+')
-    for line in test_usecase_config_content:
-        outF.write(line)
-    outF.close()
+    dict = {"usecase_mode": -1}
+    json_object = json.dumps(dict, indent=4)
+    with open('../config/usecase_config.json', 'w') as outfile:
+        outfile.write(json_object)
 
     widget = DeployWindow()
     qtbot.addWidget(widget)
 
     assert widget._path_to_model == 'filepath/to/onnx/model'
     assert widget._path_to_label_list == 'filepath/to/classes/list/txt'
-    assert widget.usecase_mode == '-1'
+    assert widget.usecase_mode == 0
 
 
 def test_validSession_validUseCase_DeployWindow(qtbot):
 
-    test_session_config_content = ['./data/model/squeezenet1.1-7.onnx\n',
-                                   '/data/label_list/imagenet_classes.txt\n',
-                                   'visualize\n',
-                                   'CPU\n']
-    outF = open('../data/session_config.txt', 'w+')
-    for line in test_session_config_content:
-        outF.write(line)
-    outF.close()
+    dict = {
+        "path_to_model": './data/model/squeezenet1.1-7.onnx',
+        "path_to_label_list": './data/label_list/imagenet_classes.txt',
+        "visualizeFlag": 'visualize',
+        "useCPU": 'CPU'
+        }
+    json_object = json.dumps(dict, indent=4)
+    with open('../config/session_config.json', 'w') as outfile:
+        outfile.write(json_object)
 
-    test_usecase_config_content = ['0\n']
-    outF = open('../data/usecase_config.txt', 'w+')
-    for line in test_usecase_config_content:
-        outF.write(line)
-    outF.close()
+    dict = {"usecase_mode": 0}
+    json_object = json.dumps(dict, indent=4)
+    with open('../config/usecase_config.json', 'w') as outfile:
+        outfile.write(json_object)
+
 
     widget = DeployWindow()
     qtbot.addWidget(widget)
 
     assert widget._path_to_model == './data/model/squeezenet1.1-7.onnx'
     assert widget._path_to_label_list == './data/label_list/imagenet_classes.txt'
-    assert widget.usecase_mode == '0'
+    assert widget.usecase_mode == 0
 
 
 def test_deployPackage_DeployWindow(qtbot):
@@ -202,35 +219,16 @@ def test_setUseCase_DeployWindow(qtbot):
             color_matching_index = i
 
     widget.setUseCase(classification_index)
-
-    usecase_config_lines = [line.rstrip('\n') for
-                            line in open('../data/usecase_config.txt')]
-    assert len(usecase_config_lines) == 1
+    f = open('../config/usecase_config.json')
+    data = json.load(f)
+    usecase_mode = data['usecase_mode']
+    assert usecase_mode == 0
 
     widget.setUseCase(color_matching_index)
-    usecase_config_lines = [line.rstrip('\n') for
-                            line in open('../data/usecase_config.txt')]
-    assert len(usecase_config_lines) == 2
-
-
-def test_setModel_DeployWindow(qtbot):
-
-    widget = DeployWindow(True)
-    qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.model_button, QtCore.Qt.LeftButton)
-
-    assert widget._path_to_model == 'dummy_model_filepath'
-
-
-def test_setLabelList_DeployWindow(qtbot):
-
-    widget = DeployWindow(True)
-    qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.list_button, QtCore.Qt.LeftButton)
-
-    assert widget._path_to_label_list == 'dummy_label_list_filepath'
+    f = open('../config/usecase_config.json')
+    data = json.load(f)
+    usecase_mode = data['usecase_mode']
+    assert usecase_mode == 2
 
 
 def test_setP1_TrainWindow(qtbot):
@@ -439,7 +437,7 @@ def test_closeWindow_CountingWindow(qtbot):
 def test_writeToUseCaseConfig_CountingWindow(qtbot):
 
     path_to_labellist = '../data/label_list/coco_classes.txt'
-    path_to_usecase_config = '../data/usecase_config.txt'
+    path_to_usecase_config = '../config/usecase_config.json'
     widget = CountingWindow(path_to_labellist, path_to_usecase_config)
     qtbot.addWidget(widget)
 
@@ -448,18 +446,21 @@ def test_writeToUseCaseConfig_CountingWindow(qtbot):
     widget._select_list = ['person']
     qtbot.mouseClick(widget.finish_button, QtCore.Qt.LeftButton)
 
-    select_list = [line.rstrip('\n') for
-                   line in open('../data/usecase_config.txt')]
-    assert select_list[0] == '1'
-    assert select_list[1] == 'person'
-    assert widget.isVisible() is False
+    f = open(path_to_usecase_config)
+    data = json.load(f)
+    usecase_mode = data['usecase_mode']
+    class_list = data['class_list']
+
+    assert usecase_mode == 1
+    assert class_list[0] == 'person'
+    assert widget.isVisible() is True
 
 
 def test_addObject_CountingWindow():
 
-    path_to_labellist = '../data/label_list/coco_classes.txt'
-    path_to_usecase_config = '../data/usecase_config.txt'
-    widget = CountingWindow(path_to_labellist, path_to_usecase_config)
+    path_to_label_list = './data/label_list/coco_classes.txt'
+    path_to_usecase_config = './data/usecase_config.txt'
+    widget = CountingWindow(path_to_label_list, path_to_usecase_config)
 
     widget.addObject(0)
     assert len(widget._select_list) == 1
