@@ -150,7 +150,7 @@ void EPDContainer::setUseCaseConfigFile()
     Json::Value class_list = obj["class_list"];
     for ( size_t index = 0; index < class_list.size(); index++ )
     {
-        countClassNames.append(class_list[index].asString());
+        countClassNames.emplace_back(class_list[index].asString());
     }
   }
 
