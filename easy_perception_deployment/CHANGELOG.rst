@@ -18,5 +18,6 @@ Changelog for package easy_perception_deployment
 0.1.1 (2022-08-01)
 -------------------
 * Fixed faulty usecase_config.json reading within usecase_config.hpp.
-* ...
+* Updated generateCountClassNames() in usecase_config.hpp to json parsing.
+* Fixed wrong if conditions for parsing incoming Use Case integer in Deploy.py.
 * Contributor(s): Bey Hao Yun
