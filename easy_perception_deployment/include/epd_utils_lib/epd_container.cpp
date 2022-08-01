@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <jsoncpp/json/json.h>
+
 #include <algorithm>
 #include <fstream>
 #include <string>
@@ -113,118 +115,89 @@ void EPDContainer::initORTSessionHandler()
 
 void EPDContainer::setModelConfigFile()
 {
-  std::string filepath;
-  std::fstream infile;
-  infile.open(PATH_TO_SESSION_CONFIG);
-  // TODO(cardboardcode) Include check if file exist or file is empty.
+  Json::Reader reader;
+  Json::Value obj;
+  std::ifstream ifs_1(PATH_TO_SESSION_CONFIG);
 
-  while (std::getline(infile, filepath)) {
-    if (filepath == "visualize") {
-      onlyVisualize = true;
-      break;
+  if (ifs_1) {
+    try {
+      ifs_1 >> obj;
+    } catch (const std::exception & e) {
+      std::cerr << e.what() << std::endl;
     }
-    if (filepath == "robot") {
-      onlyVisualize = false;
-      break;
-    }
-
-    // Check if file exists
-    if (std::ifstream(filepath)) {
-      // One of the  line in the .txt file should always be for the onnx model .onnx file.
-      // The other line should always be for the class label .txt file.
-      if (filepath.substr(filepath.length() - 4) == "onnx") {
-        onnx_model_path = filepath;
-      }
-      if (filepath.substr(filepath.length() - 3) == "txt") {
-        class_label_path = filepath;
-      }
-    } else {
-      std::stringstream FILE_DOES_NOT_EXIST;
-      FILE_DOES_NOT_EXIST << filepath << " does not exist.";
-      throw std::runtime_error(FILE_DOES_NOT_EXIST.str().c_str());
-    }
+  } else {
+    std::cerr << "File not found!" << std::endl;
   }
-  infile.close();
+
+  reader.parse(ifs_1, obj);
+
+  onnx_model_path = obj["path_to_model"].asString();
+  class_label_path = obj["path_to_label_list"].asString();
+
+  std::cout << "onnx_model_path = " << onnx_model_path << std::endl;
+
+  std::string visualizeFlag = obj["visualizeFlag"].asString();
+
+  if (visualizeFlag.compare("visualize") == 0) {
+    onlyVisualize = true;
+  } else {
+    onlyVisualize = false;
+  }
+
+  ifs_1.close();
 }
 
 void EPDContainer::setUseCaseConfigFile()
 {
-  std::string s;
-  std::fstream infile;
-  infile.open(PATH_TO_USECASE_CONFIG);
+  Json::Reader reader;
+  Json::Value obj;
+  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
+  reader.parse(ifs_1, obj);
 
-  while (std::getline(infile, s)) {
-    /* Check if input string is numeric.
-       If true, set the mode.
-     Otherwise set the link or filter. */
-    if (!s.empty() && std::all_of(s.begin(), s.end(), ::isdigit)) {
-      std::stringstream i(s);
-      i >> useCaseMode;
-      if (useCaseMode == EPD::CLASSIFICATION_MODE) {
-        break;
-      }
-      if (useCaseMode == EPD::LOCALISATION_MODE) {
-        // Check if model precision level is not 3.
-        // If true, issue critical error and close program.
-        if (precision_level != 3) {
-          throw std::runtime_error("Please use a Precision-Level 3 ONNX model.");
-        }
-        break;
-      }
-      if (useCaseMode > 4) {
-        throw std::runtime_error("Invalid Use Case.");
-      }
-      continue;
-    }
+  useCaseMode = obj["usecase_mode"].asInt();
 
-    if (useCaseMode == EPD::COUNTING_MODE) {
-      countClassNames.emplace_back(s);
-    }
-    if (useCaseMode == EPD::COLOR_MATCHING_MODE) {
-      template_color_path = s;
-      break;
-    }
-    if (useCaseMode == EPD::TRACKING_MODE) {
-      if (precision_level != 3) {
-        throw std::runtime_error("Please use a Precision-Level 3 ONNX model.");
-        break;
-      }
-
-      tracker_type = s;
-      break;
+  // Classification Mode. Do nothing.
+  // Counting Mode
+  if (useCaseMode == EPD::COUNTING_MODE) {
+    Json::Value class_list = obj["class_list"];
+    for (int index = 0; index < static_cast<int>(class_list.size()); index++) {
+      countClassNames.emplace_back(class_list[index].asString());
     }
   }
-  infile.close();
 
-  switch (useCaseMode) {
-    case EPD::CLASSIFICATION_MODE:
-      printf("[-Use Case-]= EPD::CLASSIFICATION_MODE\n");
-      break;
-    case EPD::COUNTING_MODE:
-      printf("[-Use Case-]= EPD::COUNTING_MODE\n");
-      break;
-    case EPD::COLOR_MATCHING_MODE:
-      printf("[-Use Case-]= EPD::COLOR_MATCHING_MODE\n");
-      break;
-    case EPD::LOCALISATION_MODE:
-      printf("[-Use Case-]= EPD::LOCALISATION_MODE\n");
-      printf("[- Input RGB Image Topic -]= /camera/color/image_raw\n");
-      printf(
-        "[- Input Depth Image Topic -]= "
-        "/camera/aligned_depth_to_color/image_raw\n");
-      printf("[- Camera Info Topic -]= /camera/color/camera_info\n");
-      break;
-    case EPD::TRACKING_MODE:
-      printf("[-Use Case-]= EPD::TRACKING_MODE\n");
-      break;
+  if (useCaseMode == EPD::COLOR_MATCHING_MODE) {
+    template_color_path = obj["path_to_color_template"].asString();
   }
+
+  // Localization Mode
+  if (useCaseMode == EPD::LOCALISATION_MODE) {
+    // Check if model precision level is not 3.
+    // If true, issue critical error and close program.
+    if (precision_level != 3) {
+      throw std::runtime_error("Please use a Precision-Level 3 ONNX model.");
+    }
+  }
+
+  // Tracking Mode
+  if (useCaseMode == EPD::TRACKING_MODE) {
+    // Check if model precision level is not 3.
+    // If true, issue critical error and close program.
+    if (precision_level != 3) {
+      throw std::runtime_error("Please use a Precision-Level 3 ONNX model.");
+    }
+    tracker_type = obj["track_type"].asString();
+  }
+
+  // Invalid Use Case Mode
+  if (useCaseMode > 4) {
+    throw std::runtime_error("Invalid Use Case.\n");
+  }
+
+  ifs_1.close();
 }
 
 void EPDContainer::setPrecisionLevel()
 {
-  std::string onnx_model_filename = onnx_model_path.substr(onnx_model_path.find_last_of("/\\") + 1);
-  printf("[-ONNX Model-]= %s\n", onnx_model_filename.c_str());
-
   std::vector<std::vector<int64_t>> empty_inputShapes;
 
   Ort::OrtBase ort_session(onnx_model_path, 0, empty_inputShapes);
@@ -242,7 +215,6 @@ void EPDContainer::setPrecisionLevel()
     default:
       throw std::runtime_error("Invalid Precision Level. Report as GitHub issue.");
   }
-  printf("[-Precision Level-]= %d\n", precision_level);
 }
 
 void EPDContainer::setLabelList()
@@ -256,7 +228,6 @@ void EPDContainer::setLabelList()
   }
 
   infile.close();
-  printf("[-Label List-]= %s\n", class_label_path.c_str());
 }
 
 }  // namespace EPD

@@ -13,15 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <jsoncpp/json/json.h>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <memory>
 #include "gtest/gtest.h"
 #include "bits/stdc++.h"
 #include "epd_utils_lib/epd_container.hpp"
 
-std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/data/session_config.txt");
-std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/data/usecase_config.txt");
+std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/config/session_config.json");
+std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/config/usecase_config.json");
 std::string PATH_TO_ONNX_MODEL(PATH_TO_PACKAGE "/data/model/FasterRCNN-10.onnx");
 std::string PATH_TO_LABEL_LIST(PATH_TO_PACKAGE "/data/label_list/coco_classes.txt");
 std::string PATH_TO_TEST_IMAGE(PATH_TO_PACKAGE "/test/nadezhda_diskant.jpg");
@@ -30,16 +32,35 @@ std::string PATH_TO_COLORMATCH_IMAGE(PATH_TO_PACKAGE "/test/nadezhda_diskant.jpg
 
 TEST(EPD_TestSuite, Test_P2Model_ColorMatch_Action)
 {
+  Json::StreamWriterBuilder builder;
+  std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+  builder["commentStyle"] = "None";
+  builder["indentation"] = "    ";
+
+  // Reset session_config.json
   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
-  system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
-  system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
-  system(("echo robot >> " + PATH_TO_SESSION_CONFIG).c_str());
-
+  // Reset usecase_config.json
   system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
-  system(("echo 2 >> " + PATH_TO_USECASE_CONFIG).c_str());
-  system(("echo " + PATH_TO_COLORMATCH_IMAGE + " >> " + PATH_TO_USECASE_CONFIG).c_str());
+
+  Json::Value session_config_json;
+  session_config_json["path_to_model"] = PATH_TO_ONNX_MODEL;
+  session_config_json["path_to_label_list"] = PATH_TO_LABEL_LIST;
+  session_config_json["visualizeFlag"] = "robot";
+  session_config_json["useCPU"] = "CPU";
+
+  Json::Value usecase_config_json;
+  usecase_config_json["usecase_mode"] = 2;
+  usecase_config_json["path_to_color_template"] = PATH_TO_COLORMATCH_IMAGE;
+
+  std::ofstream outputFileStream1(PATH_TO_SESSION_CONFIG);
+  writer->write(session_config_json, &outputFileStream1);
+  outputFileStream1.close();
+
+  std::ofstream outputFileStream2(PATH_TO_USECASE_CONFIG);
+  writer->write(usecase_config_json, &outputFileStream2);
+  outputFileStream2.close();
 
   EPD::EPDContainer * ortAgent_;
 

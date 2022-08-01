@@ -13,6 +13,8 @@
 # limitations under the License.
 
 import os
+import sys
+import json
 import subprocess
 
 from PySide2.QtCore import QSize
@@ -28,13 +30,13 @@ class DeployWindow(QWidget):
     '''
     The DeployWindow class is a PySide2 Graphical User Interface (GUI) window
     that is called by MainWindow class in order to configure a custom session
-    and write to session_config.txt.
+    and write to session_config.json.
     '''
     def __init__(self, debug=False):
         '''
         The constructor.
         Sets the size of the window and configurations for session_config.
-        Checks if the session_config.txt file exists. If true, configure
+        Checks if the session_config.json file exists. If true, configure
         accordingly. Otherwise, assign default values.
         Calls setButtons function to populate window with button.
         '''
@@ -60,57 +62,73 @@ class DeployWindow(QWidget):
 
         self.useCPU = True
 
-        self._path_to_session_config = '../data/session_config.txt'
-        self._path_to_usecase_config = '../data/usecase_config.txt'
-        self._path_to_launch_file = '../launch/run.launch.py'
+        self._path_to_session_config = '../config/session_config.json'
+        self._path_to_usecase_config = '../config/usecase_config.json'
+        self._path_to_input_image_json_file = '../config/input_image_topic.json'
 
         self.usecase_list = ['Classification', 'Counting', 'Color-Matching', 'Localization', 'Tracking']
 
-        # Check if session_config.txt file exists.
-        # If does not exist, assign default value.
+        session_config = None
+        usecase_config = None
         if self.doesFileExist(self._path_to_session_config):
-            self.session_config = [line.rstrip('\n') for
-                                   line in open(self._path_to_session_config)]
-
-            if len(self.session_config) == 4:
-                self._path_to_model = self.session_config[0]
-                self._path_to_label_list = '.' + self.session_config[1]
-                self.visualizeFlag = True if self.session_config[2] == 'visualize' else False
-                self.useCPU = True if self.session_config[3] == 'CPU' else False
-            else:
-                self._path_to_model = 'filepath/to/onnx/model'
-                self._path_to_label_list = 'filepath/to/classes/list/txt'
-                self.useCPU = True
-                self.session_config = [self._path_to_label_list, self._path_to_model, 'visualize', 'CPU']
-
+            session_config_json_obj = open(self._path_to_session_config)
+            session_config = json.load(session_config_json_obj)
         else:
-            print('[ session_config.txt ] is missing or faulty. Assigning default values')
+            print('[ session_config.json ] is missing. Assigning default values')
             self._path_to_model = 'filepath/to/onnx/model'
             self._path_to_label_list = 'filepath/to/classes/list/txt'
+            self.visualizeFlag = True
             self.useCPU = True
-            self.session_config = [self._path_to_label_list, self._path_to_model, 'visualize', 'CPU']
 
-
-        # Check if usecase_config.txt file exists.
-        # If does not exist, assign default value.
         if self.doesFileExist(self._path_to_usecase_config):
-            self.usecase_config = [line.rstrip('\n') for
-                                   line in open(self._path_to_usecase_config)]
-            self.usecase_mode = self.usecase_config[0]
+            usecase_config_json_obj = open(self._path_to_usecase_config)
+            usecase_config = json.load(usecase_config_json_obj)
+        else:
+            print('[usecase_config.json] is missing.'
+                  'Assigning default Use Case MODE : [CLASSIFICATION] ')
+            self.usecase_mode = 0
+
+        try:
+            self._path_to_model = session_config["path_to_model"]
+            self._path_to_label_list = session_config["path_to_label_list"]
+            if session_config["visualizeFlag"] == "visualize":
+                self.visualizeFlag = True
+            else:
+                self.visualizeFlag = False
+            if session_config["useCPU"] == "CPU":
+                self.useCPU = True
+            else:
+                self.useCPU = False
+        except:
+            print('[ session_config.json ] Exception. Assigning default values')
+            self._path_to_model = 'filepath/to/onnx/model'
+            self._path_to_label_list = 'filepath/to/classes/list/txt'
+            self.visualizeFlag = True
+            self.useCPU = True
+
+        try:
+            print(usecase_config["usecase_mode"])
+            self.usecase_mode = int(usecase_config["usecase_mode"])
+
+            if self.usecase_mode <= 0 or self.usecase_mode > 4:
+                print('[usecase_config.json] Invalid Usecase Mode - FOUND.'
+                      'Assigning default Use Case MODE : [CLASSIFICATION] ')
+                self.usecase_mode = 0
+
             # Rearranging usecase_list based on saved configuration.
             curr_usecase_mode = self.usecase_list[int(self.usecase_mode)]
             self.usecase_list.remove(curr_usecase_mode)
             self.usecase_list.insert(0, curr_usecase_mode)
-        else:
-            print('[usecase_config.txt] is missing.'
+        except:
+            print('[usecase_config.json] Exception.'
                   'Assigning default Use Case MODE : [CLASSIFICATION] ')
             self.usecase_mode = 0
 
-        if self.doesFileExist(self._path_to_launch_file):
-            self.launch_file = [line.rstrip('\n') for
-                                   line in open(self._path_to_launch_file)]
-            self._input_image_topic = self.launch_file[24]
-            self._input_image_topic = self._input_image_topic[69:-3]
+        if self.doesFileExist(self._path_to_input_image_json_file):
+            # Load input_image_topic.json
+            f = open(self._path_to_input_image_json_file)
+            data = json.load(f)
+            self._input_image_topic = data['input_image_topic']
         else:
             self._input_image_topic = '/camera/color/image_raw'
 
@@ -136,7 +154,7 @@ class DeployWindow(QWidget):
 
     def setButtons(self):
         '''A Mutator function that defines all buttons in DeployWindow.'''
-        # ONNX Model to set the path to ONNX model and store in session_config.txt
+        # ONNX Model to set the path to ONNX model and store in session_config.json
         self.model_button = QPushButton('ONNX Model', self)
         self.model_button.setIcon(QIcon('img/model.png'))
         self.model_button.setIconSize(QSize(75, 75))
@@ -148,7 +166,7 @@ class DeployWindow(QWidget):
         else:
             self.model_button.setStyleSheet('background-color: rgba(200,10,0,255);')
 
-        # Label List to set the path to ONNX model and store in session_config.txt
+        # Label List to set the path to ONNX model and store in session_config.json
         self.list_button = QPushButton('Label List', self)
         self.list_button.setIcon(QIcon('img/label_list.png'))
         self.list_button.setIconSize(QSize(75, 75))
@@ -177,7 +195,7 @@ class DeployWindow(QWidget):
         else:
             self.usecase_config_button.setStyleSheet('background-color: rgba(200,10,0,255);')
 
-        # UseCase button to select use case and write to usecase_config.txt
+        # UseCase button to select use case and write to usecase_config.json
         self.usecase_config_label = QLabel(self)
         self.usecase_config_label.setText('Use Case =')
         self.usecase_config_label.move(self._DEPLOY_WIN_W/2 - 90,
@@ -224,7 +242,7 @@ class DeployWindow(QWidget):
             self.docker_button.setText('GPU')
 
         # Run button to deploy ROS2 package with info
-        # from usecase_config.txt and session_config.txt
+        # from usecase_config.json and session_config.json
         self.run_button = QPushButton('Run', self)
         self.run_button.setIcon(QIcon('img/go.png'))
         self.run_button.setIconSize(QSize(100, 100))
@@ -245,8 +263,8 @@ class DeployWindow(QWidget):
         '''
         A Mutator function that runs a bash script that checks if the _is_running
         boolean flag is True or not.\n
-        If False, run bash script to run ROS2 package with session_config.txt and
-        usecase_config.txt
+        If False, run bash script to run ROS2 package with session_config.json and
+        usecase_config.json
         Otherwise, run bash script to kill ROS2 package processes remotely.
         '''
         if not self._is_running:
@@ -275,11 +293,11 @@ class DeployWindow(QWidget):
         new_image_topic = self.topic_button.toPlainText()
         print('Rewriting Input Image Topic to: ' + new_image_topic)
 
-        self.launch_file[24] = self.launch_file[24][:52] + new_image_topic + self.launch_file[24][-3:]
+        dict = {"input_image_topic": new_image_topic}
+        json_object = json.dumps(dict, indent=4)
 
-        with open(self._path_to_launch_file, 'w') as filehandle:
-            for line in self.launch_file:
-                filehandle.write(line + '\n')
+        with open(self._path_to_input_image_json_file, 'w') as outfile:
+            outfile.write(json_object)
 
     def doesFileExist(self, input_filepath):
         ''' A Getter function that checks if a given file exists.'''
@@ -295,10 +313,9 @@ class DeployWindow(QWidget):
 
         if self.visualizeFlag:
             self.visualize_button.setText('Visualize')
-            self.session_config[2] = 'visualize'
         else:
             self.visualize_button.setText('Action')
-            self.session_config[2] = 'robot'
+
         self.visualize_button.updateGeometry()
         self.updateSessionConfig()
 
@@ -308,10 +325,8 @@ class DeployWindow(QWidget):
 
         if self.useCPU:
             self.docker_button.setText('CPU')
-            self.session_config[3] = 'CPU'
         else:
             self.docker_button.setText('GPU')
-            self.session_config[3] = 'GPU'
         self.docker_button.updateGeometry()
         self.updateSessionConfig()
 
@@ -325,20 +340,26 @@ class DeployWindow(QWidget):
                 msgBox.setText('[Classification] Selected.'
                                'No other configuration required.')
                 msgBox.exec()
-            print('Wrote to ../data/usecase_config.txt')
-            with open(self._path_to_usecase_config, 'w') as filehandle:
-                filehandle.write('0\n')
+
+            print('Wrote to ../data/usecase_config.json')
+            dict = {"usecase_mode": 0}
+            json_object = json.dumps(dict, indent=4)
+            with open(self._path_to_usecase_config, 'w') as outfile:
+                outfile.write(json_object)
+
         elif selected_usecase == 'Counting':
             self.counting_window = CountingWindow(self._path_to_label_list,
                                                   self._path_to_usecase_config)
             self.counting_window.show()
         elif selected_usecase == 'Localization':
-            with open(self._path_to_usecase_config, 'w') as filehandle:
-                filehandle.write('3\n')
+            dict = {"usecase_mode": 3}
+            json_object = json.dumps(dict, indent=4)
+            with open(self._path_to_usecase_config, 'w') as outfile:
+                outfile.write(json_object)
         elif selected_usecase == 'Tracking':
             self.tracking_window = TrackingWindow(self._path_to_usecase_config)
             self.tracking_window.show()
-        else:
+        elif selected_usecase == 'Color-Matching':
             if not self.debug:
                 input_refimage_filepath, ok = (
                     QFileDialog.getOpenFileName(self,
@@ -349,28 +370,51 @@ class DeployWindow(QWidget):
                 input_refimage_filepath = 'dummy_filepath_to_refimage'
                 ok = True
 
-            self.usecase_config.clear()
-            self.usecase_config.append(str(2))
             if ok:
-
                 filepath_index = input_refimage_filepath.find('/data')
-
-                self.usecase_config.append('.' + input_refimage_filepath[filepath_index:])
+                path_to_color_template = '.' + input_refimage_filepath[filepath_index:]
             else:
                 print('No reference color template set.')
                 return
-            print('Wrote to ../data/usecase_config.txt')
-            with open(self._path_to_usecase_config, 'w') as filehandle:
-                for ele in self.usecase_config:
-                    filehandle.write('%s\n' % ele)
+
+            print('Wrote to ../data/usecase_config.json')
+            dict = {
+                "usecase_mode": 2,
+                "path_to_color_template": path_to_color_template
+                }
+            json_object = json.dumps(dict, indent=4)
+
+            with open(self._path_to_usecase_config, 'w') as outfile:
+                outfile.write(json_object)
+        else:
+            print('Invalid Use Case')
+            sys.exit()
 
         self.usecase_config_button.setStyleSheet('background-color: rgba(0,150,10,255);')
 
     def updateSessionConfig(self):
-        '''A Mutator function that updates the session_config.txt file.'''
-        with open(self._path_to_session_config, 'w') as filehandle:
-            for ele in self.session_config:
-                filehandle.write('%s\n' % ele)
+        '''A Mutator function that updates the session_config.json file.'''
+
+        if self.visualizeFlag:
+            visualizeFlag_string = "visualize"
+        else:
+            visualizeFlag_string = "robot"
+
+        if self.useCPU:
+            useCPU_string = "CPU"
+        else:
+            useCPU_string = "GPU"
+
+        dict = {
+            "path_to_model": self._path_to_model,
+            "path_to_label_list": self._path_to_label_list,
+            "visualizeFlag": visualizeFlag_string,
+            "useCPU": useCPU_string
+            }
+        json_object = json.dumps(dict, indent=4)
+
+        with open(self._path_to_session_config, 'w') as outfile:
+            outfile.write(json_object)
 
     def setModel(self):
         '''A function is triggered by the button labelled, ONNX Model.'''
@@ -389,7 +433,7 @@ class DeployWindow(QWidget):
 
             index = input_model_filepath.find('/data/model')
 
-            self.session_config[0] = '.' + input_model_filepath[index:]
+            self._path_to_model = '.' + input_model_filepath[index:]
         else:
             print('No ONNX model set.')
             return
@@ -402,7 +446,7 @@ class DeployWindow(QWidget):
         if not self.debug:
             input_classes_filepath, ok = (
                 QFileDialog.getOpenFileName(self,
-                                            'Set the .txt to use',
+                                            'Set the .json to use',
                                             os.path.abspath('../data'),
                                             'Text Files (*.txt)'))
         else:
@@ -414,7 +458,7 @@ class DeployWindow(QWidget):
 
             index = input_classes_filepath.find('/data/label_list')
 
-            self.session_config[1] = '.' + input_classes_filepath[index:]
+            self._path_to_label_list = '.' + input_classes_filepath[index:]
         else:
             print('No label list set.')
             return

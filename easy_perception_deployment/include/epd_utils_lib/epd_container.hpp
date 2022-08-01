@@ -32,7 +32,7 @@ namespace EPD
 {
 /*! \class EPDContainer
     \brief An Easy Perception Deployment(EPD) Container class object.
-    The EPDContainer class object parses the session_config.txt and
+    The EPDContainer class object parses the session_config.json and
     usecase_config.txt files to determine how an ONNX model can be
     deployed as an inference engine using the ONNXRuntime library.
 */
@@ -46,14 +46,14 @@ public:
   /*! \brief An pointer for a Precision Level 1 OrtBase object*/
   Ort::P1OrtBase * p1_ort_session;
   /*! \brief The determined precision_level for an input ONNX model file,
-  * stated by the session_config.txt. */
+  * stated by the session_config.json. */
   unsigned int precision_level;
   /*! \brief A fixed integer for expected RGB 2D images*/
   const int IMG_CHANNEL = 3;
-  /*! \brief The constant filepath to session_config.txt*/
-  const std::string PATH_TO_SESSION_CONFIG = PATH_TO_PACKAGE "/data/session_config.txt";
-  /*! \brief The constant filepath to usecase_config.txt*/
-  const std::string PATH_TO_USECASE_CONFIG = PATH_TO_PACKAGE "/data/usecase_config.txt";
+  /*! \brief The constant filepath to session_config.json*/
+  const std::string PATH_TO_SESSION_CONFIG = PATH_TO_PACKAGE "/config/session_config.json";
+  /*! \brief The constant filepath to usecase_config.json*/
+  const std::string PATH_TO_USECASE_CONFIG = PATH_TO_PACKAGE "/config/usecase_config.json";
   /*! \brief The filepath to a template color image for Color-Matching use-case
   * filter.
   */
@@ -123,7 +123,7 @@ private:
   /*! \brief Expected dimensions of the data provided by an input camera.*/
   int frame_width, frame_height;
 
-  /*! \brief A Mutator function that parses the session_config.txt file.*/
+  /*! \brief A Mutator function that parses the session_config.json file.*/
   void setModelConfigFile();
   /*! \brief A Mutator function that parses the usecase_config.txt file.*/
   void setUseCaseConfigFile();

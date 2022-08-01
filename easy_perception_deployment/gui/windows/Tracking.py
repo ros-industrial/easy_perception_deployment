@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import json
 
 from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
@@ -24,13 +25,13 @@ class TrackingWindow(QWidget):
     '''
     The TrackingWindow class is a PySide2 Graphical User Interface (GUI) window
     that is called by DeployWindow class in order to configure a custom Tracking
-    use-case and write to usecase_config.txt.
+    use-case and write to usecase_config.json.
     '''
     def __init__(self, _path_to_usecase_config):
         '''
         The constructor.
         Sets the size of the window and configurations for usecase_config.
-        Checks if the usecase_config.txt file exists. If true, configure
+        Checks if the usecase_config.json file exists. If true, configure
         accordingly. Otherwise, assign default values.
         Calls setButtons function to populate window with button.
         '''
@@ -69,7 +70,7 @@ class TrackingWindow(QWidget):
         for label in self._tracker_description_list:
             self.label_list_dropdown.addItem(label)
 
-        # Finish button to save the stored counting and write to usecase_config.txt
+        # Finish button to save the stored counting and write to usecase_config.json
         self.finish_button = QPushButton('Done', self)
         self.finish_button.setIcon(QIcon('img/go.png'))
         self.finish_button.setIconSize(QSize(75, 75))
@@ -92,11 +93,15 @@ class TrackingWindow(QWidget):
 
     def writeToUseCaseConfig(self):
         '''A function that is triggered by the button labelled, Finish.'''
-        print('Wrote to ../data/usecase_config.txt')
-        with open(self._path_to_usecase_config, 'w') as filehandle:
-            filehandle.write('4\n')
-            filehandle.write('%s\n' % self._tracker_label_list[self._selected_tracker_index])
-        self.close()
+        print('Wrote to ../data/usecase_config.json')
+
+        dict = {
+            "usecase_mode": 4,
+            "track_type": self._tracker_label_list[self._selected_tracker_index]
+            }
+        json_object = json.dumps(dict, indent=4)
+        with open(self._path_to_usecase_config, 'w') as outfile:
+            outfile.write(json_object)
 
     def closeWindow(self):
         '''A function that is triggered by the button labelled, Cancel.'''
