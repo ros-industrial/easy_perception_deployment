@@ -1850,7 +1850,7 @@ cv::Ptr<cv::Tracker> P3OrtBase::create_tracker(std::string tracker_type)
     return cv::TrackerCSRT::create();
   } else {
     throw std::runtime_error(
-            "Invalid OpenCV Tracker name given in usecase_config.txt. "
+            "Invalid OpenCV Tracker name given in usecase_config.json. "
             "Please use [KCF, MedianFlow, CSRT] only.");
   }
 }

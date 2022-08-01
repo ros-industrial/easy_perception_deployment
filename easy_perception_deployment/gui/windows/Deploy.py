@@ -110,8 +110,8 @@ class DeployWindow(QWidget):
             print(usecase_config["usecase_mode"])
             self.usecase_mode = int(usecase_config["usecase_mode"])
 
-            if self.usecase_mode <= 0 or self.usecase_mode > 4:
-                print('[usecase_config.json] Invalid Usecase Mode - FOUND.'
+            if self.usecase_mode < 0 or self.usecase_mode > 4:
+                print('[usecase_config.json] Invalid Usecase Mode - FOUND.\n'
                       'Assigning default Use Case MODE : [CLASSIFICATION] ')
                 self.usecase_mode = 0
 

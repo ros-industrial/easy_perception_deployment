@@ -23,7 +23,7 @@
 #include "opencv2/opencv.hpp"
 
 
-/*! \brief A collection of use-case filters, namely for parsing usecase_config.txt,
+/*! \brief A collection of use-case filters, namely for parsing usecase_config.json,
 Counting and Color-Matching usecaseMode.
  */
 namespace EPD
@@ -34,9 +34,9 @@ const unsigned int COLOR_MATCHING_MODE = 2;
 const unsigned int LOCALISATION_MODE = 3;
 const unsigned int TRACKING_MODE = 4;
 
-const char PATH_TO_USECASE_CONFIG[] = PATH_TO_PACKAGE "/data/usecase_config.txt";
+const char PATH_TO_USECASE_CONFIG[] = PATH_TO_PACKAGE "/config/usecase_config.json";
 
-/*! \brief A Getter function that parses the usecase_config.txt if a Counting
+/*! \brief A Getter function that parses the usecase_config.json if a Counting
 usecaseMode is selected and populates a list of selected object names intended
 to be counted.
 */
@@ -44,17 +44,28 @@ inline std::vector<std::string> generateCountClassNames()
 {
   std::vector<std::string> countClassNames;
 
-  std::string s;
-  std::fstream infile;
-  infile.open(PATH_TO_USECASE_CONFIG);
+  Json::Reader reader;
+  Json::Value obj;
+  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
 
-  // Read and throw away the first line since it is already read.
-  std::getline(infile, s);
-
-  while (std::getline(infile, s)) {
-    countClassNames.emplace_back(s);
+  if (ifs_1) {
+    try {
+      ifs_1 >> obj;
+    } catch (const std::exception & e) {
+      std::cerr << e.what() << std::endl;
+    }
+  } else {
+    std::cerr << "File not found!" << std::endl;
   }
-  infile.close();
+
+  reader.parse(ifs_1, obj);
+
+  Json::Value class_list = obj["class_list"];
+  for (int index = 0; index < static_cast<int>(class_list.size()); index++) {
+    countClassNames.emplace_back(class_list[index].asString());
+  }
+
+  ifs_1.close();
 
   return countClassNames;
 }
@@ -112,15 +123,26 @@ inline void matchColor(
   std::vector<float> & scores,
   std::vector<std::string> allClassNames)
 {
-  // Get the reference image using the 2nd line of usecase_config.txt
-  std::string s;
-  std::fstream infile;
-  infile.open(PATH_TO_USECASE_CONFIG);
-  // Read and throw away the first line since it is already read.
-  std::getline(infile, s);
-  std::getline(infile, s);
+  Json::Reader reader;
+  Json::Value obj;
+  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
 
-  std::string filepath_to_refcolor = s;
+  if (ifs_1) {
+    try {
+      ifs_1 >> obj;
+    } catch (const std::exception & e) {
+      std::cerr << e.what() << std::endl;
+    }
+  } else {
+    std::cerr << "File not found!" << std::endl;
+  }
+
+  reader.parse(ifs_1, obj);
+
+  std::string filepath_to_refcolor = obj["path_to_color_template"].asString();
+
+  ifs_1.close();
+
   cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, cv::IMREAD_COLOR);
   cv::Mat hsv_base, hsv_test1;
   cv::cvtColor(ref_color_image, hsv_base, cv::COLOR_BGR2HSV);
@@ -173,7 +195,6 @@ inline void matchColor(
   bboxes = local_bboxes;
   classIndices = local_classIndices;
   scores = local_scores;
-  infile.close();
 }
 
 /*! \brief A Mutator function that takes the base inference results from a P2
@@ -282,15 +303,26 @@ inline void matchColor(
   std::vector<cv::Mat> & masks,
   std::vector<std::string> allClassNames)
 {
-  // Get the reference image using the 2nd line of usecase_config.txt
-  std::string s;
-  std::fstream infile;
-  infile.open(PATH_TO_USECASE_CONFIG);
-  // Read and throw away the first line since it is already read.
-  std::getline(infile, s);
-  std::getline(infile, s);
+  Json::Reader reader;
+  Json::Value obj;
+  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
 
-  std::string filepath_to_refcolor = s;
+  if (ifs_1) {
+    try {
+      ifs_1 >> obj;
+    } catch (const std::exception & e) {
+      std::cerr << e.what() << std::endl;
+    }
+  } else {
+    std::cerr << "File not found!" << std::endl;
+  }
+
+  reader.parse(ifs_1, obj);
+
+  std::string filepath_to_refcolor = obj["path_to_color_template"].asString();
+
+  ifs_1.close();
+
   cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, cv::IMREAD_COLOR);
   cv::Mat hsv_base, hsv_test1;
   cv::cvtColor(ref_color_image, hsv_base, cv::COLOR_BGR2HSV);
@@ -347,7 +379,6 @@ inline void matchColor(
   classIndices = local_classIndices;
   scores = local_scores;
   masks = local_masks;
-  infile.close();
 }
 
 /*! \brief A Mutator function that takes the base inference results from a P3
@@ -362,7 +393,7 @@ inline void activateUseCase(
   std::vector<cv::Mat> & masks,
   std::vector<std::string> allClassNames)
 {
-  unsigned int useCaseMode = 3;
+  int useCaseMode = 3;
 
   Json::Reader reader;
   Json::Value obj;

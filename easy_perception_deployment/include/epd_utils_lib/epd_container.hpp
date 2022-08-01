@@ -33,7 +33,7 @@ namespace EPD
 /*! \class EPDContainer
     \brief An Easy Perception Deployment(EPD) Container class object.
     The EPDContainer class object parses the session_config.json and
-    usecase_config.txt files to determine how an ONNX model can be
+    usecase_config.json files to determine how an ONNX model can be
     deployed as an inference engine using the ONNXRuntime library.
 */
 class EPDContainer
@@ -125,7 +125,7 @@ private:
 
   /*! \brief A Mutator function that parses the session_config.json file.*/
   void setModelConfigFile();
-  /*! \brief A Mutator function that parses the usecase_config.txt file.*/
+  /*! \brief A Mutator function that parses the usecase_config.json file.*/
   void setUseCaseConfigFile();
   /*! \brief A Mutator function that does a test initialization of an
   *  OrtBase object based on an input ONNX model file and determines the
