@@ -16,10 +16,12 @@
 #ifndef EPD_UTILS_LIB__USECASE_CONFIG_HPP_
 #define EPD_UTILS_LIB__USECASE_CONFIG_HPP_
 
+#include <jsoncpp/json/json.h>
 #include <string>
 #include <vector>
 #include <fstream>
 #include "opencv2/opencv.hpp"
+
 
 /*! \brief A collection of use-case filters, namely for parsing usecase_config.txt,
 Counting and Color-Matching usecaseMode.
@@ -185,17 +187,28 @@ inline void activateUseCase(
   std::vector<float> & scores,
   std::vector<std::string> allClassNames)
 {
-  unsigned int useCaseMode = 3;
-  std::string s;
-  std::fstream infile;
-  infile.open(PATH_TO_USECASE_CONFIG);
+  unsigned int useCaseMode = 0;
 
-  // Get first line of the usecase_config.txt
-  std::getline(infile, s);
-  if (!s.empty() && std::all_of(s.begin(), s.end(), ::isdigit)) {
-    std::stringstream i(s);
-    i >> useCaseMode;
+  Json::Reader reader;
+  Json::Value obj;
+  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
+
+  if (ifs_1) {
+    try {
+      ifs_1 >> obj;
+    } catch (const std::exception & e) {
+      std::cerr << e.what() << std::endl;
+    }
+  } else {
+    std::cerr << "File not found!" << std::endl;
   }
+
+  reader.parse(ifs_1, obj);
+
+  useCaseMode = obj["usecase_mode"].asInt();
+
+  ifs_1.close();
+
   // If default CLASSIFICATION_MODE is selected, do not alter anything and return.
   if (useCaseMode == EPD::CLASSIFICATION_MODE) {
     return;
@@ -350,16 +363,26 @@ inline void activateUseCase(
   std::vector<std::string> allClassNames)
 {
   unsigned int useCaseMode = 3;
-  std::string s;
-  std::fstream infile;
-  infile.open(PATH_TO_USECASE_CONFIG);
 
-  // Get first line of the usecase_config.txt
-  std::getline(infile, s);
-  if (!s.empty() && std::all_of(s.begin(), s.end(), ::isdigit)) {
-    std::stringstream i(s);
-    i >> useCaseMode;
+  Json::Reader reader;
+  Json::Value obj;
+  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
+
+  if (ifs_1) {
+    try {
+      ifs_1 >> obj;
+    } catch (const std::exception & e) {
+      std::cerr << e.what() << std::endl;
+    }
+  } else {
+    std::cerr << "File not found!" << std::endl;
   }
+
+  reader.parse(ifs_1, obj);
+
+  useCaseMode = obj["usecase_mode"].asInt();
+
+  ifs_1.close();
 
   // If default CLASSIFICATION_MODE is selected, do not alter anything and return.
   if (useCaseMode == EPD::CLASSIFICATION_MODE) {

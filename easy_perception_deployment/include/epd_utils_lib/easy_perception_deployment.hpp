@@ -274,10 +274,10 @@ EasyPerceptionDeployment::EasyPerceptionDeployment(void)
   RCLCPP_INFO(this->get_logger(), "[-ONNX Model-] - %s", ortAgent_.onnx_model_path.c_str());
   RCLCPP_INFO(this->get_logger(), "[-Label List-] - %s", ortAgent_.class_label_path.c_str());
   RCLCPP_INFO(this->get_logger(), "[-Precision Level-] - %d", ortAgent_.precision_level);
-  if (ortAgent_.isVisualize()){
-      RCLCPP_INFO(this->get_logger(), "[-Mode-] - VISUALISE");
+  if (ortAgent_.isVisualize()) {
+    RCLCPP_INFO(this->get_logger(), "[-Mode-] - VISUALISE");
   } else {
-      RCLCPP_INFO(this->get_logger(), "[-Mode-] - ACTION");
+    RCLCPP_INFO(this->get_logger(), "[-Mode-] - ACTION");
   }
 
   switch (ortAgent_.useCaseMode) {
@@ -293,7 +293,8 @@ EasyPerceptionDeployment::EasyPerceptionDeployment(void)
     case EPD::LOCALISATION_MODE:
       RCLCPP_INFO(this->get_logger(), "[-Use Case-] - EPD::LOCALISATION_MODE");
       RCLCPP_INFO(this->get_logger(), "[- Input RGB Image Topic -] - /camera/color/image_raw");
-      RCLCPP_INFO(this->get_logger(),
+      RCLCPP_INFO(
+        this->get_logger(),
         "[- Input Depth Image Topic -] - "
         "/camera/aligned_depth_to_color/image_raw");
       RCLCPP_INFO(this->get_logger(), "[- Camera Info Topic -] - /camera/color/camera_info");

@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <jsoncpp/json/json.h>
+
 #include <algorithm>
 #include <fstream>
 #include <string>
@@ -20,8 +22,6 @@
 
 #include "epd_container.hpp"
 #include "epd_utils_lib/usecase_config.hpp"
-#include <jsoncpp/json/json.h>
-#include "rclcpp/rclcpp.hpp"
 
 
 namespace EPD
@@ -118,21 +118,33 @@ void EPDContainer::setModelConfigFile()
   Json::Reader reader;
   Json::Value obj;
   std::ifstream ifs_1(PATH_TO_SESSION_CONFIG);
+
+  if (ifs_1) {
+    try {
+      ifs_1 >> obj;
+    } catch (const std::exception & e) {
+      std::cerr << e.what() << std::endl;
+    }
+  } else {
+    std::cerr << "File not found!" << std::endl;
+  }
+
   reader.parse(ifs_1, obj);
 
   onnx_model_path = obj["path_to_model"].asString();
   class_label_path = obj["path_to_label_list"].asString();
 
+  std::cout << "onnx_model_path = " << onnx_model_path << std::endl;
+
   std::string visualizeFlag = obj["visualizeFlag"].asString();
 
-  if (visualizeFlag.compare("visualize") == 0){
-      onlyVisualize = true;
+  if (visualizeFlag.compare("visualize") == 0) {
+    onlyVisualize = true;
   } else {
-      onlyVisualize = false;
+    onlyVisualize = false;
   }
 
   ifs_1.close();
-
 }
 
 void EPDContainer::setUseCaseConfigFile()
@@ -148,9 +160,8 @@ void EPDContainer::setUseCaseConfigFile()
   // Counting Mode
   if (useCaseMode == EPD::COUNTING_MODE) {
     Json::Value class_list = obj["class_list"];
-    for (int index = 0; index < int(class_list.size()); index++)
-    {
-        countClassNames.emplace_back(class_list[index].asString());
+    for (int index = 0; index < static_cast<int>(class_list.size()); index++) {
+      countClassNames.emplace_back(class_list[index].asString());
     }
   }
 

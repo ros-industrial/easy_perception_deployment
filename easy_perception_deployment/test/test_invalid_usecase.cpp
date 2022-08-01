@@ -13,9 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <jsoncpp/json/json.h>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <memory>
 #include "gtest/gtest.h"
 #include "bits/stdc++.h"
 #include "epd_utils_lib/epd_container.hpp"
@@ -27,14 +29,34 @@ std::string PATH_TO_LABEL_LIST(PATH_TO_PACKAGE "/data/label_list/imagenet_classe
 
 TEST(EPD_TestSuite, Test_readSessionUseCaseConfigTextFile_EPDContainer)
 {
+  Json::StreamWriterBuilder builder;
+  std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+  builder["commentStyle"] = "None";
+  builder["indentation"] = "    ";
+
+  // Reset session_config.json
   system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
   system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
-  system(("echo " + PATH_TO_ONNX_MODEL + " >> " + PATH_TO_SESSION_CONFIG).c_str());
-  system(("echo " + PATH_TO_LABEL_LIST + " >> " + PATH_TO_SESSION_CONFIG).c_str());
-
+  // Reset usecase_config.json
   system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
   system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
-  system(("echo 5 >> " + PATH_TO_USECASE_CONFIG).c_str());
+
+  Json::Value session_config_json;
+  session_config_json["path_to_model"] = PATH_TO_ONNX_MODEL;
+  session_config_json["path_to_label_list"] = PATH_TO_LABEL_LIST;
+  session_config_json["visualizeFlag"] = "visualize";
+  session_config_json["useCPU"] = "CPU";
+
+  Json::Value usecase_config_json;
+  usecase_config_json["usecase_mode"] = 5;
+
+  std::ofstream outputFileStream1(PATH_TO_SESSION_CONFIG);
+  writer->write(session_config_json, &outputFileStream1);
+  outputFileStream1.close();
+
+  std::ofstream outputFileStream2(PATH_TO_USECASE_CONFIG);
+  writer->write(usecase_config_json, &outputFileStream2);
+  outputFileStream2.close();
 
   EPD::EPDContainer * ortAgent_;
 
@@ -42,12 +64,10 @@ TEST(EPD_TestSuite, Test_readSessionUseCaseConfigTextFile_EPDContainer)
     ortAgent_ = new EPD::EPDContainer();
     FAIL() << "Expected std::runtime_error.";
   } catch (std::runtime_error const & err) {
-    EXPECT_EQ(err.what(), std::string("Invalid Use Case."));
+    EXPECT_EQ(err.what(), std::string("Invalid Use Case.\n"));
   } catch (...) {
     FAIL() << "Expected std::runtime_error.";
   }
-
-  ortAgent_->setFrameDimension(400, 500);
 }
 
 int main(int argc, char ** argv)
