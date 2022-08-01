@@ -29,7 +29,7 @@ from windows.Train import TrainWindow
 from datetime import date
 from PySide2 import QtCore
 
-# Clear all stored session_config.json usecase_config.txt
+# Clear all stored session_config.json usecase_config.json
 if os.path.exists('../config/session_config.json') and os.path.exists('../config/usecase_config.json'):
     p1 = subprocess.Popen(['rm', '../config/session_config.json'])
     p1.communicate()
@@ -425,7 +425,7 @@ def test_conformDatasetToCOCO_TrainWindow(qtbot):
 def test_closeWindow_CountingWindow(qtbot):
 
     path_to_labellist = '../data/label_list/coco_classes.txt'
-    path_to_usecase_config = '../data/usecase_config.txt'
+    path_to_usecase_config = '../config/usecase_config.json'
     widget = CountingWindow(path_to_labellist, path_to_usecase_config)
     qtbot.addWidget(widget)
 
@@ -459,7 +459,7 @@ def test_writeToUseCaseConfig_CountingWindow(qtbot):
 def test_addObject_CountingWindow():
 
     path_to_label_list = './data/label_list/coco_classes.txt'
-    path_to_usecase_config = './data/usecase_config.txt'
+    path_to_usecase_config = './config/usecase_config.json'
     widget = CountingWindow(path_to_label_list, path_to_usecase_config)
 
     widget.addObject(0)

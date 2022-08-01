@@ -15,3 +15,8 @@ Changelog for package easy_perception_deployment
 * Revamped session_config and use_config parser. easy_perception_deployment now reads config/usecase_config.json as well as config/session_config.json for more robust session configuration.
 * Contributor(s): Bey Hao Yun
 
+0.1.1 (2022-08-01)
+-------------------
+* Fixed faulty usecase_config.json reading within usecase_config.hpp.
+* ...
+* Contributor(s): Bey Hao Yun

@@ -23,7 +23,7 @@
 #include "opencv2/opencv.hpp"
 
 
-/*! \brief A collection of use-case filters, namely for parsing usecase_config.txt,
+/*! \brief A collection of use-case filters, namely for parsing usecase_config.json,
 Counting and Color-Matching usecaseMode.
  */
 namespace EPD
@@ -34,9 +34,9 @@ const unsigned int COLOR_MATCHING_MODE = 2;
 const unsigned int LOCALISATION_MODE = 3;
 const unsigned int TRACKING_MODE = 4;
 
-const char PATH_TO_USECASE_CONFIG[] = PATH_TO_PACKAGE "/data/usecase_config.txt";
+const char PATH_TO_USECASE_CONFIG[] = PATH_TO_PACKAGE "/config/usecase_config.json";
 
-/*! \brief A Getter function that parses the usecase_config.txt if a Counting
+/*! \brief A Getter function that parses the usecase_config.json if a Counting
 usecaseMode is selected and populates a list of selected object names intended
 to be counted.
 */
@@ -112,7 +112,7 @@ inline void matchColor(
   std::vector<float> & scores,
   std::vector<std::string> allClassNames)
 {
-  // Get the reference image using the 2nd line of usecase_config.txt
+  // Get the reference image using the 2nd line of usecase_config.json
   std::string s;
   std::fstream infile;
   infile.open(PATH_TO_USECASE_CONFIG);
@@ -282,7 +282,7 @@ inline void matchColor(
   std::vector<cv::Mat> & masks,
   std::vector<std::string> allClassNames)
 {
-  // Get the reference image using the 2nd line of usecase_config.txt
+  // Get the reference image using the 2nd line of usecase_config.json
   std::string s;
   std::fstream infile;
   infile.open(PATH_TO_USECASE_CONFIG);
@@ -362,7 +362,7 @@ inline void activateUseCase(
   std::vector<cv::Mat> & masks,
   std::vector<std::string> allClassNames)
 {
-  unsigned int useCaseMode = 3;
+  int useCaseMode = 3;
 
   Json::Reader reader;
   Json::Value obj;
