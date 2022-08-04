@@ -364,7 +364,7 @@ void EasyPerceptionDeployment::process_localize_callback(
   // Initialize timer
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
-  EPD::EPDObjectLocalization result = ortAgent_.p3_ort_session->infer_action(
+  EPD::EPDObjectLocalization result = ortAgent_.p3_ort_session->infer(
     img,
     depth_img,
     *camera_info,

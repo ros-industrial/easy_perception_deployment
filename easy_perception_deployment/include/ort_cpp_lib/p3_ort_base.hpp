@@ -57,25 +57,19 @@ public:
   /*! \brief A Destructor function*/
   ~P3OrtBase();
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function with depth_msg and camera_info.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info);
-  /*! \brief A auxillary Mutator function that calls the internal overloading
   infer function.*/
   EPD::EPDObjectDetection infer(const cv::Mat & inputImg);
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
-  EPD::EPDObjectLocalization infer_action(
+  infer function.*/
+  EPD::EPDObjectLocalization infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
     double camera_to_plane_distance_mm);
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
+  infer function.*/
   EPD::EPDObjectTracking infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
@@ -122,53 +116,6 @@ private:
     const int numChannels) const;
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
-  inference result for visualization purposes.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-
-  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
-  inference result for visualization purposes with localization results.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-
-  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
-  inference result for visualization purposes with localization results.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    const std::string tracker_type,
-    std::vector<cv::Ptr<cv::Tracker>> & trackers,
-    std::vector<int> & tracker_logs,
-    std::vector<EPD::LabelledRect2d> & tracker_results,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-
-  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result for use by external agents.*/
   EPD::EPDObjectDetection infer(
     const cv::Mat & inputImg,
@@ -183,7 +130,7 @@ private:
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result with Localization results for use by external agents.*/
-  EPD::EPDObjectLocalization infer_action(
+  EPD::EPDObjectLocalization infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
