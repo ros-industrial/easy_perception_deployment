@@ -631,6 +631,12 @@ const
     case 2:
       {
         EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
+        EPD::activateUseCase(img, result.bboxes, result.classIndices, result.scores, result.masks, ortAgent_.classNames);
+
+        EPD::EPDObjectDetection output_obj(result.bboxes.size());
+        output_obj.bboxes = result.bboxes;
+        output_obj.classIndices = result.classIndices;
+        output_obj.scores = result.scores;
 
         if (ortAgent_.isVisualize()) {
           resultImg = ortAgent_.visualize(result, img);

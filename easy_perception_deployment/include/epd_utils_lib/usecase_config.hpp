@@ -71,7 +71,7 @@ inline std::vector<std::string> generateCountClassNames()
   return countClassNames;
 }
 
-/*! \brief A Mutator function that takes the base inference results from a P2
+/*! \brief A Mutator function that takes the base inference results from a P3
 inference engine and excludes any bounding boxes, classIndices and score
 element that do not share the label of selected objects-to-be counted.
 */
@@ -79,6 +79,7 @@ inline void count(
   std::vector<std::array<float, 4>> & bboxes,
   std::vector<uint64_t> & classIndices,
   std::vector<float> & scores,
+  std::vector<cv::Mat> & masks,
   std::vector<std::string> allClassNames)
 {
   std::vector<std::string> countClassNames = EPD::generateCountClassNames();
@@ -87,6 +88,12 @@ inline void count(
   std::vector<std::array<float, 4>> local_bboxes;
   std::vector<uint64_t> local_classIndices;
   std::vector<float> local_scores;
+  std::vector<cv::Mat> local_masks;
+
+  bool noMasksFound = false;
+  if (masks.size() == 0) {
+    noMasksFound = true;
+  }
 
   /*Iterate through bbboxes, classIndices and allClassNames
   to count corresponding detected objects with the same labels.
@@ -95,6 +102,10 @@ inline void count(
     const auto & curBbox = bboxes[i];
     const uint64_t classIdx = classIndices[i];
     const float curScore = scores[i];
+    cv::Mat curMask;
+    if (!noMasksFound) {
+      curMask = masks[i];
+    }
     const std::string curLabel = allClassNames.empty() ?
       std::to_string(classIdx) : allClassNames[classIdx];
 
@@ -104,6 +115,9 @@ inline void count(
         local_bboxes.push_back(curBbox);
         local_classIndices.push_back(classIdx);
         local_scores.push_back(curScore);
+        if (!noMasksFound) {
+          local_masks.push_back(curMask);
+        }
       }
     }
   }
@@ -111,9 +125,13 @@ inline void count(
   bboxes = local_bboxes;
   classIndices = local_classIndices;
   scores = local_scores;
+  if (!noMasksFound){
+    masks = local_masks;
+  }
+    
 }
 
-/*! \brief A Mutator function that takes the base inference results from a P2
+/*! \brief A Mutator function that takes the base inference results from a P3
 inference engine and excludes any bounding boxes, classIndices and score
 element that is not similar enough to the template color..
 */
@@ -122,8 +140,14 @@ inline void matchColor(
   std::vector<std::array<float, 4>> & bboxes,
   std::vector<uint64_t> & classIndices,
   std::vector<float> & scores,
+  std::vector<cv::Mat> & masks,
   std::vector<std::string> allClassNames)
 {
+  bool noMasksFound = false;
+  if (masks.size() == 0) {
+    noMasksFound = true;
+  }
+  
   Json::Reader reader;
   Json::Value obj;
   std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
@@ -164,11 +188,17 @@ inline void matchColor(
   std::vector<std::array<float, 4>> local_bboxes;
   std::vector<uint64_t> local_classIndices;
   std::vector<float> local_scores;
+  std::vector<cv::Mat> local_masks;
 
   for (size_t i = 0; i < bboxes.size(); ++i) {
     const auto & curBbox = bboxes[i];
     const uint64_t classIdx = classIndices[i];
     const float curScore = scores[i];
+    cv::Mat curMask;
+    if (!noMasksFound) {
+      curMask = masks[i];
+    }
+      
     const std::string curLabel = allClassNames.empty() ?
       std::to_string(classIdx) : allClassNames[classIdx];
 
@@ -190,97 +220,7 @@ inline void matchColor(
       local_bboxes.push_back(curBbox);
       local_classIndices.push_back(classIdx);
       local_scores.push_back(curScore);
-    }
-  }
-
-  bboxes = local_bboxes;
-  classIndices = local_classIndices;
-  scores = local_scores;
-}
-
-/*! \brief A Mutator function that takes the base inference results from a P2
-inference engine and excludes any bounding boxes, classIndices and score
-element based on a selected use-case filter.
-*/
-inline void activateUseCase(
-  const cv::Mat & img,
-  std::vector<std::array<float, 4>> & bboxes,
-  std::vector<uint64_t> & classIndices,
-  std::vector<float> & scores,
-  std::vector<std::string> allClassNames)
-{
-  unsigned int useCaseMode = 0;
-
-  Json::Reader reader;
-  Json::Value obj;
-  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
-
-  if (ifs_1) {
-    try {
-      ifs_1 >> obj;
-    } catch (const std::exception & e) {
-      std::cerr << e.what() << std::endl;
-    }
-  } else {
-    std::cerr << "File not found!" << std::endl;
-  }
-
-  reader.parse(ifs_1, obj);
-
-  useCaseMode = obj["usecase_mode"].asInt();
-
-  ifs_1.close();
-
-  // If default CLASSIFICATION_MODE is selected, do not alter anything and return.
-  if (useCaseMode == EPD::CLASSIFICATION_MODE) {
-    return;
-  } else if (useCaseMode == EPD::COUNTING_MODE) {
-    printf("Use Case: [Counting] selected.\n");
-    EPD::count(bboxes, classIndices, scores, allClassNames);
-  } else if (useCaseMode == EPD::COLOR_MATCHING_MODE) {
-    printf("Use Case: [Color-Matching] selected.\n");
-    EPD::matchColor(img, bboxes, classIndices, scores, allClassNames);
-  } else {
-    throw std::runtime_error("Invalid Use Case. Can only be [0, 1, 2, 3, 4].");
-  }
-}
-
-/*! \brief A Mutator function that takes the base inference results from a P3
-inference engine and excludes any bounding boxes, classIndices and score
-element that do not share the label of selected objects-to-be counted.
-*/
-inline void count(
-  std::vector<std::array<float, 4>> & bboxes,
-  std::vector<uint64_t> & classIndices,
-  std::vector<float> & scores,
-  std::vector<cv::Mat> & masks,
-  std::vector<std::string> allClassNames)
-{
-  std::vector<std::string> countClassNames = EPD::generateCountClassNames();
-
-  // Set max number of object to detect to 1000.
-  std::vector<std::array<float, 4>> local_bboxes;
-  std::vector<uint64_t> local_classIndices;
-  std::vector<float> local_scores;
-  std::vector<cv::Mat> local_masks;
-
-  /*Iterate through bbboxes, classIndices and allClassNames
-  to count corresponding detected objects with the same labels.
-  */
-  for (size_t i = 0; i < bboxes.size(); ++i) {
-    const auto & curBbox = bboxes[i];
-    const uint64_t classIdx = classIndices[i];
-    const float curScore = scores[i];
-    const cv::Mat curMask = masks[i];
-    const std::string curLabel = allClassNames.empty() ?
-      std::to_string(classIdx) : allClassNames[classIdx];
-
-    for (size_t j = 0; j < countClassNames.size(); j++) {
-      std::string countLabel = countClassNames[j];
-      if (curLabel.compare(countLabel) == 0) {
-        local_bboxes.push_back(curBbox);
-        local_classIndices.push_back(classIdx);
-        local_scores.push_back(curScore);
+      if (!noMasksFound) {
         local_masks.push_back(curMask);
       }
     }
@@ -289,97 +229,9 @@ inline void count(
   bboxes = local_bboxes;
   classIndices = local_classIndices;
   scores = local_scores;
-  masks = local_masks;
-}
-
-/*! \brief A Mutator function that takes the base inference results from a P3
-inference engine and excludes any bounding boxes, classIndices and score
-element that is not similar enough to the template color..
-*/
-inline void matchColor(
-  const cv::Mat & img,
-  std::vector<std::array<float, 4>> & bboxes,
-  std::vector<uint64_t> & classIndices,
-  std::vector<float> & scores,
-  std::vector<cv::Mat> & masks,
-  std::vector<std::string> allClassNames)
-{
-  Json::Reader reader;
-  Json::Value obj;
-  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
-
-  if (ifs_1) {
-    try {
-      ifs_1 >> obj;
-    } catch (const std::exception & e) {
-      std::cerr << e.what() << std::endl;
-    }
-  } else {
-    std::cerr << "File not found!" << std::endl;
+  if (!noMasksFound) {
+    masks = local_masks;
   }
-
-  reader.parse(ifs_1, obj);
-
-  std::string filepath_to_refcolor = obj["path_to_color_template"].asString();
-
-  ifs_1.close();
-
-  cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, cv::IMREAD_COLOR);
-  cv::Mat hsv_base, hsv_test1;
-  cv::cvtColor(ref_color_image, hsv_base, cv::COLOR_BGR2HSV);
-  cv::Mat hist_base, hist_test1;
-  int h_bins = 50, s_bins = 60;
-  int histSize[] = {h_bins, s_bins};
-  int channels[] = {0, 1};
-
-  // hue varies from 0 to 179, saturation from 0 to 255
-  float h_ranges[] = {0, 180};
-  float s_ranges[] = {0, 256};
-  const float * ranges[] = {h_ranges, s_ranges};
-  cv::calcHist(&hsv_base, 1, channels, cv::Mat(), hist_base, 2, histSize, ranges, true, false);
-  cv::normalize(hist_base, hist_base, 0, 1, cv::NORM_MINMAX, -1, cv::Mat());
-
-  double base_base;
-  cv::Mat croppedImage;
-  std::vector<std::array<float, 4>> local_bboxes;
-  std::vector<uint64_t> local_classIndices;
-  std::vector<float> local_scores;
-  std::vector<cv::Mat> local_masks;
-
-  for (size_t i = 0; i < bboxes.size(); ++i) {
-    const auto & curBbox = bboxes[i];
-    const uint64_t classIdx = classIndices[i];
-    const float curScore = scores[i];
-    const cv::Mat curMask = masks[i];
-    const std::string curLabel = allClassNames.empty() ?
-      std::to_string(classIdx) : allClassNames[classIdx];
-
-    cv::Rect objectROI(cv::Point(curBbox[0], curBbox[1]), cv::Point(curBbox[2], curBbox[3]));
-    croppedImage = img(objectROI);
-    cv::cvtColor(croppedImage, hsv_test1, cv::COLOR_BGR2HSV);
-    cv::calcHist(
-      &hsv_test1, 1, channels, cv::Mat(),
-      hist_test1, 2, histSize, ranges, true, false);
-    cv::normalize(
-      hist_test1, hist_test1, 0, 1,
-      cv::NORM_MINMAX, -1, cv::Mat());
-
-    /* Can change 3rd arg in compareHist function call to [0,1,2,3],
-    [Correlation, Chi-square, Intersection, Bhattacharyya]
-    TODO(cardboardcode) Require benchmark to justify use of metric 0: Correlation.*/
-    base_base = compareHist(hist_base, hist_test1, 0);
-    if (base_base > 0.8) {
-      local_bboxes.push_back(curBbox);
-      local_classIndices.push_back(classIdx);
-      local_scores.push_back(curScore);
-      local_masks.push_back(curMask);
-    }
-  }
-
-  bboxes = local_bboxes;
-  classIndices = local_classIndices;
-  scores = local_scores;
-  masks = local_masks;
 }
 
 /*! \brief A Mutator function that takes the base inference results from a P3
