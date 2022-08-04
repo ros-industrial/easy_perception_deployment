@@ -168,7 +168,6 @@ private:
   void checkOrtAgentIsInitialized(
     const int img_height,
     const int img_width) const;
-
 };
 
 EasyPerceptionDeployment::EasyPerceptionDeployment(void)
@@ -631,7 +630,13 @@ const
     case 2:
       {
         EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
-        EPD::activateUseCase(img, result.bboxes, result.classIndices, result.scores, result.masks, ortAgent_.classNames);
+        EPD::activateUseCase(
+          img,
+          result.bboxes,
+          result.classIndices,
+          result.scores,
+          result.masks,
+          ortAgent_.classNames);
 
         EPD::EPDObjectDetection output_obj(result.bboxes.size());
         output_obj.bboxes = result.bboxes;
@@ -666,7 +671,13 @@ const
     case 3:
       {
         EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer(img);
-        EPD::activateUseCase(img, result.bboxes, result.classIndices, result.scores, result.masks, ortAgent_.classNames);
+        EPD::activateUseCase(
+          img,
+          result.bboxes,
+          result.classIndices,
+          result.scores,
+          result.masks,
+          ortAgent_.classNames);
 
         EPD::EPDObjectDetection output_obj(result.bboxes.size());
         output_obj.bboxes = result.bboxes;
@@ -681,8 +692,7 @@ const
           visual_pub->publish(*output_msg);
         } else {
           epd_msgs::msg::EPDObjectDetection output_msg;
-          for (size_t i = 0; i < output_obj.data_size; i++)
-          {
+          for (size_t i = 0; i < output_obj.data_size; i++) {
             output_msg.class_indices.push_back(output_obj.classIndices[i]);
 
             output_msg.scores.push_back(output_obj.scores[i]);
@@ -696,7 +706,10 @@ const
             output_msg.bboxes.push_back(roi);
 
             sensor_msgs::msg::Image::SharedPtr mask =
-                cv_bridge::CvImage(std_msgs::msg::Header(), "32FC1", output_obj.masks[i]).toImageMsg();
+              cv_bridge::CvImage(
+              std_msgs::msg::Header(),
+              "32FC1",
+              output_obj.masks[i]).toImageMsg();
             output_msg.masks.push_back(*mask);
           }
           p3_pub->publish(output_msg);

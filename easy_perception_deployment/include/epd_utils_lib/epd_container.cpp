@@ -229,90 +229,90 @@ void EPDContainer::setLabelList()
 }
 
 cv::Mat EPDContainer::visualize(
-    const EPD::EPDObjectDetection result,
-    const cv::Mat input_image)
+  const EPD::EPDObjectDetection result,
+  const cv::Mat input_image)
 {
-    cv::Scalar oneColor(0.0, 0.0, 255.0, 0.0);
-    cv::Mat output_image = input_image.clone();
+  cv::Scalar oneColor(0.0, 0.0, 255.0, 0.0);
+  cv::Mat output_image = input_image.clone();
 
-    bool noMasksFound = false;
-    cv::Mat curMask, finalMask;
-    if (result.masks.size() == 0) {
-      noMasksFound = true;
+  bool noMasksFound = false;
+  cv::Mat curMask, finalMask;
+  if (result.masks.size() == 0) {
+    noMasksFound = true;
+  }
+
+  for (size_t i = 0; i < result.bboxes.size(); ++i) {
+    const int curBbox[] = {
+      result.bboxes[i][0],
+      result.bboxes[i][1],
+      result.bboxes[i][2],
+      result.bboxes[i][3]
+    };
+
+    if (!noMasksFound) {
+      curMask = result.masks[i].clone();
     }
 
-    for (size_t i = 0; i < result.bboxes.size(); ++i) {
-
-      const int curBbox[] = {
-        result.bboxes[i][0],
-        result.bboxes[i][1],
-        result.bboxes[i][2],
-        result.bboxes[i][3]
-      };
-
-      if (!noMasksFound) {
-        curMask = result.masks[i].clone();
-      }
-
-      // DEBUG patch.
-      if (curMask.empty() && !noMasksFound) {
-        continue;
-      }
-
-      const cv::Scalar & curColor = oneColor;
-      const std::string curLabel = classNames[result.classIndices[i]];
-
-      cv::rectangle(
-        output_image, cv::Point(curBbox[0], curBbox[1]),
-        cv::Point(curBbox[2], curBbox[3]), curColor, 2);
-
-      int baseLine = 0;
-      cv::Size labelSize =
-        cv::getTextSize(curLabel, cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
-      cv::rectangle(
-        output_image, cv::Point(
-          curBbox[0], curBbox[1]),
-        cv::Point(
-          curBbox[0] + labelSize.width,
-          curBbox[1] + static_cast<int>(1.3 * labelSize.height)),
-        curColor, -1);
-
-      // Visualizing masks
-      const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
-        cv::Point(curBbox[2], curBbox[3]));
-
-      if (!noMasksFound) {
-        cv::resize(curMask, curMask, curBoxRect.size());
-        // Assigning masks that exceed the maskThreshold.
-        finalMask = (curMask > 0.5);
-      }
-
-      // Assigning coloredRoi with the bounding box.
-      cv::Mat coloredRoi = (0.3 * curColor + 0.7 * output_image(curBoxRect));
-      coloredRoi.convertTo(coloredRoi, CV_8UC3);
-
-      if (!noMasksFound) {
-        std::vector<cv::Mat> contours;
-        cv::Mat hierarchy, tempFinalMask;
-        finalMask.convertTo(tempFinalMask, CV_8U);
-        cv::findContours(tempFinalMask, contours, hierarchy, cv::RETR_TREE,
-                       cv::CHAIN_APPROX_SIMPLE);
-        cv::drawContours(coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 2, cv::LINE_8,
-                       hierarchy, 100);
-      }
-
-      if (!noMasksFound) {
-        coloredRoi.copyTo(output_image(curBoxRect), finalMask);
-      }
-
-      cv::putText(
-        output_image, curLabel,
-        cv::Point(curBbox[0], curBbox[1] + labelSize.height),
-        cv::FONT_HERSHEY_COMPLEX, 0.35, cv::Scalar(255, 255, 255));
-
+    // DEBUG patch.
+    if (curMask.empty() && !noMasksFound) {
+      continue;
     }
 
-    return output_image;
+    const cv::Scalar & curColor = oneColor;
+    const std::string curLabel = classNames[result.classIndices[i]];
+
+    cv::rectangle(
+      output_image, cv::Point(curBbox[0], curBbox[1]),
+      cv::Point(curBbox[2], curBbox[3]), curColor, 2);
+
+    int baseLine = 0;
+    cv::Size labelSize =
+      cv::getTextSize(curLabel, cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
+    cv::rectangle(
+      output_image, cv::Point(
+        curBbox[0], curBbox[1]),
+      cv::Point(
+        curBbox[0] + labelSize.width,
+        curBbox[1] + static_cast<int>(1.3 * labelSize.height)),
+      curColor, -1);
+
+    // Visualizing masks
+    const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
+      cv::Point(curBbox[2], curBbox[3]));
+
+    if (!noMasksFound) {
+      cv::resize(curMask, curMask, curBoxRect.size());
+      // Assigning masks that exceed the maskThreshold.
+      finalMask = (curMask > 0.5);
+    }
+
+    // Assigning coloredRoi with the bounding box.
+    cv::Mat coloredRoi = (0.3 * curColor + 0.7 * output_image(curBoxRect));
+    coloredRoi.convertTo(coloredRoi, CV_8UC3);
+
+    if (!noMasksFound) {
+      std::vector<cv::Mat> contours;
+      cv::Mat hierarchy, tempFinalMask;
+      finalMask.convertTo(tempFinalMask, CV_8U);
+      cv::findContours(
+        tempFinalMask, contours, hierarchy, cv::RETR_TREE,
+        cv::CHAIN_APPROX_SIMPLE);
+      cv::drawContours(
+        coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 2, cv::LINE_8,
+        hierarchy, 100);
+    }
+
+    if (!noMasksFound) {
+      coloredRoi.copyTo(output_image(curBoxRect), finalMask);
+    }
+
+    cv::putText(
+      output_image, curLabel,
+      cv::Point(curBbox[0], curBbox[1] + labelSize.height),
+      cv::FONT_HERSHEY_COMPLEX, 0.35, cv::Scalar(255, 255, 255));
+  }
+
+  return output_image;
 }
 
 }  // namespace EPD

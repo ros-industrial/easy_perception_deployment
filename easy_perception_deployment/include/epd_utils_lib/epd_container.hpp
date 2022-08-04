@@ -113,8 +113,8 @@ public:
   void initORTSessionHandler();
 
   cv::Mat visualize(
-      const EPD::EPDObjectDetection result,
-      const cv::Mat input_image);
+    const EPD::EPDObjectDetection result,
+    const cv::Mat input_image);
 
 private:
   /*! \brief A boolean to indicate that OrtBase object has been initialized.*/

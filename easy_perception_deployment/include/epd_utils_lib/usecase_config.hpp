@@ -125,10 +125,9 @@ inline void count(
   bboxes = local_bboxes;
   classIndices = local_classIndices;
   scores = local_scores;
-  if (!noMasksFound){
+  if (!noMasksFound) {
     masks = local_masks;
   }
-    
 }
 
 /*! \brief A Mutator function that takes the base inference results from a P3
@@ -147,7 +146,6 @@ inline void matchColor(
   if (masks.size() == 0) {
     noMasksFound = true;
   }
-  
   Json::Reader reader;
   Json::Value obj;
   std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
@@ -198,7 +196,6 @@ inline void matchColor(
     if (!noMasksFound) {
       curMask = masks[i];
     }
-      
     const std::string curLabel = allClassNames.empty() ?
       std::to_string(classIdx) : allClassNames[classIdx];
 

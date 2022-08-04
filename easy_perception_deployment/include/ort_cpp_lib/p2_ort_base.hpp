@@ -103,7 +103,6 @@ private:
     float * dst,
     float confThresh,
     const cv::Scalar & meanVal);
-
 };
 }  // namespace Ort
 
