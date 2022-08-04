@@ -21,3 +21,11 @@ Changelog for package easy_perception_deployment
 * Updated generateCountClassNames() in usecase_config.hpp to json parsing.
 * Fixed wrong if conditions for parsing incoming Use Case integer in Deploy.py.
 * Contributor(s): Bey Hao Yun
+
+0.2.1 (2022-08-05)
+-------------------
+* Combined both infer_visualize and infer_action together into one for restructuring and optimization purposes.
+* Removed debug statement printing onnx_model_path from epd_container.cpp.
+* Abstract visualize workflow from P3OrtBase to EPDContainer class.  
+* Contributor(s): Bey Hao Yun
+
