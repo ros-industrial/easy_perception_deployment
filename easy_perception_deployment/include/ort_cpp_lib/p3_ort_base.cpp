@@ -60,17 +60,6 @@ P3OrtBase::P3OrtBase(
 P3OrtBase::~P3OrtBase()
 {}
 
-// Mutator: Classification
-cv::Mat P3OrtBase::infer_visualize(const cv::Mat & inputImg)
-{
-  std::vector<float> dst(3 * m_paddedH * m_paddedW);
-
-  return this->infer_visualize(
-    inputImg, m_newW, m_newH,
-    m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
-    cv::Scalar(102.9801, 115.9465, 122.7717));
-}
-
 // Mutator: Localization
 cv::Mat P3OrtBase::infer_visualize(
   const cv::Mat & inputImg,
@@ -174,79 +163,6 @@ void P3OrtBase::preprocess(
       }
     }
   }
-}
-
-// Mutator 4
-cv::Mat P3OrtBase::infer_visualize(
-  const cv::Mat & inputImg,
-  int newW,
-  int newH,
-  int paddedW,
-  int paddedH,
-  float ratio,
-  float * dst,
-  float confThresh,
-  const cv::Scalar & meanVal)
-{
-  cv::Mat tmpImg;
-  cv::resize(inputImg, tmpImg, cv::Size(newW, newH));
-
-  tmpImg.convertTo(tmpImg, CV_32FC3);
-  tmpImg -= meanVal;
-
-  cv::Mat paddedImg(paddedH, paddedW, CV_32FC3, cv::Scalar(0, 0, 0));
-  tmpImg.copyTo(paddedImg(cv::Rect(0, 0, newW, newH)));
-
-  this->preprocess(dst, paddedImg, paddedW, paddedH, 3);
-
-  // boxes, labels, scores, masks
-  auto inferenceOutput = (*this)({dst});
-
-  assert(inferenceOutput[1].second.size() == 1);
-  size_t nBoxes = inferenceOutput[1].second[0];
-
-  std::vector<std::array<float, 4>> bboxes;
-  std::vector<uint64_t> classIndices;
-  std::vector<float> scores;
-  std::vector<cv::Mat> masks;
-
-  bboxes.reserve(nBoxes);
-  classIndices.reserve(nBoxes);
-  scores.reserve(nBoxes);
-  masks.reserve(nBoxes);
-
-
-  for (size_t i = 0; i < nBoxes; ++i) {
-    if (inferenceOutput[2].first[i] > confThresh) {
-      float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
-      float ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
-      float xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
-      float ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
-
-      xmin = std::max<float>(xmin, 0);
-      ymin = std::max<float>(ymin, 0);
-      xmax = std::min<float>(xmax, inputImg.cols);
-      ymax = std::min<float>(ymax, inputImg.rows);
-
-      bboxes.emplace_back(std::array<float, 4>{xmin, ymin, xmax, ymax});
-      classIndices.emplace_back(reinterpret_cast<int64_t *>(inferenceOutput[1].first)[i]);
-      scores.emplace_back(inferenceOutput[2].first[i]);
-
-      cv::Mat curMask(28, 28, CV_32FC1);
-      memcpy(
-        curMask.data,
-        inferenceOutput[3].first + i * 28 * 28,
-        28 * 28 * sizeof(float));
-      masks.emplace_back(curMask);
-    }
-  }
-
-  if (bboxes.size() == 0) {
-    return inputImg;
-  }
-
-  EPD::activateUseCase(inputImg, bboxes, classIndices, scores, masks, this->getClassNames());
-  return visualize(inputImg, bboxes, classIndices, masks, this->getClassNames(), 0.5);
 }
 
 // Mutator 5: Localization
@@ -498,73 +414,6 @@ EPD::EPDObjectDetection P3OrtBase::infer_action(
   output_obj.masks = masks;
 
   return output_obj;
-}
-
-cv::Mat P3OrtBase::visualize(
-  const cv::Mat & img,
-  const std::vector<std::array<float, 4>> & bboxes,
-  const std::vector<uint64_t> & classIndices,
-  const std::vector<cv::Mat> & masks,
-  const std::vector<std::string> & allClassNames = {},
-  const float maskThreshold = 0.5)
-{
-  assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(allClassNames.size() > *std::max_element(classIndices.begin(), classIndices.end()));
-  }
-
-  cv::Scalar allColors(255.0, 0.0, 0.0, 0.0);
-
-  cv::Mat result = img.clone();
-
-  for (size_t i = 0; i < bboxes.size(); ++i) {
-    const auto & curBbox = bboxes[i];
-    const uint64_t classIdx = classIndices[i];
-    cv::Mat curMask = masks[i].clone();
-    const cv::Scalar & curColor = allColors;
-    const std::string curLabel = allClassNames.empty() ?
-      std::to_string(classIdx) : allClassNames[classIdx];
-
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]), curColor, 2);
-
-    int baseLine = 0;
-    cv::Size labelSize = cv::getTextSize(
-      curLabel, cv::FONT_HERSHEY_COMPLEX,
-      0.35, 1, &baseLine);
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(
-        curBbox[0] + labelSize.width, curBbox[1] +
-        static_cast<int>(1.3 * labelSize.height)),
-      curColor, -1);
-    cv::putText(
-      result, curLabel, cv::Point(curBbox[0], curBbox[1] + labelSize.height),
-      cv::FONT_HERSHEY_COMPLEX,
-      0.35, cv::Scalar(255, 255, 255));
-
-    // Visualize masks
-    const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]));
-
-    cv::resize(curMask, curMask, curBoxRect.size());
-
-    cv::Mat finalMask = (curMask > maskThreshold);
-
-    cv::Mat coloredRoi = (0.3 * curColor + 0.7 * result(curBoxRect));
-
-    coloredRoi.convertTo(coloredRoi, CV_8UC3);
-
-    std::vector<cv::Mat> contours;
-    cv::Mat hierarchy;
-    finalMask.convertTo(finalMask, CV_8U);
-
-    cv::findContours(finalMask, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
-    cv::drawContours(coloredRoi, contours, -1, curColor, 5, cv::LINE_8, hierarchy, 100);
-    coloredRoi.copyTo(result(curBoxRect), finalMask);
-  }
-  return result;
 }
 
 double P3OrtBase::findMedian(cv::Mat depthImg)
