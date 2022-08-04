@@ -656,7 +656,7 @@ const
             roi.width = output_obj.bboxes[i][2] - output_obj.bboxes[i][0];
             roi.height = output_obj.bboxes[i][3] - output_obj.bboxes[i][1];
             roi.do_rectify = false;
-            output_msg.output_obj.push_back(roi);
+            output_msg.bboxes.push_back(roi);
           }
           p2_pub->publish(output_msg);
         }
