@@ -48,17 +48,6 @@ P2OrtBase::P2OrtBase(
 // Destructor
 P2OrtBase::~P2OrtBase() {}
 
-// Mutator 4
-cv::Mat P2OrtBase::infer_visualize(const cv::Mat & inputImg)
-{
-  std::vector<float> dst(3 * m_paddedH * m_paddedW);
-
-  return this->infer_visualize(
-    inputImg, m_newW, m_newH,
-    m_paddedW, m_paddedH, m_ratio,
-    dst.data(), 0.5, cv::Scalar(102.9801, 115.9465, 122.7717));
-}
-
 EPD::EPDObjectDetection P2OrtBase::infer_action(const cv::Mat & inputImg)
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
@@ -93,70 +82,6 @@ void P2OrtBase::preprocess(
       }
     }
   }
-}
-
-// Mutator 4
-cv::Mat P2OrtBase::infer_visualize(
-  const cv::Mat & inputImg,
-  int newW,
-  int newH,
-  int paddedW,
-  int paddedH,
-  float ratio,
-  float * dst,
-  float confThresh,
-  const cv::Scalar & meanVal)
-{
-  cv::Mat tmpImg;
-  cv::resize(inputImg, tmpImg, cv::Size(newW, newH));
-
-  tmpImg.convertTo(tmpImg, CV_32FC3);
-  tmpImg -= meanVal;
-
-  cv::Mat paddedImg(paddedH, paddedW, CV_32FC3, cv::Scalar(0, 0, 0));
-  tmpImg.copyTo(paddedImg(cv::Rect(0, 0, newW, newH)));
-
-  this->preprocess(dst, paddedImg, paddedW, paddedH, 3);
-
-  // boxes, labels, scores
-  auto inferenceOutput = (*this)({dst});
-
-  assert(inferenceOutput[1].second.size() == 1);
-  size_t nBoxes = inferenceOutput[1].second[0];
-
-  std::vector<std::array<float, 4>> bboxes;
-  std::vector<uint64_t> classIndices;
-  // Remove scores for release
-  std::vector<float> scores;
-
-  bboxes.reserve(nBoxes);
-  classIndices.reserve(nBoxes);
-  scores.reserve(nBoxes);
-
-  for (size_t i = 0; i < nBoxes; ++i) {
-    if (inferenceOutput[2].first[i] > confThresh) {
-      float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
-      float ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
-      float xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
-      float ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
-
-      xmin = std::max<float>(xmin, 0);
-      ymin = std::max<float>(ymin, 0);
-      xmax = std::min<float>(xmax, inputImg.cols);
-      ymax = std::min<float>(ymax, inputImg.rows);
-
-      bboxes.emplace_back(std::array<float, 4>{xmin, ymin, xmax, ymax});
-      classIndices.emplace_back(reinterpret_cast<int64_t *>(inferenceOutput[1].first)[i]);
-      scores.emplace_back(inferenceOutput[2].first[i]);
-    }
-  }
-
-  if (bboxes.size() == 0) {
-    return inputImg;
-  }
-
-  EPD::activateUseCase(inputImg, bboxes, classIndices, scores, this->getClassNames());
-  return visualize(inputImg, bboxes, classIndices, this->getClassNames());
 }
 
 // Mutator 4
@@ -230,46 +155,4 @@ EPD::EPDObjectDetection P2OrtBase::infer_action(
   return output_obj;
 }
 
-cv::Mat P2OrtBase::visualize(
-  const cv::Mat & img,
-  const std::vector<std::array<float, 4>> & bboxes,
-  const std::vector<uint64_t> & classIndices,
-  const std::vector<std::string> & allClassNames = {})
-{
-  assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(allClassNames.size() > *std::max_element(classIndices.begin(), classIndices.end()));
-  }
-
-  cv::Mat result = img.clone();
-
-  cv::Scalar allColors(255.0, 0.0, 0.0, 0.0);
-
-  for (size_t i = 0; i < bboxes.size(); ++i) {
-    const auto & curBbox = bboxes[i];
-    const uint64_t classIdx = classIndices[i];
-    const cv::Scalar & curColor = allColors[classIdx];
-    const std::string curLabel = allClassNames.empty() ?
-      std::to_string(classIdx) : allClassNames[classIdx];
-
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]), curColor, 2);
-
-    int baseLine = 0;
-    cv::Size labelSize = cv::getTextSize(
-      curLabel,
-      cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(
-        curBbox[0] + labelSize.width, curBbox[1] +
-        static_cast<int>(1.3 * labelSize.height)),
-      curColor, -1);
-    cv::putText(
-      result, curLabel, cv::Point(curBbox[0], curBbox[1] + labelSize.height),
-      cv::FONT_HERSHEY_COMPLEX, 0.35, cv::Scalar(255, 255, 255));
-  }
-  return result;
-}
 }  // namespace Ort

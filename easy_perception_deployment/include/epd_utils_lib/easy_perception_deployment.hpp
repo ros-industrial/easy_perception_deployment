@@ -633,12 +633,10 @@ const
         EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
 
         if (ortAgent_.isVisualize()) {
-
           resultImg = ortAgent_.visualize(result, img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
-
         } else {
           epd_msgs::msg::EPDObjectDetection output_msg;
           for (size_t i = 0; i < result.data_size; i++) {

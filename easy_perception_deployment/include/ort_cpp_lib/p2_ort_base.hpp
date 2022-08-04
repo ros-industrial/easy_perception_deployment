@@ -53,9 +53,6 @@ public:
   /*! \brief A Destructor function*/
   ~P2OrtBase();
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function.*/
-  cv::Mat infer_visualize(const cv::Mat & inputImg);
-  /*! \brief A auxillary Mutator function that calls the internal overloading
   infer_action function.*/
   EPD::EPDObjectDetection infer_action(const cv::Mat & inputImg);
 
@@ -95,18 +92,6 @@ private:
     const int numChannels) const;
 
   /*! \brief A Mutator function that runs a P2 Ort Session and gets P2
-  inference result for visualization purposes.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-  /*! \brief A Mutator function that runs a P2 Ort Session and gets P2
   inference result for use by external agents.*/
   EPD::EPDObjectDetection infer_action(
     const cv::Mat & inputImg,
@@ -119,14 +104,6 @@ private:
     float confThresh,
     const cv::Scalar & meanVal);
 
-  /*! \brief A Mutator function that takes P2 inference outputs and illustrates
-  derived bounding boxes with corresponding object labels for visualization
-  purposes.*/
-  cv::Mat visualize(
-    const cv::Mat & img,
-    const std::vector<std::array<float, 4>> & bboxes,
-    const std::vector<uint64_t> & classIndices,
-    const std::vector<std::string> & allClassNames);
 };
 }  // namespace Ort
 
