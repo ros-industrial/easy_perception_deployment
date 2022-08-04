@@ -360,7 +360,7 @@ cv::Mat EasyPerceptionDeployment::visualize(
     }
 
     const cv::Scalar & curColor = oneColor;
-    const std::string curLabel = std::to_string(i);
+    const std::string curLabel = ortAgent_.classNames[result.classIndices[i]];
 
     cv::rectangle(
       output_image, cv::Point(curBbox[0], curBbox[1]),
