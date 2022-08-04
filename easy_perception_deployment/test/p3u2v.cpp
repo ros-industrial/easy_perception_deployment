@@ -79,7 +79,7 @@ TEST(EPD_TestSuite, Test_P3Model_ColorMatch_Visualize)
 
   ASSERT_EQ(!ortAgent_->p3_ort_session, false);
 
-  EPD::EPDObjectDetection result = ortAgent_->p3_ort_session->infer_action(frame);
+  EPD::EPDObjectDetection result = ortAgent_->p3_ort_session->infer(frame);
   cv::Mat output = ortAgent_->visualize(result, frame);
 
   ASSERT_NE(output.cols, 0);

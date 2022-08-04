@@ -662,7 +662,7 @@ const
       }
     case 3:
       {
-        EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer_action(img);
+        EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer(img);
 
         if (ortAgent_.isVisualize()) {
           resultImg = ortAgent_.visualize(result, img);

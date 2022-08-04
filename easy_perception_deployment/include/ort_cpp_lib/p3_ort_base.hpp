@@ -78,8 +78,8 @@ public:
     std::vector<EPD::LabelledRect2d> & tracker_results);
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
-  EPD::EPDObjectDetection infer_action(const cv::Mat & inputImg);
+  infer function.*/
+  EPD::EPDObjectDetection infer(const cv::Mat & inputImg);
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
   infer_action function.*/
@@ -185,7 +185,7 @@ private:
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result for use by external agents.*/
-  EPD::EPDObjectDetection infer_action(
+  EPD::EPDObjectDetection infer(
     const cv::Mat & inputImg,
     int newW,
     int newH,
