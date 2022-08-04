@@ -179,15 +179,15 @@ inference engine and excludes any bounding boxes, classIndices and score
 element based on a selected use-case filter.
 */
 inline void activateUseCase(
-    const cv::Mat &img,
-    std::vector<std::array<int, 4>> &bboxes,
-    std::vector<uint64_t> &classIndices,
-    std::vector<float> &scores,
-    std::vector<cv::Mat> &masks,
-    std::vector<std::string> allClassNames,
-    const unsigned int useCaseMode,
-    const std::vector<std::string> countClassNames,
-    const std::string filepath_to_refcolor)
+  const cv::Mat & img,
+  std::vector<std::array<int, 4>> & bboxes,
+  std::vector<uint64_t> & classIndices,
+  std::vector<float> & scores,
+  std::vector<cv::Mat> & masks,
+  std::vector<std::string> allClassNames,
+  const unsigned int useCaseMode,
+  const std::vector<std::string> countClassNames,
+  const std::string filepath_to_refcolor)
 {
   // If default CLASSIFICATION_MODE is selected, do not alter anything and return.
   if (useCaseMode == EPD::CLASSIFICATION_MODE) {

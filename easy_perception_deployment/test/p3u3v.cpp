@@ -88,11 +88,10 @@ TEST(EPD_TestSuite, Test_P3Model_Localize_Visualize)
     depth_img,
     camera_info,
     0.1);
-  
+
   EPD::EPDObjectTracking converted_result(result.data_size);
   converted_result.object_ids.clear();
-  for (size_t i = 0; i < result.data_size; i++)
-  {
+  for (size_t i = 0; i < result.data_size; i++) {
     EPD::EPDObjectTracking::LocalizedObject object;
     object.name = result.objects[i].name;
     object.roi = result.objects[i].roi;

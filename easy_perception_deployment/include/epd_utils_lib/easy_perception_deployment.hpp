@@ -369,7 +369,7 @@ void EasyPerceptionDeployment::process_localize_callback(
     depth_img,
     *camera_info,
     camera_to_plane_distance_mm);
-  
+
   cv::Mat resultImg;
   if (ortAgent_.isVisualize()) {
     EPD::EPDObjectTracking converted_result(result.data_size);
@@ -387,7 +387,7 @@ void EasyPerceptionDeployment::process_localize_callback(
 
       converted_result.objects.emplace_back(object);
     }
-    
+
     cv::Mat resultImg = ortAgent_.visualize(converted_result, img);
 
     sensor_msgs::msg::Image::SharedPtr output_msg =
@@ -502,15 +502,15 @@ void EasyPerceptionDeployment::process_tracking_callback(
   cv::Mat resultImg;
 
   EPD::EPDObjectTracking result = ortAgent_.p3_ort_session->infer(
-      img,
-      depth_img,
-      *camera_info,
-      camera_to_plane_distance_mm,
-      ortAgent_.tracker_type,
-      ortAgent_.trackers,
-      ortAgent_.tracker_logs,
-      ortAgent_.tracker_results);
-  
+    img,
+    depth_img,
+    *camera_info,
+    camera_to_plane_distance_mm,
+    ortAgent_.tracker_type,
+    ortAgent_.trackers,
+    ortAgent_.tracker_logs,
+    ortAgent_.tracker_results);
+
   if (ortAgent_.isVisualize()) {
     resultImg = ortAgent_.visualize(result, img);
 

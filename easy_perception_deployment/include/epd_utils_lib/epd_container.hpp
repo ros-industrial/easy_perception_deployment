@@ -117,8 +117,8 @@ public:
     const cv::Mat input_image);
 
   cv::Mat visualize(
-      const EPD::EPDObjectTracking result,
-      const cv::Mat input_image);
+    const EPD::EPDObjectTracking result,
+    const cv::Mat input_image);
 
 private:
   /*! \brief A boolean to indicate that OrtBase object has been initialized.*/
