@@ -76,7 +76,7 @@ inference engine and excludes any bounding boxes, classIndices and score
 element that do not share the label of selected objects-to-be counted.
 */
 inline void count(
-  std::vector<std::array<float, 4>> & bboxes,
+  std::vector<std::array<int, 4>> & bboxes,
   std::vector<uint64_t> & classIndices,
   std::vector<float> & scores,
   std::vector<cv::Mat> & masks,
@@ -85,7 +85,7 @@ inline void count(
   std::vector<std::string> countClassNames = EPD::generateCountClassNames();
 
   // Set max number of object to detect to 1000.
-  std::vector<std::array<float, 4>> local_bboxes;
+  std::vector<std::array<int, 4>> local_bboxes;
   std::vector<uint64_t> local_classIndices;
   std::vector<float> local_scores;
   std::vector<cv::Mat> local_masks;
@@ -137,7 +137,7 @@ element that is not similar enough to the template color..
 */
 inline void matchColor(
   const cv::Mat & img,
-  std::vector<std::array<float, 4>> & bboxes,
+  std::vector<std::array<int, 4>> & bboxes,
   std::vector<uint64_t> & classIndices,
   std::vector<float> & scores,
   std::vector<cv::Mat> & masks,
@@ -185,7 +185,7 @@ inline void matchColor(
 
   double base_base;
   cv::Mat croppedImage;
-  std::vector<std::array<float, 4>> local_bboxes;
+  std::vector<std::array<int, 4>> local_bboxes;
   std::vector<uint64_t> local_classIndices;
   std::vector<float> local_scores;
   std::vector<cv::Mat> local_masks;
@@ -240,7 +240,7 @@ element based on a selected use-case filter.
 */
 inline void activateUseCase(
   const cv::Mat & img,
-  std::vector<std::array<float, 4>> & bboxes,
+  std::vector<std::array<int, 4>> & bboxes,
   std::vector<uint64_t> & classIndices,
   std::vector<float> & scores,
   std::vector<cv::Mat> & masks,

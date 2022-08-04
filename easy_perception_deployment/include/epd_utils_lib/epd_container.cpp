@@ -243,7 +243,7 @@ cv::Mat EPDContainer::visualize(
 
     for (size_t i = 0; i < result.bboxes.size(); ++i) {
 
-      const unsigned int curBbox[] = {
+      const int curBbox[] = {
         result.bboxes[i][0],
         result.bboxes[i][1],
         result.bboxes[i][2],

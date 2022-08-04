@@ -365,7 +365,7 @@ EPD::EPDObjectDetection P3OrtBase::infer(
   assert(inferenceOutput[1].second.size() == 1);
   size_t nBoxes = inferenceOutput[1].second[0];
 
-  std::vector<std::array<float, 4>> bboxes;
+  std::vector<std::array<int, 4>> bboxes;
   std::vector<uint64_t> classIndices;
   std::vector<float> scores;
   std::vector<cv::Mat> masks;
@@ -377,17 +377,17 @@ EPD::EPDObjectDetection P3OrtBase::infer(
 
   for (size_t i = 0; i < nBoxes; ++i) {
     if (inferenceOutput[2].first[i] > confThresh) {
-      float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
-      float ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
-      float xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
-      float ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
+      int xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
+      int ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
+      int xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
+      int ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
 
-      xmin = std::max<float>(xmin, 0);
-      ymin = std::max<float>(ymin, 0);
-      xmax = std::min<float>(xmax, inputImg.cols);
-      ymax = std::min<float>(ymax, inputImg.rows);
+      xmin = std::max<int>(xmin, 0);
+      ymin = std::max<int>(ymin, 0);
+      xmax = std::min<int>(xmax, inputImg.cols);
+      ymax = std::min<int>(ymax, inputImg.rows);
 
-      bboxes.emplace_back(std::array<float, 4>{xmin, ymin, xmax, ymax});
+      bboxes.emplace_back(std::array<int, 4>{xmin, ymin, xmax, ymax});
       classIndices.emplace_back(reinterpret_cast<int64_t *>(inferenceOutput[1].first)[i]);
       scores.emplace_back(inferenceOutput[2].first[i]);
 

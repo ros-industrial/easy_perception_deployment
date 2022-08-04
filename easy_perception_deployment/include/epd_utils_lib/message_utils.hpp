@@ -38,7 +38,7 @@ class EPDObjectDetection
 {
 public:
   /*! \brief A vector of bounding boxes with xmin, ymin, xmax, ymax.*/
-  std::vector<std::array<float, 4>> bboxes;
+  std::vector<std::array<int, 4>> bboxes;
   /*! \brief A vector of indices that indicate the numerical identities of
   corresponding bounding boxes of the same index.
   */
