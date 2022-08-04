@@ -630,16 +630,16 @@ const
       }
     case 2:
       {
+        EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
+
         if (ortAgent_.isVisualize()) {
 
-          resultImg = ortAgent_.p2_ort_session->infer_visualize(img);
+          resultImg = ortAgent_.visualize(result, img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
 
         } else {
-
-          EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
           epd_msgs::msg::EPDObjectDetection output_msg;
           for (size_t i = 0; i < result.data_size; i++) {
             output_msg.class_indices.push_back(result.classIndices[i]);
@@ -658,7 +658,6 @@ const
         }
 
         break;
-
       }
     case 3:
       {

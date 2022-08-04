@@ -233,8 +233,14 @@ cv::Mat EPDContainer::visualize(
     const cv::Mat input_image)
 {
     cv::Scalar oneColor(0.0, 0.0, 255.0, 0.0);
-
     cv::Mat output_image = input_image.clone();
+
+    bool noMasksFound = false;
+    cv::Mat curMask, finalMask;
+    if (result.masks.size() == 0) {
+      noMasksFound = true;
+    }
+
     for (size_t i = 0; i < result.bboxes.size(); ++i) {
 
       const unsigned int curBbox[] = {
@@ -243,10 +249,13 @@ cv::Mat EPDContainer::visualize(
         result.bboxes[i][2],
         result.bboxes[i][3]
       };
-      cv::Mat curMask = result.masks[i].clone();
+
+      if (!noMasksFound) {
+        curMask = result.masks[i].clone();
+      }
 
       // DEBUG patch.
-      if (curMask.empty()){
+      if (curMask.empty() && !noMasksFound) {
         continue;
       }
 
@@ -271,54 +280,30 @@ cv::Mat EPDContainer::visualize(
       // Visualizing masks
       const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
         cv::Point(curBbox[2], curBbox[3]));
-      cv::resize(curMask, curMask, curBoxRect.size());
-      // Assigning masks that exceed the maskThreshold.
-      cv::Mat finalMask = (curMask > 0.5);
+
+      if (!noMasksFound) {
+        cv::resize(curMask, curMask, curBoxRect.size());
+        // Assigning masks that exceed the maskThreshold.
+        finalMask = (curMask > 0.5);
+      }
 
       // Assigning coloredRoi with the bounding box.
       cv::Mat coloredRoi = (0.3 * curColor + 0.7 * output_image(curBoxRect));
       coloredRoi.convertTo(coloredRoi, CV_8UC3);
 
-      std::vector<cv::Mat> contours;
-      cv::Mat hierarchy, tempFinalMask;
-      finalMask.convertTo(tempFinalMask, CV_8U);
-      cv::findContours(tempFinalMask, contours, hierarchy, cv::RETR_TREE,
+      if (!noMasksFound) {
+        std::vector<cv::Mat> contours;
+        cv::Mat hierarchy, tempFinalMask;
+        finalMask.convertTo(tempFinalMask, CV_8U);
+        cv::findContours(tempFinalMask, contours, hierarchy, cv::RETR_TREE,
                        cv::CHAIN_APPROX_SIMPLE);
-      cv::drawContours(coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 2, cv::LINE_8,
+        cv::drawContours(coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 2, cv::LINE_8,
                        hierarchy, 100);
-
-      double maxArea = 0;
-      int maxAreaContourId = 999;
-      for (unsigned int j = 0; j < contours.size(); j++) {
-        double newArea = cv::contourArea(contours[j]);
-        if (newArea > maxArea) {
-          maxArea = newArea;
-          maxAreaContourId = j;
-        }
-      }
-      unsigned int maxID = maxAreaContourId;
-
-      std::vector<cv::RotatedRect> minRect(contours.size());
-      for (unsigned int index = 0; index < contours.size(); index++) {
-        if (index != maxID){
-          continue;
-        }
-        minRect[index] = cv::minAreaRect(cv::Mat(contours[index]));
-
-        cv::Point2f rect_points[4];
-        // 4 points of the rotated rectangle
-        minRect[index].points(rect_points);
-
-        // Mid points of the each side of the rotated rectangle
-        cv::Point pt_a, pt_b, pt_c, pt_d;
-        pt_a = (rect_points[0] + rect_points[3]) / 2; //    0 |__a__| 3
-        pt_b = (rect_points[1] + rect_points[2]) / 2; //	    |  	  |
-        pt_c = (rect_points[0] + rect_points[1]) / 2; //	  c |     | d
-        pt_d = (rect_points[3] + rect_points[2]) / 2; //	    |__b__|
-                                                      //	   1       2
       }
 
-      coloredRoi.copyTo(output_image(curBoxRect), finalMask);
+      if (!noMasksFound) {
+        coloredRoi.copyTo(output_image(curBoxRect), finalMask);
+      }
 
       cv::putText(
         output_image, curLabel,
