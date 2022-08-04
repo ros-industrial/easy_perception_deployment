@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -364,9 +364,31 @@ void EasyPerceptionDeployment::process_localize_callback(
   // Initialize timer
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
+  EPD::EPDObjectLocalization result = ortAgent_.p3_ort_session->infer(
+    img,
+    depth_img,
+    *camera_info,
+    camera_to_plane_distance_mm);
+
   cv::Mat resultImg;
   if (ortAgent_.isVisualize()) {
-    resultImg = ortAgent_.p3_ort_session->infer_visualize(img, depth_img, *camera_info);
+    EPD::EPDObjectTracking converted_result(result.data_size);
+    converted_result.object_ids.clear();
+    for (size_t i = 0; i < result.data_size; i++) {
+      EPD::EPDObjectTracking::LocalizedObject object;
+      object.name = result.objects[i].name;
+      object.roi = result.objects[i].roi;
+      object.mask = result.objects[i].mask;
+      object.length = result.objects[i].length;
+      object.breadth = result.objects[i].breadth;
+      object.height = result.objects[i].height;
+      object.segmented_pcl = result.objects[i].segmented_pcl;
+      object.axis = result.objects[i].axis;
+
+      converted_result.objects.emplace_back(object);
+    }
+
+    cv::Mat resultImg = ortAgent_.visualize(converted_result, img);
 
     sensor_msgs::msg::Image::SharedPtr output_msg =
       cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
@@ -378,12 +400,6 @@ void EasyPerceptionDeployment::process_localize_callback(
     RCLCPP_INFO(this->get_logger(), "[-FPS-]= %f\n", 1000.0 / elapsedTime.count());
 
   } else {
-    EPD::EPDObjectLocalization result = ortAgent_.p3_ort_session->infer_action(
-      img,
-      depth_img,
-      *camera_info,
-      camera_to_plane_distance_mm);
-
     epd_msgs::msg::EPDObjectLocalization output_msg;
 
     output_msg.header = std_msgs::msg::Header();
@@ -484,22 +500,19 @@ void EasyPerceptionDeployment::process_tracking_callback(
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
   cv::Mat resultImg;
-  if (ortAgent_.isVisualize()) {
-    resultImg = ortAgent_.p3_ort_session->infer_visualize(
-      img,
-      depth_img,
-      *camera_info,
-      ortAgent_.tracker_type,
-      ortAgent_.trackers,
-      ortAgent_.tracker_logs,
-      ortAgent_.tracker_results);
 
-    // DEBUG
-    // for (size_t i = 0; i < ortAgent_.tracker_results.size(); i++) {
-    //   std::cout << "Tracked Object = [ "
-    //     << ortAgent_.tracker_results[i].obj_tag
-    //     << " ]" << std::endl;
-    // }
+  EPD::EPDObjectTracking result = ortAgent_.p3_ort_session->infer(
+    img,
+    depth_img,
+    *camera_info,
+    camera_to_plane_distance_mm,
+    ortAgent_.tracker_type,
+    ortAgent_.trackers,
+    ortAgent_.tracker_logs,
+    ortAgent_.tracker_results);
+
+  if (ortAgent_.isVisualize()) {
+    resultImg = ortAgent_.visualize(result, img);
 
     sensor_msgs::msg::Image::SharedPtr output_msg =
       cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
@@ -511,16 +524,6 @@ void EasyPerceptionDeployment::process_tracking_callback(
     RCLCPP_INFO(this->get_logger(), "[-FPS-]= %f\n", 1000.0 / elapsedTime.count());
 
   } else {
-    EPD::EPDObjectTracking result = ortAgent_.p3_ort_session->infer_action(
-      img,
-      depth_img,
-      *camera_info,
-      camera_to_plane_distance_mm,
-      ortAgent_.tracker_type,
-      ortAgent_.trackers,
-      ortAgent_.tracker_logs,
-      ortAgent_.tracker_results);
-
     epd_msgs::msg::EPDObjectTracking output_msg;
 
     output_msg.header = std_msgs::msg::Header();
@@ -534,13 +537,6 @@ void EasyPerceptionDeployment::process_tracking_callback(
     output_msg.fx = camera_info->k.at(0);
     output_msg.ppy = camera_info->k.at(5);
     output_msg.fy = camera_info->k.at(4);
-
-    // DEBUG
-    // std::cout << "[ ";
-    // for (size_t i = 0; i < output_msg.object_ids.size(); i++) {
-    //   std::cout << " " << output_msg.object_ids[i] << " ";
-    // }
-    // std::cout << " ]" << std::endl;
 
     // Populate output_msg objects and roi_array
     for (size_t i = 0; i < result.data_size; i++) {
@@ -629,24 +625,40 @@ const
       }
     case 2:
       {
+        EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer(img);
+        EPD::activateUseCase(
+          img,
+          result.bboxes,
+          result.classIndices,
+          result.scores,
+          result.masks,
+          ortAgent_.classNames,
+          ortAgent_.useCaseMode,
+          ortAgent_.countClassNames,
+          ortAgent_.template_color_path);
+
+        EPD::EPDObjectDetection output_obj(result.bboxes.size());
+        output_obj.bboxes = result.bboxes;
+        output_obj.classIndices = result.classIndices;
+        output_obj.scores = result.scores;
+
         if (ortAgent_.isVisualize()) {
-          resultImg = ortAgent_.p2_ort_session->infer_visualize(img);
+          resultImg = ortAgent_.visualize(output_obj, img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
         } else {
-          EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
           epd_msgs::msg::EPDObjectDetection output_msg;
-          for (size_t i = 0; i < result.data_size; i++) {
-            output_msg.class_indices.push_back(result.classIndices[i]);
+          for (size_t i = 0; i < output_obj.data_size; i++) {
+            output_msg.class_indices.push_back(output_obj.classIndices[i]);
 
-            output_msg.scores.push_back(result.scores[i]);
+            output_msg.scores.push_back(output_obj.scores[i]);
 
             sensor_msgs::msg::RegionOfInterest roi;
-            roi.x_offset = result.bboxes[i][0];
-            roi.y_offset = result.bboxes[i][1];
-            roi.width = result.bboxes[i][2] - result.bboxes[i][0];
-            roi.height = result.bboxes[i][3] - result.bboxes[i][1];
+            roi.x_offset = output_obj.bboxes[i][0];
+            roi.y_offset = output_obj.bboxes[i][1];
+            roi.width = output_obj.bboxes[i][2] - output_obj.bboxes[i][0];
+            roi.height = output_obj.bboxes[i][3] - output_obj.bboxes[i][1];
             roi.do_rectify = false;
             output_msg.bboxes.push_back(roi);
           }
@@ -657,29 +669,49 @@ const
       }
     case 3:
       {
+        EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer(img);
+        EPD::activateUseCase(
+          img,
+          result.bboxes,
+          result.classIndices,
+          result.scores,
+          result.masks,
+          ortAgent_.classNames,
+          ortAgent_.useCaseMode,
+          ortAgent_.countClassNames,
+          ortAgent_.template_color_path);
+
+        EPD::EPDObjectDetection output_obj(result.bboxes.size());
+        output_obj.bboxes = result.bboxes;
+        output_obj.classIndices = result.classIndices;
+        output_obj.scores = result.scores;
+        output_obj.masks = result.masks;
+
         if (ortAgent_.isVisualize()) {
-          resultImg = ortAgent_.p3_ort_session->infer_visualize(img);
+          resultImg = ortAgent_.visualize(output_obj, img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
         } else {
-          EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer_action(img);
           epd_msgs::msg::EPDObjectDetection output_msg;
-          for (size_t i = 0; i < result.data_size; i++) {
-            output_msg.class_indices.push_back(result.classIndices[i]);
+          for (size_t i = 0; i < output_obj.data_size; i++) {
+            output_msg.class_indices.push_back(output_obj.classIndices[i]);
 
-            output_msg.scores.push_back(result.scores[i]);
+            output_msg.scores.push_back(output_obj.scores[i]);
 
             sensor_msgs::msg::RegionOfInterest roi;
-            roi.x_offset = result.bboxes[i][0];
-            roi.y_offset = result.bboxes[i][1];
-            roi.width = result.bboxes[i][2] - result.bboxes[i][0];
-            roi.height = result.bboxes[i][3] - result.bboxes[i][1];
+            roi.x_offset = output_obj.bboxes[i][0];
+            roi.y_offset = output_obj.bboxes[i][1];
+            roi.width = output_obj.bboxes[i][2] - output_obj.bboxes[i][0];
+            roi.height = output_obj.bboxes[i][3] - output_obj.bboxes[i][1];
             roi.do_rectify = false;
             output_msg.bboxes.push_back(roi);
 
             sensor_msgs::msg::Image::SharedPtr mask =
-              cv_bridge::CvImage(std_msgs::msg::Header(), "32FC1", result.masks[i]).toImageMsg();
+              cv_bridge::CvImage(
+              std_msgs::msg::Header(),
+              "32FC1",
+              output_obj.masks[i]).toImageMsg();
             output_msg.masks.push_back(*mask);
           }
           p3_pub->publish(output_msg);

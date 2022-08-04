@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -83,13 +83,32 @@ TEST(EPD_TestSuite, Test_P3Model_Localize_Visualize)
 
   ASSERT_EQ(!ortAgent_->p3_ort_session, false);
 
-  cv::Mat result = ortAgent_->p3_ort_session->infer_visualize(
+  EPD::EPDObjectLocalization result = ortAgent_->p3_ort_session->infer(
     colored_img,
     depth_img,
-    camera_info);
+    camera_info,
+    0.1);
 
-  ASSERT_NE(result.cols, 0);
-  ASSERT_NE(result.rows, 0);
+  EPD::EPDObjectTracking converted_result(result.data_size);
+  converted_result.object_ids.clear();
+  for (size_t i = 0; i < result.data_size; i++) {
+    EPD::EPDObjectTracking::LocalizedObject object;
+    object.name = result.objects[i].name;
+    object.roi = result.objects[i].roi;
+    object.mask = result.objects[i].mask;
+    object.length = result.objects[i].length;
+    object.breadth = result.objects[i].breadth;
+    object.height = result.objects[i].height;
+    object.segmented_pcl = result.objects[i].segmented_pcl;
+    object.axis = result.objects[i].axis;
+
+    converted_result.objects.emplace_back(object);
+  }
+
+  cv::Mat output = ortAgent_->visualize(converted_result, colored_img);
+
+  ASSERT_NE(output.cols, 0);
+  ASSERT_NE(output.rows, 0);
 }
 
 int main(int argc, char ** argv)

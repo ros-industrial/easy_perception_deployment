@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ TEST(EPD_TestSuite, Test_P3Model_Localize_Action)
 
   ASSERT_EQ(!ortAgent_->p3_ort_session, false);
 
-  EPD::EPDObjectLocalization result = ortAgent_->p3_ort_session->infer_action(
+  EPD::EPDObjectLocalization result = ortAgent_->p3_ort_session->infer(
     colored_img,
     depth_img,
     camera_info,

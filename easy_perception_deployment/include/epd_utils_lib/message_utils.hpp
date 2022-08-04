@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ class EPDObjectDetection
 {
 public:
   /*! \brief A vector of bounding boxes with xmin, ymin, xmax, ymax.*/
-  std::vector<std::array<float, 4>> bboxes;
+  std::vector<std::array<int, 4>> bboxes;
   /*! \brief A vector of indices that indicate the numerical identities of
   corresponding bounding boxes of the same index.
   */

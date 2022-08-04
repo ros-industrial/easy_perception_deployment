@@ -1,5 +1,5 @@
-// Copyright 2021 Advanced Remanufacturing and Technology Centre
-// Copyright 2021 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -84,18 +84,19 @@ TEST(EPD_TestSuite, Test_P3Model_Tracking_Visualize)
 
   ASSERT_EQ(!ortAgent_->p3_ort_session, false);
 
-  cv::Mat result = ortAgent_->p3_ort_session->infer_visualize(
+  EPD::EPDObjectTracking result = ortAgent_->p3_ort_session->infer(
     colored_img,
     depth_img,
     camera_info,
+    0.1,
     ortAgent_->tracker_type,
     ortAgent_->trackers,
     ortAgent_->tracker_logs,
-    ortAgent_->tracker_results
-  );
+    ortAgent_->tracker_results);
+  cv::Mat output = ortAgent_->visualize(result, colored_img);
 
-  ASSERT_NE(result.cols, 0);
-  ASSERT_NE(result.rows, 0);
+  ASSERT_NE(output.cols, 0);
+  ASSERT_NE(output.rows, 0);
 }
 
 int main(int argc, char ** argv)

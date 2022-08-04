@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@
 #include "gtest/gtest.h"
 #include "bits/stdc++.h"
 #include "epd_utils_lib/epd_container.hpp"
+#include "epd_utils_lib/message_utils.hpp"
 
 std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/config/session_config.json");
 std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/config/usecase_config.json");
@@ -79,7 +80,8 @@ TEST(EPD_TestSuite, Test_P2Model_Counting_Visualize)
 
   ASSERT_EQ(!ortAgent_->p2_ort_session, false);
 
-  cv::Mat output = ortAgent_->p2_ort_session->infer_visualize(frame);
+  EPD::EPDObjectDetection result = ortAgent_->p2_ort_session->infer(frame);
+  cv::Mat output = ortAgent_->visualize(result, frame);
   ASSERT_NE(output.cols, 0);
   ASSERT_NE(output.rows, 0);
 }

@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,41 +57,20 @@ public:
   /*! \brief A Destructor function*/
   ~P3OrtBase();
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function.*/
-  cv::Mat infer_visualize(const cv::Mat & inputImg);
+  infer function.*/
+  EPD::EPDObjectDetection infer(const cv::Mat & inputImg);
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function with depth_msg and camera_info.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info);
-  /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function with depth_msg and camera_info.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    const std::string tracker_type,
-    std::vector<cv::Ptr<cv::Tracker>> & trackers,
-    std::vector<int> & tracker_logs,
-    std::vector<EPD::LabelledRect2d> & tracker_results);
-
-  /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
-  EPD::EPDObjectDetection infer_action(const cv::Mat & inputImg);
-
-  /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
-  EPD::EPDObjectLocalization infer_action(
+  infer function.*/
+  EPD::EPDObjectLocalization infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
     double camera_to_plane_distance_mm);
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
-  EPD::EPDObjectTracking infer_action(
+  infer function.*/
+  EPD::EPDObjectTracking infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
@@ -137,55 +116,8 @@ private:
     const int numChannels) const;
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
-  inference result for visualization purposes.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-
-  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
-  inference result for visualization purposes with localization results.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-
-  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
-  inference result for visualization purposes with localization results.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    const std::string tracker_type,
-    std::vector<cv::Ptr<cv::Tracker>> & trackers,
-    std::vector<int> & tracker_logs,
-    std::vector<EPD::LabelledRect2d> & tracker_results,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-
-  /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result for use by external agents.*/
-  EPD::EPDObjectDetection infer_action(
+  EPD::EPDObjectDetection infer(
     const cv::Mat & inputImg,
     int newW,
     int newH,
@@ -198,7 +130,7 @@ private:
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result with Localization results for use by external agents.*/
-  EPD::EPDObjectLocalization infer_action(
+  EPD::EPDObjectLocalization infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
@@ -214,7 +146,7 @@ private:
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result with Tracking results for use by external agents.*/
-  EPD::EPDObjectTracking infer_action(
+  EPD::EPDObjectTracking infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
@@ -274,20 +206,6 @@ private:
     const cv::Mat & img,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
-    const std::vector<std::array<float, 4>> & bboxes,
-    const std::vector<uint64_t> & classIndices,
-    const std::vector<cv::Mat> & masks,
-    const std::vector<std::string> & allClassNames,
-    const float maskThreshold);
-
-  /*! \brief A Mutator function that takes P3 inference outputs and illustrates
-  derived bounding boxes with corresponding object labels for visualization
-  purposes and tracked localization.*/
-  cv::Mat tracking_visualize(
-    const cv::Mat & img,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    std::vector<EPD::LabelledRect2d> & tracker_results,
     const std::vector<std::array<float, 4>> & bboxes,
     const std::vector<uint64_t> & classIndices,
     const std::vector<cv::Mat> & masks,

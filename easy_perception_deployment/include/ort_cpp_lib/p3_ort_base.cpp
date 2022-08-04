@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -61,61 +61,18 @@ P3OrtBase::~P3OrtBase()
 {}
 
 // Mutator: Classification
-cv::Mat P3OrtBase::infer_visualize(const cv::Mat & inputImg)
+EPD::EPDObjectDetection P3OrtBase::infer(const cv::Mat & inputImg)
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
 
-  return this->infer_visualize(
+  return this->infer(
     inputImg, m_newW, m_newH,
     m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
     cv::Scalar(102.9801, 115.9465, 122.7717));
 }
 
 // Mutator: Localization
-cv::Mat P3OrtBase::infer_visualize(
-  const cv::Mat & inputImg,
-  const cv::Mat & depthImg,
-  sensor_msgs::msg::CameraInfo camera_info)
-{
-  std::vector<float> dst(3 * m_paddedH * m_paddedW);
-
-  return this->infer_visualize(
-    inputImg, depthImg, camera_info, m_newW, m_newH,
-    m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
-    cv::Scalar(102.9801, 115.9465, 122.7717));
-}
-
-// Mutator: Tracking
-cv::Mat P3OrtBase::infer_visualize(
-  const cv::Mat & inputImg,
-  const cv::Mat & depthImg,
-  sensor_msgs::msg::CameraInfo camera_info,
-  const std::string tracker_type,
-  std::vector<cv::Ptr<cv::Tracker>> & trackers,
-  std::vector<int> & tracker_logs,
-  std::vector<EPD::LabelledRect2d> & tracker_results)
-{
-  std::vector<float> dst(3 * m_paddedH * m_paddedW);
-
-  return this->infer_visualize(
-    inputImg, depthImg, camera_info, tracker_type, trackers, tracker_logs,
-    tracker_results, m_newW, m_newH, m_paddedW, m_paddedH, m_ratio,
-    dst.data(), 0.5, cv::Scalar(102.9801, 115.9465, 122.7717));
-}
-
-// Mutator: Classification
-EPD::EPDObjectDetection P3OrtBase::infer_action(const cv::Mat & inputImg)
-{
-  std::vector<float> dst(3 * m_paddedH * m_paddedW);
-
-  return this->infer_action(
-    inputImg, m_newW, m_newH,
-    m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
-    cv::Scalar(102.9801, 115.9465, 122.7717));
-}
-
-// Mutator: Localization
-EPD::EPDObjectLocalization P3OrtBase::infer_action(
+EPD::EPDObjectLocalization P3OrtBase::infer(
   const cv::Mat & inputImg,
   const cv::Mat & depthImg,
   sensor_msgs::msg::CameraInfo camera_info,
@@ -123,14 +80,14 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
 
-  return this->infer_action(
+  return this->infer(
     inputImg, depthImg, camera_info, camera_to_plane_distance_mm,
     m_newW, m_newH, m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
     cv::Scalar(102.9801, 115.9465, 122.7717));
 }
 
 // Mutator: Tracking
-EPD::EPDObjectTracking P3OrtBase::infer_action(
+EPD::EPDObjectTracking P3OrtBase::infer(
   const cv::Mat & inputImg,
   const cv::Mat & depthImg,
   sensor_msgs::msg::CameraInfo camera_info,
@@ -142,7 +99,7 @@ EPD::EPDObjectTracking P3OrtBase::infer_action(
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
 
-  return this->infer_action(
+  return this->infer(
     inputImg, depthImg, camera_info, camera_to_plane_distance_mm,
     tracker_type, trackers, tracker_logs, tracker_results,
     m_newW, m_newH, m_paddedW, m_paddedH, m_ratio, dst.data(), 0.5,
@@ -177,7 +134,7 @@ void P3OrtBase::preprocess(
 }
 
 // Mutator 4
-cv::Mat P3OrtBase::infer_visualize(
+EPD::EPDObjectDetection P3OrtBase::infer(
   const cv::Mat & inputImg,
   int newW,
   int newH,
@@ -205,168 +162,7 @@ cv::Mat P3OrtBase::infer_visualize(
   assert(inferenceOutput[1].second.size() == 1);
   size_t nBoxes = inferenceOutput[1].second[0];
 
-  std::vector<std::array<float, 4>> bboxes;
-  std::vector<uint64_t> classIndices;
-  std::vector<float> scores;
-  std::vector<cv::Mat> masks;
-
-  bboxes.reserve(nBoxes);
-  classIndices.reserve(nBoxes);
-  scores.reserve(nBoxes);
-  masks.reserve(nBoxes);
-
-
-  for (size_t i = 0; i < nBoxes; ++i) {
-    if (inferenceOutput[2].first[i] > confThresh) {
-      float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
-      float ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
-      float xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
-      float ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
-
-      xmin = std::max<float>(xmin, 0);
-      ymin = std::max<float>(ymin, 0);
-      xmax = std::min<float>(xmax, inputImg.cols);
-      ymax = std::min<float>(ymax, inputImg.rows);
-
-      bboxes.emplace_back(std::array<float, 4>{xmin, ymin, xmax, ymax});
-      classIndices.emplace_back(reinterpret_cast<int64_t *>(inferenceOutput[1].first)[i]);
-      scores.emplace_back(inferenceOutput[2].first[i]);
-
-      cv::Mat curMask(28, 28, CV_32FC1);
-      memcpy(
-        curMask.data,
-        inferenceOutput[3].first + i * 28 * 28,
-        28 * 28 * sizeof(float));
-      masks.emplace_back(curMask);
-    }
-  }
-
-  if (bboxes.size() == 0) {
-    return inputImg;
-  }
-
-  EPD::activateUseCase(inputImg, bboxes, classIndices, scores, masks, this->getClassNames());
-  return visualize(inputImg, bboxes, classIndices, masks, this->getClassNames(), 0.5);
-}
-
-// Mutator 5: Localization
-cv::Mat P3OrtBase::infer_visualize(
-  const cv::Mat & inputImg,
-  const cv::Mat & depthImg,
-  sensor_msgs::msg::CameraInfo camera_info,
-  int newW,
-  int newH,
-  int paddedW,
-  int paddedH,
-  float ratio,
-  float * dst,
-  float confThresh,
-  const cv::Scalar & meanVal)
-{
-  cv::Mat tmpImg;
-  cv::resize(inputImg, tmpImg, cv::Size(newW, newH));
-
-  tmpImg.convertTo(tmpImg, CV_32FC3);
-  tmpImg -= meanVal;
-
-  cv::Mat paddedImg(paddedH, paddedW, CV_32FC3, cv::Scalar(0, 0, 0));
-  tmpImg.copyTo(paddedImg(cv::Rect(0, 0, newW, newH)));
-
-  this->preprocess(dst, paddedImg, paddedW, paddedH, 3);
-
-  // boxes, labels, scores, masks
-  auto inferenceOutput = (*this)({dst});
-
-  assert(inferenceOutput[1].second.size() == 1);
-  size_t nBoxes = inferenceOutput[1].second[0];
-
-  std::vector<std::array<float, 4>> bboxes;
-  std::vector<uint64_t> classIndices;
-  std::vector<float> scores;
-  std::vector<cv::Mat> masks;
-
-  bboxes.reserve(nBoxes);
-  classIndices.reserve(nBoxes);
-  scores.reserve(nBoxes);
-  masks.reserve(nBoxes);
-
-
-  for (size_t i = 0; i < nBoxes; ++i) {
-    if (inferenceOutput[2].first[i] > confThresh) {
-      float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
-      float ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
-      float xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
-      float ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
-
-      xmin = std::max<float>(xmin, 0);
-      ymin = std::max<float>(ymin, 0);
-      xmax = std::min<float>(xmax, inputImg.cols);
-      ymax = std::min<float>(ymax, inputImg.rows);
-
-      bboxes.emplace_back(std::array<float, 4>{xmin, ymin, xmax, ymax});
-      classIndices.emplace_back(reinterpret_cast<int64_t *>(inferenceOutput[1].first)[i]);
-      scores.emplace_back(inferenceOutput[2].first[i]);
-
-      cv::Mat curMask(28, 28, CV_32FC1);
-      memcpy(
-        curMask.data,
-        inferenceOutput[3].first + i * 28 * 28,
-        28 * 28 * sizeof(float));
-      masks.emplace_back(curMask);
-    }
-  }
-
-  if (bboxes.size() == 0) {
-    return inputImg;
-  }
-
-  return localize_visualize(
-    inputImg,
-    depthImg,
-    camera_info,
-    bboxes,
-    classIndices,
-    masks,
-    this->getClassNames(),
-    0.5);
-}
-
-// Mutator 5: Tracking
-cv::Mat P3OrtBase::infer_visualize(
-  const cv::Mat & inputImg,
-  const cv::Mat & depthImg,
-  sensor_msgs::msg::CameraInfo camera_info,
-  const std::string tracker_type,
-  std::vector<cv::Ptr<cv::Tracker>> & trackers,
-  std::vector<int> & tracker_logs,
-  std::vector<EPD::LabelledRect2d> & tracker_results,
-  int newW,
-  int newH,
-  int paddedW,
-  int paddedH,
-  float ratio,
-  float * dst,
-  float confThresh,
-  const cv::Scalar & meanVal)
-{
-  cv::Mat tmpImg;
-  cv::resize(inputImg, tmpImg, cv::Size(newW, newH));
-
-  tmpImg.convertTo(tmpImg, CV_32FC3);
-  tmpImg -= meanVal;
-
-  cv::Mat paddedImg(paddedH, paddedW, CV_32FC3, cv::Scalar(0, 0, 0));
-  tmpImg.copyTo(paddedImg(cv::Rect(0, 0, newW, newH)));
-
-  this->preprocess(dst, paddedImg, paddedW, paddedH, 3);
-
-  // boxes, labels, scores, masks
-  auto inferenceOutput = (*this)({dst});
-
-  assert(inferenceOutput[1].second.size() == 1);
-  size_t nBoxes = inferenceOutput[1].second[0];
-
-  std::vector<std::array<float, 4>> bboxes;
+  std::vector<std::array<int, 4>> bboxes;
   std::vector<uint64_t> classIndices;
   std::vector<float> scores;
   std::vector<cv::Mat> masks;
@@ -378,100 +174,17 @@ cv::Mat P3OrtBase::infer_visualize(
 
   for (size_t i = 0; i < nBoxes; ++i) {
     if (inferenceOutput[2].first[i] > confThresh) {
-      float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
-      float ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
-      float xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
-      float ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
+      int xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
+      int ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
+      int xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
+      int ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
 
-      xmin = std::max<float>(xmin, 0);
-      ymin = std::max<float>(ymin, 0);
-      xmax = std::min<float>(xmax, inputImg.cols);
-      ymax = std::min<float>(ymax, inputImg.rows);
+      xmin = std::max<int>(xmin, 0);
+      ymin = std::max<int>(ymin, 0);
+      xmax = std::min<int>(xmax, inputImg.cols);
+      ymax = std::min<int>(ymax, inputImg.rows);
 
-      bboxes.emplace_back(std::array<float, 4>{xmin, ymin, xmax, ymax});
-      classIndices.emplace_back(reinterpret_cast<int64_t *>(inferenceOutput[1].first)[i]);
-      scores.emplace_back(inferenceOutput[2].first[i]);
-
-      cv::Mat curMask(28, 28, CV_32FC1);
-      memcpy(
-        curMask.data,
-        inferenceOutput[3].first + i * 28 * 28,
-        28 * 28 * sizeof(float));
-      masks.emplace_back(curMask);
-    }
-  }
-  // DEBUG
-  // Evaluate detection results and tracking results.
-  tracking_evaluate(bboxes, inputImg, tracker_type, trackers, tracker_logs, tracker_results);
-
-  if (bboxes.size() == 0) {
-    return inputImg;
-  }
-
-  return tracking_visualize(
-    inputImg,
-    depthImg,
-    camera_info,
-    tracker_results,
-    bboxes,
-    classIndices,
-    masks,
-    this->getClassNames(),
-    0.5);
-}
-
-// Mutator 4
-EPD::EPDObjectDetection P3OrtBase::infer_action(
-  const cv::Mat & inputImg,
-  int newW,
-  int newH,
-  int paddedW,
-  int paddedH,
-  float ratio,
-  float * dst,
-  float confThresh,
-  const cv::Scalar & meanVal)
-{
-  cv::Mat tmpImg;
-  cv::resize(inputImg, tmpImg, cv::Size(newW, newH));
-
-  tmpImg.convertTo(tmpImg, CV_32FC3);
-  tmpImg -= meanVal;
-
-  cv::Mat paddedImg(paddedH, paddedW, CV_32FC3, cv::Scalar(0, 0, 0));
-  tmpImg.copyTo(paddedImg(cv::Rect(0, 0, newW, newH)));
-
-  this->preprocess(dst, paddedImg, paddedW, paddedH, 3);
-
-  // boxes, labels, scores, masks
-  auto inferenceOutput = (*this)({dst});
-
-  assert(inferenceOutput[1].second.size() == 1);
-  size_t nBoxes = inferenceOutput[1].second[0];
-
-  std::vector<std::array<float, 4>> bboxes;
-  std::vector<uint64_t> classIndices;
-  std::vector<float> scores;
-  std::vector<cv::Mat> masks;
-
-  bboxes.reserve(nBoxes);
-  classIndices.reserve(nBoxes);
-  scores.reserve(nBoxes);
-  masks.reserve(nBoxes);
-
-  for (size_t i = 0; i < nBoxes; ++i) {
-    if (inferenceOutput[2].first[i] > confThresh) {
-      float xmin = inferenceOutput[0].first[i * 4 + 0] / ratio;
-      float ymin = inferenceOutput[0].first[i * 4 + 1] / ratio;
-      float xmax = inferenceOutput[0].first[i * 4 + 2] / ratio;
-      float ymax = inferenceOutput[0].first[i * 4 + 3] / ratio;
-
-      xmin = std::max<float>(xmin, 0);
-      ymin = std::max<float>(ymin, 0);
-      xmax = std::min<float>(xmax, inputImg.cols);
-      ymax = std::min<float>(ymax, inputImg.rows);
-
-      bboxes.emplace_back(std::array<float, 4>{xmin, ymin, xmax, ymax});
+      bboxes.emplace_back(std::array<int, 4>{xmin, ymin, xmax, ymax});
       classIndices.emplace_back(reinterpret_cast<int64_t *>(inferenceOutput[1].first)[i]);
       scores.emplace_back(inferenceOutput[2].first[i]);
 
@@ -489,8 +202,6 @@ EPD::EPDObjectDetection P3OrtBase::infer_action(
     return output_msg;
   }
 
-  EPD::activateUseCase(inputImg, bboxes, classIndices, scores, masks, this->getClassNames());
-
   EPD::EPDObjectDetection output_obj(bboxes.size());
   output_obj.bboxes = bboxes;
   output_obj.classIndices = classIndices;
@@ -498,73 +209,6 @@ EPD::EPDObjectDetection P3OrtBase::infer_action(
   output_obj.masks = masks;
 
   return output_obj;
-}
-
-cv::Mat P3OrtBase::visualize(
-  const cv::Mat & img,
-  const std::vector<std::array<float, 4>> & bboxes,
-  const std::vector<uint64_t> & classIndices,
-  const std::vector<cv::Mat> & masks,
-  const std::vector<std::string> & allClassNames = {},
-  const float maskThreshold = 0.5)
-{
-  assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(allClassNames.size() > *std::max_element(classIndices.begin(), classIndices.end()));
-  }
-
-  cv::Scalar allColors(255.0, 0.0, 0.0, 0.0);
-
-  cv::Mat result = img.clone();
-
-  for (size_t i = 0; i < bboxes.size(); ++i) {
-    const auto & curBbox = bboxes[i];
-    const uint64_t classIdx = classIndices[i];
-    cv::Mat curMask = masks[i].clone();
-    const cv::Scalar & curColor = allColors;
-    const std::string curLabel = allClassNames.empty() ?
-      std::to_string(classIdx) : allClassNames[classIdx];
-
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]), curColor, 2);
-
-    int baseLine = 0;
-    cv::Size labelSize = cv::getTextSize(
-      curLabel, cv::FONT_HERSHEY_COMPLEX,
-      0.35, 1, &baseLine);
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(
-        curBbox[0] + labelSize.width, curBbox[1] +
-        static_cast<int>(1.3 * labelSize.height)),
-      curColor, -1);
-    cv::putText(
-      result, curLabel, cv::Point(curBbox[0], curBbox[1] + labelSize.height),
-      cv::FONT_HERSHEY_COMPLEX,
-      0.35, cv::Scalar(255, 255, 255));
-
-    // Visualize masks
-    const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]));
-
-    cv::resize(curMask, curMask, curBoxRect.size());
-
-    cv::Mat finalMask = (curMask > maskThreshold);
-
-    cv::Mat coloredRoi = (0.3 * curColor + 0.7 * result(curBoxRect));
-
-    coloredRoi.convertTo(coloredRoi, CV_8UC3);
-
-    std::vector<cv::Mat> contours;
-    cv::Mat hierarchy;
-    finalMask.convertTo(finalMask, CV_8U);
-
-    cv::findContours(finalMask, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
-    cv::drawContours(coloredRoi, contours, -1, curColor, 5, cv::LINE_8, hierarchy, 100);
-    coloredRoi.copyTo(result(curBoxRect), finalMask);
-  }
-  return result;
 }
 
 double P3OrtBase::findMedian(cv::Mat depthImg)
@@ -622,420 +266,10 @@ double P3OrtBase::findMin(cv::Mat depthImg)
   return min;
 }
 
-cv::Mat P3OrtBase::localize_visualize(
-  const cv::Mat & img,
-  const cv::Mat & depthImg,
-  sensor_msgs::msg::CameraInfo camera_info,
-  const std::vector<std::array<float, 4>> & bboxes,
-  const std::vector<uint64_t> & classIndices,
-  const std::vector<cv::Mat> & masks,
-  const std::vector<std::string> & allClassNames = {},
-  const float maskThreshold = 0.5)
-{
-  assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(
-      allClassNames.size() >
-      *std::max_element(classIndices.begin(), classIndices.end()));
-  }
-
-  cv::Scalar allColors(0.0, 0.0, 255.0, 0.0);
-
-  // // num of objects will be equal to number of bboxes
-  cv::Mat result = img.clone();
-  for (size_t i = 0; i < bboxes.size(); ++i) {
-    const auto & curBbox = bboxes[i];
-    const uint64_t classIdx = classIndices[i];
-    cv::Mat curMask = masks[i].clone();
-    const cv::Scalar & curColor = allColors[classIdx];
-    const std::string curLabel = allClassNames.empty() ?
-      std::to_string(classIdx) :
-      allClassNames[classIdx];
-
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]), curColor, 2);
-
-    int baseLine = 0;
-    cv::Size labelSize =
-      cv::getTextSize(curLabel, cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
-    cv::rectangle(
-      result, cv::Point(
-        curBbox[0], curBbox[1]),
-      cv::Point(
-        curBbox[0] + labelSize.width,
-        curBbox[1] + static_cast<int>(1.3 * labelSize.height)),
-      curColor, -1);
-    cv::putText(
-      result, curLabel,
-      cv::Point(curBbox[0], curBbox[1] + labelSize.height),
-      cv::FONT_HERSHEY_COMPLEX, 0.35, cv::Scalar(255, 255, 255));
-
-    // Visualizing masks
-    const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]));
-
-    cv::resize(curMask, curMask, curBoxRect.size());
-
-    // Assigning masks that exceed the maskThreshold.
-    cv::Mat finalMask = (curMask > maskThreshold);
-
-    // Assigning coloredRoi with the bounding box.
-    cv::Mat coloredRoi = (0.3 * curColor + 0.7 * result(curBoxRect));
-
-    coloredRoi.convertTo(coloredRoi, CV_8UC3);
-
-    std::vector<cv::Mat> contours;
-    cv::Mat hierarchy;
-    cv::Mat tempFinalMask;
-    finalMask.convertTo(tempFinalMask, CV_8U);
-    // Generate red contour lines of segmentation mask.
-    cv::findContours(
-      tempFinalMask, contours, hierarchy, cv::RETR_TREE,
-      cv::CHAIN_APPROX_SIMPLE);
-    // Draw red contour lines on output image.
-    cv::drawContours(
-      coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 5, cv::LINE_8,
-      hierarchy, 100);
-
-    // For more details, refer to link below:
-    // https://tinyurl.com/y5qnnxud
-    float ppx = camera_info.k.at(2);
-    float fx = camera_info.k.at(0);
-    float ppy = camera_info.k.at(5);
-    float fy = camera_info.k.at(4);
-
-    // Getting rotated rectangle and draw the major axis
-    std::vector<cv::RotatedRect> minRect(contours.size());
-    float obj_surface_depth;
-    float object_length, object_breadth, object_height;
-    cv::Point pt_a, pt_b, pt_c, pt_d;
-    cv::Point rotated_mid;
-
-    // Getting only the largest contour
-    // The largest contour is the one which has the largest area.
-    // TODO(cardboardcode): Changed according to your use case.
-    double maxArea = 0;
-    int maxAreaContourId = 999;
-    for (unsigned int j = 0; j < contours.size(); j++) {
-      double newArea = cv::contourArea(contours[j]);
-      if (newArea > maxArea) {
-        maxArea = newArea;
-        maxAreaContourId = j;
-      }  //  End if
-    }  //  End for
-    unsigned int maxID = maxAreaContourId;
-
-    for (unsigned int index = 0; index < contours.size(); index++) {
-      if (index != maxID) {
-        continue;
-      }
-      //  Compute rotated rectangle based on contours
-      minRect[index] = cv::minAreaRect(cv::Mat(contours[index]));
-      cv::Point2f rect_points[4];
-      //  4 points of the rotated rectangle
-      minRect[index].points(rect_points);
-
-      //  Mid points of the each side of the rotated rectangle
-      pt_a = (rect_points[0] + rect_points[3]) / 2;
-      pt_b = (rect_points[1] + rect_points[2]) / 2;
-      pt_c = (rect_points[0] + rect_points[1]) / 2;
-      pt_d = (rect_points[3] + rect_points[2]) / 2;
-
-      //  Add the top left corner to the coordinate in the small bbox
-      //  For temporary, bboxes center
-      rotated_mid = (cv::Point(curBbox[0], curBbox[1]) +
-        cv::Point(curBbox[2], curBbox[3])) / 2;
-
-      //  Get coordinates of the object center
-      float table_depth = this->findMedian(depthImg) * 0.001;
-      obj_surface_depth = this->findMin(depthImg(curBoxRect)) * 0.001;
-
-      float x = (rotated_mid.x - ppx) / fx * obj_surface_depth;
-      float y = (rotated_mid.y - ppy) / fy * obj_surface_depth;
-
-      std::cout << "[-cam -> table-] = " << table_depth <<
-        " meters" << std::endl;
-      std::cout << "[-cam -> obj_top-] = " << obj_surface_depth <<
-        " meters" << std::endl;
-
-      std::cout << "[-OBJ centroid x-] = " << x << std::endl;
-      std::cout << "[-OBJ centroid y-] = " << y << std::endl;
-      std::cout << "[-OBJ centroid z-] = " << obj_surface_depth +
-      (table_depth - obj_surface_depth) / 2 << std::endl;
-
-      // Get estimated size of object
-      // Compare the length of 2 side of the rectangle,
-      // the longer side will be the major axis
-      if (cv::norm(rect_points[0] - rect_points[1]) >
-        cv::norm(rect_points[1] - rect_points[2]))
-      {
-        // Draws the major axis(red)
-        cv::line(coloredRoi, pt_a, pt_b, cv::Scalar(0, 0, 255), 2);
-        // Draws the minor axis (green)
-        cv::line(coloredRoi, pt_c, pt_d, cv::Scalar(0, 255, 0), 2);
-        // Calculates the length of the object
-        object_length = obj_surface_depth * sqrt(
-          pow((pt_a.x - pt_b.x) / fx, 2) +
-          pow(
-            (pt_a.y - pt_b.y) / fy,
-            2));
-        // Calculates the breadth of the object
-        object_breadth = obj_surface_depth * sqrt(
-          pow((pt_c.x - pt_d.x) / fx, 2) +
-          pow(
-            (pt_c.y - pt_d.y) / fy,
-            2));
-
-      } else {
-        // Draw the major axis
-        cv::line(coloredRoi, pt_c, pt_d, cv::Scalar(0, 0, 255), 2);
-        // Draw the minor axis (green)
-        cv::line(coloredRoi, pt_a, pt_b, cv::Scalar(0, 255, 0), 2);
-        // Get object breadth and length
-        object_breadth = obj_surface_depth * sqrt(
-          pow((pt_a.x - pt_b.x) / fx, 2) +
-          pow((pt_a.y - pt_b.y) / fy, 2));
-        object_length = obj_surface_depth * sqrt(
-          pow((pt_c.x - pt_d.x) / fx, 2) +
-          pow((pt_c.y - pt_d.y) / fy, 2));
-      }
-      // Setting height of object
-      object_height = table_depth - obj_surface_depth;
-
-      // TODO(cardboardcode): To provide optimized debug prints in future iterations.
-      std::cout << "[-OBJ Name-] = " << curLabel << std::endl;
-      std::cout << "[-OBJ Length-] = " << object_length << " meters" << std::endl;
-      std::cout << "[-OBJ Breadth-] = " << object_breadth << " meters" << std::endl;
-      std::cout << "[-OBJ Height-] = " << object_height << " meters" << std::endl;
-
-      // Mark the center point with blue dot
-      cv::circle(coloredRoi, rotated_mid, 1, cv::Scalar(255, 0, 0), 1);
-    }
-
-    // Push each Region-Of-Interest (ROI) in sequence
-    coloredRoi.copyTo(result(curBoxRect), finalMask);
-  }
-
-  return result;
-}
-
-cv::Mat P3OrtBase::tracking_visualize(
-  const cv::Mat & img,
-  const cv::Mat & depthImg,
-  sensor_msgs::msg::CameraInfo camera_info,
-  std::vector<EPD::LabelledRect2d> & tracker_results,
-  const std::vector<std::array<float, 4>> & bboxes,
-  const std::vector<uint64_t> & classIndices,
-  const std::vector<cv::Mat> & masks,
-  const std::vector<std::string> & allClassNames = {},
-  const float maskThreshold = 0.5)
-{
-  assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(
-      allClassNames.size() >
-      *std::max_element(classIndices.begin(), classIndices.end()));
-  }
-
-  cv::Scalar allColors(0.0, 0.0, 255.0, 0.0);
-  cv::Scalar trackingColor(255.0, 0.0, 0.0, 0.0);
-
-  cv::Mat result = img.clone();
-
-  for (size_t i = 0; i < tracker_results.size(); i++) {
-    cv::rectangle(
-      result,
-      tracker_results[i].obj_bounding_box,
-      trackingColor,
-      4);
-  }
-
-  for (size_t i = 0; i < bboxes.size(); ++i) {
-    const auto & curBbox = bboxes[i];
-    const uint64_t classIdx = classIndices[i];
-    cv::Mat curMask = masks[i].clone();
-    const cv::Scalar & curColor = allColors[classIdx];
-    std::string curLabel = allClassNames.empty() ?
-      std::to_string(classIdx) :
-      allClassNames[classIdx];
-
-    cv::rectangle(
-      result, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]), curColor, 2);
-
-    int baseLine = 0;
-    cv::Size labelSize =
-      cv::getTextSize(curLabel, cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
-    cv::rectangle(
-      result, cv::Point(
-        curBbox[0], curBbox[1]),
-      cv::Point(
-        curBbox[0] + labelSize.width,
-        curBbox[1] + static_cast<int>(1.3 * labelSize.height)),
-      curColor, -1);
-
-    // Update curLabel with tracker number tag for object.
-    for (size_t j = 0; j < tracker_results.size(); j++) {
-      if (tracker_results[j].obj_bounding_box.x == curBbox[0] &&
-        tracker_results[j].obj_bounding_box.y == curBbox[1] &&
-        tracker_results[j].obj_bounding_box.width == curBbox[2] - curBbox[0] &&
-        tracker_results[j].obj_bounding_box.height == curBbox[3] - curBbox[1])
-      {
-        curLabel = curLabel + "_" + std::string(tracker_results[j].obj_tag);
-      }
-    }
-    cv::putText(
-      result, curLabel,
-      cv::Point(curBbox[0], curBbox[1] + labelSize.height),
-      cv::FONT_HERSHEY_COMPLEX, 0.55, cv::Scalar(255, 255, 255));
-
-    // Visualizing masks
-    const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]));
-
-    cv::resize(curMask, curMask, curBoxRect.size());
-
-    // Assigning masks that exceed the maskThreshold.
-    cv::Mat finalMask = (curMask > maskThreshold);
-
-    // Assigning coloredRoi with the bounding box.
-    cv::Mat coloredRoi = (0.3 * curColor + 0.7 * result(curBoxRect));
-
-    coloredRoi.convertTo(coloredRoi, CV_8UC3);
-
-    std::vector<cv::Mat> contours;
-    cv::Mat hierarchy;
-    cv::Mat tempFinalMask;
-    finalMask.convertTo(tempFinalMask, CV_8U);
-    // Generate red contour lines of segmentation mask.
-    cv::findContours(
-      tempFinalMask, contours, hierarchy, cv::RETR_TREE,
-      cv::CHAIN_APPROX_SIMPLE);
-    // Draw red contour lines on output image.
-    cv::drawContours(
-      coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 5, cv::LINE_8,
-      hierarchy, 100);
-
-    // For more details, refer to link below:
-    // https://tinyurl.com/y5qnnxud
-    float fx = camera_info.k.at(0);
-    float fy = camera_info.k.at(4);
-
-    // Getting rotated rectangle and draw the major axis
-    std::vector<cv::RotatedRect> minRect(contours.size());
-    float obj_surface_depth;
-    float object_length, object_breadth, object_height;
-    cv::Point pt_a, pt_b, pt_c, pt_d;
-    cv::Point rotated_mid;
-
-    // Getting only the largest contour
-    // The largest contour is the one which has the largest area.
-    // TODO(cardboardcode): Changed according to your use case.
-    double maxArea = 0;
-    int maxAreaContourId = 999;
-    for (unsigned int j = 0; j < contours.size(); j++) {
-      double newArea = cv::contourArea(contours[j]);
-      if (newArea > maxArea) {
-        maxArea = newArea;
-        maxAreaContourId = j;
-      }  //  End if
-    }  //  End for
-    unsigned int maxID = maxAreaContourId;
-
-    for (unsigned int index = 0; index < contours.size(); index++) {
-      if (index != maxID) {
-        continue;
-      }
-      //  Compute rotated rectangle based on contours
-      minRect[index] = cv::minAreaRect(cv::Mat(contours[index]));
-      cv::Point2f rect_points[4];
-      //  4 points of the rotated rectangle
-      minRect[index].points(rect_points);
-
-      //  Mid points of the each side of the rotated rectangle
-      pt_a = (rect_points[0] + rect_points[3]) / 2;
-      pt_b = (rect_points[1] + rect_points[2]) / 2;
-      pt_c = (rect_points[0] + rect_points[1]) / 2;
-      pt_d = (rect_points[3] + rect_points[2]) / 2;
-
-      //  Add the top left corner to the coordinate in the small bbox
-      //  For temporary, bboxes center
-      rotated_mid = (cv::Point(curBbox[0], curBbox[1]) +
-        cv::Point(curBbox[2], curBbox[3])) / 2;
-
-      //  Get coordinates of the object center
-      float table_depth = this->findMedian(depthImg) * 0.001;
-      obj_surface_depth = this->findMin(depthImg(curBoxRect)) * 0.001;
-
-      // std::cout << "table_depth = " << table_depth << std::endl;
-      // std::cout << "obj_surface_depth = " << obj_surface_depth << std::endl;
-
-      // std::cout << "[-OBJ centroid x-] = " << x << std::endl;
-      // std::cout << "[-OBJ centroid y-] = " << y << std::endl;
-      // std::cout << "[-OBJ centroid z-] = " << obj_surface_depth +
-      // (table_depth - obj_surface_depth) / 2 << std::endl;
-
-      // Get estimated size of object
-      // Compare the length of 2 side of the rectangle,
-      // the longer side will be the major axis
-      if (cv::norm(rect_points[0] - rect_points[1]) >
-        cv::norm(rect_points[1] - rect_points[2]))
-      {
-        // Draws the major axis(red)
-        cv::line(coloredRoi, pt_a, pt_b, cv::Scalar(0, 0, 255), 2);
-        // Draws the minor axis (green)
-        cv::line(coloredRoi, pt_c, pt_d, cv::Scalar(0, 255, 0), 2);
-        // Calculates the length of the object
-        object_length = obj_surface_depth * sqrt(
-          pow((pt_a.x - pt_b.x) / fx, 2) +
-          pow(
-            (pt_a.y - pt_b.y) / fy,
-            2));
-        // Calculates the breadth of the object
-        object_breadth = obj_surface_depth * sqrt(
-          pow((pt_c.x - pt_d.x) / fx, 2) +
-          pow(
-            (pt_c.y - pt_d.y) / fy,
-            2));
-
-      } else {
-        // Draw the major axis
-        cv::line(coloredRoi, pt_c, pt_d, cv::Scalar(0, 0, 255), 2);
-        // Draw the minor axis (green)
-        cv::line(coloredRoi, pt_a, pt_b, cv::Scalar(0, 255, 0), 2);
-        // Get object breadth and length
-        object_breadth = obj_surface_depth * sqrt(
-          pow((pt_a.x - pt_b.x) / fx, 2) +
-          pow((pt_a.y - pt_b.y) / fy, 2));
-        object_length = obj_surface_depth * sqrt(
-          pow((pt_c.x - pt_d.x) / fx, 2) +
-          pow((pt_c.y - pt_d.y) / fy, 2));
-      }
-      // Setting height of object
-      object_height = table_depth - obj_surface_depth;
-
-      // TODO(cardboardcode): To provide optimized debug prints in future iterations.
-      std::cout << "[-OBJ Name-] = " << curLabel << std::endl;
-      std::cout << "[-OBJ Length-] = " << object_length << std::endl;
-      std::cout << "[-OBJ Breadth-] = " << object_breadth << std::endl;
-      std::cout << "[-OBJ Height-] = " << object_height << std::endl;
-
-      // Mark the center point with blue dot
-      cv::circle(coloredRoi, rotated_mid, 1, cv::Scalar(255, 0, 0), 1);
-    }
-
-    // Push each Region-Of-Interest (ROI) in sequence
-    coloredRoi.copyTo(result(curBoxRect), finalMask);
-  }
-
-  return result;
-}
-
 // DEBUG
 // A mutator function that will output an EPD::EPDObjectLocalization object that
 // contains all information required for Localization.
-EPD::EPDObjectLocalization P3OrtBase::infer_action(
+EPD::EPDObjectLocalization P3OrtBase::infer(
   const cv::Mat & inputImg,
   const cv::Mat & depthImg,
   sensor_msgs::msg::CameraInfo camera_info,
@@ -1309,7 +543,7 @@ EPD::EPDObjectLocalization P3OrtBase::infer_action(
 // DEBUG
 // A mutator function that will output an EPD::EPDObjectTracking object that
 // contains all information required for Localization.
-EPD::EPDObjectTracking P3OrtBase::infer_action(
+EPD::EPDObjectTracking P3OrtBase::infer(
   const cv::Mat & inputImg,
   const cv::Mat & depthImg,
   sensor_msgs::msg::CameraInfo camera_info,
@@ -1385,12 +619,12 @@ EPD::EPDObjectTracking P3OrtBase::infer_action(
   float maskThreshold = 0.5;
   cv::Mat result = inputImg.clone();
 
-  assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(
-      allClassNames.size() >
-      *std::max_element(classIndices.begin(), classIndices.end()));
-  }
+  // assert(bboxes.size() == classIndices.size());
+  // if (!allClassNames.empty()) {
+  //   assert(
+  //     allClassNames.size() >
+  //     *std::max_element(classIndices.begin(), classIndices.end()));
+  // }
 
   // If there is zero bounding boxes generated, return empty EPDObjectTracking object.
   if (bboxes.size() == 0) {

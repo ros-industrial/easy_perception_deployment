@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -53,11 +53,8 @@ public:
   /*! \brief A Destructor function*/
   ~P2OrtBase();
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function.*/
-  cv::Mat infer_visualize(const cv::Mat & inputImg);
-  /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
-  EPD::EPDObjectDetection infer_action(const cv::Mat & inputImg);
+  infer function.*/
+  EPD::EPDObjectDetection infer(const cv::Mat & inputImg);
 
   /*! \brief A Getter function that gets the number of object names used for an
   ongoing session.*/
@@ -95,20 +92,8 @@ private:
     const int numChannels) const;
 
   /*! \brief A Mutator function that runs a P2 Ort Session and gets P2
-  inference result for visualization purposes.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    int newW,
-    int newH,
-    int paddedW,
-    int paddedH,
-    float ratio,
-    float * dst,
-    float confThresh,
-    const cv::Scalar & meanVal);
-  /*! \brief A Mutator function that runs a P2 Ort Session and gets P2
   inference result for use by external agents.*/
-  EPD::EPDObjectDetection infer_action(
+  EPD::EPDObjectDetection infer(
     const cv::Mat & inputImg,
     int newW,
     int newH,
@@ -118,15 +103,6 @@ private:
     float * dst,
     float confThresh,
     const cv::Scalar & meanVal);
-
-  /*! \brief A Mutator function that takes P2 inference outputs and illustrates
-  derived bounding boxes with corresponding object labels for visualization
-  purposes.*/
-  cv::Mat visualize(
-    const cv::Mat & img,
-    const std::vector<std::array<float, 4>> & bboxes,
-    const std::vector<uint64_t> & classIndices,
-    const std::vector<std::string> & allClassNames);
 };
 }  // namespace Ort
 

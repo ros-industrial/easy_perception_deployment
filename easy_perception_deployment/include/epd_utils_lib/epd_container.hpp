@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -111,6 +111,14 @@ public:
   *   specific OrtBase object.
   */
   void initORTSessionHandler();
+
+  cv::Mat visualize(
+    const EPD::EPDObjectDetection result,
+    const cv::Mat input_image);
+
+  cv::Mat visualize(
+    const EPD::EPDObjectTracking result,
+    const cv::Mat input_image);
 
 private:
   /*! \brief A boolean to indicate that OrtBase object has been initialized.*/
