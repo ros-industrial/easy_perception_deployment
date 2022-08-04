@@ -1,5 +1,5 @@
-// Copyright 2020 Advanced Remanufacturing and Technology Centre
-// Copyright 2020 ROS-Industrial Consortium Asia Pacific Team
+// Copyright 2022 Advanced Remanufacturing and Technology Centre
+// Copyright 2022 ROS-Industrial Consortium Asia Pacific Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -663,29 +663,37 @@ const
     case 3:
       {
         EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer(img);
+        EPD::activateUseCase(img, result.bboxes, result.classIndices, result.scores, result.masks, ortAgent_.classNames);
+
+        EPD::EPDObjectDetection output_obj(result.bboxes.size());
+        output_obj.bboxes = result.bboxes;
+        output_obj.classIndices = result.classIndices;
+        output_obj.scores = result.scores;
+        output_obj.masks = result.masks;
 
         if (ortAgent_.isVisualize()) {
-          resultImg = ortAgent_.visualize(result, img);
+          resultImg = ortAgent_.visualize(output_obj, img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
         } else {
           epd_msgs::msg::EPDObjectDetection output_msg;
-          for (size_t i = 0; i < result.data_size; i++) {
-            output_msg.class_indices.push_back(result.classIndices[i]);
+          for (size_t i = 0; i < output_obj.data_size; i++)
+          {
+            output_msg.class_indices.push_back(output_obj.classIndices[i]);
 
-            output_msg.scores.push_back(result.scores[i]);
+            output_msg.scores.push_back(output_obj.scores[i]);
 
             sensor_msgs::msg::RegionOfInterest roi;
-            roi.x_offset = result.bboxes[i][0];
-            roi.y_offset = result.bboxes[i][1];
-            roi.width = result.bboxes[i][2] - result.bboxes[i][0];
-            roi.height = result.bboxes[i][3] - result.bboxes[i][1];
+            roi.x_offset = output_obj.bboxes[i][0];
+            roi.y_offset = output_obj.bboxes[i][1];
+            roi.width = output_obj.bboxes[i][2] - output_obj.bboxes[i][0];
+            roi.height = output_obj.bboxes[i][3] - output_obj.bboxes[i][1];
             roi.do_rectify = false;
             output_msg.bboxes.push_back(roi);
 
             sensor_msgs::msg::Image::SharedPtr mask =
-              cv_bridge::CvImage(std_msgs::msg::Header(), "32FC1", result.masks[i]).toImageMsg();
+                cv_bridge::CvImage(std_msgs::msg::Header(), "32FC1", output_obj.masks[i]).toImageMsg();
             output_msg.masks.push_back(*mask);
           }
           p3_pub->publish(output_msg);

@@ -405,8 +405,6 @@ EPD::EPDObjectDetection P3OrtBase::infer(
     return output_msg;
   }
 
-  EPD::activateUseCase(inputImg, bboxes, classIndices, scores, masks, this->getClassNames());
-
   EPD::EPDObjectDetection output_obj(bboxes.size());
   output_obj.bboxes = bboxes;
   output_obj.classIndices = classIndices;

@@ -21,6 +21,7 @@
 #include <vector>
 #include <fstream>
 #include "opencv2/opencv.hpp"
+#include "epd_utils_lib/message_utils.hpp"
 
 
 /*! \brief A collection of use-case filters, namely for parsing usecase_config.json,
