@@ -134,8 +134,6 @@ void EPDContainer::setModelConfigFile()
   onnx_model_path = obj["path_to_model"].asString();
   class_label_path = obj["path_to_label_list"].asString();
 
-  std::cout << "onnx_model_path = " << onnx_model_path << std::endl;
-
   std::string visualizeFlag = obj["visualizeFlag"].asString();
 
   if (visualizeFlag.compare("visualize") == 0) {
