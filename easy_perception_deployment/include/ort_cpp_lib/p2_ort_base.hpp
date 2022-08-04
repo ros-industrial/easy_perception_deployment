@@ -53,8 +53,8 @@ public:
   /*! \brief A Destructor function*/
   ~P2OrtBase();
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_action function.*/
-  EPD::EPDObjectDetection infer_action(const cv::Mat & inputImg);
+  infer function.*/
+  EPD::EPDObjectDetection infer(const cv::Mat & inputImg);
 
   /*! \brief A Getter function that gets the number of object names used for an
   ongoing session.*/
@@ -93,7 +93,7 @@ private:
 
   /*! \brief A Mutator function that runs a P2 Ort Session and gets P2
   inference result for use by external agents.*/
-  EPD::EPDObjectDetection infer_action(
+  EPD::EPDObjectDetection infer(
     const cv::Mat & inputImg,
     int newW,
     int newH,

@@ -48,11 +48,11 @@ P2OrtBase::P2OrtBase(
 // Destructor
 P2OrtBase::~P2OrtBase() {}
 
-EPD::EPDObjectDetection P2OrtBase::infer_action(const cv::Mat & inputImg)
+EPD::EPDObjectDetection P2OrtBase::infer(const cv::Mat & inputImg)
 {
   std::vector<float> dst(3 * m_paddedH * m_paddedW);
 
-  return this->infer_action(
+  return this->infer(
     inputImg, m_newW, m_newH,
     m_paddedW, m_paddedH, m_ratio,
     dst.data(), 0.5, cv::Scalar(102.9801, 115.9465, 122.7717));
@@ -85,7 +85,7 @@ void P2OrtBase::preprocess(
 }
 
 // Mutator 4
-EPD::EPDObjectDetection P2OrtBase::infer_action(
+EPD::EPDObjectDetection P2OrtBase::infer(
   const cv::Mat & inputImg,
   int newW,
   int newH,

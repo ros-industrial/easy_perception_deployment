@@ -609,7 +609,7 @@ const
       }
     case 2:
       {
-        EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
+        EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer(img);
         EPD::activateUseCase(
           img,
           result.bboxes,

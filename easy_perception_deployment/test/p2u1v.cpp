@@ -80,7 +80,7 @@ TEST(EPD_TestSuite, Test_P2Model_Counting_Visualize)
 
   ASSERT_EQ(!ortAgent_->p2_ort_session, false);
 
-  EPD::EPDObjectDetection result = ortAgent_->p2_ort_session->infer_action(frame);
+  EPD::EPDObjectDetection result = ortAgent_->p2_ort_session->infer(frame);
   cv::Mat output = ortAgent_->visualize(result, frame);
   ASSERT_NE(output.cols, 0);
   ASSERT_NE(output.rows, 0);
