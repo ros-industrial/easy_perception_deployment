@@ -35,42 +35,6 @@ const unsigned int COLOR_MATCHING_MODE = 2;
 const unsigned int LOCALISATION_MODE = 3;
 const unsigned int TRACKING_MODE = 4;
 
-const char PATH_TO_USECASE_CONFIG[] = PATH_TO_PACKAGE "/config/usecase_config.json";
-
-/*! \brief A Getter function that parses the usecase_config.json if a Counting
-usecaseMode is selected and populates a list of selected object names intended
-to be counted.
-*/
-inline std::vector<std::string> generateCountClassNames()
-{
-  std::vector<std::string> countClassNames;
-
-  Json::Reader reader;
-  Json::Value obj;
-  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
-
-  if (ifs_1) {
-    try {
-      ifs_1 >> obj;
-    } catch (const std::exception & e) {
-      std::cerr << e.what() << std::endl;
-    }
-  } else {
-    std::cerr << "File not found!" << std::endl;
-  }
-
-  reader.parse(ifs_1, obj);
-
-  Json::Value class_list = obj["class_list"];
-  for (int index = 0; index < static_cast<int>(class_list.size()); index++) {
-    countClassNames.emplace_back(class_list[index].asString());
-  }
-
-  ifs_1.close();
-
-  return countClassNames;
-}
-
 /*! \brief A Mutator function that takes the base inference results from a P3
 inference engine and excludes any bounding boxes, classIndices and score
 element that do not share the label of selected objects-to-be counted.
@@ -80,21 +44,19 @@ inline void count(
   std::vector<uint64_t> & classIndices,
   std::vector<float> & scores,
   std::vector<cv::Mat> & masks,
-  std::vector<std::string> allClassNames)
+  std::vector<std::string> allClassNames,
+  const std::vector<std::string> countClassNames)
 {
-  std::vector<std::string> countClassNames = EPD::generateCountClassNames();
+  bool noMasksFound = false;
+  if (masks.size() == 0) {
+    noMasksFound = true;
+  }
 
   // Set max number of object to detect to 1000.
   std::vector<std::array<int, 4>> local_bboxes;
   std::vector<uint64_t> local_classIndices;
   std::vector<float> local_scores;
   std::vector<cv::Mat> local_masks;
-
-  bool noMasksFound = false;
-  if (masks.size() == 0) {
-    noMasksFound = true;
-  }
-
   /*Iterate through bbboxes, classIndices and allClassNames
   to count corresponding detected objects with the same labels.
   */
@@ -140,32 +102,13 @@ inline void matchColor(
   std::vector<uint64_t> & classIndices,
   std::vector<float> & scores,
   std::vector<cv::Mat> & masks,
-  std::vector<std::string> allClassNames)
+  std::vector<std::string> allClassNames,
+  const std::string filepath_to_refcolor)
 {
   bool noMasksFound = false;
   if (masks.size() == 0) {
     noMasksFound = true;
   }
-  Json::Reader reader;
-  Json::Value obj;
-  std::ifstream ifs_1(PATH_TO_USECASE_CONFIG);
-
-  if (ifs_1) {
-    try {
-      ifs_1 >> obj;
-    } catch (const std::exception & e) {
-      std::cerr << e.what() << std::endl;
-    }
-  } else {
-    std::cerr << "File not found!" << std::endl;
-  }
-
-  reader.parse(ifs_1, obj);
-
-  std::string filepath_to_refcolor = obj["path_to_color_template"].asString();
-
-  ifs_1.close();
-
   cv::Mat ref_color_image = cv::imread(filepath_to_refcolor, cv::IMREAD_COLOR);
   cv::Mat hsv_base, hsv_test1;
   cv::cvtColor(ref_color_image, hsv_base, cv::COLOR_BGR2HSV);
@@ -251,10 +194,10 @@ inline void activateUseCase(
     return;
   } else if (useCaseMode == EPD::COUNTING_MODE) {
     printf("Use Case: [Counting] selected.\n");
-    EPD::count(bboxes, classIndices, scores, masks, allClassNames);
+    EPD::count(bboxes, classIndices, scores, masks, allClassNames, countClassNames);
   } else if (useCaseMode == EPD::COLOR_MATCHING_MODE) {
     printf("Use Case: [Color-Matching] selected.\n");
-    EPD::matchColor(img, bboxes, classIndices, scores, masks, allClassNames);
+    EPD::matchColor(img, bboxes, classIndices, scores, masks, allClassNames, filepath_to_refcolor);
   } else {
     throw std::runtime_error("Invalid Use Case. Can only be [0, 1, 2].");
   }

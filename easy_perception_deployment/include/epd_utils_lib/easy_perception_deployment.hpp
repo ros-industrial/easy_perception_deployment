@@ -638,7 +638,7 @@ const
           result.masks,
           ortAgent_.classNames,
           ortAgent_.useCaseMode,
-          ortAgent_.countClassName,
+          ortAgent_.countClassNames,
           ortAgent_.template_color_path);
 
         EPD::EPDObjectDetection output_obj(result.bboxes.size());
@@ -682,7 +682,7 @@ const
           result.masks,
           ortAgent_.classNames,
           ortAgent_.useCaseMode,
-          ortAgent_.countClassName,
+          ortAgent_.countClassNames,
           ortAgent_.template_color_path);
 
         EPD::EPDObjectDetection output_obj(result.bboxes.size());
