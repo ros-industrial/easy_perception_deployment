@@ -315,4 +315,74 @@ cv::Mat EPDContainer::visualize(
   return output_image;
 }
 
-}  // namespace EPD
+cv::Mat EPDContainer::visualize(
+  const EPD::EPDObjectTracking result,
+  const cv::Mat input_image)
+{
+  cv::Scalar oneColor(0.0, 0.0, 255.0, 0.0);
+
+  cv::Mat output_image = input_image.clone();
+  for (size_t i = 0; i < result.objects.size(); ++i)
+  {
+
+    const unsigned int curBbox[] = {
+        result.objects[i].roi.x_offset,
+        result.objects[i].roi.y_offset,
+        result.objects[i].roi.width + result.objects[i].roi.x_offset,
+        result.objects[i].roi.height + result.objects[i].roi.y_offset};
+    cv::Mat curMask = result.objects[i].mask.clone();
+
+    // DEBUG patch.
+    if (curMask.empty()) {
+      continue;
+    }
+
+    const cv::Scalar &curColor = oneColor;
+    std::string curLabel = result.objects[i].name;
+
+    cv::rectangle(
+        output_image, cv::Point(curBbox[0], curBbox[1]),
+        cv::Point(curBbox[2], curBbox[3]), curColor, 2);
+
+    int baseLine = 0;
+    cv::Size labelSize =
+        cv::getTextSize(curLabel, cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
+    cv::rectangle(
+        output_image, cv::Point(curBbox[0], curBbox[1]),
+        cv::Point(
+            curBbox[0] + labelSize.width,
+            curBbox[1] + static_cast<int>(1.3 * labelSize.height)),
+        curColor, -1);
+
+    curLabel = curLabel + "_" + result.object_ids[i];
+
+    // Visualizing masks
+    const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
+                              cv::Point(curBbox[2], curBbox[3]));
+    cv::resize(curMask, curMask, curBoxRect.size());
+    // Assigning masks that exceed the maskThreshold.
+    cv::Mat finalMask = (curMask > 0.5);
+
+    // Assigning coloredRoi with the bounding box.
+    cv::Mat coloredRoi = (0.3 * curColor + 0.7 * output_image(curBoxRect));
+    coloredRoi.convertTo(coloredRoi, CV_8UC3);
+
+    std::vector<cv::Mat> contours;
+    cv::Mat hierarchy, tempFinalMask;
+    finalMask.convertTo(tempFinalMask, CV_8U);
+    cv::findContours(tempFinalMask, contours, hierarchy, cv::RETR_TREE,
+                     cv::CHAIN_APPROX_SIMPLE);
+    cv::drawContours(coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 2, cv::LINE_8,
+                     hierarchy, 100);
+
+    coloredRoi.copyTo(output_image(curBoxRect), finalMask);
+
+    cv::putText(
+        output_image, curLabel,
+        cv::Point(curBbox[0], curBbox[1] + labelSize.height),
+        cv::FONT_HERSHEY_COMPLEX, 0.35, cv::Scalar(255, 255, 255));
+  }
+
+  return output_image;
+}
+} // namespace EPD

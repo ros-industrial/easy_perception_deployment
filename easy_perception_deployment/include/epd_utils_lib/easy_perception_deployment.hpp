@@ -484,22 +484,19 @@ void EasyPerceptionDeployment::process_tracking_callback(
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
   cv::Mat resultImg;
-  if (ortAgent_.isVisualize()) {
-    resultImg = ortAgent_.p3_ort_session->infer_visualize(
+
+  EPD::EPDObjectTracking result = ortAgent_.p3_ort_session->infer_action(
       img,
       depth_img,
       *camera_info,
+      camera_to_plane_distance_mm,
       ortAgent_.tracker_type,
       ortAgent_.trackers,
       ortAgent_.tracker_logs,
       ortAgent_.tracker_results);
-
-    // DEBUG
-    // for (size_t i = 0; i < ortAgent_.tracker_results.size(); i++) {
-    //   std::cout << "Tracked Object = [ "
-    //     << ortAgent_.tracker_results[i].obj_tag
-    //     << " ]" << std::endl;
-    // }
+  
+  if (ortAgent_.isVisualize()) {
+    resultImg = ortAgent_.visualize(result, img);
 
     sensor_msgs::msg::Image::SharedPtr output_msg =
       cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
@@ -511,16 +508,6 @@ void EasyPerceptionDeployment::process_tracking_callback(
     RCLCPP_INFO(this->get_logger(), "[-FPS-]= %f\n", 1000.0 / elapsedTime.count());
 
   } else {
-    EPD::EPDObjectTracking result = ortAgent_.p3_ort_session->infer_action(
-      img,
-      depth_img,
-      *camera_info,
-      camera_to_plane_distance_mm,
-      ortAgent_.tracker_type,
-      ortAgent_.trackers,
-      ortAgent_.tracker_logs,
-      ortAgent_.tracker_results);
-
     epd_msgs::msg::EPDObjectTracking output_msg;
 
     output_msg.header = std_msgs::msg::Header();
@@ -534,13 +521,6 @@ void EasyPerceptionDeployment::process_tracking_callback(
     output_msg.fx = camera_info->k.at(0);
     output_msg.ppy = camera_info->k.at(5);
     output_msg.fy = camera_info->k.at(4);
-
-    // DEBUG
-    // std::cout << "[ ";
-    // for (size_t i = 0; i < output_msg.object_ids.size(); i++) {
-    //   std::cout << " " << output_msg.object_ids[i] << " ";
-    // }
-    // std::cout << " ]" << std::endl;
 
     // Populate output_msg objects and roi_array
     for (size_t i = 0; i < result.data_size; i++) {

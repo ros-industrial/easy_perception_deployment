@@ -1232,12 +1232,12 @@ EPD::EPDObjectTracking P3OrtBase::infer_action(
   float maskThreshold = 0.5;
   cv::Mat result = inputImg.clone();
 
-  assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(
-      allClassNames.size() >
-      *std::max_element(classIndices.begin(), classIndices.end()));
-  }
+  // assert(bboxes.size() == classIndices.size());
+  // if (!allClassNames.empty()) {
+  //   assert(
+  //     allClassNames.size() >
+  //     *std::max_element(classIndices.begin(), classIndices.end()));
+  // }
 
   // If there is zero bounding boxes generated, return empty EPDObjectTracking object.
   if (bboxes.size() == 0) {
