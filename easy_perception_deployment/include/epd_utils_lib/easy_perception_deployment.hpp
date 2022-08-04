@@ -630,11 +630,14 @@ const
     case 2:
       {
         if (ortAgent_.isVisualize()) {
+
           resultImg = ortAgent_.p2_ort_session->infer_visualize(img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
+        
         } else {
+
           EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
           epd_msgs::msg::EPDObjectDetection output_msg;
           for (size_t i = 0; i < result.data_size; i++) {
@@ -654,15 +657,20 @@ const
         }
 
         break;
+
       }
     case 3:
       {
         if (ortAgent_.isVisualize()) {
+          // TODO(cardboardvoice): Replace infer_visualize with infer_action.
+          // TODO(cardboardvoice): Implement EPDContainer function to visualize infer_action.
           resultImg = ortAgent_.p3_ort_session->infer_visualize(img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
+        
         } else {
+
           EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer_action(img);
           epd_msgs::msg::EPDObjectDetection output_msg;
           for (size_t i = 0; i < result.data_size; i++) {
@@ -686,6 +694,7 @@ const
         }
 
         break;
+
       }
   }
 
