@@ -21,6 +21,7 @@
 #include "gtest/gtest.h"
 #include "bits/stdc++.h"
 #include "epd_utils_lib/epd_container.hpp"
+#include "epd_utils_lib/message_utils.hpp"
 
 std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/config/session_config.json");
 std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/config/usecase_config.json");
@@ -78,7 +79,8 @@ TEST(EPD_TestSuite, Test_P3Model_ColorMatch_Visualize)
 
   ASSERT_EQ(!ortAgent_->p3_ort_session, false);
 
-  cv::Mat output = ortAgent_->p3_ort_session->infer_visualize(frame);
+  EPD::EPDObjectDetection result = ortAgent_->p3_ort_session->infer_action(frame);
+  cv::Mat output = ortAgent_->visualize(result, frame);
 
   ASSERT_NE(output.cols, 0);
   ASSERT_NE(output.rows, 0);

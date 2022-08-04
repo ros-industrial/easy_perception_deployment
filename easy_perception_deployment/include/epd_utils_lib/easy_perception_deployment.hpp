@@ -169,10 +169,6 @@ private:
     const int img_height,
     const int img_width) const;
 
-  // For visualizing detection results.
-  cv::Mat visualize(
-    const EPD::EPDObjectDetection result,
-    const cv::Mat input_image) const;
 };
 
 EasyPerceptionDeployment::EasyPerceptionDeployment(void)
@@ -334,109 +330,6 @@ void EasyPerceptionDeployment::checkOrtAgentIsInitialized(
   } else {
     hasCameraChanged(img_height, img_width);
   }
-}
-
-cv::Mat EasyPerceptionDeployment::visualize(
-  const EPD::EPDObjectDetection result,
-  const cv::Mat input_image) const
-{
-  std::cout << "Experimental Visualize Workflow..." << std::endl;
-  cv::Scalar oneColor(0.0, 0.0, 255.0, 0.0);
-
-  cv::Mat output_image = input_image.clone();
-  for (size_t i = 0; i < result.bboxes.size(); ++i) {
-    
-    const unsigned int curBbox[] = {
-      result.bboxes[i][0],
-      result.bboxes[i][1],
-      result.bboxes[i][2],
-      result.bboxes[i][3]
-    };
-    cv::Mat curMask = result.masks[i].clone();
-
-    // DEBUG patch.
-    if (curMask.empty()){
-      continue;
-    }
-
-    const cv::Scalar & curColor = oneColor;
-    const std::string curLabel = ortAgent_.classNames[result.classIndices[i]];
-
-    cv::rectangle(
-      output_image, cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]), curColor, 2);
-
-    int baseLine = 0;
-    cv::Size labelSize =
-      cv::getTextSize(curLabel, cv::FONT_HERSHEY_COMPLEX, 0.35, 1, &baseLine);
-    cv::rectangle(
-      output_image, cv::Point(
-        curBbox[0], curBbox[1]),
-      cv::Point(
-        curBbox[0] + labelSize.width,
-        curBbox[1] + static_cast<int>(1.3 * labelSize.height)),
-      curColor, -1);
-
-    // Visualizing masks
-    const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
-      cv::Point(curBbox[2], curBbox[3]));
-    cv::resize(curMask, curMask, curBoxRect.size());
-    // Assigning masks that exceed the maskThreshold.
-    cv::Mat finalMask = (curMask > 0.5);
-
-    // Assigning coloredRoi with the bounding box.
-    cv::Mat coloredRoi = (0.3 * curColor + 0.7 * output_image(curBoxRect));
-    coloredRoi.convertTo(coloredRoi, CV_8UC3);
-
-    std::vector<cv::Mat> contours;
-    cv::Mat hierarchy, tempFinalMask;
-    finalMask.convertTo(tempFinalMask, CV_8U);
-    cv::findContours(tempFinalMask, contours, hierarchy, cv::RETR_TREE,
-                     cv::CHAIN_APPROX_SIMPLE);
-    cv::drawContours(coloredRoi, contours, -1, cv::Scalar(0, 0, 255), 2, cv::LINE_8,
-                     hierarchy, 100);
-
-    double maxArea = 0;
-    int maxAreaContourId = 999;
-    for (unsigned int j = 0; j < contours.size(); j++) {
-      double newArea = cv::contourArea(contours[j]);
-      if (newArea > maxArea) {
-        maxArea = newArea;
-        maxAreaContourId = j;
-      }
-    }
-    unsigned int maxID = maxAreaContourId;
-
-    std::vector<cv::RotatedRect> minRect(contours.size());
-    for (unsigned int index = 0; index < contours.size(); index++) {
-      if (index != maxID){
-        continue;
-      }
-      minRect[index] = cv::minAreaRect(cv::Mat(contours[index]));
-
-      cv::Point2f rect_points[4];
-      // 4 points of the rotated rectangle
-      minRect[index].points(rect_points);
-
-      // Mid points of the each side of the rotated rectangle
-      cv::Point pt_a, pt_b, pt_c, pt_d;
-      pt_a = (rect_points[0] + rect_points[3]) / 2; //    0 |__a__| 3
-      pt_b = (rect_points[1] + rect_points[2]) / 2; //	    |  	  |
-      pt_c = (rect_points[0] + rect_points[1]) / 2; //	  c |     | d
-      pt_d = (rect_points[3] + rect_points[2]) / 2; //	    |__b__|
-                                                    //	   1       2
-    }
-
-    coloredRoi.copyTo(output_image(curBoxRect), finalMask);
-
-    cv::putText(
-      output_image, curLabel,
-      cv::Point(curBbox[0], curBbox[1] + labelSize.height),
-      cv::FONT_HERSHEY_COMPLEX, 0.35, cv::Scalar(255, 255, 255));
-
-  }
-
-  return output_image;
 }
 
 void EasyPerceptionDeployment::process_localize_callback(
@@ -743,7 +636,7 @@ const
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
-        
+
         } else {
 
           EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer_action(img);
@@ -770,9 +663,9 @@ const
     case 3:
       {
         EPD::EPDObjectDetection result = ortAgent_.p3_ort_session->infer_action(img);
-        
+
         if (ortAgent_.isVisualize()) {
-          resultImg = this->visualize(result, img);
+          resultImg = ortAgent_.visualize(result, img);
           sensor_msgs::msg::Image::SharedPtr output_msg =
             cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
           visual_pub->publish(*output_msg);
