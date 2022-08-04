@@ -57,26 +57,11 @@ public:
   /*! \brief A Destructor function*/
   ~P3OrtBase();
   /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function.*/
-  cv::Mat infer_visualize(const cv::Mat & inputImg);
-
-  /*! \brief A auxillary Mutator function that calls the internal overloading
   infer_visualize function with depth_msg and camera_info.*/
   cv::Mat infer_visualize(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info);
-  /*! \brief A auxillary Mutator function that calls the internal overloading
-  infer_visualize function with depth_msg and camera_info.*/
-  cv::Mat infer_visualize(
-    const cv::Mat & inputImg,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    const std::string tracker_type,
-    std::vector<cv::Ptr<cv::Tracker>> & trackers,
-    std::vector<int> & tracker_logs,
-    std::vector<EPD::LabelledRect2d> & tracker_results);
-
   /*! \brief A auxillary Mutator function that calls the internal overloading
   infer function.*/
   EPD::EPDObjectDetection infer(const cv::Mat & inputImg);
@@ -91,7 +76,7 @@ public:
 
   /*! \brief A auxillary Mutator function that calls the internal overloading
   infer_action function.*/
-  EPD::EPDObjectTracking infer_action(
+  EPD::EPDObjectTracking infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
@@ -214,7 +199,7 @@ private:
 
   /*! \brief A Mutator function that runs a P3 Ort Session and gets P3
   inference result with Tracking results for use by external agents.*/
-  EPD::EPDObjectTracking infer_action(
+  EPD::EPDObjectTracking infer(
     const cv::Mat & inputImg,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
@@ -274,20 +259,6 @@ private:
     const cv::Mat & img,
     const cv::Mat & depthImg,
     sensor_msgs::msg::CameraInfo camera_info,
-    const std::vector<std::array<float, 4>> & bboxes,
-    const std::vector<uint64_t> & classIndices,
-    const std::vector<cv::Mat> & masks,
-    const std::vector<std::string> & allClassNames,
-    const float maskThreshold);
-
-  /*! \brief A Mutator function that takes P3 inference outputs and illustrates
-  derived bounding boxes with corresponding object labels for visualization
-  purposes and tracked localization.*/
-  cv::Mat tracking_visualize(
-    const cv::Mat & img,
-    const cv::Mat & depthImg,
-    sensor_msgs::msg::CameraInfo camera_info,
-    std::vector<EPD::LabelledRect2d> & tracker_results,
     const std::vector<std::array<float, 4>> & bboxes,
     const std::vector<uint64_t> & classIndices,
     const std::vector<cv::Mat> & masks,

@@ -485,7 +485,7 @@ void EasyPerceptionDeployment::process_tracking_callback(
 
   cv::Mat resultImg;
 
-  EPD::EPDObjectTracking result = ortAgent_.p3_ort_session->infer_action(
+  EPD::EPDObjectTracking result = ortAgent_.p3_ort_session->infer(
       img,
       depth_img,
       *camera_info,

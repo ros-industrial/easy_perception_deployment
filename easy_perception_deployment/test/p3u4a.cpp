@@ -84,7 +84,7 @@ TEST(EPD_TestSuite, Test_P3Model_Tracking_Action)
 
   ASSERT_EQ(!ortAgent_->p3_ort_session, false);
 
-  EPD::EPDObjectTracking result = ortAgent_->p3_ort_session->infer_action(
+  EPD::EPDObjectTracking result = ortAgent_->p3_ort_session->infer(
     colored_img,
     depth_img,
     camera_info,
