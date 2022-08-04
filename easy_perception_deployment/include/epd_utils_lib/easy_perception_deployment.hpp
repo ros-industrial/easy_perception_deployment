@@ -364,9 +364,31 @@ void EasyPerceptionDeployment::process_localize_callback(
   // Initialize timer
   std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
 
+  EPD::EPDObjectLocalization result = ortAgent_.p3_ort_session->infer_action(
+    img,
+    depth_img,
+    *camera_info,
+    camera_to_plane_distance_mm);
+  
   cv::Mat resultImg;
   if (ortAgent_.isVisualize()) {
-    resultImg = ortAgent_.p3_ort_session->infer_visualize(img, depth_img, *camera_info);
+    EPD::EPDObjectTracking converted_result(result.data_size);
+    converted_result.object_ids.clear();
+    for (size_t i = 0; i < result.data_size; i++) {
+      EPD::EPDObjectTracking::LocalizedObject object;
+      object.name = result.objects[i].name;
+      object.roi = result.objects[i].roi;
+      object.mask = result.objects[i].mask;
+      object.length = result.objects[i].length;
+      object.breadth = result.objects[i].breadth;
+      object.height = result.objects[i].height;
+      object.segmented_pcl = result.objects[i].segmented_pcl;
+      object.axis = result.objects[i].axis;
+
+      converted_result.objects.emplace_back(object);
+    }
+    
+    cv::Mat resultImg = ortAgent_.visualize(converted_result, img);
 
     sensor_msgs::msg::Image::SharedPtr output_msg =
       cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", resultImg).toImageMsg();
@@ -378,12 +400,6 @@ void EasyPerceptionDeployment::process_localize_callback(
     RCLCPP_INFO(this->get_logger(), "[-FPS-]= %f\n", 1000.0 / elapsedTime.count());
 
   } else {
-    EPD::EPDObjectLocalization result = ortAgent_.p3_ort_session->infer_action(
-      img,
-      depth_img,
-      *camera_info,
-      camera_to_plane_distance_mm);
-
     epd_msgs::msg::EPDObjectLocalization output_msg;
 
     output_msg.header = std_msgs::msg::Header();

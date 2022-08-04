@@ -324,14 +324,12 @@ cv::Mat EPDContainer::visualize(
   cv::Mat output_image = input_image.clone();
   for (size_t i = 0; i < result.objects.size(); ++i)
   {
-
     const unsigned int curBbox[] = {
         result.objects[i].roi.x_offset,
         result.objects[i].roi.y_offset,
         result.objects[i].roi.width + result.objects[i].roi.x_offset,
         result.objects[i].roi.height + result.objects[i].roi.y_offset};
     cv::Mat curMask = result.objects[i].mask.clone();
-
     // DEBUG patch.
     if (curMask.empty()) {
       continue;
@@ -354,8 +352,10 @@ cv::Mat EPDContainer::visualize(
             curBbox[1] + static_cast<int>(1.3 * labelSize.height)),
         curColor, -1);
 
-    curLabel = curLabel + "_" + result.object_ids[i];
-
+    if (result.object_ids.size() != 0){
+      curLabel = curLabel + "_" + result.object_ids[i];
+    }
+    
     // Visualizing masks
     const cv::Rect curBoxRect(cv::Point(curBbox[0], curBbox[1]),
                               cv::Point(curBbox[2], curBbox[3]));
