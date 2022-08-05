@@ -809,9 +809,9 @@ EPD::EPDObjectTracking P3OrtBase::infer(
       pcl::compute3DCentroid(output_obj.objects[i].segmented_pcl, centerpoint);
 
       pcl::computeCovarianceMatrix(
-          output_obj.objects[i].segmented_pcl,
-          centerpoint,
-          covariance_matrix);
+        output_obj.objects[i].segmented_pcl,
+        centerpoint,
+        covariance_matrix);
       pcl::eigen33(covariance_matrix, eigenvectors, eigenvalues);
 
       axis = Eigen::Vector3f(

@@ -35,3 +35,9 @@ Changelog for package easy_perception_deployment
 * Updated unit testing modules under test folder to reflect new infer function calls for P1OrtBase, P2OrtBase and P3OrtBase classes. 
 * Contributor(s): Bey Hao Yun
 
+0.2.1 (2022-08-06)
+-------------------
+* Abstracted instantiation of struct LocalizedObject in usecase_config.hpp. Reduced code verbosity for EPDObjectLocalization to EPDObjectTracking conversion in Localization Visualize workflow. 
+* Contributor(s): Bey Hao Yun
+
+

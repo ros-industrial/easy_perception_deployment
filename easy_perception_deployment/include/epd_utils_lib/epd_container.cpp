@@ -337,7 +337,12 @@ cv::Mat EPDContainer::visualize(
     const cv::Scalar & curColor = oneColor;
     std::string curLabel = result.objects[i].name;
 
-    cv::rectangle(output_image, cv::Point(curBbox[0], curBbox[1]), cv::Point(curBbox[2], curBbox[3]), curColor, 2);
+    cv::rectangle(
+      output_image,
+      cv::Point(curBbox[0], curBbox[1]),
+      cv::Point(curBbox[2], curBbox[3]),
+      curColor,
+      2);
 
     int baseLine = 0;
     cv::Size labelSize =
