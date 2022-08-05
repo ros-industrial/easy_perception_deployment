@@ -67,22 +67,22 @@ public:
   }
 };
 
+struct LocalizedObject
+{
+  std::string name;
+  sensor_msgs::msg::RegionOfInterest roi;
+  cv::Mat mask;
+  geometry_msgs::msg::Point centroid;
+  float length;
+  float breadth;
+  float height;
+  pcl::PointCloud<pcl::PointXYZ> segmented_pcl;
+  geometry_msgs::msg::Vector3 axis;
+};
+
 class EPDObjectLocalization
 {
 public:
-  struct LocalizedObject
-  {
-    std::string name;
-    sensor_msgs::msg::RegionOfInterest roi;
-    cv::Mat mask;
-    geometry_msgs::msg::Point centroid;
-    float length;
-    float breadth;
-    float height;
-    pcl::PointCloud<pcl::PointXYZ> segmented_pcl;
-    geometry_msgs::msg::Vector3 axis;
-  };
-
   std::vector<LocalizedObject> objects;
   /*! \brief A set size for all vectors in class.*/
   size_t data_size;
@@ -104,18 +104,6 @@ public:
 class EPDObjectTracking
 {
 public:
-  struct LocalizedObject
-  {
-    std::string name;
-    sensor_msgs::msg::RegionOfInterest roi;
-    cv::Mat mask;
-    geometry_msgs::msg::Point centroid;
-    float length;
-    float breadth;
-    float height;
-    pcl::PointCloud<pcl::PointXYZ> segmented_pcl;
-    geometry_msgs::msg::Vector3 axis;
-  };
   std::vector<std::string> object_ids;
   std::vector<LocalizedObject> objects;
   /*! \brief A set size for all vectors in class.*/

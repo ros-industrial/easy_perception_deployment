@@ -92,17 +92,7 @@ TEST(EPD_TestSuite, Test_P3Model_Localize_Visualize)
   EPD::EPDObjectTracking converted_result(result.data_size);
   converted_result.object_ids.clear();
   for (size_t i = 0; i < result.data_size; i++) {
-    EPD::EPDObjectTracking::LocalizedObject object;
-    object.name = result.objects[i].name;
-    object.roi = result.objects[i].roi;
-    object.mask = result.objects[i].mask;
-    object.length = result.objects[i].length;
-    object.breadth = result.objects[i].breadth;
-    object.height = result.objects[i].height;
-    object.segmented_pcl = result.objects[i].segmented_pcl;
-    object.axis = result.objects[i].axis;
-
-    converted_result.objects.emplace_back(object);
+    converted_result.objects.emplace_back(result.objects[i]);
   }
 
   cv::Mat output = ortAgent_->visualize(converted_result, colored_img);
