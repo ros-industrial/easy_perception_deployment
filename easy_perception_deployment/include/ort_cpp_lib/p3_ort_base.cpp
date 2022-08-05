@@ -340,11 +340,11 @@ EPD::EPDObjectLocalization P3OrtBase::infer(
   cv::Mat result = inputImg.clone();
 
   assert(bboxes.size() == classIndices.size());
-  if (!allClassNames.empty()) {
-    assert(
-      allClassNames.size() >
-      *std::max_element(classIndices.begin(), classIndices.end()));
-  }
+  // if (!allClassNames.empty()) {
+  //   assert(
+  //     allClassNames.size() >
+  //     *std::max_element(classIndices.begin(), classIndices.end()));
+  // }
 
   // If there is zero bounding boxes generated, return empty EPDObjectLocalization object.
   if (bboxes.size() == 0) {
@@ -355,7 +355,6 @@ EPD::EPDObjectLocalization P3OrtBase::infer(
   EPD::EPDObjectLocalization output_obj(bboxes.size());
 
   float table_depth = this->findMedian(depthImg) * 0.001;
-
   // No. of objects will be equal to number of bboxes
   /* START of Populating EPDObjectLocalization object */
   for (size_t i = 0; i < bboxes.size(); ++i) {
