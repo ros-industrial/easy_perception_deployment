@@ -20,6 +20,7 @@ import os
 import sys
 import argparse
 import getopt
+import json
 
 def print_help():
     print('config_epd.py [--visualize ] [--action ] [--cpu ] [--gpu ] ' +
@@ -42,7 +43,6 @@ class EPDConfigurator():
         self._input_image_topic = ''
         self.visualizeFlag = True
         self.useCPU = True
-        self.isService = False
 
         self.usecase_mode = 0
 
@@ -73,7 +73,7 @@ class EPDConfigurator():
 
         opt_files = self.parse_args(args[1:])
 
-        self.write_to_session_config(self.session_config_filepath)
+        self.write_out(self.session_config_filepath, self.usecase_config_filepath)
 
 
     def parse_args(self, args):
@@ -90,43 +90,94 @@ class EPDConfigurator():
                 print_help()
                 sys.exit(0)
             elif opt in ('-v', '--visualize'):
+                print("[ session_config.json ] - Setting to Visualize Mode.")
                 self.visualizeFlag = True
-                self.session_config[2] = "visualize"
             elif opt in ('-a', '--action'):
+                print("[ session_config.json ] - Setting to Action Mode.")
                 self.visualizeFlag = False
-                self.session_config[2] = "robot"
             elif opt in ('-g', '--gpu'):
+                print("[ session_config.json ] - Setting to GPU Mode.")
                 self.useCPU = False
-                self.session_config[3] = "GPU"
             elif opt in ('-c', '--cpu'):
+                print("[ session_config.json ] - Setting to CPU Mode.")
                 self.useCPU = True
-                self.session_config[3] = "CPU"
             elif opt in ('-m', '--model'):
                 if not os.path.isfile(os.getcwd() + "/" + arg):
                     print("[ config_epd ] - ERROR. input model file does not exist.")
                     print("[ config_epd ] - Exiting.")
                     sys.exit(2)
                 self._path_to_model = "./" + arg
-                self.session_config[0] = "./" + arg
             elif opt in ('-l', '--label'):
                 if not os.path.isfile(os.getcwd() + "/" + arg):
                     print("[ config_epd ] - ERROR. input label list does not exist.")
                     print("[ config_epd ] - Exiting.")
                     sys.exit(2)
                 self._path_to_label_list = "./" + arg
-                self.session_config[1] = "./" + arg
 
     def parse_session_config(self, session_config_filepath):
-        #TODO(cardboardcode): Implement parser for session_config.json.
-        print("[ parse_session_config ] - FUNCTION START ")
+
+        f = open(session_config_filepath)
+        data = json.load(f)
+        self._path_to_model = data["path_to_model"]
+        self._path_to_label_list = data["path_to_label_list"]
+        if data["useCPU"] == "CPU":
+            self.useCPU = True
+        else:
+            self.useCPU = False
+        if data["visualizeFlag"] == "visualize":
+            self.visualizeFlag = True
+        else:
+            self.visualizeFlag = False
+        f.close()
+
 
     def parse_usecase_config(self, usecase_config_filepath):
-        #TODO(cardboardcode): Implement parser for usecase_config.json.
-        print("[ parse_use_case_config ] - FUNCTION START")
 
-    def write_to_session_config(self, session_config_filepath):
-        #TODO(cardboardcode): Implement write out function to session_config.json
-        #TODO(cardboardcode): Implement seperate write out function to usecase_config.json
+        f = open(usecase_config_filepath)
+        data = json.load(f)
+        self.usecase_mode = data["usecase_mode"]
+        if self.usecase_mode == 0:
+            print("[ Use Case ] - CLASSIFICATION")
+        elif self.usecase_mode == 1:
+            print("[ Use Case ] - COUNTING")
+        elif self.usecase_mode == 2:
+            print("[ Use Case ] - COLOR-MATCHING")
+        elif self.usecase_mode == 3:
+            print("[ Use Case ] - LOCALIZATION")
+        elif self.usecase_mode == 4:
+            print("[ Use Case ] - TRACKING")
+        else:
+            print("[ Use Case ] - INVALID. Please rectify usecase_config.json. Exiting...")
+            f.close()
+            sys.exit(1)
+        f.close()
+
+    def write_out(self, session_config_filepath, usecase_config_filepath):
+        #TODO(cardboardcode): Implement write out function to usecase_config.json
+
+        if self.visualizeFlag:
+            visualizeFlag_string = "visualize"
+        else:
+            visualizeFlag_string = "robot"
+
+        if self.useCPU:
+            useCPU_string = "CPU"
+        else:
+            useCPU_string = "GPU"
+
+        dict = {
+            "path_to_model": self._path_to_model,
+            "path_to_label_list": self._path_to_label_list,
+            "visualizeFlag": visualizeFlag_string,
+            "useCPU": useCPU_string
+            }
+        json_object_1 = json.dumps(dict, indent=4)
+
+        with open(session_config_filepath, 'w') as outfile_1:
+            outfile_1.write(json_object_1)
+
+        #with open(usecase_config_filepath, 'w') as outfile_2:
+        #    outfile_2.write(json_object_2)
 
 def main(args=None):
 
