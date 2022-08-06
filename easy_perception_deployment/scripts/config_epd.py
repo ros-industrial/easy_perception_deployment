@@ -32,6 +32,7 @@ def print_help():
     print('-c --cpu   Sets EPD to CPU Mode.')
     print('--model   Sets new onnx model to be deployed via EPD.')
     print('--label   Sets new label list to be deployed via EPD.')
+    #TODO(cardboardcode): Add options for usecase_config.json CLI configuration.
 
 
 class EPDConfigurator():
@@ -77,6 +78,7 @@ class EPDConfigurator():
 
 
     def parse_args(self, args):
+        #TODO(cardboardcode): Add options for usecase_config.json CLI configuration.
         opts, opt_files = getopt.getopt(args, 'hvagc',
                                         ['visualize',
                                          'action',
@@ -140,12 +142,15 @@ class EPDConfigurator():
             print("[ Use Case ] - CLASSIFICATION")
         elif self.usecase_mode == 1:
             print("[ Use Case ] - COUNTING")
+            #TODO(cardboardcode): Read and assign countClassNames array variable.
         elif self.usecase_mode == 2:
             print("[ Use Case ] - COLOR-MATCHING")
+            #TODO(cardboardcode): Read and assign template_color_image_filepath string variable.
         elif self.usecase_mode == 3:
             print("[ Use Case ] - LOCALIZATION")
         elif self.usecase_mode == 4:
             print("[ Use Case ] - TRACKING")
+            #TODO(cardboardcode): Read and assign track_type string variable.
         else:
             print("[ Use Case ] - INVALID. Please rectify usecase_config.json. Exiting...")
             f.close()
