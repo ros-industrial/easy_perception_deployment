@@ -55,10 +55,6 @@ set(EPD_UTILS
   include/ort_cpp_lib/p1_ort_base.cpp
 )
 
-# Check if CUDA is available in local onnxruntime build
-include(CheckLanguage)
-check_language(CUDA)
-
 if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/data/model/squeezenet1.1-7.onnx")
   message(AUTHOR_WARNING "Pretrained models are downloaded.")
 else()
@@ -74,13 +70,16 @@ else()
   --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
 endif()
 
-if(EXISTS ${CMAKE_CUDA_COMPILER})
+# Check if CUDA is available in local onnxruntime build
+find_package(CUDA)
+
+if(CUDA_FOUND)
   message(AUTHOR_WARNING "Using [-GPU-].")
   add_definitions(-DUSE_GPU=true)
 else()
   message(AUTHOR_WARNING "Your local onnxruntime does not support CUDA. Using [-CPU-] instead.")
   add_definitions(-DUSE_GPU=false)
-endif()
+endif(CUDA_FOUND)
 
 if(DEBUG)
   message(AUTHOR_WARNING "Running in DEBUG mode.")
