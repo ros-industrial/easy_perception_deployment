@@ -79,7 +79,7 @@ if(CUDA_FOUND)
 else()
   message(AUTHOR_WARNING "Your local onnxruntime does not support CUDA. Using [-CPU-] instead.")
   add_definitions(-DUSE_GPU=false)
-endif(CUDA_FOUND)
+endif()
 
 if(DEBUG)
   message(AUTHOR_WARNING "Running in DEBUG mode.")
