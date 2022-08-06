@@ -1,6 +1,6 @@
 {
-	"path_to_label_list" : "/home/cardboardvoice/epd_workspace/5_linting_epd_ws/src/easy_perception_deployment/easy_perception_deployment/data/label_list/imagenet_classes.txt",
-	"path_to_model" : "/home/cardboardvoice/epd_workspace/5_linting_epd_ws/src/easy_perception_deployment/easy_perception_deployment/data/model/squeezenet1.1-7.onnx",
-	"useCPU" : "CPU",
-	"visualizeFlag" : "robot"
+    "path_to_model": "./data/model/MaskRCNN-10.onnx",
+    "path_to_label_list": "./data/label_list/coco_classes.txt",
+    "visualizeFlag": "visualize",
+    "useCPU": "CPU"
 }
