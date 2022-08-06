@@ -40,4 +40,7 @@ Changelog for package easy_perception_deployment
 * Abstracted instantiation of struct LocalizedObject in usecase_config.hpp. Reduced code verbosity for EPDObjectLocalization to EPDObjectTracking conversion in Localization Visualize workflow. 
 * Contributor(s): Bey Hao Yun
 
-
+0.2.2 (2022-08-07)
+-------------------
+* Modified CMake-based check for CUDA installation to set USE_GPU flag. 
+* Contributor(s): Bey Hao Yun
