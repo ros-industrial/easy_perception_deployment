@@ -23,7 +23,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
-          sudo apt-get install -y wget curl doxygen
           sudo python -m pip install pycodestyle
       - name: Static Analysis
         run: |
