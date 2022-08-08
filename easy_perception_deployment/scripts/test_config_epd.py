@@ -25,7 +25,7 @@ os.chdir(r"../")
 REQUIRED_START_DIR = os.getcwd()
 
 # Reset session_config.json and usecase_config.json to default.
-if(os.path.exists('./config/session_config.json') and
+if (os.path.exists('./config/session_config.json') and
    os.path.exists('./config/usecase_config.json')):
     p1 = subprocess.Popen(['rm', './config/session_config.json'])
     p1.communicate()

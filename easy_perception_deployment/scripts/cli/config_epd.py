@@ -84,7 +84,7 @@ class EPDConfigurator():
         # CLI configuration.
 
     def isInEPDPackageRoot(self, start_dirpath):
-        if(os.path.isdir(start_dirpath + "/scripts") and
+        if (os.path.isdir(start_dirpath + "/scripts") and
            os.path.isdir(start_dirpath + "/launch") and
            os.path.isdir(start_dirpath + "/data")):
             print("[ config_epd ] - Executing in root of EPD package.")
