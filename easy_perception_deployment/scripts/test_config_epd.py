@@ -424,3 +424,19 @@ def test_set_UseCase_Tracking(mocker):
 
     assert usecase_mode == 4
     assert track_type == "KCF"
+
+
+def test_set_Invalid_UseCase():
+
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--use',
+        '5']
+    usecase_config_filepath = REQUIRED_START_DIR \
+        + "/config/usecase_config.json"
+
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+        configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
+
+    # Check for sys.exit() due to invalid Use Case.
+    assert pytest_wrapped_e.type == SystemExit
