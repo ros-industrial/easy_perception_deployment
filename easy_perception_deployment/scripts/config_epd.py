@@ -22,9 +22,10 @@ import argparse
 import getopt
 import json
 
+
 def print_help():
     print('config_epd.py [--visualize ] [--action ] [--cpu ] [--gpu ] ' +
-        '[--model ] [--label ]')
+          '[--model ] [--label ]')
     print()
     print('-v --visualize   Sets EPD to Visualize Mode.')
     print('-a --action   Sets EPD to Action Mode.')
@@ -32,7 +33,8 @@ def print_help():
     print('-c --cpu   Sets EPD to CPU Mode.')
     print('--model   Sets new onnx model to be deployed via EPD.')
     print('--label   Sets new label list to be deployed via EPD.')
-    #TODO(cardboardcode): Add options for usecase_config.json CLI configuration.
+    # TODO(cardboardcode): Add options for usecase_config.json
+    # CLI configuration.
 
 
 class EPDConfigurator():
@@ -51,7 +53,8 @@ class EPDConfigurator():
         self.usecase_config = []
 
         # Check if session_config.txt exits.
-        self.session_config_filepath = start_dirpath + "/config/session_config.json"
+        self.session_config_filepath = start_dirpath +
+        "/config/session_config.json"
         if os.path.isfile(self.session_config_filepath):
             print("[ config_epd ] - session_config.json detected.")
             self.parse_session_config(self.session_config_filepath)
@@ -59,7 +62,8 @@ class EPDConfigurator():
             print("[ config_epd ] - ERROR. session_config.json missing.")
             sys.exit(1)
         # Check if usecase_config.txt exists.
-        self.usecase_config_filepath = start_dirpath + "/config/usecase_config.json"
+        self.usecase_config_filepath = start_dirpath +
+        "/config/usecase_config.json"
         if os.path.isfile(self.usecase_config_filepath):
             print("[ config_epd ] - usecase_config.txt detected.")
             self.parse_usecase_config(self.usecase_config_filepath)
@@ -74,11 +78,13 @@ class EPDConfigurator():
 
         opt_files = self.parse_args(args[1:])
 
-        self.write_out(self.session_config_filepath, self.usecase_config_filepath)
-
+        self.write_out(
+            self.session_config_filepath,
+            self.usecase_config_filepath)
 
     def parse_args(self, args):
-        #TODO(cardboardcode): Add options for usecase_config.json CLI configuration.
+        # TODO(cardboardcode): Add options for usecase_config.json
+        # CLI configuration.
         opts, opt_files = getopt.getopt(args, 'hvagc',
                                         ['visualize',
                                          'action',
@@ -105,13 +111,15 @@ class EPDConfigurator():
                 self.useCPU = True
             elif opt in ('-m', '--model'):
                 if not os.path.isfile(os.getcwd() + "/" + arg):
-                    print("[ config_epd ] - ERROR. input model file does not exist.")
+                    print("[ config_epd ] - ERROR." +
+                          " input model file does not exist.")
                     print("[ config_epd ] - Exiting.")
                     sys.exit(2)
                 self._path_to_model = "./" + arg
             elif opt in ('-l', '--label'):
                 if not os.path.isfile(os.getcwd() + "/" + arg):
-                    print("[ config_epd ] - ERROR. input label list does not exist.")
+                    print("[ config_epd ] - ERROR." +
+                          " input label list does not exist.")
                     print("[ config_epd ] - Exiting.")
                     sys.exit(2)
                 self._path_to_label_list = "./" + arg
@@ -132,7 +140,6 @@ class EPDConfigurator():
             self.visualizeFlag = False
         f.close()
 
-
     def parse_usecase_config(self, usecase_config_filepath):
 
         f = open(usecase_config_filepath)
@@ -142,23 +149,28 @@ class EPDConfigurator():
             print("[ Use Case ] - CLASSIFICATION")
         elif self.usecase_mode == 1:
             print("[ Use Case ] - COUNTING")
-            #TODO(cardboardcode): Read and assign countClassNames array variable.
+            # TODO(cardboardcode): Read and assign countClassNames
+            # array variable.
         elif self.usecase_mode == 2:
             print("[ Use Case ] - COLOR-MATCHING")
-            #TODO(cardboardcode): Read and assign template_color_image_filepath string variable.
+            # TODO(cardboardcode): Read and assign
+            # template_color_image_filepath string variable.
         elif self.usecase_mode == 3:
             print("[ Use Case ] - LOCALIZATION")
         elif self.usecase_mode == 4:
             print("[ Use Case ] - TRACKING")
-            #TODO(cardboardcode): Read and assign track_type string variable.
+            # TODO(cardboardcode): Read and assign track_type
+            # string variable.
         else:
-            print("[ Use Case ] - INVALID. Please rectify usecase_config.json. Exiting...")
+            print("[ Use Case ] - INVALID. Please rectify" +
+                  " usecase_config.json. Exiting...")
             f.close()
             sys.exit(1)
         f.close()
 
     def write_out(self, session_config_filepath, usecase_config_filepath):
-        #TODO(cardboardcode): Implement write out function to usecase_config.json
+        # TODO(cardboardcode): Implement write out function
+        # to usecase_config.json
 
         if self.visualizeFlag:
             visualizeFlag_string = "visualize"
@@ -181,19 +193,23 @@ class EPDConfigurator():
         with open(session_config_filepath, 'w') as outfile_1:
             outfile_1.write(json_object_1)
 
-        #with open(usecase_config_filepath, 'w') as outfile_2:
+        # with open(usecase_config_filepath, 'w') as outfile_2:
         #    outfile_2.write(json_object_2)
+
 
 def main(args=None):
 
-    # Checks if this script is run in the root of the easy_perception_deployment ROS2 package.
+    # Checks if this script is run in the root of the
+    # easy_perception_deployment ROS2 package.
     start_dirpath = os.getcwd()
-    # Check if the following folder are in the directory when script is being executed:
+    # Check if the following folder are in the directory
+    # when script is being executed:
     # data
     # CMakeLists.txt and package.xml
 
     if os.path.isdir(start_dirpath + "/data"):
-        if os.path.isdir(start_dirpath + "/scripts") and os.path.isdir(start_dirpath + "/launch"):
+        if os.path.isdir(start_dirpath + "/scripts")
+        and os.path.isdir(start_dirpath + "/launch"):
             print("[ config_epd ] - Executing in root of EPD package.")
             configurator = EPDConfigurator(start_dirpath, args)
         else:
@@ -204,6 +220,7 @@ def main(args=None):
         print("[ config_epd ] - ERROR. data folder is missing.")
         print("[ config_epd ] - Exiting...")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main(sys.argv)
