@@ -1,4 +1,4 @@
-name: PYTHON_CI
+name: CLI_CI
 
 # Determines when this workflow is run
 on: [push, pull_request]

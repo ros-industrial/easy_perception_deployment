@@ -1,4 +1,4 @@
-name: INDUSTRIAL_ROS_CI
+name: CI
 
 # Determines when this workflow is run
 on: [push, pull_request]
