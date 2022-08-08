@@ -7,7 +7,7 @@ jobs:
   python_ci:
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.8, 3.9]
     env:
       QT_QPA_PLATFORM: "offscreen"
       CODECOV_TOKEN: b56af58a-9b3b-49a9-800d-65746dbfb346
@@ -27,4 +27,9 @@ jobs:
           sudo python -m pip install pycodestyle
       - name: Static Analysis
         run: |
-          pycodestyle --show-source easy_perception_deployment/scripts/config_epd.py --count
+          pycodestyle --show-source easy_perception_deployment/scripts/test_config_epd.py easy_perception_deployment/scripts/cli/config_epd.py --count
+      - name: Dynamic Analysis
+        run: |
+          pip install pytest pytest-cov
+          cd easy_perception_deployment/scripts
+          pytest --capture=no -vv test_config_epd.py

@@ -23,23 +23,11 @@ import getopt
 import json
 
 
-def print_help():
-    print('config_epd.py [--visualize ] [--action ] [--cpu ] [--gpu ] ' +
-          '[--model ] [--label ]')
-    print()
-    print('-v --visualize   Sets EPD to Visualize Mode.')
-    print('-a --action   Sets EPD to Action Mode.')
-    print('-g --gpu   Sets EPD to GPU Mode.')
-    print('-c --cpu   Sets EPD to CPU Mode.')
-    print('--model   Sets new onnx model to be deployed via EPD.')
-    print('--label   Sets new label list to be deployed via EPD.')
-    # TODO(cardboardcode): Add options for usecase_config.json
-    # CLI configuration.
-
-
 class EPDConfigurator():
 
     def __init__(self, start_dirpath, args):
+
+        self.isInEPDPackageRoot(start_dirpath)
 
         self._path_to_model = ''
         self._path_to_label_list = ''
@@ -52,18 +40,18 @@ class EPDConfigurator():
         self.session_config = []
         self.usecase_config = []
 
-        # Check if session_config.txt exits.
-        self.session_config_filepath = start_dirpath +
-        "/config/session_config.json"
+        # Check if session_config.json exits.
+        self.session_config_filepath = start_dirpath \
+            + "/config/session_config.json"
         if os.path.isfile(self.session_config_filepath):
             print("[ config_epd ] - session_config.json detected.")
             self.parse_session_config(self.session_config_filepath)
         else:
             print("[ config_epd ] - ERROR. session_config.json missing.")
             sys.exit(1)
-        # Check if usecase_config.txt exists.
-        self.usecase_config_filepath = start_dirpath +
-        "/config/usecase_config.json"
+        # Check if usecase_config.json exists.
+        self.usecase_config_filepath = start_dirpath \
+            + "/config/usecase_config.json"
         if os.path.isfile(self.usecase_config_filepath):
             print("[ config_epd ] - usecase_config.txt detected.")
             self.parse_usecase_config(self.usecase_config_filepath)
@@ -73,7 +61,7 @@ class EPDConfigurator():
 
         if len(args) < 2:
             print('Please specify a configuration.')
-            print_help()
+            self.print_help()
             sys.exit(1)
 
         opt_files = self.parse_args(args[1:])
@@ -81,6 +69,30 @@ class EPDConfigurator():
         self.write_out(
             self.session_config_filepath,
             self.usecase_config_filepath)
+
+    def print_help(self):
+        print('config_epd.py [--visualize ] [--action ] [--cpu ] [--gpu ] ' +
+              '[--model ] [--label ]')
+        print()
+        print('-v --visualize   Sets EPD to Visualize Mode.')
+        print('-a --action   Sets EPD to Action Mode.')
+        print('-g --gpu   Sets EPD to GPU Mode.')
+        print('-c --cpu   Sets EPD to CPU Mode.')
+        print('--model   Sets new onnx model to be deployed via EPD.')
+        print('--label   Sets new label list to be deployed via EPD.')
+        # TODO(cardboardcode): Add options for usecase_config.json
+        # CLI configuration.
+
+    def isInEPDPackageRoot(self, start_dirpath):
+        if(os.path.isdir(start_dirpath + "/scripts") and
+           os.path.isdir(start_dirpath + "/launch") and
+           os.path.isdir(start_dirpath + "/data")):
+            print("[ config_epd ] - Executing in root of EPD package.")
+        else:
+            print("[ config_epd ] - ERROR. Not in root of EPD package")
+            print("[ config_epd ] - Please run in root of EPD package.")
+            print("[ config_epd ] - Exiting...")
+            sys.exit(1)
 
     def parse_args(self, args):
         # TODO(cardboardcode): Add options for usecase_config.json
@@ -95,7 +107,7 @@ class EPDConfigurator():
 
         for opt, arg in opts:
             if opt == '-h':
-                print_help()
+                self.print_help()
                 sys.exit(0)
             elif opt in ('-v', '--visualize'):
                 print("[ session_config.json ] - Setting to Visualize Mode.")
@@ -115,14 +127,14 @@ class EPDConfigurator():
                           " input model file does not exist.")
                     print("[ config_epd ] - Exiting.")
                     sys.exit(2)
-                self._path_to_model = "./" + arg
+                self._path_to_model = arg
             elif opt in ('-l', '--label'):
                 if not os.path.isfile(os.getcwd() + "/" + arg):
                     print("[ config_epd ] - ERROR." +
                           " input label list does not exist.")
                     print("[ config_epd ] - Exiting.")
                     sys.exit(2)
-                self._path_to_label_list = "./" + arg
+                self._path_to_label_list = arg
 
     def parse_session_config(self, session_config_filepath):
 
@@ -198,28 +210,13 @@ class EPDConfigurator():
 
 
 def main(args=None):
-
     # Checks if this script is run in the root of the
     # easy_perception_deployment ROS2 package.
     start_dirpath = os.getcwd()
-    # Check if the following folder are in the directory
+    # Check if the following folders/files are in the directory
     # when script is being executed:
-    # data
-    # CMakeLists.txt and package.xml
-
-    if os.path.isdir(start_dirpath + "/data"):
-        if os.path.isdir(start_dirpath + "/scripts")
-        and os.path.isdir(start_dirpath + "/launch"):
-            print("[ config_epd ] - Executing in root of EPD package.")
-            configurator = EPDConfigurator(start_dirpath, args)
-        else:
-            print("[ config_epd ] - ERROR. /scripts or /launch is missing.")
-            print("[ config_epd ] - Exiting...")
-            sys.exit(1)
-    else:
-        print("[ config_epd ] - ERROR. data folder is missing.")
-        print("[ config_epd ] - Exiting...")
-        sys.exit(1)
+    # /data, /scripts, /launch, CMakeLists.txt and package.xml
+    configurator = EPDConfigurator(start_dirpath, args)
 
 
 if __name__ == "__main__":
