@@ -51,7 +51,7 @@ if (os.path.exists('./config/session_config.json') and
 def test_invalid_ExeDirectory():
     # Change to invalid directory.
     os.chdir(r"./scripts")
-    test_args = ['scripts/config_epd.py', '-v']
+    test_args = ['scripts/cli/config_epd.py', '-v']
     INVALID_START_DIR = os.getcwd()
 
     with pytest.raises(SystemExit) as pytest_wrapped_e:
@@ -63,7 +63,7 @@ def test_invalid_ExeDirectory():
 
 
 def test_print_help_NoArgs(capfd):
-    test_args = ['scripts/config_epd.py']
+    test_args = ['scripts/cli/config_epd.py']
 
     with pytest.raises(SystemExit) as pytest_wrapped_e:
         configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
@@ -72,7 +72,7 @@ def test_print_help_NoArgs(capfd):
 
 
 def test_print_help_HelpArg(capfd):
-    test_args = ['scripts/config_epd.py', '-h']
+    test_args = ['scripts/cli/config_epd.py', '-h']
 
     with pytest.raises(SystemExit) as pytest_wrapped_e:
         configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
@@ -82,7 +82,7 @@ def test_print_help_HelpArg(capfd):
 
 def test_set_VisualizeMode_short():
 
-    test_args = ['scripts/config_epd.py', '-v']
+    test_args = ['scripts/cli/config_epd.py', '-v']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -99,7 +99,7 @@ def test_set_VisualizeMode_short():
 
 def test_set_VisualizeMode_long():
 
-    test_args = ['scripts/config_epd.py', '--visualize']
+    test_args = ['scripts/cli/config_epd.py', '--visualize']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -116,7 +116,7 @@ def test_set_VisualizeMode_long():
 
 def test_set_ActionMode_short():
 
-    test_args = ['scripts/config_epd.py', '-a']
+    test_args = ['scripts/cli/config_epd.py', '-a']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -133,7 +133,7 @@ def test_set_ActionMode_short():
 
 def test_set_ActionMode_long():
 
-    test_args = ['scripts/config_epd.py', '--action']
+    test_args = ['scripts/cli/config_epd.py', '--action']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -150,7 +150,7 @@ def test_set_ActionMode_long():
 
 def test_set_ActionMode_long():
 
-    test_args = ['scripts/config_epd.py', '--action']
+    test_args = ['scripts/cli/config_epd.py', '--action']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -167,7 +167,7 @@ def test_set_ActionMode_long():
 
 def test_set_GPU_short():
 
-    test_args = ['scripts/config_epd.py', '-g']
+    test_args = ['scripts/cli/config_epd.py', '-g']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -184,7 +184,7 @@ def test_set_GPU_short():
 
 def test_set_GPU_long():
 
-    test_args = ['scripts/config_epd.py', '--gpu']
+    test_args = ['scripts/cli/config_epd.py', '--gpu']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -201,7 +201,7 @@ def test_set_GPU_long():
 
 def test_set_CPU_short():
 
-    test_args = ['scripts/config_epd.py', '-c']
+    test_args = ['scripts/cli/config_epd.py', '-c']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -218,7 +218,7 @@ def test_set_CPU_short():
 
 def test_set_CPU_long():
 
-    test_args = ['scripts/config_epd.py', '--cpu']
+    test_args = ['scripts/cli/config_epd.py', '--cpu']
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -240,7 +240,7 @@ def test_set_ValidModel():
     p1 = subprocess.Popen(['touch', PATH_TO_DUMMY_MODEL])
     p1.communicate()
 
-    test_args = ['scripts/config_epd.py', '--model', PATH_TO_DUMMY_MODEL]
+    test_args = ['scripts/cli/config_epd.py', '--model', PATH_TO_DUMMY_MODEL]
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -263,7 +263,7 @@ def test_set_InvalidModel():
 
     PATH_TO_INVALID_MODEL = './data/model/NONEXISTENT_MODEL.onnx'
 
-    test_args = ['scripts/config_epd.py', '--model', PATH_TO_INVALID_MODEL]
+    test_args = ['scripts/cli/config_epd.py', '--model', PATH_TO_INVALID_MODEL]
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -277,7 +277,10 @@ def test_set_ValidLabelList():
 
     PATH_TO_VALID_LABEL_LIST = './data/label_list/coco_classes.txt'
 
-    test_args = ['scripts/config_epd.py', '--label', PATH_TO_VALID_LABEL_LIST]
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--label',
+        PATH_TO_VALID_LABEL_LIST]
     session_config_filepath = REQUIRED_START_DIR \
         + "/config/session_config.json"
 
@@ -297,7 +300,7 @@ def test_set_InvalidLabelList():
     PATH_TO_INVALID_LABEL_LIST = './data/label_list/NONEXISTENT_LABEL_LIST.txt'
 
     test_args = [
-        'scripts/config_epd.py',
+        'scripts/cli/config_epd.py',
         '--label',
         PATH_TO_INVALID_LABEL_LIST]
     session_config_filepath = REQUIRED_START_DIR \
@@ -307,3 +310,117 @@ def test_set_InvalidLabelList():
         configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
 
     assert pytest_wrapped_e.type == SystemExit
+
+
+def test_set_UseCase_Classification():
+
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--use',
+        '0']
+    usecase_config_filepath = REQUIRED_START_DIR \
+        + "/config/usecase_config.json"
+
+    configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
+
+    # Load usecase_config.json
+    f = open(usecase_config_filepath)
+    data = json.load(f)
+    usecase_mode = data["usecase_mode"]
+    f.close()
+
+    assert usecase_mode == 0
+
+
+def test_set_UseCase_Localization():
+
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--use',
+        '3']
+    usecase_config_filepath = REQUIRED_START_DIR \
+        + "/config/usecase_config.json"
+
+    configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
+
+    # Load usecase_config.json
+    f = open(usecase_config_filepath)
+    data = json.load(f)
+    usecase_mode = data["usecase_mode"]
+    f.close()
+
+    assert usecase_mode == 3
+
+
+def test_set_UseCase_Counting(mocker):
+
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--use',
+        '1']
+    usecase_config_filepath = REQUIRED_START_DIR \
+        + "/config/usecase_config.json"
+
+    mocker.patch('builtins.input', side_effect=["2", "person", "dog"])
+
+    configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
+
+    # Load usecase_config.json
+    f = open(usecase_config_filepath)
+    data = json.load(f)
+    usecase_mode = data["usecase_mode"]
+    count_class_list = data["class_list"]
+    f.close()
+
+    assert usecase_mode == 1
+    assert len(count_class_list) == 2
+    assert count_class_list[0] == "person"
+    assert count_class_list[1] == "dog"
+
+
+def test_set_UseCase_ColorMatching(mocker):
+
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--use',
+        '2']
+    usecase_config_filepath = REQUIRED_START_DIR \
+        + "/config/usecase_config.json"
+
+    mocker.patch('builtins.input', side_effect=["./data/orange.png"])
+
+    configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
+
+    # Load usecase_config.json
+    f = open(usecase_config_filepath)
+    data = json.load(f)
+    usecase_mode = data["usecase_mode"]
+    path_to_color_template = data["path_to_color_template"]
+    f.close()
+
+    assert usecase_mode == 2
+    assert path_to_color_template == "./data/orange.png"
+
+
+def test_set_UseCase_Tracking(mocker):
+
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--use',
+        '4']
+    usecase_config_filepath = REQUIRED_START_DIR \
+        + "/config/usecase_config.json"
+
+    mocker.patch('builtins.input', side_effect=["KCF"])
+
+    configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
+
+    # Load usecase_config.json
+    f = open(usecase_config_filepath)
+    data = json.load(f)
+    usecase_mode = data["usecase_mode"]
+    track_type = data["track_type"]
+    f.close()
+
+    assert usecase_mode == 4
+    assert track_type == "KCF"

@@ -29,6 +29,6 @@ jobs:
           pycodestyle --show-source easy_perception_deployment/scripts/test_config_epd.py easy_perception_deployment/scripts/cli/config_epd.py --count
       - name: Dynamic Analysis
         run: |
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov pytest-mock
           cd easy_perception_deployment/scripts
           pytest --capture=no -vv test_config_epd.py

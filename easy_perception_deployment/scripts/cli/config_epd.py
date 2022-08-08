@@ -37,8 +37,9 @@ class EPDConfigurator():
 
         self.usecase_mode = 0
 
-        self.session_config = []
-        self.usecase_config = []
+        self.count_class_list = []
+        self.path_to_color_template = ''
+        self.track_type = ''
 
         # Check if session_config.json exits.
         self.session_config_filepath = start_dirpath \
@@ -80,8 +81,8 @@ class EPDConfigurator():
         print('-c --cpu   Sets EPD to CPU Mode.')
         print('--model   Sets new onnx model to be deployed via EPD.')
         print('--label   Sets new label list to be deployed via EPD.')
-        # TODO(cardboardcode): Add options for usecase_config.json
-        # CLI configuration.
+        print('--use   Sets usecase mode to be deployed via EPD. ' +
+              'Eg. [0,1,2,3,4].')
 
     def isInEPDPackageRoot(self, start_dirpath):
         if (os.path.isdir(start_dirpath + "/scripts") and
@@ -103,7 +104,8 @@ class EPDConfigurator():
                                          'gpu',
                                          'cpu',
                                          'model=',
-                                         'label='])
+                                         'label=',
+                                         'use='])
 
         for opt, arg in opts:
             if opt == '-h':
@@ -135,6 +137,8 @@ class EPDConfigurator():
                     print("[ config_epd ] - Exiting.")
                     sys.exit(2)
                 self._path_to_label_list = arg
+            elif opt in ('--use'):
+                self.set_use_case_from_cli(int(arg))
 
     def parse_session_config(self, session_config_filepath):
 
@@ -161,18 +165,21 @@ class EPDConfigurator():
             print("[ Use Case ] - CLASSIFICATION")
         elif self.usecase_mode == 1:
             print("[ Use Case ] - COUNTING")
-            # TODO(cardboardcode): Read and assign countClassNames
-            # array variable.
+            self.count_class_list = data["class_list"]
+            # DEBUG
+            print("class_list =", self.count_class_list)
         elif self.usecase_mode == 2:
             print("[ Use Case ] - COLOR-MATCHING")
-            # TODO(cardboardcode): Read and assign
-            # template_color_image_filepath string variable.
+            self.path_to_color_template = data["path_to_color_template"]
+            # DEBUG
+            print("path_to_color_template =", self.path_to_color_template)
         elif self.usecase_mode == 3:
             print("[ Use Case ] - LOCALIZATION")
         elif self.usecase_mode == 4:
             print("[ Use Case ] - TRACKING")
-            # TODO(cardboardcode): Read and assign track_type
-            # string variable.
+            self.track_type = data["track_type"]
+            # DEBUG
+            print("track_type =", self.track_type)
         else:
             print("[ Use Case ] - INVALID. Please rectify" +
                   " usecase_config.json. Exiting...")
@@ -180,9 +187,39 @@ class EPDConfigurator():
             sys.exit(1)
         f.close()
 
+    def set_use_case_from_cli(self, usecase_mode):
+        self.usecase_mode = usecase_mode
+
+        if usecase_mode == 0:
+            print("[ session_config.json ] - " +
+                  "Setting Use Case Mode to CLASSIFICATION.")
+        elif usecase_mode == 1:
+            print("[ session_config.json ] - " +
+                  "Setting Use Case Mode to COUNTING.")
+            n = int(input("Please enter number of object class names : "))
+            self.count_class_list.clear()
+            for i in range(0, n):
+                ele = input("Please enter class name: ")
+                self.count_class_list.append(ele)
+        elif usecase_mode == 2:
+            print("[ session_config.json ] - " +
+                  "Setting Use Case Mode to COLOR-MATCHING.")
+            self.path_to_color_template = input("Please enter \
+                Color Image File Path: ")
+        elif usecase_mode == 3:
+            print("[ session_config.json ] - " +
+                  "Setting Use Case Mode to LOCALIZATION.")
+        elif usecase_mode == 4:
+            print("[ session_config.json ] - " +
+                  "Setting Use Case Mode to TRACKING.")
+            self.track_type = input("Please enter Tracker Type \
+                [KCF, MEDIANFLOW, CSRT]: ")
+        else:
+            print("[ session_config.json ] - " +
+                  "Invalid Use Case Mode provided. Exiting...")
+            sys.exit(1)
+
     def write_out(self, session_config_filepath, usecase_config_filepath):
-        # TODO(cardboardcode): Implement write out function
-        # to usecase_config.json
 
         if self.visualizeFlag:
             visualizeFlag_string = "visualize"
@@ -205,8 +242,44 @@ class EPDConfigurator():
         with open(session_config_filepath, 'w') as outfile_1:
             outfile_1.write(json_object_1)
 
-        # with open(usecase_config_filepath, 'w') as outfile_2:
-        #    outfile_2.write(json_object_2)
+        if self.usecase_mode == 0:
+            dict = {
+                "usecase_mode": self.usecase_mode
+            }
+            json_object_2 = json.dumps(dict, indent=4)
+            with open(usecase_config_filepath, 'w') as outfile_2:
+                outfile_2.write(json_object_2)
+        elif self.usecase_mode == 1:
+            dict = {
+                "usecase_mode": self.usecase_mode,
+                "class_list": self.count_class_list
+            }
+            json_object_2 = json.dumps(dict, indent=4)
+            with open(usecase_config_filepath, 'w') as outfile_2:
+                outfile_2.write(json_object_2)
+        elif self.usecase_mode == 2:
+            dict = {
+                "usecase_mode": self.usecase_mode,
+                "path_to_color_template": self.path_to_color_template
+            }
+            json_object_2 = json.dumps(dict, indent=4)
+            with open(usecase_config_filepath, 'w') as outfile_2:
+                outfile_2.write(json_object_2)
+        elif self.usecase_mode == 3:
+            dict = {
+                "usecase_mode": self.usecase_mode
+            }
+            json_object_2 = json.dumps(dict, indent=4)
+            with open(usecase_config_filepath, 'w') as outfile_2:
+                outfile_2.write(json_object_2)
+        elif self.usecase_mode == 4:
+            dict = {
+                "usecase_mode": self.usecase_mode,
+                "track_type": self.track_type
+            }
+            json_object_2 = json.dumps(dict, indent=4)
+            with open(usecase_config_filepath, 'w') as outfile_2:
+                outfile_2.write(json_object_2)
 
 
 def main(args=None):
