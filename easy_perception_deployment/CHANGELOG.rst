@@ -44,5 +44,10 @@ Changelog for package easy_perception_deployment
 -------------------
 * Modified CMake-based check for CUDA installation to set USE_GPU flag. 
 * Included python script within scripts folder to allow for session and use-case configuration via commandline/terminal.
-* Included unit-testing as well as additional Continuous Integration component as PYTHON_CI_ACTION.
+* Included unit-testing as well as additional Continuous Integration component as CLI_CI.
+* Contributor(s): Bey Hao Yun
+
+0.2.3 (2022-08-12)
+-------------------
+* Included extant EPD GUI unit-testing as well as additional Continuous Integration component as GUI_CI.
 * Contributor(s): Bey Hao Yun
