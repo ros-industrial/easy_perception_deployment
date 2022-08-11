@@ -54,7 +54,7 @@ class CountingWindow(QWidget):
         print("path_to_label_list =", path_to_label_list)
         if not os.path.exists(path_to_label_list):
             msgBox = QMessageBox()
-            msgBox.setText('No label list selected.' +
+            msgBox.setText('No label list selected. ' +
                            'Please select a label list.')
             msgBox.exec()
         else:

@@ -198,16 +198,6 @@ def test_deployPackage_DeployWindow(qtbot):
     assert widget._is_running is False
 
 
-def test_setUseCase_Classification_DeployWindow(qtbot):
-
-    widget = DeployWindow()
-    qtbot.addWidget(widget)
-
-    qtbot.keyClicks(widget.usecase_config_button, 'Counting')
-
-    assert widget.counting_window.isVisible() is True
-
-
 def test_setUseCase_DeployWindow(qtbot):
 
     widget = DeployWindow(True)
@@ -435,21 +425,9 @@ def test_conformDatasetToCOCO_TrainWindow(qtbot):
         p3.communicate()
 
 
-def test_closeWindow_CountingWindow(qtbot):
-
-    path_to_labellist = '../data/label_list/coco_classes.txt'
-    path_to_usecase_config = '../config/usecase_config.json'
-    widget = CountingWindow(path_to_labellist, path_to_usecase_config)
-    qtbot.addWidget(widget)
-
-    widget.show()
-    qtbot.mouseClick(widget.cancel_button, QtCore.Qt.LeftButton)
-    assert widget.isVisible() is False
-
-
 def test_writeToUseCaseConfig_CountingWindow(qtbot):
 
-    path_to_labellist = '../data/label_list/coco_classes.txt'
+    path_to_labellist = './data/label_list/coco_classes.txt'
     path_to_usecase_config = '../config/usecase_config.json'
     widget = CountingWindow(path_to_labellist, path_to_usecase_config)
     qtbot.addWidget(widget)
