@@ -61,11 +61,6 @@ class P2Trainer:
         A Mutator function that modifies the various training session config
         files.
         '''
-        a_file = open(self.path_to_training_config, 'r')
-        b_file = open(self.path_to_export_config, 'r')
-        training_config_lines = a_file.readlines()
-        export_config_lines = b_file.readlines()
-
         isCOCOFormat = False
         for label in self.label_list:
             if label == '__ignore__':
@@ -76,36 +71,26 @@ class P2Trainer:
         else:
             custom_class_no = len(self.label_list) + 2
 
-        modif_line_index = 22
-        for i in range(0, len(training_config_lines)):
-            if 'NUM_CLASSES:' in training_config_lines[i]:
-                modif_line_index = i
-                break
+        # Load maskrcnn_training.yaml and 
+        # maskrcnn_export.yaml in order to
+        # replace NUM_CLASSES.
+        dict = {}
+        with open(self.path_to_training_config) as file:
+            dict = yaml.load(file, Loader=yaml.FullLoader)
 
-        modif_line = ('    NUM_CLASSES: ' +
-                      str(custom_class_no) +
-                      ' #Change to your number of objects +2\n')
+        dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] = custom_class_no
 
-        training_config_lines[modif_line_index] = modif_line
+        with open(self.path_to_training_config, 'w') as file:
+            documents = yaml.dump(dict, file)
 
-        a_file = open(self.path_to_training_config, 'w')
-        a_file.writelines(training_config_lines)
-        a_file.close()
+        dict.clear()
+        with open(self.path_to_export_config) as file:
+            dict = yaml.load(file, Loader=yaml.FullLoader)
 
-        for i in range(0, len(export_config_lines)):
-            if 'NUM_CLASSES:' in export_config_lines[i]:
-                modif_line_index = i
-                break
+        dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] = custom_class_no
 
-        modif_line = ('    NUM_CLASSES: ' +
-                      str(custom_class_no) +
-                      ' #Change to your number of objects +2\n')
-
-        export_config_lines[modif_line_index] = modif_line
-
-        b_file = open(self.path_to_export_config, 'w')
-        b_file.writelines(export_config_lines)
-        b_file.close()
+        with open(self.path_to_export_config, 'w') as file:
+            documents = yaml.dump(dict, file)
 
     def train(self, debug):
         '''

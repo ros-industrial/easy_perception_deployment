@@ -115,7 +115,6 @@ class DeployWindow(QWidget):
             self.useCPU = True
 
         try:
-            print(usecase_config["usecase_mode"])
             self.usecase_mode = int(usecase_config["usecase_mode"])
 
             if self.usecase_mode < 0 or self.usecase_mode > 4:
