@@ -80,8 +80,8 @@ class DeployWindow(QWidget):
             session_config_json_obj = open(self._path_to_session_config)
             session_config = json.load(session_config_json_obj)
         else:
-            print('[ session_config.json ] is missing. \
-                Assigning default values')
+            print('[ session_config.json ] is missing.' +
+                  'Assigning default values')
             self._path_to_model = 'filepath/to/onnx/model'
             self._path_to_label_list = 'filepath/to/classes/list/txt'
             self.visualizeFlag = True
@@ -107,8 +107,8 @@ class DeployWindow(QWidget):
             else:
                 self.useCPU = False
         except (KeyError, TypeError):
-            print('[ session_config.json ] Exception. \
-            Assigning default values')
+            print('[ session_config.json ] Exception.' +
+                  'Assigning default values')
             self._path_to_model = 'filepath/to/onnx/model'
             self._path_to_label_list = 'filepath/to/classes/list/txt'
             self.visualizeFlag = True

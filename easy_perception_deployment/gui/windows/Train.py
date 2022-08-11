@@ -328,8 +328,8 @@ class TrainWindow(QWidget):
             return
 
         if not self._is_dataset_labelled:
-            print('Dataset not properly restructured. \
-                Please restructure Dataset.')
+            print('Dataset not properly restructured.' +
+                  'Please restructure Dataset.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
@@ -366,9 +366,9 @@ class TrainWindow(QWidget):
                     'background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is /train \
-                    and /val sub-directories \
-                    in the selected dataset directory.')
+                print('[ERROR] - Please ensure there is /train' +
+                      'and /val sub-directories' +
+                      'in the selected dataset directory.')
         elif self._precision_level == 2:
             isDatasetNamedRight = 'custom_dataset'
             os.path.basename(self._path_to_dataset) == 'custom_dataset'
@@ -383,9 +383,9 @@ class TrainWindow(QWidget):
                     'background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is /train_dataset \
-                    and /val_dataset sub-directories \
-                    in the selected dataset directory.')
+                print('[ERROR] - Please ensure there is /train_dataset' +
+                      'and /val_dataset sub-directories' +
+                      'in the selected dataset directory.')
         elif self._precision_level == 3:
             isDatasetNamedRight = 'custom_dataset'
             os.path.basename(self._path_to_dataset) == 'custom_dataset'
@@ -400,9 +400,9 @@ class TrainWindow(QWidget):
                     'background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is /train_dataset \
-                    and /val_dataset sub-directories \
-                    in the selected dataset directory.')
+                print('[ERROR] - Please ensure there is /train_dataset' +
+                      'and /val_dataset sub-directories' +
+                      'in the selected dataset directory.')
 
         self.validateTraining()
 
