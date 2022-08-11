@@ -29,3 +29,13 @@ jobs:
           easy_perception_deployment/gui/test_gui.py \
           easy_perception_deployment/gui/windows/*.py \
           easy_perception_deployment/gui/trainer/*.py --count
+      - name: Dynamic Analysis
+        run: |
+          pip install PySide2==5.15.0
+          pip install dateutils==0.6.12
+          pip install pycocotools==2.0.2
+          pip install labelme==5.0.1
+          pip install torch==1.8.1
+          pip install torchvision==0.9.1
+          cd easy_perception_deployment/gui
+          pytest --capture=no -vv test_gui.py
