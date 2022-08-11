@@ -152,8 +152,8 @@ def test_invalidSession_invalidUseCase_DeployWindow(qtbot):
 def test_validSession_validUseCase_DeployWindow(qtbot):
 
     local_path_to_model = './data/model/squeezenet1.1-7.onnx'
-    local_path_to_label_list = ('./data/' +
-    'label_list/imagenet_classes.txt')
+    local_path_to_label_list = ('./data/label_list/' +
+                                'imagenet_classes.txt')
 
     dict = {
         "path_to_model": local_path_to_model,
