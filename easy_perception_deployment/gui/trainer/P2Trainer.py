@@ -41,12 +41,18 @@ class P2Trainer:
         self.export_process = None
 
         self.path_to_dataset = path_to_dataset
-        self.path_to_modif = 'trainer/training_files/modified_paths_catalog.py'
-        self.path_to_training_config = 'trainer/training_files/fasterrcnn_training.yaml'
-        self.path_to_export_config = 'trainer/exporter_files/fasterrcnn_export.yaml'
-        self.path_to_trim_tools = 'trainer/training_files/trim_faster_rcnn.py'
-        self.path_to_remove_init_tool = 'trainer/exporter_files/remove_initializer.py'
-        self.path_to_export_modif = 'trainer/exporter_files/export_to_p2_onnx.py'
+        self.path_to_modif = (
+            'trainer/training_files/modified_paths_catalog.py')
+        self.path_to_training_config = (
+            'trainer/training_files/fasterrcnn_training.yaml')
+        self.path_to_export_config = (
+            'trainer/exporter_files/fasterrcnn_export.yaml')
+        self.path_to_trim_tools = (
+            'trainer/training_files/trim_faster_rcnn.py')
+        self.path_to_remove_init_tool = (
+            'trainer/exporter_files/remove_initializer.py')
+        self.path_to_export_modif = (
+            'trainer/exporter_files/export_to_p2_onnx.py')
 
         self.setNumClassesInTrainingConfig()
 
@@ -116,58 +122,64 @@ class P2Trainer:
 
     def createTrainFarm(self, debug):
         '''
-        A Mutator function that runs a bash script that utilizes the environment
+        A Mutator function that runs a bash script that
+        utilizes the environment
         created in the createTrainFarm to run training session.
         '''
-        self.create_process = subprocess.Popen([
-                              './trainer/training_files/scripts/install_p2trainfarm.bash',
-                              self.path_to_dataset,
-                              self.path_to_modif,
-                              self.path_to_training_config,
-                              self.path_to_trim_tools])
+        self.create_process = subprocess.Popen(
+            ['./trainer/training_files/scripts/install_p2trainfarm.bash',
+             self.path_to_dataset,
+             self.path_to_modif,
+             self.path_to_training_config,
+             self.path_to_trim_tools])
         if not debug:
             self.create_process.communicate()
 
     def runTrainFarm(self, debug):
         '''
-        A Mutator function that runs a bash script that utilizes the environment
+        A Mutator function that runs a bash script that
+        utilizes the environment
         created in the createTrainFarm to run training session.
         '''
-        self.run_process = subprocess.Popen([
-                              './trainer/training_files/scripts/run_p2trainfarm.bash',
-                              self.model_name,
-                              str(date.today()),
-                              self.path_to_dataset,
-                              self.path_to_training_config])
+        self.run_process = subprocess.Popen(
+            ['./trainer/training_files/scripts/run_p2trainfarm.bash',
+             self.model_name,
+             str(date.today()),
+             self.path_to_dataset,
+             self.path_to_training_config])
         if not debug:
             self.run_process.communicate()
 
     def createExportFarm(self, debug):
         '''
-        A Mutator function that runs a bash script that downloads, creates and runs
-        an environment for exporting the trained .pth file to the final ONNX
+        A Mutator function that runs a bash script that
+        downloads, creates and runs
+        an environment for exporting the trained .pth
+        file to the final ONNX
         model file.
         '''
-        self.build_export_process = subprocess.Popen([
-                              './trainer/exporter_files/scripts/install_p2exporter.bash',
-                              self.model_name,
-                              str(date.today()),
-                              self.path_to_export_config,
-                              self.path_to_remove_init_tool,
-                              self.path_to_export_modif])
+        self.build_export_process = subprocess.Popen(
+            ['./trainer/exporter_files/scripts/install_p2exporter.bash',
+             self.model_name,
+             str(date.today()),
+             self.path_to_export_config,
+             self.path_to_remove_init_tool,
+             self.path_to_export_modif])
         if not debug:
             self.build_export_process.communicate()
 
     def runExportFarm(self, debug):
         '''
-        A Mutator function that runs a bash script that downloads, creates and runs
-        an environment for exporting the trained .pth file to the final ONNX
+        A Mutator function that runs a bash script that
+        downloads, creates and runs
+        an environment for exporting the trained .pth
+        file to the final ONNX
         model file.
         '''
-        self.export_process = subprocess.Popen([
-                              './trainer/exporter_files/scripts/run_p2exporter.bash',
-                              self.model_name,
-                              str(date.today()),
-                              self.path_to_export_config])
+        self.export_process = subprocess.Popen(
+            ['./trainer/exporter_files/scripts/run_p2exporter.bash',
+             self.model_name,
+             str(date.today()),
+             self.path_to_export_config])
         if not debug:
             self.export_process.communicate()
