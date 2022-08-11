@@ -470,6 +470,18 @@ def test_addObject_CountingWindow():
     assert len(widget._select_list) == 0
 
 
+def test_closeWindow_CountingWindow(qtbot):
+
+    path_to_labellist = './data/label_list/coco_classes.txt'
+    path_to_usecase_config = './config/usecase_config.json'
+    widget = CountingWindow(path_to_labellist, path_to_usecase_config)
+    qtbot.addWidget(widget)
+
+    widget.show()
+    qtbot.mouseClick(widget.cancel_button, QtCore.Qt.LeftButton)
+    assert widget.isVisible() is False
+
+
 def test_P1Trainer():
 
     if not os.path.exists('../data/datasets/hymenoptera_data'):
