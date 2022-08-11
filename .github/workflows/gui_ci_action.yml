@@ -37,5 +37,7 @@ jobs:
           pip install labelme==5.0.1
           pip install torch==1.8.1
           pip install torchvision==0.9.1
+          pip install pytest==6.0.1
+          pip install pytest-qt==3.3.0
           cd easy_perception_deployment/gui
           pytest --capture=no -vv test_gui.py
