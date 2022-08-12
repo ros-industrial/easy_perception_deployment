@@ -59,5 +59,7 @@ Changelog for package easy_perception_deployment
 * Integrated dockerized workflow for P3TrainFarm and P3Exporter. 
 * Integrated dockerized workflow for P2TrainFarm and P2Exporter.
 * Added GUI feature to edit MAX_ITER, TEST_PERIOD, CHECKPOINT_PERIOD, STEPS parameters for maskrcnn_training, maskrcnn_export, fasterrcnn_training and fasterrcnn_export yaml files. This allows condensed testing as well as higher customizability.
-* Included CLI feature to edit input_image_topic. 
+* Included CLI feature to edit input_image_topic.
+* Revamped GUI icons for better UI appearance.
+* Removed deprecated gui.png. Desktop icon is replaced with epd_desktop.png. 
 * Contributor(s): Bey Hao Yun
