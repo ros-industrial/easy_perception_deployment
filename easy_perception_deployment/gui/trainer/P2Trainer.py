@@ -71,7 +71,7 @@ class P2Trainer:
         else:
             custom_class_no = len(self.label_list) + 2
 
-        # Load maskrcnn_training.yaml and 
+        # Load maskrcnn_training.yaml and
         # maskrcnn_export.yaml in order to
         # replace NUM_CLASSES.
         dict = {}

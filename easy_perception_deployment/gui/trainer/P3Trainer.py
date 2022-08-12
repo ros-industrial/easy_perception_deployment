@@ -72,7 +72,7 @@ class P3Trainer:
         else:
             custom_class_no = len(self.label_list) + 2
 
-        # Load maskrcnn_training.yaml and 
+        # Load maskrcnn_training.yaml and
         # maskrcnn_export.yaml in order to
         # replace NUM_CLASSES.
         dict = {}
@@ -92,7 +92,6 @@ class P3Trainer:
 
         with open(self.path_to_export_config, 'w') as file:
             documents = yaml.dump(dict, file)
-
 
     def train(self, debug):
         '''
