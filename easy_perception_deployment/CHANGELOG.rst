@@ -50,4 +50,5 @@ Changelog for package easy_perception_deployment
 0.2.3 (2022-08-12)
 -------------------
 * Included extant EPD GUI unit-testing as well as additional Continuous Integration component as GUI_CI.
+* Improved yaml parser in P2Trainer.py and P3Trainer.py.
 * Contributor(s): Bey Hao Yun
