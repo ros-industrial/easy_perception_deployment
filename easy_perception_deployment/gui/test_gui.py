@@ -30,7 +30,8 @@ from datetime import date
 from PySide2 import QtCore
 
 # Clear all stored session_config.json usecase_config.json
-if os.path.exists('../config/session_config.json') and os.path.exists('../config/usecase_config.json'):
+if (os.path.exists('../config/session_config.json') and
+   os.path.exists('../config/usecase_config.json')):
     p1 = subprocess.Popen(['rm', '../config/session_config.json'])
     p1.communicate()
     p2 = subprocess.Popen(['rm', '../config/usecase_config.json'])
@@ -150,9 +151,13 @@ def test_invalidSession_invalidUseCase_DeployWindow(qtbot):
 
 def test_validSession_validUseCase_DeployWindow(qtbot):
 
+    local_path_to_model = './data/model/squeezenet1.1-7.onnx'
+    local_path_to_label_list = ('./data/label_list/' +
+                                'imagenet_classes.txt')
+
     dict = {
-        "path_to_model": './data/model/squeezenet1.1-7.onnx',
-        "path_to_label_list": './data/label_list/imagenet_classes.txt',
+        "path_to_model": local_path_to_model,
+        "path_to_label_list": local_path_to_label_list,
         "visualizeFlag": 'visualize',
         "useCPU": 'CPU'
         }
@@ -165,12 +170,11 @@ def test_validSession_validUseCase_DeployWindow(qtbot):
     with open('../config/usecase_config.json', 'w') as outfile:
         outfile.write(json_object)
 
-
     widget = DeployWindow()
     qtbot.addWidget(widget)
 
-    assert widget._path_to_model == './data/model/squeezenet1.1-7.onnx'
-    assert widget._path_to_label_list == './data/label_list/imagenet_classes.txt'
+    assert widget._path_to_model == local_path_to_model
+    assert widget._path_to_label_list == local_path_to_label_list
     assert widget.usecase_mode == 0
 
 
@@ -192,16 +196,6 @@ def test_deployPackage_DeployWindow(qtbot):
     isKillScriptRunning = widget._kill_process.poll()
     assert isKillScriptRunning is None
     assert widget._is_running is False
-
-
-def test_setUseCase_Classification_DeployWindow(qtbot):
-
-    widget = DeployWindow()
-    qtbot.addWidget(widget)
-
-    qtbot.keyClicks(widget.usecase_config_button, 'Counting')
-
-    assert widget.counting_window.isVisible() is True
 
 
 def test_setUseCase_DeployWindow(qtbot):
@@ -401,9 +395,15 @@ def test_setDataset_TrainWindow(qtbot):
 def test_conformDatasetToCOCO_TrainWindow(qtbot):
 
     if not os.path.exists('../data/datasets/p2p3_dummy_dataset'):
-        p1 = subprocess.Popen(['mkdir', '-p', '../data/datasets/p2p3_dummy_dataset/train_dataset'])
+        p1 = subprocess.Popen([
+            'mkdir',
+            '-p',
+            '../data/datasets/p2p3_dummy_dataset/train_dataset'])
         p1.communicate()
-        p2 = subprocess.Popen(['mkdir', '-p', '../data/datasets/p2p3_dummy_dataset/val_dataset'])
+        p2 = subprocess.Popen([
+            'mkdir',
+            '-p',
+            '../data/datasets/p2p3_dummy_dataset/val_dataset'])
         p2.communicate()
 
     widget = TrainWindow(True)
@@ -418,25 +418,16 @@ def test_conformDatasetToCOCO_TrainWindow(qtbot):
 
     # Clean up test materials.
     if os.path.exists('../data/datasets/p2p3_dummy_dataset'):
-        p3 = subprocess.Popen(['rm', '-r', '../data/datasets/p2p3_dummy_dataset'])
+        p3 = subprocess.Popen([
+            'rm',
+            '-r',
+            '../data/datasets/p2p3_dummy_dataset'])
         p3.communicate()
-
-
-def test_closeWindow_CountingWindow(qtbot):
-
-    path_to_labellist = '../data/label_list/coco_classes.txt'
-    path_to_usecase_config = '../config/usecase_config.json'
-    widget = CountingWindow(path_to_labellist, path_to_usecase_config)
-    qtbot.addWidget(widget)
-
-    widget.show()
-    qtbot.mouseClick(widget.cancel_button, QtCore.Qt.LeftButton)
-    assert widget.isVisible() is False
 
 
 def test_writeToUseCaseConfig_CountingWindow(qtbot):
 
-    path_to_labellist = '../data/label_list/coco_classes.txt'
+    path_to_labellist = './data/label_list/coco_classes.txt'
     path_to_usecase_config = '../config/usecase_config.json'
     widget = CountingWindow(path_to_labellist, path_to_usecase_config)
     qtbot.addWidget(widget)
@@ -479,17 +470,31 @@ def test_addObject_CountingWindow():
     assert len(widget._select_list) == 0
 
 
+def test_closeWindow_CountingWindow(qtbot):
+
+    path_to_labellist = './data/label_list/coco_classes.txt'
+    path_to_usecase_config = './config/usecase_config.json'
+    widget = CountingWindow(path_to_labellist, path_to_usecase_config)
+    qtbot.addWidget(widget)
+
+    widget.show()
+    qtbot.mouseClick(widget.cancel_button, QtCore.Qt.LeftButton)
+    assert widget.isVisible() is False
+
+
 def test_P1Trainer():
 
     if not os.path.exists('../data/datasets/hymenoptera_data'):
-        p1 = subprocess.Popen(['wget',
-                               'https://download.pytorch.org/tutorial/hymenoptera_data.zip',
-                               '--directory-prefix=../data/datasets/'])
+        p1 = subprocess.Popen([
+            'wget',
+            'https://download.pytorch.org/tutorial/hymenoptera_data.zip',
+            '--directory-prefix=../data/datasets/'])
         p1.communicate()
-        p2 = subprocess.Popen(['unzip',
-                               '../data/datasets/hymenoptera_data.zip',
-                               '-d',
-                               '../data/datasets/'])
+        p2 = subprocess.Popen([
+            'unzip',
+            '../data/datasets/hymenoptera_data.zip',
+            '-d',
+            '../data/datasets/'])
         p2.communicate()
 
     path_to_dataset = '../data/datasets/hymenoptera_data'
@@ -500,11 +505,26 @@ def test_P1Trainer():
 
     p1_trainer.train(True)
 
-    output_pth_filename = './trainer/P1TrainFarm/' + model_name + '_' + str(date.today()) + '.pth'
-    output_model_filename = '../data/model/' + model_name + '_' + str(date.today()) + '.onnx'
+    output_pth_filename = (
+        './trainer/P1TrainFarm/' +
+        model_name +
+        '_' +
+        str(date.today()) +
+        '.pth')
+    output_model_filename = (
+        '../data/model/' +
+        model_name +
+        '_' +
+        str(date.today()) +
+        '.onnx')
     assert os.path.exists(output_pth_filename) is True
     assert os.path.exists(output_model_filename) is True
-    p1_model_array = ['alexnet', 'vgg', 'squeezenet', 'densenet', 'resnet', 'mobilenet']
+    p1_model_array = ['alexnet',
+                      'vgg',
+                      'squeezenet',
+                      'densenet',
+                      'resnet',
+                      'mobilenet']
     for model in p1_model_array:
         model_ft, input_size = p1_trainer.initialize_model(model,
                                                            len(label_list),

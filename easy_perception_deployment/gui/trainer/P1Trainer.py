@@ -81,9 +81,9 @@ class P1Trainer:
 
     def train(self, debug):
         '''
-        A Mutator function that sets a fixed 15-epoch training session given
-        prior session configuration set during initialization, calls train_model
-        function.
+        A Mutator function that sets a fixed 15-epoch
+        training session given prior session configuration set
+        during initialization, calls train_model function.
         '''
         if debug:
             self.batch_size = 8
@@ -101,7 +101,8 @@ class P1Trainer:
                             shuffle=True,
                             num_workers=4) for x in ['train', 'val']}
 
-        self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device(
+            'cuda:0' if torch.cuda.is_available() else 'cpu')
 
         model_ft = self.model_ft.to(self.device)
 
@@ -122,19 +123,22 @@ class P1Trainer:
 
         criterion = nn.CrossEntropyLoss()
 
-        model_ft, hist = self.train_model(model_ft,
-                                          dataloaders_dict,
-                                          criterion,
-                                          optimizer_ft,
-                                          num_epochs=self.num_epochs,
-                                          is_inception=(self.model_name == 'inception'))
+        model_ft, hist = self.train_model(
+            model_ft,
+            dataloaders_dict,
+            criterion,
+            optimizer_ft,
+            num_epochs=self.num_epochs,
+            is_inception=(self.model_name == 'inception'))
 
         filename = self.model_name + '_' + str(date.today())
 
         p1 = subprocess.Popen(['mkdir', '-p', './trainer/P1TrainFarm'])
         p1.communicate()
 
-        torch.save(model_ft.state_dict(), './trainer/P1TrainFarm/' + filename + '.pth')
+        torch.save(
+            model_ft.state_dict(),
+            './trainer/P1TrainFarm/' + filename + '.pth')
 
         # Set up the image pre-processing.
         tfms = transforms.Compose([
@@ -144,13 +148,18 @@ class P1Trainer:
             transforms.Normalize(self.IMAGENET_MEAN, self.IMAGENET_STD)
         ])
 
-        model_ft.load_state_dict(torch.load('./trainer/P1TrainFarm/' + filename + '.pth'))
+        model_ft.load_state_dict(
+            torch.load('./trainer/P1TrainFarm/' + filename + '.pth'))
 
         files = glob.glob(self.data_dir + '/**/*.png', recursive=True)
         # If unable to find any .png files, find .jpg file.
         if len(files) == 0:
-            files = glob.glob(self.data_dir + '/**/*.jpg', recursive=True)
-            files.append(glob.glob(self.data_dir + '/**/*.jpeg', recursive=True))
+            files = glob.glob(
+                self.data_dir + '/**/*.jpg',
+                recursive=True)
+            files.append(
+                glob.glob(self.data_dir + '/**/*.jpeg',
+                          recursive=True))
 
         random_train_image = files[0]
         # # Open the input image and move to GPU.
@@ -169,25 +178,26 @@ class P1Trainer:
         print('Object in image determined to be: ', self.class_names[preds[0]])
 
         # Export the model
-        torch.onnx.export(  # model being run
-                          model_ft,
-                          # model input (or a tuple for multiple inputs)
-                          img,
-                          # where to save the model (can be a file or file-like object)
-                          self.path_to_trained_model,
-                          # store the trained parameter weights inside the model file
-                          export_params=True,
-                          # the ONNX version to export the model to
-                          opset_version=10,
-                          # whether to execute constant folding for optimization
-                          do_constant_folding=True,
-                          # the model's input names
-                          input_names=['input'],
-                          # the model's output names
-                          output_names=['output'],
-                          # variable length axes
-                          dynamic_axes={'input': {0: 'batch_size'},
-                                        'output': {0: 'batch_size'}})
+        torch.onnx.export(
+            # model being run
+            model_ft,
+            # model input (or a tuple for multiple inputs)
+            img,
+            # where to save the model (can be a file or file-like object)
+            self.path_to_trained_model,
+            # store the trained parameter weights inside the model file
+            export_params=True,
+            # the ONNX version to export the model to
+            opset_version=10,
+            # whether to execute constant folding for optimization
+            do_constant_folding=True,
+            # the model's input names
+            input_names=['input'],
+            # the model's output names
+            output_names=['output'],
+            # variable length axes
+            dynamic_axes={'input': {0: 'batch_size'},
+                          'output': {0: 'batch_size'}})
 
         # # EXPORT End
         print('ONNX model exported to ', self.path_to_trained_model)
@@ -257,9 +267,11 @@ class P1Trainer:
                     running_corrects += torch.sum(preds == labels.data)
 
                 epoch_loss = running_loss / len(dataloaders[phase].dataset)
-                epoch_acc = running_corrects.double() / len(dataloaders[phase].dataset)
+                epoch_acc = (running_corrects.double() /
+                             len(dataloaders[phase].dataset))
 
-                print('{} Loss: {:.4f} Accuracy: {:.4f}'.format(phase, epoch_loss, epoch_acc))
+                print('{} Loss: {:.4f} Accuracy: {:.4f}'.format(
+                    phase, epoch_loss, epoch_acc))
 
                 # deep copy the model
                 if phase == 'val' and epoch_acc > best_acc:
@@ -271,7 +283,8 @@ class P1Trainer:
             print()
 
         time_elapsed = time.time() - since
-        print('Training complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
+        print('Training complete in {:.0f}m {:.0f}s'.format(
+            time_elapsed // 60, time_elapsed % 60))
         print('Best val Acc: {:4f}'.format(best_acc))
 
         # load best model weights
@@ -294,8 +307,8 @@ class P1Trainer:
                          num_classes,
                          feature_extract,
                          use_pretrained=True):
-        # Initialize these variables which will be set in this if statement. Each of these
-        # variables is model specific.
+        # Initialize these variables which will be set in this if statement.
+        # Each of these variables is model specific.
         '''
         A Getter function that takes the requested session configuration and
         initializes corresponding pretrained model.\n

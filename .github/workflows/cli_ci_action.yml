@@ -10,7 +10,6 @@ jobs:
         python-version: [3.8]
     env:
       QT_QPA_PLATFORM: "offscreen"
-      CODECOV_TOKEN: b56af58a-9b3b-49a9-800d-65746dbfb346
 
     runs-on: ubuntu-20.04
     steps:

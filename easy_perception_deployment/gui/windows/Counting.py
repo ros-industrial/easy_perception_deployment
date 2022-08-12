@@ -23,9 +23,10 @@ from PySide2.QtWidgets import QMessageBox, QPushButton, QWidget
 
 class CountingWindow(QWidget):
     '''
-    The CountingWindow class is a PySide2 Graphical User Interface (GUI) window
-    that is called by DeployWindow class in order to configure a custom Counting
-    use-case and write to usecase_config.json.
+    The CountingWindow class is a PySide2
+    Graphical User Interface (GUI) window that is called by
+    DeployWindow class in order to configure a custom
+    Counting use-case and write to usecase_config.json.
     '''
     def __init__(self, path_to_label_list, _path_to_usecase_config):
         '''
@@ -53,10 +54,12 @@ class CountingWindow(QWidget):
         print("path_to_label_list =", path_to_label_list)
         if not os.path.exists(path_to_label_list):
             msgBox = QMessageBox()
-            msgBox.setText('No label list selected. Please select a label list.')
+            msgBox.setText('No label list selected. ' +
+                           'Please select a label list.')
             msgBox.exec()
         else:
-            self._label_list = [line.rstrip('\n') for line in open(path_to_label_list)]
+            self._label_list = [
+                line.rstrip('\n') for line in open(path_to_label_list)]
             # If label-list file is empty
             if len(self._label_list) == 0:
                 msgBox = QMessageBox()
@@ -98,7 +101,8 @@ class CountingWindow(QWidget):
         self.selected_list_menu_label.move(0,
                                            self._COUNTING_WIN_H/3 - 25)
 
-        # Finish button to save the stored counting and write to usecase_config.json
+        # Finish button to save the stored counting and
+        # write to usecase_config.json
         self.finish_button = QPushButton('Finish', self)
         self.finish_button.setIcon(QIcon('img/go.png'))
         self.finish_button.setIconSize(QSize(75, 75))

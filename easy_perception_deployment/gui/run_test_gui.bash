@@ -34,15 +34,14 @@ then
       conda create -n epd_gui_env python=3.6 -y
       eval "$(conda shell.bash hook)"
       conda activate epd_gui_env
-      pip install pyside2
-      pip install dateutils
-      pip install pycocotools
-      pip install labelme
-      pip install pytest-qt
-      conda install pytest -y
-      conda install pytorch torchvision cpuonly -c pytorch -y
-      pip install lark-parser
-      pip install empy
+      pip install PySide2==5.15.0
+      pip install dateutils==0.6.12
+      pip install pycocotools==2.0.2
+      pip install labelme==5.0.1
+      pip install torch==1.8.1
+      pip install torchvision==0.9.1
+      pip install pytest==6.0.1
+      pip install pytest-qt==3.3.0
       conda deactivate
       echo "[epd_gui_env] env created."
 fi
