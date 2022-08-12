@@ -39,5 +39,6 @@ jobs:
           pip install torchvision==0.9.1
           pip install pytest==6.0.1
           pip install pytest-qt==3.3.0
+          pip install pyyaml==5.3.1
           cd easy_perception_deployment/gui
           pytest --capture=no -vv test_gui.py
