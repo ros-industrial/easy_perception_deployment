@@ -61,5 +61,6 @@ Changelog for package easy_perception_deployment
 * Added GUI feature to edit MAX_ITER, TEST_PERIOD, CHECKPOINT_PERIOD, STEPS parameters for maskrcnn_training, maskrcnn_export, fasterrcnn_training and fasterrcnn_export yaml files. This allows condensed testing as well as higher customizability.
 * Included CLI feature to edit input_image_topic.
 * Revamped GUI icons for better UI appearance.
-* Removed deprecated gui.png. Desktop icon is replaced with epd_desktop.png. 
+* Removed deprecated gui.png. Desktop icon is replaced with epd_desktop.png.
+* Removed "Use Case =" label in Deploy GUI window. Lengthened Visualize/Action toggle for neater UI appearance.
 * Contributor(s): Bey Hao Yun
