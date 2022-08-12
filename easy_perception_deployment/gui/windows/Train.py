@@ -106,7 +106,7 @@ class TrainWindow(QWidget):
 
         # Labeller button to initiate labelme
         self.label_button = QPushButton('Label Dataset', self)
-        self.label_button.setIcon(QIcon('img/label.png'))
+        self.label_button.setIcon(QIcon('img/label_labelme.png'))
         self.label_button.setIconSize(QSize(50, 50))
         self.label_button.setGeometry(0, 200, self._TRAIN_WIN_W/2, 100)
         self.label_button.setStyleSheet(
@@ -115,7 +115,7 @@ class TrainWindow(QWidget):
             self.label_button.hide()
 
         self.generate_button = QPushButton('Generate Dataset', self)
-        self.generate_button.setIcon(QIcon('img/label.png'))
+        self.generate_button.setIcon(QIcon('img/label_generate.png'))
         self.generate_button.setIconSize(QSize(50, 50))
         self.generate_button.setGeometry(
             self._TRAIN_WIN_W/2,
