@@ -440,3 +440,23 @@ def test_set_Invalid_UseCase():
 
     # Check for sys.exit() due to invalid Use Case.
     assert pytest_wrapped_e.type == SystemExit
+
+
+def test_set_InputImageTopic():
+
+    test_args = [
+        'scripts/cli/config_epd.py',
+        '--topic',
+        '/virtual_camera/image_raw']
+    inputimagetopic_config_filepath = REQUIRED_START_DIR \
+        + "/config/input_image_topic.json"
+
+    configurator = EPDConfigurator(REQUIRED_START_DIR, test_args)
+
+    # Load usecase_config.json
+    f = open(inputimagetopic_config_filepath)
+    data = json.load(f)
+    input_image_topic = data["input_image_topic"]
+    f.close()
+
+    assert input_image_topic == '/virtual_camera/image_raw'
