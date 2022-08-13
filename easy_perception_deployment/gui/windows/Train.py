@@ -100,10 +100,6 @@ class TrainWindow(QWidget):
         self.model_selector.setStyleSheet('background-color: red;')
         self.populateModelSelector()
 
-        self.model_selector_label = QLabel(self)
-        self.model_selector_label.setText('Choose Model =')
-        self.model_selector_label.move(220, 40)
-
         # Labeller button to initiate labelme
         self.label_button = QPushButton('Label Dataset', self)
         self.label_button.setIcon(QIcon('img/label_labelme.png'))
