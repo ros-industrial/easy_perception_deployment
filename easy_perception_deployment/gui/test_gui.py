@@ -17,7 +17,6 @@ import os
 import json
 import subprocess
 
-from trainer.P1Trainer import P1Trainer
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
 
@@ -225,16 +224,6 @@ def test_setUseCase_DeployWindow(qtbot):
     assert usecase_mode == 2
 
 
-def test_setP1_TrainWindow(qtbot):
-
-    widget = TrainWindow()
-    qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.p1_button, QtCore.Qt.LeftButton)
-
-    assert widget._precision_level == 1
-
-
 def test_setP2_TrainWindow(qtbot):
 
     widget = TrainWindow()
@@ -259,11 +248,6 @@ def test_setModel_TrainWindow(qtbot):
 
     widget = TrainWindow()
     qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.p1_button, QtCore.Qt.LeftButton)
-    qtbot.keyClicks(widget.model_selector, 'resnet')
-
-    assert widget.model_name == 'resnet'
 
     qtbot.mouseClick(widget.p2_button, QtCore.Qt.LeftButton)
     qtbot.keyClicks(widget.model_selector, 'fasterrcnn')
@@ -327,13 +311,8 @@ def test_validateDataset_TrainWindow(qtbot):
     widget = TrainWindow()
     qtbot.addWidget(widget)
 
-    widget._precision_level = 1
-    widget._path_to_dataset = 'invalid_path_to_dataset'
-    qtbot.mouseClick(widget.validate_button, QtCore.Qt.LeftButton)
-
-    assert widget._is_dataset_labelled is False
-
     widget._precision_level = 2
+    widget._path_to_dataset = 'invalid_path_to_dataset'
     qtbot.mouseClick(widget.validate_button, QtCore.Qt.LeftButton)
     assert widget._is_dataset_labelled is False
 
@@ -346,11 +325,6 @@ def test_populateModelSelector_TrainWindow(qtbot):
 
     widget = TrainWindow()
     qtbot.addWidget(widget)
-
-    widget._precision_level = 1
-    widget.populateModelSelector()
-
-    assert len(widget._model_list) == 7
 
     widget._precision_level = 2
     widget.populateModelSelector()
@@ -480,73 +454,6 @@ def test_closeWindow_CountingWindow(qtbot):
     widget.show()
     qtbot.mouseClick(widget.cancel_button, QtCore.Qt.LeftButton)
     assert widget.isVisible() is False
-
-
-def test_P1Trainer():
-
-    if not os.path.exists('../data/datasets/hymenoptera_data'):
-        p1 = subprocess.Popen([
-            'wget',
-            'https://download.pytorch.org/tutorial/hymenoptera_data.zip',
-            '--directory-prefix=../data/datasets/'])
-        p1.communicate()
-        p2 = subprocess.Popen([
-            'unzip',
-            '../data/datasets/hymenoptera_data.zip',
-            '-d',
-            '../data/datasets/'])
-        p2.communicate()
-
-    path_to_dataset = '../data/datasets/hymenoptera_data'
-    model_name = 'inception'
-    label_list = ['ants', 'bees']
-
-    p1_trainer = P1Trainer(path_to_dataset, model_name, label_list)
-
-    p1_trainer.train(True)
-
-    output_pth_filename = (
-        './trainer/P1TrainFarm/' +
-        model_name +
-        '_' +
-        str(date.today()) +
-        '.pth')
-    output_model_filename = (
-        '../data/model/' +
-        model_name +
-        '_' +
-        str(date.today()) +
-        '.onnx')
-    assert os.path.exists(output_pth_filename) is True
-    assert os.path.exists(output_model_filename) is True
-    p1_model_array = ['alexnet',
-                      'vgg',
-                      'squeezenet',
-                      'densenet',
-                      'resnet',
-                      'mobilenet']
-    for model in p1_model_array:
-        model_ft, input_size = p1_trainer.initialize_model(model,
-                                                           len(label_list),
-                                                           True)
-        assert model_ft is not None
-
-    model_ft, input_size = p1_trainer.initialize_model('invalid_model',
-                                                       len(label_list),
-                                                       True)
-    assert model_ft is None
-
-    # Clean up test materials.
-    if (os.path.exists('../data/datasets/hymenoptera_data') and
-            os.path.exists('../data/datasets/hymenoptera_data.zip') and
-            os.path.exists('./trainer/P1TrainFarm')):
-        p3 = subprocess.Popen(['rm',
-                               '-r',
-                               '../data/datasets/hymenoptera_data',
-                               '../data/datasets/hymenoptera_data.zip',
-                               './trainer/P1TrainFarm',
-                               output_model_filename])
-        p3.communicate()
 
 
 def test_P2Trainer():

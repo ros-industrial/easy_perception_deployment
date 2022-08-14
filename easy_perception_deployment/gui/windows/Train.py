@@ -25,7 +25,6 @@ from PySide2.QtWidgets import (
     QWidget
 )
 
-from trainer.P1Trainer import P1Trainer
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
 
@@ -54,7 +53,7 @@ class TrainWindow(QWidget):
         self.model_name = ''
         self._model_list = []
         self._label_list = []
-        self._precision_level = 1
+        self._precision_level = 2
 
         self._path_to_dataset = ''
         self._path_to_label_list = ''
@@ -83,16 +82,12 @@ class TrainWindow(QWidget):
 
     def setButtons(self):
         '''A Mutator function that defines all buttons in TrainWindow.'''
-        self.p1_button = QPushButton('P1', self)
-        self.p1_button.setGeometry(0, 0, 50, 100)
-        self.p1_button.setStyleSheet(
-            'background-color: rgba(180,180,180,255);')
 
         self.p2_button = QPushButton('P2', self)
-        self.p2_button.setGeometry(50, 0, 50, 100)
+        self.p2_button.setGeometry(0, 0, 50, 100)
 
         self.p3_button = QPushButton('P3', self)
-        self.p3_button.setGeometry(100, 0, 50, 100)
+        self.p3_button.setGeometry(50, 0, 50, 100)
 
         # Model dropdown menu to select Precision Level specific model
         self.model_selector = QComboBox(self)
@@ -120,8 +115,6 @@ class TrainWindow(QWidget):
             100)
         self.generate_button.setStyleSheet(
             'background-color: rgba(0,200,10,255);')
-        if self._precision_level == 1:
-            self.generate_button.hide()
 
         # Labeller button to initiate labelme
         self.validate_button = QPushButton('Validate Dataset', self)
@@ -159,7 +152,6 @@ class TrainWindow(QWidget):
         self.list_button.setStyleSheet(
             'background-color: rgba(200,10,0,255);')
 
-        self.p1_button.clicked.connect(self.setP1)
         self.p2_button.clicked.connect(self.setP2)
         self.p3_button.clicked.connect(self.setP3)
 
@@ -173,20 +165,6 @@ class TrainWindow(QWidget):
         # DEBUG Remove the line during Release.
         # self.train_button.clicked.connect(self.startTraining)
 
-    def setP1(self):
-        '''A function that is triggered by the button labelled, P1.'''
-        self._precision_level = 1
-        self.populateModelSelector()
-        self.initModel()
-        self.label_button.hide()
-        self.generate_button.hide()
-        self.p1_button.setStyleSheet(
-            'background-color: rgba(180,180,180,255);')
-        self.p2_button.setStyleSheet('background-color: white;')
-        self.p3_button.setStyleSheet('background-color: white;')
-        self.disconnectTrainingButton()
-        print('Set Precision Level at: ', self._precision_level)
-
     def setP2(self):
         '''A function that is triggered by the button labelled, P2.'''
         self._precision_level = 2
@@ -196,7 +174,6 @@ class TrainWindow(QWidget):
         self.generate_button.show()
         self.p2_button.setStyleSheet(
             'background-color: rgba(180,180,180,255);')
-        self.p1_button.setStyleSheet('background-color: white;')
         self.p3_button.setStyleSheet('background-color: white;')
         self.disconnectTrainingButton()
         print('Set Precision Level at: ', self._precision_level)
@@ -210,7 +187,6 @@ class TrainWindow(QWidget):
         self.generate_button.show()
         self.p3_button.setStyleSheet(
             'background-color: rgba(180,180,180,255);')
-        self.p1_button.setStyleSheet('background-color: white;')
         self.p2_button.setStyleSheet('background-color: white;')
         self.disconnectTrainingButton()
         print('Set Precision Level at: ', self._precision_level)
@@ -331,13 +307,6 @@ class TrainWindow(QWidget):
             self.disconnectTrainingButton()
             return
 
-        # Precision Level 1 only requires 4 checks.
-        if self._precision_level == 1:
-            print('Precision 1 Training Ready.')
-            self.train_button.setStyleSheet('background-color: white;')
-            self.connectTrainingButton()
-            return
-
         if not self._is_dataset_labelled:
             print('Dataset not labelled properly. Please label Dataset.')
             self.train_button.setStyleSheet(
@@ -350,22 +319,7 @@ class TrainWindow(QWidget):
 
     def validateDataset(self):
         '''A function that is triggered by Validate Dataset button.'''
-        if self._precision_level == 1:
-            trainDirExists = os.path.exists(
-                self._path_to_dataset + '/train')
-            valDirExists = os.path.exists(
-                self._path_to_dataset + '/val')
-            # Check if the dataset folder has the following structure
-            if trainDirExists and valDirExists:
-                self._is_dataset_labelled = True
-                self.validate_button.setStyleSheet(
-                    'background-color: rgba(0,200,10,255);')
-            else:
-                self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is /train' +
-                      'and /val sub-directories' +
-                      'in the selected dataset directory.')
-        elif self._precision_level == 2:
+        if self._precision_level == 2:
             isDatasetNamedRight = 'custom_dataset'
             os.path.basename(self._path_to_dataset) == 'custom_dataset'
             trainDirExists = os.path.exists(
@@ -409,10 +363,9 @@ class TrainWindow(QWidget):
         self.train_button.updateGeometry()
 
         if self._precision_level == 1:
-            p1_trainer = P1Trainer(self._path_to_dataset,
-                                   self.model_name,
-                                   self._label_list)
-            p1_trainer.train(False)
+            print("[ Deprecation Notice ] - Precision Level 1 features " +
+                  "has been deprecated in EPD v0.3.0.")
+            print("Please use Precision Level 1 and 2 features instead.")
         elif self._precision_level == 2:
             p2_trainer = P2Trainer(self._path_to_dataset,
                                    self.model_name,
@@ -476,11 +429,7 @@ class TrainWindow(QWidget):
         Model with all available pretrained models from PyTorch model zoo.
         '''
         # Implement different model list based on different precision level.
-        if self._precision_level == 1:
-            self._model_list = [
-                line.rstrip('\n') for line in
-                open('./lists/p1_model_list.txt')]
-        elif self._precision_level == 2:
+        if self._precision_level == 2:
             self._model_list = [
                 line.rstrip('\n') for line in
                 open('./lists/p2_model_list.txt')]
