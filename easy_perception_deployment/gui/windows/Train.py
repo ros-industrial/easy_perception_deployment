@@ -85,6 +85,8 @@ class TrainWindow(QWidget):
 
         self.p2_button = QPushButton('P2', self)
         self.p2_button.setGeometry(0, 0, 50, 100)
+        self.p2_button.setStyleSheet(
+            'background-color: rgba(180,180,180,255);')
 
         self.p3_button = QPushButton('P3', self)
         self.p3_button.setGeometry(50, 0, 50, 100)
