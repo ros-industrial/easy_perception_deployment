@@ -178,7 +178,6 @@ class TrainWindow(QWidget):
             'background-color: rgba(180,180,180,255);')
         self.p3_button.setStyleSheet('background-color: white;')
         self.disconnectTrainingButton()
-        print('Set Precision Level at: ', self._precision_level)
 
     def setP3(self):
         '''A function that is triggered by the button labelled, P3.'''
@@ -191,7 +190,6 @@ class TrainWindow(QWidget):
             'background-color: rgba(180,180,180,255);')
         self.p2_button.setStyleSheet('background-color: white;')
         self.disconnectTrainingButton()
-        print('Set Precision Level at: ', self._precision_level)
 
     def setModel(self, index):
         '''A function that is triggered by
@@ -224,7 +222,7 @@ class TrainWindow(QWidget):
                 line.rstrip('\n') for line in
                 open(input_classes_filepath)]
         else:
-            print('No label list set.')
+            print('[ WARNING ] - No label list set.')
             return
         self.list_button.setStyleSheet('background-color: rgba(0,150,10,255);')
         self._is_labellist_linked = True
@@ -253,7 +251,7 @@ class TrainWindow(QWidget):
                 'background-color: rgba(0,200,10,255);')
         else:
             # Set button color to red
-            print('Dataset path does not exist.')
+            print('[ WARNING ] - Dataset path does not exist.')
             self.dataset_button.setStyleSheet('background-color: red;')
 
         self.validateTraining()
@@ -271,7 +269,7 @@ class TrainWindow(QWidget):
         '''
         self.model_name = self._model_list[0]
         self._is_model_ready = True
-        print('Set Model to ', self.model_name)
+        print('Setting Model to ', self.model_name)
 
     def validateTraining(self):
         '''
@@ -283,26 +281,28 @@ class TrainWindow(QWidget):
         # all data is available for Training to start without issue.
 
         if not self._is_model_ready:
-            print('No model provided. Please choose Model.')
+            print('[ WARNING ] - No model provided. Please choose Model.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
             return
         if not self._is_dataset_linked:
-            print('Dataset directory not provided. Please choose Dataset.')
+            print('[ WARNING ] - Dataset directory not provided. ' +
+                  'Please choose Dataset.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
             return
         if not self._is_labellist_linked:
-            print('Label List not provided. Please choose Label List.')
+            print('[ WARNING ] - Label List not provided. ' +
+                  'Please choose Label List.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
             return
 
         if not self._is_dataset_labelled:
-            print('Dataset not properly restructured.' +
+            print('[ WARNING ] - Dataset not properly restructured.' +
                   'Please restructure Dataset.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
@@ -310,7 +310,8 @@ class TrainWindow(QWidget):
             return
 
         if not self._is_dataset_labelled:
-            print('Dataset not labelled properly. Please label Dataset.')
+            print('[ WARNING ] - Dataset not labelled properly. ' +
+                  'Please label Dataset.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
@@ -335,7 +336,7 @@ class TrainWindow(QWidget):
                     'background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is /train_dataset' +
+                print('[ ERROR ] - Please ensure there is /train_dataset' +
                       'and /val_dataset sub-directories' +
                       'in the selected dataset directory.')
         elif self._precision_level == 3:
@@ -352,7 +353,7 @@ class TrainWindow(QWidget):
                     'background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
-                print('[ERROR] - Please ensure there is /train_dataset' +
+                print('[ ERROR ] - Please ensure there is /train_dataset' +
                       'and /val_dataset sub-directories' +
                       'in the selected dataset directory.')
 
@@ -423,7 +424,7 @@ class TrainWindow(QWidget):
             if not self.debug:
                 self.label_val_process.communicate()
         else:
-            print('Faulty labelled dataset detected.')
+            print('[ WARNING ] - Faulty labelled dataset detected.')
 
     def populateModelSelector(self):
         '''
