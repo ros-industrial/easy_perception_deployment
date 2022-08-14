@@ -54,7 +54,7 @@ Changelog for package easy_perception_deployment
 * Contributor(s): Bey Hao Yun
 
 
-0.3.0 (2022-08-14)
+0.3.0 (2022-08-16)
 -------------------
 * Integrated dockerized workflow for P3TrainFarm and P3Exporter. 
 * Integrated dockerized workflow for P2TrainFarm and P2Exporter.
