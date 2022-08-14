@@ -58,6 +58,7 @@ Changelog for package easy_perception_deployment
 -------------------
 * Integrated dockerized workflow for P3TrainFarm and P3Exporter. 
 * Integrated dockerized workflow for P2TrainFarm and P2Exporter.
+* Deprecated Precision Level 1 training and deployment features due to lack of reported use. This removal will help reduce software bloat and accelerate GUI deployment.
 * Added GUI feature to edit MAX_ITER, TEST_PERIOD, CHECKPOINT_PERIOD, STEPS parameters for maskrcnn_training, fasterrcnn_training yaml files. This allows condensed testing as well as higher customizability in training.
 * Included CLI feature to edit input_image_topic.
 * Revamped GUI icons for better UI appearance.
