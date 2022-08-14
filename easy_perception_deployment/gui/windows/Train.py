@@ -14,22 +14,14 @@
 
 import os
 import subprocess
+from ast import literal_eval as make_tuple
 
 from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
-from PySide2.QtWidgets import (
-    QComboBox,
-    QFileDialog,
-    QLabel,
-    QPushButton,
-    QWidget,
-    QInputDialog,
-    QLineEdit
-)
-
+from PySide2.QtWidgets import (QComboBox, QFileDialog, QInputDialog, QLabel,
+                               QLineEdit, QPushButton, QWidget)
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
-from ast import literal_eval as make_tuple
 
 
 class TrainWindow(QWidget):
@@ -494,12 +486,20 @@ class TrainWindow(QWidget):
         elif self._precision_level == 2:
             p2_trainer = P2Trainer(self._path_to_dataset,
                                    self.model_name,
-                                   self._label_list)
+                                   self._label_list,
+                                   self.max_iteration,
+                                   self.checkpoint_period,
+                                   self.test_period,
+                                   self.steps)
             p2_trainer.train(False)
         else:
             p3_trainer = P3Trainer(self._path_to_dataset,
                                    self.model_name,
-                                   self._label_list)
+                                   self._label_list,
+                                   self.max_iteration,
+                                   self.checkpoint_period,
+                                   self.test_period,
+                                   self.steps)
             p3_trainer.train(False)
 
         self.train_button.setText('Train')

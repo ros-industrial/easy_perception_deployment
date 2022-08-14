@@ -15,6 +15,7 @@
 
 import os
 import json
+import yaml
 import subprocess
 
 from trainer.P2Trainer import P2Trainer
@@ -504,19 +505,99 @@ def test_closeWindow_CountingWindow(qtbot):
     assert widget.isVisible() is False
 
 
-def test_P2Trainer():
+def test_P2Trainer_Training_Config(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'fasterrcnn'
-    path_label_list = '../data/label_list/coco_classes.txt'
+    label_list = ['__ignore__', '_background_', 'test_object']
 
-    if os.path.exists(path_label_list):
-        label_list = [line.rstrip('\n') for line in open(path_label_list)]
-    else:
-        label_list = ['ant', 'bees']
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
 
-    p2_trainer = P2Trainer(path_to_dataset, model_name, label_list)
+    widget.max_iteration = 1000
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
 
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        1000,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    dict = {}
+    with open('trainer/training_files/fasterrcnn_training.yaml') as file:
+        dict = yaml.load(file, Loader=yaml.FullLoader)
+
+    assert dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] == 3
+    assert dict['SOLVER']['MAX_ITER'] == 1000
+    assert dict['SOLVER']['CHECKPOINT_PERIOD'] == 100
+    assert dict['SOLVER']['TEST_PERIOD'] == 100
+    assert dict['SOLVER']['STEPS'] == '(100, 200, 300)'
+
+
+def test_P3Trainer_Training_Config(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'test_object']
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 1000
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        1000,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    dict = {}
+    with open('trainer/training_files/maskrcnn_training.yaml') as file:
+        dict = yaml.load(file, Loader=yaml.FullLoader)
+
+    assert dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] == 3
+    assert dict['SOLVER']['MAX_ITER'] == 1000
+    assert dict['SOLVER']['CHECKPOINT_PERIOD'] == 100
+    assert dict['SOLVER']['TEST_PERIOD'] == 100
+    assert dict['SOLVER']['STEPS'] == '(100, 200, 300)'
+
+
+def test_P2Trainer_Training_Workflow(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'test_object']
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 1000
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        1000,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    # TODO(cardboardcode): Elaborate dockerized p2 training
+    # and exporter workflow.
     p2_trainer.train(True)
     assert p2_trainer.create_process is not None
     p2_trainer.create_process.kill()
@@ -527,24 +608,32 @@ def test_P2Trainer():
     assert p2_trainer.export_process is not None
     p2_trainer.export_process.kill()
 
-    if os.path.exists('./trainer/P2TrainFarm'):
-        p1 = subprocess.Popen(['rm', '-r', './trainer/P2TrainFarm'])
-        p1.communicate()
 
-
-def test_P3Trainer():
+def test_P3Trainer_Training_Workflow(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'maskrcnn'
-    path_label_list = '../data/label_list/coco_classes.txt'
+    label_list = ['__ignore__', '_background_', 'test_object']
 
-    if os.path.exists(path_label_list):
-        label_list = [line.rstrip('\n') for line in open(path_label_list)]
-    else:
-        label_list = ['ant', 'bees']
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
 
-    p3_trainer = P3Trainer(path_to_dataset, model_name, label_list)
+    widget.max_iteration = 1000
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
 
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        1000,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    # TODO(cardboardcode): Elaborate dockerized p3 training
+    # and exporter workflow.
     p3_trainer.train(True)
     assert p3_trainer.create_process is not None
     p3_trainer.create_process.kill()
@@ -554,7 +643,3 @@ def test_P3Trainer():
     p3_trainer.build_export_process.kill()
     assert p3_trainer.export_process is not None
     p3_trainer.export_process.kill()
-
-    if os.path.exists('./trainer/P3TrainFarm'):
-        p1 = subprocess.Popen(['rm', '-r', './trainer/P3TrainFarm'])
-        p1.communicate()

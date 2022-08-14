@@ -26,15 +26,21 @@ class P3Trainer:
     custom-trained P3 ONNX model file.\n
     This model can then be deployed as a ROS2 package.
     '''
-    def __init__(self, path_to_dataset, model_name, label_list):
+    def __init__(self, path_to_dataset, model_name,
+                 label_list, max_iteration, checkpoint_period,
+                 test_period, steps):
         '''
         The constructor.
         Sets all the required fixed path to various files needed to start
         a training session.\n
-        Calls setNumClassesInTrainingConfig function.
+        Calls updateTrainingConfig function.
         '''
         self.model_name = model_name
         self.label_list = label_list
+        self.max_iteration = max_iteration
+        self.checkpoint_period = checkpoint_period
+        self.test_period = test_period
+        self.steps = steps
 
         self.create_process = None
         self.run_process = None
@@ -55,9 +61,9 @@ class P3Trainer:
         self.path_to_export_modif = (
             'trainer/exporter_files/export_to_p3_onnx.py')
 
-        self.setNumClassesInTrainingConfig()
+        self.updateTrainingConfig()
 
-    def setNumClassesInTrainingConfig(self):
+    def updateTrainingConfig(self):
         '''
         A Mutator function that modifies the various training session config
         files.
@@ -80,6 +86,10 @@ class P3Trainer:
             dict = yaml.load(file, Loader=yaml.FullLoader)
 
         dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] = custom_class_no
+        dict['SOLVER']['MAX_ITER'] = self.max_iteration
+        dict['SOLVER']['CHECKPOINT_PERIOD'] = self.checkpoint_period
+        dict['SOLVER']['TEST_PERIOD'] = self.test_period
+        dict['SOLVER']['STEPS'] = self.steps
 
         with open(self.path_to_training_config, 'w') as file:
             documents = yaml.dump(dict, file)
