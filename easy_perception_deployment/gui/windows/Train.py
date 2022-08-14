@@ -22,11 +22,14 @@ from PySide2.QtWidgets import (
     QFileDialog,
     QLabel,
     QPushButton,
-    QWidget
+    QWidget,
+    QInputDialog,
+    QLineEdit
 )
 
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
+from ast import literal_eval as make_tuple
 
 
 class TrainWindow(QWidget):
@@ -45,8 +48,9 @@ class TrainWindow(QWidget):
 
         self.debug = debug
 
-        self._TRAIN_WIN_H = 500
+        self._TRAIN_WIN_H = 650
         self._TRAIN_WIN_W = 500
+        self._ROW_THICKNESS = 100
 
         self.setWindowIcon(QIcon("img/epd_desktop.png"))
 
@@ -69,6 +73,11 @@ class TrainWindow(QWidget):
 
         self.label_train_process = None
         self.label_val_process = None
+
+        self.max_iteration = 3000
+        self.checkpoint_period = 200
+        self.test_period = 200
+        self.steps = '(1000, 1500, 2000, 2500)'
 
         self.setWindowTitle('Train')
         self.setGeometry(
@@ -93,7 +102,11 @@ class TrainWindow(QWidget):
 
         # Model dropdown menu to select Precision Level specific model
         self.model_selector = QComboBox(self)
-        self.model_selector.setGeometry(self._TRAIN_WIN_W-150, 0, 150, 100)
+        self.model_selector.setGeometry(
+            self._TRAIN_WIN_W-150,
+            0,
+            150,
+            self._ROW_THICKNESS)
         self.model_selector.setStyleSheet('background-color: red;')
         self.populateModelSelector()
 
@@ -101,7 +114,11 @@ class TrainWindow(QWidget):
         self.label_button = QPushButton('Label Dataset', self)
         self.label_button.setIcon(QIcon('img/label_labelme.png'))
         self.label_button.setIconSize(QSize(50, 50))
-        self.label_button.setGeometry(0, 200, self._TRAIN_WIN_W/2, 100)
+        self.label_button.setGeometry(
+            0,
+            200,
+            self._TRAIN_WIN_W/2,
+            self._ROW_THICKNESS)
         self.label_button.setStyleSheet(
             'background-color: rgba(0,200,10,255);')
         if self._precision_level == 1:
@@ -114,7 +131,7 @@ class TrainWindow(QWidget):
             self._TRAIN_WIN_W/2,
             200,
             self._TRAIN_WIN_W/2,
-            100)
+            self._ROW_THICKNESS)
         self.generate_button.setStyleSheet(
             'background-color: rgba(0,200,10,255);')
 
@@ -126,13 +143,17 @@ class TrainWindow(QWidget):
             self._TRAIN_WIN_W/2,
             300,
             self._TRAIN_WIN_W/2,
-            100)
+            self._ROW_THICKNESS)
 
         # Dataset button to prompt input via FileDialogue
         self.dataset_button = QPushButton('Choose Dataset', self)
         self.dataset_button.setIcon(QIcon('img/dataset.png'))
         self.dataset_button.setIconSize(QSize(50, 50))
-        self.dataset_button.setGeometry(0, 300, self._TRAIN_WIN_W/2, 100)
+        self.dataset_button.setGeometry(
+            0,
+            300,
+            self._TRAIN_WIN_W/2,
+            self._ROW_THICKNESS)
         self.dataset_button.setStyleSheet('background-color: red;')
 
         # Start Training button to start and display training process
@@ -142,7 +163,8 @@ class TrainWindow(QWidget):
         self.train_button.setGeometry(
             0,
             self._TRAIN_WIN_H-100,
-            self._TRAIN_WIN_W, 100)
+            self._TRAIN_WIN_W,
+            self._ROW_THICKNESS)
         self.train_button.setStyleSheet(
             'background-color: rgba(180,180,180,255);')
 
@@ -150,9 +172,42 @@ class TrainWindow(QWidget):
         self.list_button = QPushButton('Choose Label List', self)
         self.list_button.setIcon(QIcon('img/label_list.png'))
         self.list_button.setIconSize(QSize(75, 75))
-        self.list_button.setGeometry(0, 100, self._TRAIN_WIN_W, 100)
+        self.list_button.setGeometry(
+            0,
+            100,
+            self._TRAIN_WIN_W,
+            self._ROW_THICKNESS)
         self.list_button.setStyleSheet(
             'background-color: rgba(200,10,0,255);')
+
+        self.training_config_label = QLabel(self)
+        self.training_config_label.setText('Training Parameters')
+        self.training_config_label.move(self._TRAIN_WIN_W/2 - 65, 415)
+
+        self.maxiter_button = QPushButton('MAX ITERATION', self)
+        self.maxiter_button.setGeometry(
+            0,
+            450,
+            self._TRAIN_WIN_W/2,
+            self._ROW_THICKNESS/2)
+        self.checkpointp_button = QPushButton('CHECKPOINT PERIOD', self)
+        self.checkpointp_button.setGeometry(
+            self._TRAIN_WIN_W/2,
+            450,
+            self._TRAIN_WIN_W/2,
+            self._ROW_THICKNESS/2)
+        self.steps_button = QPushButton('STEPS', self)
+        self.steps_button.setGeometry(
+            0,
+            500,
+            self._TRAIN_WIN_W/2,
+            self._ROW_THICKNESS/2)
+        self.testp_button = QPushButton('TEST PERIOD', self)
+        self.testp_button.setGeometry(
+            self._TRAIN_WIN_W/2,
+            500,
+            self._TRAIN_WIN_W/2,
+            self._ROW_THICKNESS/2)
 
         self.p2_button.clicked.connect(self.setP2)
         self.p3_button.clicked.connect(self.setP3)
@@ -164,8 +219,10 @@ class TrainWindow(QWidget):
         self.validate_button.clicked.connect(self.validateDataset)
         self.list_button.clicked.connect(self.setLabelList)
 
-        # DEBUG Remove the line during Release.
-        # self.train_button.clicked.connect(self.startTraining)
+        self.maxiter_button.clicked.connect(self.setMaxIteration)
+        self.checkpointp_button.clicked.connect(self.setCheckPointPeriod)
+        self.testp_button.clicked.connect(self.setTestPeriod)
+        self.steps_button.clicked.connect(self.setSteps)
 
     def setP2(self):
         '''A function that is triggered by the button labelled, P2.'''
@@ -255,6 +312,71 @@ class TrainWindow(QWidget):
             self.dataset_button.setStyleSheet('background-color: red;')
 
         self.validateTraining()
+
+    def setMaxIteration(self):
+        if not self.debug:
+            max_iteration, ok = QInputDialog().getInt(
+                self,
+                "MAX ITERATION",
+                "No. of Training Epochs:",
+                self.max_iteration)
+        else:
+            ok = True
+            max_iteration = self.max_iteration
+        if ok:
+            self.max_iteration = max_iteration
+            print("Setting Max Iteration to", self.max_iteration)
+
+    def setCheckPointPeriod(self):
+        if not self.debug:
+            checkpoint_p, ok = QInputDialog().getInt(
+                self,
+                "CHECKPOINT PERIOD",
+                "Interval to Save Model:",
+                self.checkpoint_period)
+        else:
+            ok = True
+            checkpoint_p = self.checkpoint_period
+        if ok:
+            self.checkpoint_period = checkpoint_p
+            print("Setting Checkpoint Period to", self.checkpoint_period)
+
+    def setTestPeriod(self):
+        if not self.debug:
+            test_p, ok = QInputDialog().getInt(
+                self,
+                "TEST PERIOD",
+                "Interval to Test Model:",
+                self.test_period)
+        else:
+            ok = True
+            test_p = self.test_period
+        if ok:
+            self.test_period = test_p
+            print("Setting Test Period to", self.test_period)
+
+    def setSteps(self):
+        if not self.debug:
+            steps, ok = QInputDialog().getText(
+                self,
+                "STEPS",
+                "Tuple of Epochs to Decrease " +
+                "Learning Rate Eg. (1000, 2000):",
+                QLineEdit.Normal,
+                self.steps)
+        else:
+            ok = False
+            steps = self.steps
+
+        if ok:
+            # Check if input is a valid tuple
+            try:
+                local_steps = make_tuple(steps)
+            except (ValueError, SyntaxError):
+                print("[ WARNING ] - Invalid tuple given. " +
+                      "Reassigning default...")
+            self.steps = steps
+            print("Setting Steps to", self.steps)
 
     def runLabelme(self):
         '''A function that is triggered by Label Dataset button.'''

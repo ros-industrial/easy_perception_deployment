@@ -366,6 +366,54 @@ def test_setDataset_TrainWindow(qtbot):
     assert widget._is_dataset_linked is True
 
 
+def test_setMax_Iteration(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 1000
+
+    qtbot.mouseClick(widget.maxiter_button, QtCore.Qt.LeftButton)
+
+    assert widget.max_iteration == 1000
+
+
+def test_setCheckPoint_Period(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.checkpoint_period = 100
+
+    qtbot.mouseClick(widget.checkpointp_button, QtCore.Qt.LeftButton)
+
+    assert widget.checkpoint_period == 100
+
+
+def test_setTest_Period(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.test_period = 100
+
+    qtbot.mouseClick(widget.testp_button, QtCore.Qt.LeftButton)
+
+    assert widget.test_period == 100
+
+
+def test_setSteps_Period(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.steps = '(100, 200, 300)'
+
+    qtbot.mouseClick(widget.steps_button, QtCore.Qt.LeftButton)
+
+    assert widget.steps == '(100, 200, 300)'
+
+
 def test_conformDatasetToCOCO_TrainWindow(qtbot):
 
     if not os.path.exists('../data/datasets/p2p3_dummy_dataset'):
