@@ -492,6 +492,7 @@ class TrainWindow(QWidget):
                                    self.test_period,
                                    self.steps)
             p2_trainer.train(False)
+            p2_trainer.export(False)
         else:
             p3_trainer = P3Trainer(self._path_to_dataset,
                                    self.model_name,

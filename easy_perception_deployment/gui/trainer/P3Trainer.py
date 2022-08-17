@@ -312,7 +312,8 @@ class P3Trainer:
         cmd = [
             "bash",
             "trainer/training_files/scripts/" +
-            "prepare_trainfarm_docker_container.bash"]
+            "prepare_trainfarm_docker_container.bash",
+            "true"]
         self.install_depend_process = subprocess.Popen(cmd)
         self.install_depend_process.communicate()
 
@@ -363,7 +364,8 @@ class P3Trainer:
         cmd = [
             "bash",
             "trainer/exporter_files/scripts/" +
-            "prepare_exporter_docker_container.bash"]
+            "prepare_exporter_docker_container.bash",
+            "true"]
         self.install_depend_process = subprocess.Popen(cmd)
         self.install_depend_process.communicate()
 
@@ -407,7 +409,8 @@ class P3Trainer:
         cmd = [
             "bash",
             "trainer/training_files/scripts/" +
-            "copy_training_files.bash"]
+            "copy_training_files.bash",
+            "true"]
         self.copy_process = subprocess.Popen(cmd)
         self.copy_process.communicate()
 
@@ -434,7 +437,8 @@ class P3Trainer:
             print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
         cmd = [
             "bash",
-            "trainer/training_files/scripts/run_training.bash"]
+            "trainer/training_files/scripts/run_training.bash",
+            "true"]
         self.training_process = subprocess.Popen(cmd)
         self.training_process.communicate()
 
@@ -461,7 +465,8 @@ class P3Trainer:
             print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
         cmd = [
             "bash",
-            "trainer/exporter_files/scripts/copy_exporter_files.bash"]
+            "trainer/exporter_files/scripts/copy_exporter_files.bash",
+            "true"]
         self.copy_process = subprocess.Popen(cmd)
         self.copy_process.communicate()
 
@@ -488,7 +493,8 @@ class P3Trainer:
             print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
         cmd = [
             "bash",
-            "trainer/exporter_files/scripts/run_exporter.bash"]
+            "trainer/exporter_files/scripts/run_exporter.bash",
+            "true"]
         self.exporter_process = subprocess.Popen(cmd)
         self.exporter_process.communicate()
 

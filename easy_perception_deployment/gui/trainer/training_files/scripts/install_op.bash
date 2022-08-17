@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+TRAIN_MASKRCNN=$1
+
 cd /home/user/
 git clone https://github.com/facebookresearch/maskrcnn-benchmark.git --depth 1 --single-branch
 cd maskrcnn-benchmark
@@ -27,14 +29,25 @@ if [ ! -d "weights" ]; then
     mkdir weights
 fi
 cd weights
-FILE="e2e_mask_rcnn_R_50_FPN_1x.pth"
-if [ ! -f "$FILE" ]; then
+if $TRAIN_MASKRCNN ; then
+    FILE="e2e_mask_rcnn_R_50_FPN_1x.pth"
+    if [ ! -f "$FILE" ]; then
     echo "Downloading MaskRCNN pretrained weights."
     wget https://download.pytorch.org/models/maskrcnn/e2e_mask_rcnn_R_50_FPN_1x.pth
+    fi
+else
+    FILE="e2e_faster_rcnn_R_50_FPN_1x.pth"
+    echo "Downloading FasterRCNN pretrained weights."
+    wget https://download.pytorch.org/models/maskrcnn/e2e_faster_rcnn_R_50_FPN_1x.pth
 fi
 unset FILE
-cp /home/user/trainer/training_files/trim_mask_rcnn.py trim_mask_rcnn.py
-python trim_mask_rcnn.py
+if $TRAIN_MASKRCNN ; then
+    cp /home/user/trainer/training_files/trim_mask_rcnn.py trim_mask_rcnn.py
+    python trim_mask_rcnn.py
+else
+    cp /home/user/trainer/training_files/trim_faster_rcnn.py trim_faster_rcnn.py
+    python trim_faster_rcnn.py
+fi
 cd $INSTALL_DIR
 # Create datasets folder if does not exist.
 if [ ! -d "datasets" ]; then
