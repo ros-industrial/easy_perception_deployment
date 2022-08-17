@@ -163,7 +163,7 @@ class P3Trainer:
 
     def pullTrainFarmDockerImage(self):
         # Check if docker image cardboardcode/epd-p3-trainfarm:latest exists
-        
+
         cmd = ["docker", "inspect", "--type=image", self._TRAIN_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
@@ -181,18 +181,19 @@ class P3Trainer:
             cmd = ["docker", "pull", self._TRAIN_DOCKER_IMG]
             self.docker_pull_process = subprocess.Popen(cmd)
             self.docker_pull_process.communicate()
-            docker_pull_process_returncode = self.docker_pull_process.returncode
+            docker_pull_process_returncode = (
+                self.docker_pull_process.returncode)
         else:
             print(self._TRAIN_DOCKER_IMG + " - Docker Image FOUND.")
             docker_pull_process_returncode = 0
 
-        # If docker_pull_process succeeded, update p3_trainfarm_verification.json
+        # If docker_pull_process succeeded,
+        # Update p3_trainfarm_verification.json
         _path_to_p3_train_verification = "../config/p3_train_verification.json"
         # Load p3_trainfarm_verification.json
         file = open(_path_to_p3_train_verification)
         p3_train_verification = json.load(file)
 
-        print("returncode for docker_pull_process =", docker_pull_process_returncode)
         if docker_pull_process_returncode == 0:
             p3_train_verification["isTrainFarmDockerImagePulled"] = True
         else:
@@ -204,7 +205,7 @@ class P3Trainer:
 
     def pullExporterDockerImage(self):
         # Check if docker image cardboardcode/epd-p3-exporter:latest exists
-        
+
         cmd = ["docker", "inspect", "--type=image", self._EXPORT_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
@@ -222,18 +223,19 @@ class P3Trainer:
             cmd = ["docker", "pull", self._EXPORT_DOCKER_IMG]
             self.docker_pull_process = subprocess.Popen(cmd)
             self.docker_pull_process.communicate()
-            docker_pull_process_returncode = self.docker_pull_process.returncode
+            docker_pull_process_returncode = (
+                self.docker_pull_process.returncode)
         else:
             print(self._EXPORT_DOCKER_IMG + " - Docker Image FOUND.")
             docker_pull_process_returncode = 0
 
-        # If docker_pull_process succeeded, update p3_trainfarm_verification.json
+        # If docker_pull_process succeeded,
+        # Update p3_trainfarm_verification.json
         _path_to_p3_train_verification = "../config/p3_train_verification.json"
         # Load p3_trainfarm_verification.json
         file = open(_path_to_p3_train_verification)
         p3_train_verification = json.load(file)
 
-        print("returncode for docker_pull_process =", docker_pull_process_returncode)
         if docker_pull_process_returncode == 0:
             p3_train_verification["isExporterDockerImagePulled"] = True
         else:
@@ -245,7 +247,11 @@ class P3Trainer:
 
     def installTrainingDependencies(self):
         # Check if docker container exists.
-        cmd = ["docker", "inspect", "--type=container", self._TRAIN_DOCKER_CONTAINER]
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._TRAIN_DOCKER_CONTAINER]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -254,22 +260,28 @@ class P3Trainer:
             stderr=subprocess.STDOUT,
             env=None)
         self.docker_inspect_process.communicate()
-        # If docker container missing, create docker container, epd_p3_trainer, from image.
+        # If docker container missing,
+        # Create docker container, epd_p3_trainer, from image.
         if self.docker_inspect_process.returncode != 0:
-            cmd = ['bash', 'trainer/training_files/scripts/create_p3trainfarm_docker_container.bash']
+            cmd = [
+                "bash",
+                "trainer/training_files/scripts/" +
+                "create_p3trainfarm_docker_container.bash"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
-            print("returncode for docker_construct_process =", self.docker_construct_process.returncode)
         else:
             print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
         # Enter docker container
         # Install dependencies
-        cmd = ["bash", "trainer/training_files/scripts/prepare_p3trainfarm_docker_container.bash"]
+        cmd = [
+            "bash",
+            "trainer/training_files/scripts/" +
+            "prepare_p3trainfarm_docker_container.bash"]
         self.install_depend_process = subprocess.Popen(cmd)
         self.install_depend_process.communicate()
-        print("returncode for install_depend_process =", self.install_depend_process.returncode)
 
-        # If docker_pull_process succeeded, update p3_trainfarm_verification.json
+        # If docker_pull_process succeeded,
+        # Update p3_trainfarm_verification.json
         _path_to_p3_train_verification = "../config/p3_train_verification.json"
         # Load p3_trainfarm_verification.json
         file = open(_path_to_p3_train_verification)
@@ -286,7 +298,11 @@ class P3Trainer:
 
     def installExporterDependencies(self):
         # Check if docker container exists.
-        cmd = ["docker", "inspect", "--type=container", self._EXPORT_DOCKER_CONTAINER]
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._EXPORT_DOCKER_CONTAINER]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -295,22 +311,28 @@ class P3Trainer:
             stderr=subprocess.STDOUT,
             env=None)
         self.docker_inspect_process.communicate()
-        # If docker container missing, create docker container, epd_p3_trainer, from image.
+        # If docker container missing,
+        # Create docker container, epd_p3_trainer, from image.
         if self.docker_inspect_process.returncode != 0:
-            cmd = ['bash', 'trainer/exporter_files/scripts/create_p3exporter_docker_container.bash']
+            cmd = [
+                "bash",
+                "trainer/exporter_files/scripts/" +
+                "create_p3exporter_docker_container.bash"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
-            print("returncode for docker_construct_process =", self.docker_construct_process.returncode)
         else:
             print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
         # Enter docker container
         # Install dependencies
-        cmd = ["bash", "trainer/exporter_files/scripts/prepare_p3exporter_docker_container.bash"]
+        cmd = [
+            "bash",
+            "trainer/exporter_files/scripts/" +
+            "prepare_p3exporter_docker_container.bash"]
         self.install_depend_process = subprocess.Popen(cmd)
         self.install_depend_process.communicate()
-        print("returncode for install_depend_process =", self.install_depend_process.returncode)
 
-        # If docker_pull_process succeeded, update p3_trainfarm_verification.json
+        # If docker_pull_process succeeded,
+        # Update p3_trainfarm_verification.json
         _path_to_p3_train_verification = "../config/p3_train_verification.json"
         # Load p3_trainfarm_verification.json
         file = open(_path_to_p3_train_verification)
@@ -327,7 +349,11 @@ class P3Trainer:
 
     def copyTrainingFiles(self):
         # Check if docker container exists.
-        cmd = ["docker", "inspect", "--type=container", self._TRAIN_DOCKER_CONTAINER]
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._TRAIN_DOCKER_CONTAINER]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -348,7 +374,11 @@ class P3Trainer:
 
     def runTraining(self):
         # Check if docker container exists.
-        cmd = ["docker", "inspect", "--type=container", self._TRAIN_DOCKER_CONTAINER]
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._TRAIN_DOCKER_CONTAINER]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -363,13 +393,19 @@ class P3Trainer:
             self.installTrainingDependencies()
         else:
             print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
-        cmd = ["bash", "trainer/training_files/scripts/deploy_p3trainfarm_training.bash"]
+        cmd = [
+            "bash",
+            "trainer/training_files/scripts/deploy_p3trainfarm_training.bash"]
         self.training_process = subprocess.Popen(cmd)
         self.training_process.communicate()
 
     def copyExportFiles(self):
         # Check if docker container exists.
-        cmd = ["docker", "inspect", "--type=container", self._EXPORT_DOCKER_CONTAINER]
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._EXPORT_DOCKER_CONTAINER]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -390,7 +426,11 @@ class P3Trainer:
 
     def runExporter(self):
         # Check if docker container exists.
-        cmd = ["docker", "inspect", "--type=container", self._EXPORT_DOCKER_CONTAINER]
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._EXPORT_DOCKER_CONTAINER]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -405,7 +445,9 @@ class P3Trainer:
             self.installExporterDependencies()
         else:
             print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
-        cmd = ["bash", "trainer/exporter_files/scripts/deploy_p3exporter_exporter.bash"]
+        cmd = [
+            "bash",
+            "trainer/exporter_files/scripts/deploy_p3exporter_exporter.bash"]
         self.exporter_process = subprocess.Popen(cmd)
         self.exporter_process.communicate()
 
@@ -414,15 +456,19 @@ class P3Trainer:
         if os.path.exists("output.onnx"):
             timestamp = datetime.now()
             timestamp_string = timestamp.strftime("%d-%m-%Y-%H-%M-%S")
-            TIMESTAMPED_ONNX_FILE_NAME = (self.model_name +
+            TIMESTAMPED_ONNX_FILE_NAME = (
+                self.model_name +
                 "-" +
                 timestamp_string +
                 ".onnx")
             print("ONNX model generated from .pth file. " +
-                  "File saved to [data/model/" + 
+                  "File saved to [data/model/" +
                   TIMESTAMPED_ONNX_FILE_NAME + "]...")
-            cmd = ["cp", _FILE_PATH_TO_ONNX_MODEL, "../data/model/" + TIMESTAMPED_ONNX_FILE_NAME]
+            cmd = ["cp",
+                   _FILE_PATH_TO_ONNX_MODEL,
+                   "../data/model/" + TIMESTAMPED_ONNX_FILE_NAME]
             self.shift_process = subprocess.Popen(cmd)
             self.shift_process.communicate()
         else:
-            print("[ output.onnx ] - MISSING. Something must have failed before this.")
+            print("[ output.onnx ] - MISSING. " +
+                  "Something must have failed before this.")
