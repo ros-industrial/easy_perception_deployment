@@ -36,6 +36,7 @@ jobs:
           stable"
           sudo apt-get update
           sudo apt-get install docker-ce docker-ce-cli containerd.io
+          sudo docker run hello-world
       - name: Static Analysis
         run: |
           pycodestyle --show-source easy_perception_deployment/gui/main.py \
