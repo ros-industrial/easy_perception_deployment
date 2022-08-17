@@ -647,6 +647,7 @@ def test_P3Trainer_Training_pullTrainFarmDockerImage(qtbot):
 
     assert docker_inspect_process.returncode == 0
 
+
 def test_P3Trainer_Training_installTrainingDependencies(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
@@ -695,4 +696,4 @@ def test_P3Trainer_Training_installTrainingDependencies(qtbot):
     file = open(_path_to_p3_train_verification)
     p3_train_verification = json.load(file)
 
-    assert p3_train_verification["isTrainDependenciesInstalled"] == True
+    assert p3_train_verification["isTrainDependenciesInstalled"] is True
