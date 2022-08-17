@@ -573,52 +573,53 @@ def test_P3Trainer_Training_Config(qtbot):
     assert dict['SOLVER']['STEPS'] == '(100, 200, 300)'
 
 
-def test_P2Trainer_Training_Workflow(qtbot):
+# def test_P2Trainer_Training_Workflow(qtbot):
 
-    path_to_dataset = 'path_to_dummy_dataset'
-    model_name = 'fasterrcnn'
-    label_list = ['__ignore__', '_background_', 'test_object']
+#     path_to_dataset = 'path_to_dummy_dataset'
+#     model_name = 'fasterrcnn'
+#     label_list = ['__ignore__', '_background_', 'test_object']
 
-    widget = TrainWindow(True)
-    qtbot.addWidget(widget)
+#     widget = TrainWindow(True)
+#     qtbot.addWidget(widget)
 
-    widget.max_iteration = 1000
-    widget.checkpoint_period = 100
-    widget.test_period = 100
-    widget.steps = '(100, 200, 300)'
+#     widget.max_iteration = 1000
+#     widget.checkpoint_period = 100
+#     widget.test_period = 100
+#     widget.steps = '(100, 200, 300)'
 
-    p2_trainer = P2Trainer(
-        path_to_dataset,
-        model_name,
-        label_list,
-        1000,
-        100,
-        100,
-        '(100, 200, 300)')
+#     p2_trainer = P2Trainer(
+#         path_to_dataset,
+#         model_name,
+#         label_list,
+#         1000,
+#         100,
+#         100,
+#         '(100, 200, 300)')
 
-    # TODO(cardboardcode): Elaborate dockerized p2 training
-    # and exporter workflow.
-    p2_trainer.train(True)
-    assert p2_trainer.create_process is not None
-    p2_trainer.create_process.kill()
-    assert p2_trainer.run_process is not None
-    p2_trainer.run_process.kill()
-    assert p2_trainer.build_export_process is not None
-    p2_trainer.build_export_process.kill()
-    assert p2_trainer.export_process is not None
-    p2_trainer.export_process.kill()
+#     # TODO(cardboardcode): Elaborate dockerized p2 training
+#     # and exporter workflow.
+#     p2_trainer.train(True)
+#     assert p2_trainer.create_process is not None
+#     p2_trainer.create_process.kill()
+#     assert p2_trainer.run_process is not None
+#     p2_trainer.run_process.kill()
+#     assert p2_trainer.build_export_process is not None
+#     p2_trainer.build_export_process.kill()
+#     assert p2_trainer.export_process is not None
+#     p2_trainer.export_process.kill()
 
 
-def test_P3Trainer_Training_Workflow(qtbot):
+def test_P3Trainer_Training_pullTrainFarmDockerImage(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'maskrcnn'
-    label_list = ['__ignore__', '_background_', 'test_object']
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-p3-trainfarm:latest"
 
     widget = TrainWindow(True)
     qtbot.addWidget(widget)
 
-    widget.max_iteration = 1000
+    widget.max_iteration = 100
     widget.checkpoint_period = 100
     widget.test_period = 100
     widget.steps = '(100, 200, 300)'
@@ -627,19 +628,21 @@ def test_P3Trainer_Training_Workflow(qtbot):
         path_to_dataset,
         model_name,
         label_list,
-        1000,
+        100,
         100,
         100,
         '(100, 200, 300)')
 
-    # TODO(cardboardcode): Elaborate dockerized p3 training
-    # and exporter workflow.
-    p3_trainer.train(True)
-    assert p3_trainer.create_process is not None
-    p3_trainer.create_process.kill()
-    assert p3_trainer.run_process is not None
-    p3_trainer.run_process.kill()
-    assert p3_trainer.build_export_process is not None
-    p3_trainer.build_export_process.kill()
-    assert p3_trainer.export_process is not None
-    p3_trainer.export_process.kill()
+    p3_trainer.pullTrainFarmDockerImage()
+
+    cmd = ["docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
