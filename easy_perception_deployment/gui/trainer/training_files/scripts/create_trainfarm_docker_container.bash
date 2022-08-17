@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# DEBUG STARTDIR = ./easy_perception_deployment/gui
+# STARTDIR = ./easy_perception_deployment/gui
 docker create -it \
 --name epd_p3_trainer \
 --env="QT_X11_NO_MITSHM=1" \

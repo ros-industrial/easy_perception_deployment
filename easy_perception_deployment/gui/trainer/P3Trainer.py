@@ -47,11 +47,7 @@ class P3Trainer:
         self._TRAIN_DOCKER_CONTAINER = "epd_p3_trainer"
         self._EXPORT_DOCKER_IMG = "cardboardcode/epd-p3-exporter:latest"
         self._EXPORT_DOCKER_CONTAINER = "epd_p3_exporter"
-
-        self.create_process = None
-        self.run_process = None
-        self.build_export_process = None
-        self.export_process = None
+        self.isGPUAvailableFlag = False
 
         self.path_to_dataset = path_to_dataset
         self.path_to_modif = (
@@ -68,6 +64,7 @@ class P3Trainer:
             'trainer/exporter_files/export_to_p3_onnx.py')
 
         self.updateTrainingConfig()
+        self.checkGPUAvailability()
 
     def updateTrainingConfig(self):
         '''
@@ -109,7 +106,41 @@ class P3Trainer:
         with open(self.path_to_export_config, 'w') as file:
             documents = yaml.dump(dict, file)
 
+    def checkGPUAvailability(self):
+        # Checks whether there is available GPU device.
+        cmd = ["nvidia-smi"]
+        inspect_gpu_process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True)
+        inspect_gpu_process.communicate()
+        if inspect_gpu_process.returncode == 127:
+            print("[ nvidia-smi ] command not found. Please install nvidia-driver.")
+            self.isGPUAvailableFlag = False
+         # Checks if CUDA has been installed.
+        cmd = ["nvcc"]
+        inspect_cuda_process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True)
+        inspect_cuda_process.communicate()
+        if inspect_cuda_process.returncode == 127:
+            print("[ nvcc ] command not found. Please install nvidia-driver.")
+            self.isGPUAvailableFlag = False
+
+        print("[ nvidia-smi ] command - FOUND")
+        print("[ nvcc ] command - FOUND")
+        self.isGPUAvailableFlag = True
+        
+
     def train(self, debug):
+        # If GPU is unavailable, output warning and exit.
+        if not self.isGPUAvailableFlag:
+            print("[ WARNING ] - GPU not detected. Skipping [ train ]...")
+            return None
+
         # Verify that P3TrainFarm has successfully set up before.
         # If P3TrainFarm has been set up.
         if not self.isTrainFarmSetupVerified():
@@ -122,6 +153,11 @@ class P3Trainer:
         self.runTraining()
 
     def export(self, debug):
+        # If GPU is unavailable, output warning and exit.
+        if not self.isGPUAvailableFlag:
+            print("[ WARNING ] - GPU not detected. Skipping [ export ]...")
+            return None
+
         # Verify that P3Exporter has successfully set up before.
         # If P3Exporter has been set up.
         if not self.isExporterSetupVerified():
@@ -266,7 +302,7 @@ class P3Trainer:
             cmd = [
                 "bash",
                 "trainer/training_files/scripts/" +
-                "create_p3trainfarm_docker_container.bash"]
+                "create_trainfarm_docker_container.bash"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
         else:
@@ -276,7 +312,7 @@ class P3Trainer:
         cmd = [
             "bash",
             "trainer/training_files/scripts/" +
-            "prepare_p3trainfarm_docker_container.bash"]
+            "prepare_trainfarm_docker_container.bash"]
         self.install_depend_process = subprocess.Popen(cmd)
         self.install_depend_process.communicate()
 
@@ -317,7 +353,7 @@ class P3Trainer:
             cmd = [
                 "bash",
                 "trainer/exporter_files/scripts/" +
-                "create_p3exporter_docker_container.bash"]
+                "create_exporter_docker_container.bash"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
         else:
@@ -327,7 +363,7 @@ class P3Trainer:
         cmd = [
             "bash",
             "trainer/exporter_files/scripts/" +
-            "prepare_p3exporter_docker_container.bash"]
+            "prepare_exporter_docker_container.bash"]
         self.install_depend_process = subprocess.Popen(cmd)
         self.install_depend_process.communicate()
 
@@ -368,7 +404,10 @@ class P3Trainer:
             self.installTrainingDependencies()
         else:
             print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
-        cmd = ["bash", "trainer/training_files/scripts/copy_p3_files.bash"]
+        cmd = [
+            "bash",
+            "trainer/training_files/scripts/" +
+            "copy_training_files.bash"]
         self.copy_process = subprocess.Popen(cmd)
         self.copy_process.communicate()
 
@@ -395,7 +434,7 @@ class P3Trainer:
             print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
         cmd = [
             "bash",
-            "trainer/training_files/scripts/deploy_p3trainfarm_training.bash"]
+            "trainer/training_files/scripts/run_training.bash"]
         self.training_process = subprocess.Popen(cmd)
         self.training_process.communicate()
 
@@ -420,7 +459,9 @@ class P3Trainer:
             self.installExporterDependencies()
         else:
             print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
-        cmd = ["bash", "trainer/exporter_files/scripts/copy_p3_files.bash"]
+        cmd = [
+            "bash",
+            "trainer/exporter_files/scripts/copy_exporter_files.bash"]
         self.copy_process = subprocess.Popen(cmd)
         self.copy_process.communicate()
 
@@ -447,7 +488,7 @@ class P3Trainer:
             print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
         cmd = [
             "bash",
-            "trainer/exporter_files/scripts/deploy_p3exporter_exporter.bash"]
+            "trainer/exporter_files/scripts/run_exporter.bash"]
         self.exporter_process = subprocess.Popen(cmd)
         self.exporter_process.communicate()
 

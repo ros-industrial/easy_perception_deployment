@@ -58,23 +58,11 @@ then
       cd $START_DIR
       cp $path_to_modif $INSTALL_DIR/maskrcnn_benchmark/config/paths_catalog.py
 
-      # Change maskrcnn_benchmark/config/paths_catalog.py
-      # Insert this modification under DATASETS
-      # "coco_custom_train": {
-      #           "img_dir": "custom_dataset/train_dataset/",
-      #           "ann_file": "custom_dataset/train_dataset/annotations.json"
-      #       },
-      #       "coco_custom_val": {
-      #           "img_dir": "custom_dataset/val_dataset/",
-      #           "ann_file": "custom_dataset/val_dataset/annotations.json"
-      #       },
       cd $INSTALL_DIR
       python3 setup.py build install
 
       cd $INSTALL_DIR
       mkdir -p configs/custom
-      # cd $START_DIR
-      # cp $path_to_config $INSTALL_DIR/configs/custom/fasterrcnn_training.yaml
 
       cd $INSTALL_DIR
       mkdir weights && cd weights
@@ -96,10 +84,6 @@ then
 else
       echo "[p2_trainer] - FOUND. Skipping installation."
 fi
-
-# cd $START_DIR
-# echo "Transferring custom dataset to $INSTALL_DIR/datasets"
-# cp -r $path_to_dataset  $INSTALL_DIR/datasets/custom_dataset
 
 echo "TrainFarm created under $FINAL_DIR"
 unset env_exists INSTALL_DIR FINAL_DIR START_DIR
