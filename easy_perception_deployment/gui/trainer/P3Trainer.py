@@ -116,9 +116,10 @@ class P3Trainer:
             shell=True)
         inspect_gpu_process.communicate()
         if inspect_gpu_process.returncode == 127:
-            print("[ nvidia-smi ] command not found. Please install nvidia-driver.")
+            print("[ nvidia-smi ] command not found. " +
+                  "Please install nvidia-driver.")
             self.isGPUAvailableFlag = False
-         # Checks if CUDA has been installed.
+        # Checks if CUDA has been installed.
         cmd = ["nvcc"]
         inspect_cuda_process = subprocess.Popen(
             cmd,
@@ -133,7 +134,6 @@ class P3Trainer:
         print("[ nvidia-smi ] command - FOUND")
         print("[ nvcc ] command - FOUND")
         self.isGPUAvailableFlag = True
-        
 
     def train(self, debug):
         # If GPU is unavailable, output warning and exit.
