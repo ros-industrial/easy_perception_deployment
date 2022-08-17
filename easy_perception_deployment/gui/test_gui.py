@@ -646,3 +646,53 @@ def test_P3Trainer_Training_pullTrainFarmDockerImage(qtbot):
     docker_inspect_process.communicate()
 
     assert docker_inspect_process.returncode == 0
+
+def test_P3Trainer_Training_installTrainingDependencies(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_CONTAINER = "epd_p3_trainer"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p3_trainer.installTrainingDependencies()
+
+    # Check if epd_p3_trainer Docker Container
+    # has been succesfully created.
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _TRAIN_DOCKER_CONTAINER]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+    _path_to_p3_train_verification = "../config/p3_train_verification.json"
+    file = open(_path_to_p3_train_verification)
+    p3_train_verification = json.load(file)
+
+    assert p3_train_verification["isTrainDependenciesInstalled"] == True
