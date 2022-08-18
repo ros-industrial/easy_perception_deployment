@@ -64,10 +64,10 @@ TEST(EPD_TestSuite, Test_readSessionUseCaseConfigTextFile_EPDContainer)
 
   EXPECT_EQ(
     ortAgent_->onnx_model_path,
-    PATH_TO_PACKAGE "/data/model/squeezenet1.1-7.onnx");
+    PATH_TO_PACKAGE "/data/model/MaskRCNN-10.onnx");
   EXPECT_EQ(
     ortAgent_->class_label_path,
-    PATH_TO_PACKAGE "/data/label_list/imagenet_classes.txt");
+    PATH_TO_PACKAGE "/data/label_list/coco_classes.txt");
 }
 
 TEST(EPD_TestSuite, Test_setFrameDimension_EPDContainer)
