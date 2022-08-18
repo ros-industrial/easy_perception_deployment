@@ -44,9 +44,9 @@ class P2Trainer:
         self.test_period = test_period
         self.steps = steps
         self._TRAIN_DOCKER_IMG = "cardboardcode/epd-p3-trainfarm:latest"
-        self._TRAIN_DOCKER_CONTAINER = "epd_p3_trainer"
+        self._TRAIN_DOCKER_CONTAINER = "epd_p2_trainer"
         self._EXPORT_DOCKER_IMG = "cardboardcode/epd-p3-exporter:latest"
-        self._EXPORT_DOCKER_CONTAINER = "epd_p3_exporter"
+        self._EXPORT_DOCKER_CONTAINER = "epd_p2_exporter"
         self.isGPUAvailableFlag = False
 
         self.path_to_dataset = path_to_dataset
@@ -302,7 +302,8 @@ class P2Trainer:
             cmd = [
                 "bash",
                 "trainer/training_files/scripts/" +
-                "create_trainfarm_docker_container.bash"]
+                "create_trainfarm_docker_container.bash",
+                "false"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
         else:
@@ -354,7 +355,8 @@ class P2Trainer:
             cmd = [
                 "bash",
                 "trainer/exporter_files/scripts/" +
-                "create_exporter_docker_container.bash"]
+                "create_exporter_docker_container.bash",
+                "false"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
         else:

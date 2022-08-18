@@ -3,9 +3,9 @@
 EXPORT_MASKRCNN=$1
 
 if $EXPORT_MASKRCNN ; then
-	cd /home/user/p3_exporter/
+	cd /home/user/p3_exporter
 else
-	cd /home/user/p2_exporter/
+	cd /home/user/p2_exporter
 fi
 # Copy over custom_dataset
 if [ ! -f "/home/user/trained.pth" ] ; then

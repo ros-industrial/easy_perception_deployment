@@ -7,7 +7,7 @@ if $EXPORT_MASKRCNN ; then
     git clone https://github.com/cardboardcode/maskrcnn-benchmark.git --branch onnx_stage_mrcnn --single-branch p3_exporter --depth 1
     cd p3_exporter
 else
-    git clone https://github.com/BowenBao/maskrcnn-benchmark.git --branch onnx_stage --single-branch p2_exporter
+    git clone https://github.com/BowenBao/maskrcnn-benchmark.git --branch onnx_stage --single-branch p2_exporter --depth 1
     cd p2_exporter
 fi
 

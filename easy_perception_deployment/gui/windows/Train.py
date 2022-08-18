@@ -501,7 +501,7 @@ class TrainWindow(QWidget):
                                    self.checkpoint_period,
                                    self.test_period,
                                    self.steps)
-            p3_trainer.train(False)
+            # p3_trainer.train(False)
             p3_trainer.export(False)
 
         self.train_button.setText('Train')

@@ -3,8 +3,14 @@
 TRAIN_MASKRCNN=$1
 
 cd /home/user/
-git clone https://github.com/facebookresearch/maskrcnn-benchmark.git --depth 1 --single-branch
-cd maskrcnn-benchmark
+if $TRAIN_MASKRCNN ; then
+    git clone https://github.com/facebookresearch/maskrcnn-benchmark.git --depth 1 --single-branch p3_trainer
+    cd p3_trainer
+else
+    git clone https://github.com/facebookresearch/maskrcnn-benchmark.git --depth 1 --single-branch p2_trainer
+    cd p2_trainer
+fi
+
 export INSTALL_DIR=$PWD
 git clone https://github.com/cardboardcode/cocoapi.git
 cd cocoapi/PythonAPI
@@ -32,13 +38,15 @@ cd weights
 if $TRAIN_MASKRCNN ; then
     FILE="e2e_mask_rcnn_R_50_FPN_1x.pth"
     if [ ! -f "$FILE" ]; then
-    echo "Downloading MaskRCNN pretrained weights."
-    wget https://download.pytorch.org/models/maskrcnn/e2e_mask_rcnn_R_50_FPN_1x.pth
+        echo "Downloading MaskRCNN pretrained weights."
+        wget https://download.pytorch.org/models/maskrcnn/e2e_mask_rcnn_R_50_FPN_1x.pth
     fi
 else
     FILE="e2e_faster_rcnn_R_50_FPN_1x.pth"
-    echo "Downloading FasterRCNN pretrained weights."
-    wget https://download.pytorch.org/models/maskrcnn/e2e_faster_rcnn_R_50_FPN_1x.pth
+    if [ ! -f "$FILE" ]; then   
+        echo "Downloading FasterRCNN pretrained weights."
+        wget https://download.pytorch.org/models/maskrcnn/e2e_faster_rcnn_R_50_FPN_1x.pth
+    fi
 fi
 unset FILE
 if $TRAIN_MASKRCNN ; then

@@ -302,7 +302,8 @@ class P3Trainer:
             cmd = [
                 "bash",
                 "trainer/training_files/scripts/" +
-                "create_trainfarm_docker_container.bash"]
+                "create_trainfarm_docker_container.bash",
+                "true"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
         else:
@@ -354,7 +355,8 @@ class P3Trainer:
             cmd = [
                 "bash",
                 "trainer/exporter_files/scripts/" +
-                "create_exporter_docker_container.bash"]
+                "create_exporter_docker_container.bash",
+                "true"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
         else:
