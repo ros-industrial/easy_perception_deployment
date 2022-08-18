@@ -649,3 +649,81 @@ def test_P3Trainer_pullExporterDockerImage(qtbot):
     docker_inspect_process.communicate()
 
     assert docker_inspect_process.returncode == 0
+
+
+def test_P2Trainer_pullTrainFarmDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-p3-trainfarm:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.pullTrainFarmDockerImage()
+
+    cmd = ["docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
+def test_P2Trainer_pullExporterDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _EXPORT_DOCKER_IMG = "cardboardcode/epd-p3-exporter:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.pullExporterDockerImage()
+
+    cmd = ["docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
