@@ -54,7 +54,7 @@ Changelog for package easy_perception_deployment
 * Contributor(s): Bey Hao Yun
 
 
-0.3.0 (2022-08-16)
+0.3.0 (2022-08-19)
 -------------------
 * Integrated dockerized workflow for P3TrainFarm and P3Exporter. 
 * Integrated dockerized workflow for P2TrainFarm and P2Exporter.
@@ -64,4 +64,5 @@ Changelog for package easy_perception_deployment
 * Revamped GUI icons for better UI appearance.
 * Removed deprecated gui.png. Desktop icon is replaced with epd_desktop.png.
 * Removed "Use Case =" label in Deploy GUI window. Lengthened Visualize/Action toggle for neater UI appearance.
+* Added custom_dataset image collation with test label_list for GPU local reproducible unit-testing.
 * Contributor(s): Bey Hao Yun
