@@ -578,7 +578,7 @@ def test_P3Trainer_pullTrainFarmDockerImage(qtbot):
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'maskrcnn'
     label_list = ['__ignore__', '_background_', 'teabox']
-    _TRAIN_DOCKER_IMG = "cardboardcode/epd-p3-trainfarm:latest"
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-trainer:latest"
 
     widget = TrainWindow(True)
     qtbot.addWidget(widget)
@@ -617,7 +617,7 @@ def test_P3Trainer_pullExporterDockerImage(qtbot):
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'maskrcnn'
     label_list = ['__ignore__', '_background_', 'teabox']
-    _EXPORT_DOCKER_IMG = "cardboardcode/epd-p3-exporter:latest"
+    _EXPORT_DOCKER_IMG = "cardboardcode/epd-exporter:latest"
 
     widget = TrainWindow(True)
     qtbot.addWidget(widget)
@@ -656,7 +656,7 @@ def test_P2Trainer_pullTrainFarmDockerImage(qtbot):
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'fasterrcnn'
     label_list = ['__ignore__', '_background_', 'teabox']
-    _TRAIN_DOCKER_IMG = "cardboardcode/epd-p3-trainfarm:latest"
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-trainer:latest"
 
     widget = TrainWindow(True)
     qtbot.addWidget(widget)
@@ -695,7 +695,7 @@ def test_P2Trainer_pullExporterDockerImage(qtbot):
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'fasterrcnn'
     label_list = ['__ignore__', '_background_', 'teabox']
-    _EXPORT_DOCKER_IMG = "cardboardcode/epd-p3-exporter:latest"
+    _EXPORT_DOCKER_IMG = "cardboardcode/epd-exporter:latest"
 
     widget = TrainWindow(True)
     qtbot.addWidget(widget)

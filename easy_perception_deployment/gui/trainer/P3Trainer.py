@@ -43,9 +43,9 @@ class P3Trainer:
         self.checkpoint_period = checkpoint_period
         self.test_period = test_period
         self.steps = steps
-        self._TRAIN_DOCKER_IMG = "cardboardcode/epd-p3-trainfarm:latest"
+        self._TRAIN_DOCKER_IMG = "cardboardcode/epd-trainer:latest"
         self._TRAIN_DOCKER_CONTAINER = "epd_p3_trainer"
-        self._EXPORT_DOCKER_IMG = "cardboardcode/epd-p3-exporter:latest"
+        self._EXPORT_DOCKER_IMG = "cardboardcode/epd-exporter:latest"
         self._EXPORT_DOCKER_CONTAINER = "epd_p3_exporter"
         self.isGPUAvailableFlag = False
 
@@ -198,7 +198,7 @@ class P3Trainer:
         return True
 
     def pullTrainFarmDockerImage(self):
-        # Check if docker image cardboardcode/epd-p3-trainfarm:latest exists
+        # Check if docker image cardboardcode/epd-trainer:latest exists
 
         cmd = ["docker", "inspect", "--type=image", self._TRAIN_DOCKER_IMG]
 
@@ -210,7 +210,7 @@ class P3Trainer:
             env=None)
         self.docker_inspect_process.communicate()
         # If docker_inspect_process returns 0, image is missing.
-        # Pull public docker image cardboardcode/epd-p3-trainfarm:latest
+        # Pull public docker image cardboardcode/epd-trainer:latest
         # Otherwise, proceed.
         docker_pull_process_returncode = None
         if self.docker_inspect_process.returncode != 0:
@@ -240,7 +240,7 @@ class P3Trainer:
         file.close()
 
     def pullExporterDockerImage(self):
-        # Check if docker image cardboardcode/epd-p3-exporter:latest exists
+        # Check if docker image cardboardcode/epd-exporter:latest exists
 
         cmd = ["docker", "inspect", "--type=image", self._EXPORT_DOCKER_IMG]
 
@@ -252,7 +252,7 @@ class P3Trainer:
             env=None)
         self.docker_inspect_process.communicate()
         # If docker_inspect_process returns 0, image is missing.
-        # Pull public docker image cardboardcode/epd-p3-exporter:latest
+        # Pull public docker image cardboardcode/epd-exporter:latest
         # Otherwise, proceed.
         docker_pull_process_returncode = None
         if self.docker_inspect_process.returncode != 0:

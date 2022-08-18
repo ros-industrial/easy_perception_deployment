@@ -17,4 +17,4 @@ docker create -it \
 --gpus all \
 --shm-size 6g \
 -u 0  \
-cardboardcode/epd-p3-exporter
+cardboardcode/epd-exporter
