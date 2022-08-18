@@ -80,16 +80,6 @@ void EPDContainer::initORTSessionHandler()
   int paddedH = static_cast<int>(((newH + 31) / 32) * 32);
 
   switch (precision_level) {
-    case 1:
-      p1_ort_session = new Ort::P1OrtBase(
-        ratio, 224, 224, paddedW, paddedH,
-        classNames.size(),
-        onnx_model_path,
-        0,
-        std::vector<std::vector<int64_t>>{{1, IMG_CHANNEL, 224, 224}}
-      );
-      p1_ort_session->initClassNames(classNames);
-      break;
     case 2:
       p2_ort_session = new Ort::P2OrtBase(
         ratio, newW, newH, paddedW, paddedH,
