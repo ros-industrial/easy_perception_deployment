@@ -524,7 +524,7 @@ class TrainWindow(QWidget):
 
         PATH_TO_TRAIN_DATASET = path_to_labelled + '/train_dataset'
         PATH_TO_VAL_DATASET = path_to_labelled + '/val_dataset'
-        # Check if /train_dataset and /val_dataset folders exists 
+        # Check if /train_dataset and /val_dataset folders exists
         # in user-provided annotated dataset.
         trainDirExists = os.path.exists(PATH_TO_TRAIN_DATASET)
         if not trainDirExists:
@@ -541,8 +541,8 @@ class TrainWindow(QWidget):
             filename, file_extension = os.path.splitext(file)
             file_extension = file_extension.lower()
             if (file_extension == '.png' or
-                file_extension == '.jpeg' or
-                file_extension == '.jpg'):
+               file_extension == '.jpeg' or
+               file_extension == '.jpg'):
                 no_of_train_image = no_of_train_image + 1
         doesTrainImagesExists = (no_of_train_image != 0)
         if not doesTrainImagesExists:
@@ -570,8 +570,8 @@ class TrainWindow(QWidget):
             filename, file_extension = os.path.splitext(file)
             file_extension = file_extension.lower()
             if (file_extension == '.png' or
-                file_extension == '.jpeg' or
-                file_extension == '.jpg'):
+               file_extension == '.jpeg' or
+               file_extension == '.jpg'):
                 no_of_val_image = no_of_val_image + 1
         doesValImagesExists = (no_of_val_image != 0)
         if not doesValImagesExists:
@@ -613,7 +613,7 @@ class TrainWindow(QWidget):
             print("[ ERROR ] - No Label List provided. " +
                   "Please choose Label List.")
             return
-        
+
         if os.path.exists("../data/datasets/custom_dataset"):
             print("[ WARNING ] - Pre-existing /custom_dataset " +
                   "FOUND. Overwriting...")
