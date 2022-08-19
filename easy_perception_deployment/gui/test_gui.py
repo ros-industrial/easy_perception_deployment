@@ -357,16 +357,6 @@ def test_setLabelList_TrainWindow(qtbot):
     assert widget._is_labellist_linked is True
 
 
-def test_setDataset_TrainWindow(qtbot):
-
-    widget = TrainWindow(True)
-    qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.dataset_button, QtCore.Qt.LeftButton)
-
-    assert widget._is_dataset_linked is True
-
-
 def test_setMax_Iteration(qtbot):
 
     widget = TrainWindow(True)
