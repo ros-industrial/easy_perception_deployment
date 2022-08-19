@@ -458,7 +458,7 @@ class TrainWindow(QWidget):
             self.dataset_button.setStyleSheet('background-color: red;')
 
     def startTraining(self):
-        
+
         if self._precision_level == 1:
             print("[ Deprecation Notice ] - Precision Level 1 features " +
                   "has been deprecated in EPD v0.3.0.")
@@ -568,7 +568,8 @@ class TrainWindow(QWidget):
         to be used by the user.
         '''
         if not self.buttonConnected:
-            self.train_button.clicked.connect(self.updateBeforeStartingTraining)
+            self.train_button.clicked.connect(
+                self.updateBeforeStartingTraining)
             self.train_button.setStyleSheet(
                 'background-color: rgba(255,255,255,255);')
             self.train_button.updateGeometry()
@@ -581,7 +582,8 @@ class TrainWindow(QWidget):
         '''
         if self.buttonConnected:
             try:
-                self.train_button.clicked.disconnect(self.updateBeforeStartingTraining)
+                self.train_button.clicked.disconnect(
+                    self.updateBeforeStartingTraining)
                 self.train_button.setStyleSheet(
                     'background-color: rgba(180,180,180,255);')
                 self.train_button.updateGeometry()
