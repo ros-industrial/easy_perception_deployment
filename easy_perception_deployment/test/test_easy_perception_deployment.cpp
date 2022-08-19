@@ -29,9 +29,7 @@ std::string PATH_TO_SESSION_CONFIG(PATH_TO_PACKAGE "/config/session_config.json"
 std::string PATH_TO_USECASE_CONFIG(PATH_TO_PACKAGE "/config/usecase_config.json");
 std::string PATH_TO_ONNX_P3_MODEL(PATH_TO_PACKAGE "/data/model/MaskRCNN-10.onnx");
 std::string PATH_TO_ONNX_P2_MODEL(PATH_TO_PACKAGE "/data/model/FasterRCNN-10.onnx");
-std::string PATH_TO_ONNX_P1_MODEL(PATH_TO_PACKAGE "/data/model/squeezenet1.1-7.onnx");
 std::string PATH_TO_COCO_LABEL_LIST(PATH_TO_PACKAGE "/data/label_list/coco_classes.txt");
-std::string PATH_TO_IMAGENET_LABEL_LIST(PATH_TO_PACKAGE "/data/label_list/imagenet_classes.txt");
 std::string PATH_TO_TEST_IMAGE(PATH_TO_PACKAGE "/test/nadezhda_diskant.jpg");
 std::string PATH_TO_TEST_COLORED_IMAGE(PATH_TO_PACKAGE "/test/colored_img.png");
 std::string PATH_TO_TEST_DEPTH_IMAGE(PATH_TO_PACKAGE "/test/depth_img.png");
@@ -196,46 +194,6 @@ TEST(EPD_TestSuite, Test_EasyPerceptionDeployment_P2Model_Classification_Action)
   Json::Value session_config_json;
   session_config_json["path_to_model"] = PATH_TO_ONNX_P2_MODEL;
   session_config_json["path_to_label_list"] = PATH_TO_COCO_LABEL_LIST;
-  session_config_json["visualizeFlag"] = "robot";
-  session_config_json["useCPU"] = "CPU";
-
-  Json::Value usecase_config_json;
-  usecase_config_json["usecase_mode"] = 0;
-
-  std::ofstream outputFileStream1(PATH_TO_SESSION_CONFIG);
-  writer->write(session_config_json, &outputFileStream1);
-  outputFileStream1.close();
-
-  std::ofstream outputFileStream2(PATH_TO_USECASE_CONFIG);
-  writer->write(usecase_config_json, &outputFileStream2);
-  outputFileStream2.close();
-
-  auto epd_node = std::make_shared<EasyPerceptionDeployment>();
-  cv::Mat frame = cv::imread(PATH_TO_TEST_IMAGE, cv::IMREAD_COLOR);
-
-  sensor_msgs::msg::Image::SharedPtr input_msg =
-    cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
-
-  epd_node->process_image_callback(input_msg);
-}
-
-TEST(EPD_TestSuite, Test_EasyPerceptionDeployment_P1Model_Classification_Action)
-{
-  Json::StreamWriterBuilder builder;
-  std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
-  builder["commentStyle"] = "None";
-  builder["indentation"] = "    ";
-
-  // Reset session_config.json
-  system(("rm -f " + PATH_TO_SESSION_CONFIG).c_str());
-  system(("touch " + PATH_TO_SESSION_CONFIG).c_str());
-  // Reset usecase_config.json
-  system(("rm -f " + PATH_TO_USECASE_CONFIG).c_str());
-  system(("touch " + PATH_TO_USECASE_CONFIG).c_str());
-
-  Json::Value session_config_json;
-  session_config_json["path_to_model"] = PATH_TO_ONNX_P1_MODEL;
-  session_config_json["path_to_label_list"] = PATH_TO_IMAGENET_LABEL_LIST;
   session_config_json["visualizeFlag"] = "robot";
   session_config_json["useCPU"] = "CPU";
 

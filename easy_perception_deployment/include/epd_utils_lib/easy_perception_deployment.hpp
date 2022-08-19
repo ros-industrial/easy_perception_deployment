@@ -602,17 +602,6 @@ const
 
   cv::Mat resultImg;
   switch (ortAgent_.precision_level) {
-    case 1:
-      {
-        epd_msgs::msg::EPDImageClassification output_msg;
-        output_msg.object_names = ortAgent_.p1_ort_session->infer(img);
-
-        // TODO(cardboardcode) Populate header information with timestamp
-        // output_msg.header = std_msgs::msg::Header();
-
-        p1_pub->publish(output_msg);
-        break;
-      }
     case 2:
       {
         EPD::EPDObjectDetection result = ortAgent_.p2_ort_session->infer(img);

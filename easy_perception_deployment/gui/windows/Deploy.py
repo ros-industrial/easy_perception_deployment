@@ -214,17 +214,10 @@ class DeployWindow(QWidget):
             self.usecase_config_button.setStyleSheet(
                 'background-color: rgba(200,10,0,255);')
 
-        # UseCase button to select use case and write to usecase_config.json
-        self.usecase_config_label = QLabel(self)
-        self.usecase_config_label.setText('Use Case =')
-        self.usecase_config_label.move(self._DEPLOY_WIN_W/2 - 90,
-                                       self._DEPLOY_WIN_H/4 + 40)
-        self.usecase_config_label.setBuddy(self.usecase_config_button)
-
         self.visualize_button = QPushButton(self)
         self.visualize_button.setGeometry(0,
                                           self._DEPLOY_WIN_H/4,
-                                          self._DEPLOY_WIN_W/4,
+                                          self._DEPLOY_WIN_W/2,
                                           self._DEPLOY_WIN_H/4)
         if self.visualizeFlag:
             self.visualize_button.setText('Visualize')

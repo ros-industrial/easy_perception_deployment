@@ -52,16 +52,12 @@ set(EPD_UTILS
   include/ort_cpp_lib/ort_base.cpp
   include/ort_cpp_lib/p3_ort_base.cpp
   include/ort_cpp_lib/p2_ort_base.cpp
-  include/ort_cpp_lib/p1_ort_base.cpp
 )
 
-if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/data/model/squeezenet1.1-7.onnx")
+if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/data/model/MaskRCNN-10.onnx")
   message(AUTHOR_WARNING "Pretrained models are downloaded.")
 else()
   message(AUTHOR_WARNING "Downloading pretrained ONNX model from ONNX Model Zoo.")
-  execute_process(COMMAND wget
-  https://github.com/onnx/models/raw/main/vision/classification/squeezenet/model/squeezenet1.1-7.onnx
-  --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
   execute_process(COMMAND wget
   https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx
   --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
@@ -112,10 +108,6 @@ if(BUILD_TESTING)
   ament_add_gtest(epd_test_invalid_usecase test/test_invalid_usecase.cpp ${EPD_UTILS})
   ament_target_dependencies(epd_test_invalid_usecase OpenCV cv_bridge)
   target_link_libraries(epd_test_invalid_usecase ${onnxruntime_LIBS} ${JSONCPP_LIBRARIES})
-
-  ament_add_gtest(epd_test_P1_classification_action test/p1u0a.cpp ${EPD_UTILS})
-  ament_target_dependencies(epd_test_P1_classification_action OpenCV cv_bridge)
-  target_link_libraries(epd_test_P1_classification_action ${onnxruntime_LIBS} ${JSONCPP_LIBRARIES})
 
   ament_add_gtest(epd_test_P2_counting_action test/p2u1a.cpp ${EPD_UTILS})
   ament_target_dependencies(epd_test_P2_counting_action OpenCV cv_bridge)

@@ -80,16 +80,6 @@ void EPDContainer::initORTSessionHandler()
   int paddedH = static_cast<int>(((newH + 31) / 32) * 32);
 
   switch (precision_level) {
-    case 1:
-      p1_ort_session = new Ort::P1OrtBase(
-        ratio, 224, 224, paddedW, paddedH,
-        classNames.size(),
-        onnx_model_path,
-        0,
-        std::vector<std::vector<int64_t>>{{1, IMG_CHANNEL, 224, 224}}
-      );
-      p1_ort_session->initClassNames(classNames);
-      break;
     case 2:
       p2_ort_session = new Ort::P2OrtBase(
         ratio, newW, newH, paddedW, paddedH,
@@ -232,6 +222,11 @@ cv::Mat EPDContainer::visualize(
   const EPD::EPDObjectDetection result,
   const cv::Mat input_image)
 {
+  // If zero objects detected, return original input image
+  if (result.bboxes.size() == 0) {
+    return input_image;
+  }
+
   cv::Scalar oneColor(0.0, 0.0, 255.0, 0.0);
   cv::Mat output_image = input_image.clone();
 
@@ -253,8 +248,15 @@ cv::Mat EPDContainer::visualize(
       curMask = result.masks[i].clone();
     }
 
-    // DEBUG patch.
     if (curMask.empty() && !noMasksFound) {
+      continue;
+    }
+
+    if (curBbox[0] - curBbox[2] == 0) {
+      continue;
+    }
+
+    if (curBbox[1] - curBbox[3] == 0) {
       continue;
     }
 
@@ -319,6 +321,11 @@ cv::Mat EPDContainer::visualize(
   const EPD::EPDObjectTracking result,
   const cv::Mat input_image)
 {
+  // If zero objects detected, return original input image
+  if (result.objects.size() == 0) {
+    return input_image;
+  }
+
   cv::Scalar oneColor(0.0, 0.0, 255.0, 0.0);
 
   cv::Mat output_image = input_image.clone();
@@ -329,8 +336,16 @@ cv::Mat EPDContainer::visualize(
       result.objects[i].roi.width + result.objects[i].roi.x_offset,
       result.objects[i].roi.height + result.objects[i].roi.y_offset};
     cv::Mat curMask = result.objects[i].mask.clone();
-    // DEBUG patch.
+
     if (curMask.empty()) {
+      continue;
+    }
+
+    if (curBbox[0] - curBbox[2] == 0) {
+      continue;
+    }
+
+    if (curBbox[1] - curBbox[3] == 0) {
       continue;
     }
 

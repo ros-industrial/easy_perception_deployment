@@ -22,7 +22,6 @@
 #include <vector>
 
 #include "ort_cpp_lib/ort_base.hpp"
-#include "ort_cpp_lib/p1_ort_base.hpp"
 #include "ort_cpp_lib/p2_ort_base.hpp"
 #include "ort_cpp_lib/p3_ort_base.hpp"
 #include "epd_utils_lib/message_utils.hpp"
@@ -43,8 +42,6 @@ public:
   Ort::P3OrtBase * p3_ort_session;
   /*! \brief An pointer for a Precision Level 2 OrtBase object*/
   Ort::P2OrtBase * p2_ort_session;
-  /*! \brief An pointer for a Precision Level 1 OrtBase object*/
-  Ort::P1OrtBase * p1_ort_session;
   /*! \brief The determined precision_level for an input ONNX model file,
   * stated by the session_config.json. */
   unsigned int precision_level;

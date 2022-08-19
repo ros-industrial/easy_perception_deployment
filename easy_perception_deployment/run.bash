@@ -29,15 +29,6 @@ if (( conda_ver < 2 )); then
 fi
 
 # Check if pretrained models have been downloaded.
-P1FILE=./data/model/squeezenet1.1-7.onnx
-if [ ! -f "$P1FILE" ]; then
-    echo "Downloading $P1FILE."
-    wget \
-    https://github.com/onnx/models/raw/main/vision/classification/squeezenet/model/squeezenet1.1-7.onnx \
-    --directory-prefix=./data/model/
-fi
-unset P1FILE
-
 P2FILE=./data/model/FasterRCNN-10.onnx
 if [ ! -f "$P2FILE" ]; then
     echo "Downloading $P2FILE."
@@ -69,8 +60,6 @@ then
       pip install dateutils==0.6.12
       pip install pycocotools==2.0.2
       pip install labelme==5.0.1
-      pip install torch==1.8.1
-      pip install torchvision==0.9.1
       conda deactivate
       echo "[epd_gui_env] env created."
 fi

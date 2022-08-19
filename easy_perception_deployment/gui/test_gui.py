@@ -15,9 +15,9 @@
 
 import os
 import json
+import yaml
 import subprocess
 
-from trainer.P1Trainer import P1Trainer
 from trainer.P2Trainer import P2Trainer
 from trainer.P3Trainer import P3Trainer
 
@@ -225,16 +225,6 @@ def test_setUseCase_DeployWindow(qtbot):
     assert usecase_mode == 2
 
 
-def test_setP1_TrainWindow(qtbot):
-
-    widget = TrainWindow()
-    qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.p1_button, QtCore.Qt.LeftButton)
-
-    assert widget._precision_level == 1
-
-
 def test_setP2_TrainWindow(qtbot):
 
     widget = TrainWindow()
@@ -259,11 +249,6 @@ def test_setModel_TrainWindow(qtbot):
 
     widget = TrainWindow()
     qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.p1_button, QtCore.Qt.LeftButton)
-    qtbot.keyClicks(widget.model_selector, 'resnet')
-
-    assert widget.model_name == 'resnet'
 
     qtbot.mouseClick(widget.p2_button, QtCore.Qt.LeftButton)
     qtbot.keyClicks(widget.model_selector, 'fasterrcnn')
@@ -327,13 +312,8 @@ def test_validateDataset_TrainWindow(qtbot):
     widget = TrainWindow()
     qtbot.addWidget(widget)
 
-    widget._precision_level = 1
-    widget._path_to_dataset = 'invalid_path_to_dataset'
-    qtbot.mouseClick(widget.validate_button, QtCore.Qt.LeftButton)
-
-    assert widget._is_dataset_labelled is False
-
     widget._precision_level = 2
+    widget._path_to_dataset = 'invalid_path_to_dataset'
     qtbot.mouseClick(widget.validate_button, QtCore.Qt.LeftButton)
     assert widget._is_dataset_labelled is False
 
@@ -346,11 +326,6 @@ def test_populateModelSelector_TrainWindow(qtbot):
 
     widget = TrainWindow()
     qtbot.addWidget(widget)
-
-    widget._precision_level = 1
-    widget.populateModelSelector()
-
-    assert len(widget._model_list) == 7
 
     widget._precision_level = 2
     widget.populateModelSelector()
@@ -390,6 +365,54 @@ def test_setDataset_TrainWindow(qtbot):
     qtbot.mouseClick(widget.dataset_button, QtCore.Qt.LeftButton)
 
     assert widget._is_dataset_linked is True
+
+
+def test_setMax_Iteration(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 1000
+
+    qtbot.mouseClick(widget.maxiter_button, QtCore.Qt.LeftButton)
+
+    assert widget.max_iteration == 1000
+
+
+def test_setCheckPoint_Period(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.checkpoint_period = 100
+
+    qtbot.mouseClick(widget.checkpointp_button, QtCore.Qt.LeftButton)
+
+    assert widget.checkpoint_period == 100
+
+
+def test_setTest_Period(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.test_period = 100
+
+    qtbot.mouseClick(widget.testp_button, QtCore.Qt.LeftButton)
+
+    assert widget.test_period == 100
+
+
+def test_setSteps_Period(qtbot):
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.steps = '(100, 200, 300)'
+
+    qtbot.mouseClick(widget.steps_button, QtCore.Qt.LeftButton)
+
+    assert widget.steps == '(100, 200, 300)'
 
 
 def test_conformDatasetToCOCO_TrainWindow(qtbot):
@@ -482,124 +505,225 @@ def test_closeWindow_CountingWindow(qtbot):
     assert widget.isVisible() is False
 
 
-def test_P1Trainer():
-
-    if not os.path.exists('../data/datasets/hymenoptera_data'):
-        p1 = subprocess.Popen([
-            'wget',
-            'https://download.pytorch.org/tutorial/hymenoptera_data.zip',
-            '--directory-prefix=../data/datasets/'])
-        p1.communicate()
-        p2 = subprocess.Popen([
-            'unzip',
-            '../data/datasets/hymenoptera_data.zip',
-            '-d',
-            '../data/datasets/'])
-        p2.communicate()
-
-    path_to_dataset = '../data/datasets/hymenoptera_data'
-    model_name = 'inception'
-    label_list = ['ants', 'bees']
-
-    p1_trainer = P1Trainer(path_to_dataset, model_name, label_list)
-
-    p1_trainer.train(True)
-
-    output_pth_filename = (
-        './trainer/P1TrainFarm/' +
-        model_name +
-        '_' +
-        str(date.today()) +
-        '.pth')
-    output_model_filename = (
-        '../data/model/' +
-        model_name +
-        '_' +
-        str(date.today()) +
-        '.onnx')
-    assert os.path.exists(output_pth_filename) is True
-    assert os.path.exists(output_model_filename) is True
-    p1_model_array = ['alexnet',
-                      'vgg',
-                      'squeezenet',
-                      'densenet',
-                      'resnet',
-                      'mobilenet']
-    for model in p1_model_array:
-        model_ft, input_size = p1_trainer.initialize_model(model,
-                                                           len(label_list),
-                                                           True)
-        assert model_ft is not None
-
-    model_ft, input_size = p1_trainer.initialize_model('invalid_model',
-                                                       len(label_list),
-                                                       True)
-    assert model_ft is None
-
-    # Clean up test materials.
-    if (os.path.exists('../data/datasets/hymenoptera_data') and
-            os.path.exists('../data/datasets/hymenoptera_data.zip') and
-            os.path.exists('./trainer/P1TrainFarm')):
-        p3 = subprocess.Popen(['rm',
-                               '-r',
-                               '../data/datasets/hymenoptera_data',
-                               '../data/datasets/hymenoptera_data.zip',
-                               './trainer/P1TrainFarm',
-                               output_model_filename])
-        p3.communicate()
-
-
-def test_P2Trainer():
+def test_P2Trainer_Training_Config(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'fasterrcnn'
-    path_label_list = '../data/label_list/coco_classes.txt'
+    label_list = ['__ignore__', '_background_', 'test_object']
 
-    if os.path.exists(path_label_list):
-        label_list = [line.rstrip('\n') for line in open(path_label_list)]
-    else:
-        label_list = ['ant', 'bees']
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
 
-    p2_trainer = P2Trainer(path_to_dataset, model_name, label_list)
+    widget.max_iteration = 1000
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
 
-    p2_trainer.train(True)
-    assert p2_trainer.create_process is not None
-    p2_trainer.create_process.kill()
-    assert p2_trainer.run_process is not None
-    p2_trainer.run_process.kill()
-    assert p2_trainer.build_export_process is not None
-    p2_trainer.build_export_process.kill()
-    assert p2_trainer.export_process is not None
-    p2_trainer.export_process.kill()
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        1000,
+        100,
+        100,
+        '(100, 200, 300)')
 
-    if os.path.exists('./trainer/P2TrainFarm'):
-        p1 = subprocess.Popen(['rm', '-r', './trainer/P2TrainFarm'])
-        p1.communicate()
+    dict = {}
+    with open('trainer/training_files/fasterrcnn_training.yaml') as file:
+        dict = yaml.load(file, Loader=yaml.FullLoader)
+
+    assert dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] == 3
+    assert dict['SOLVER']['MAX_ITER'] == 1000
+    assert dict['SOLVER']['CHECKPOINT_PERIOD'] == 100
+    assert dict['SOLVER']['TEST_PERIOD'] == 100
+    assert dict['SOLVER']['STEPS'] == '(100, 200, 300)'
 
 
-def test_P3Trainer():
+def test_P3Trainer_Training_Config(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
     model_name = 'maskrcnn'
-    path_label_list = '../data/label_list/coco_classes.txt'
+    label_list = ['__ignore__', '_background_', 'test_object']
 
-    if os.path.exists(path_label_list):
-        label_list = [line.rstrip('\n') for line in open(path_label_list)]
-    else:
-        label_list = ['ant', 'bees']
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
 
-    p3_trainer = P3Trainer(path_to_dataset, model_name, label_list)
+    widget.max_iteration = 1000
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
 
-    p3_trainer.train(True)
-    assert p3_trainer.create_process is not None
-    p3_trainer.create_process.kill()
-    assert p3_trainer.run_process is not None
-    p3_trainer.run_process.kill()
-    assert p3_trainer.build_export_process is not None
-    p3_trainer.build_export_process.kill()
-    assert p3_trainer.export_process is not None
-    p3_trainer.export_process.kill()
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        1000,
+        100,
+        100,
+        '(100, 200, 300)')
 
-    if os.path.exists('./trainer/P3TrainFarm'):
-        p1 = subprocess.Popen(['rm', '-r', './trainer/P3TrainFarm'])
-        p1.communicate()
+    dict = {}
+    with open('trainer/training_files/maskrcnn_training.yaml') as file:
+        dict = yaml.load(file, Loader=yaml.FullLoader)
+
+    assert dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] == 3
+    assert dict['SOLVER']['MAX_ITER'] == 1000
+    assert dict['SOLVER']['CHECKPOINT_PERIOD'] == 100
+    assert dict['SOLVER']['TEST_PERIOD'] == 100
+    assert dict['SOLVER']['STEPS'] == '(100, 200, 300)'
+
+
+def test_P3Trainer_pullTrainFarmDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-trainer:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p3_trainer.pullTrainFarmDockerImage()
+
+    cmd = ["docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
+def test_P3Trainer_pullExporterDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _EXPORT_DOCKER_IMG = "cardboardcode/epd-exporter:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p3_trainer.pullExporterDockerImage()
+
+    cmd = ["docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
+def test_P2Trainer_pullTrainFarmDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-trainer:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.pullTrainFarmDockerImage()
+
+    cmd = ["docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
+def test_P2Trainer_pullExporterDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _EXPORT_DOCKER_IMG = "cardboardcode/epd-exporter:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.pullExporterDockerImage()
+
+    cmd = ["docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0

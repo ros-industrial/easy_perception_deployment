@@ -22,23 +22,35 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
-          sudo python -m pip install pycodestyle
-      - name: Static Analysis
-        run: |
-          pycodestyle --show-source easy_perception_deployment/gui/main.py \
-          easy_perception_deployment/gui/test_gui.py \
-          easy_perception_deployment/gui/windows/*.py \
-          easy_perception_deployment/gui/trainer/*.py --count
-      - name: Dynamic Analysis
-        run: |
+          pip install pycodestyle
           pip install PySide2==5.15.0
           pip install dateutils==0.6.12
           pip install pycocotools==2.0.2
           pip install labelme==5.0.1
-          pip install torch==1.8.1
-          pip install torchvision==0.9.1
           pip install pytest==6.0.1
           pip install pytest-qt==3.3.0
           pip install pyyaml==5.3.1
+          sudo apt-get install -y \
+          apt-transport-https \
+          ca-certificates \
+          curl \
+          gnupg-agent \
+          software-properties-common
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository \
+          "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+          $(lsb_release -cs) \
+          stable"
+          sudo apt-get update
+          sudo apt-get install docker-ce docker-ce-cli containerd.io
+      - name: Static Analysis
+        run: |
+          pycodestyle --show-source easy_perception_deployment/gui/main.py \
+          easy_perception_deployment/gui/test_gui.py \
+          easy_perception_deployment/gui/test_gui_gpu_local_only.py \
+          easy_perception_deployment/gui/windows/*.py \
+          easy_perception_deployment/gui/trainer/*.py --count
+      - name: Dynamic Analysis
+        run: |
           cd easy_perception_deployment/gui
           pytest --capture=no -vv test_gui.py

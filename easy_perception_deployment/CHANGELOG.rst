@@ -52,3 +52,17 @@ Changelog for package easy_perception_deployment
 * Included extant EPD GUI unit-testing as well as additional Continuous Integration component as GUI_CI.
 * Improved yaml parser in P2Trainer.py and P3Trainer.py.
 * Contributor(s): Bey Hao Yun
+
+
+0.3.0 (2022-08-19)
+-------------------
+* Integrated dockerized workflow for P3TrainFarm and P3Exporter. 
+* Integrated dockerized workflow for P2TrainFarm and P2Exporter.
+* Deprecated Precision Level 1 training and deployment features due to lack of reported use. This removal will help reduce software bloat and accelerate GUI deployment.
+* Added GUI feature to edit MAX_ITER, TEST_PERIOD, CHECKPOINT_PERIOD, STEPS parameters for maskrcnn_training, fasterrcnn_training yaml files. This allows condensed testing as well as higher customizability in training.
+* Included CLI feature to edit input_image_topic.
+* Revamped GUI icons for better UI appearance.
+* Removed deprecated gui.png. Desktop icon is replaced with epd_desktop.png.
+* Removed "Use Case =" label in Deploy GUI window. Lengthened Visualize/Action toggle for neater UI appearance.
+* Added custom_dataset image collation with test label_list for GPU local reproducible unit-testing.
+* Contributor(s): Bey Hao Yun

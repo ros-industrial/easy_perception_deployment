@@ -19,7 +19,7 @@
 # Static Analysis: shellcheck create_desktop_shortcut.bash
 
 path_to_gui_run_script="$PWD/run.bash"
-path_to_gui_icon_file="$PWD/gui/img/gui.png"
+path_to_gui_icon_file="$PWD/gui/img/epd_desktop.png"
 
 outputdir1="$HOME/Desktop/"
 outputdir2="$HOME/.local/share/applications/"

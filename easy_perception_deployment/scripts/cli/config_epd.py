@@ -40,24 +40,35 @@ class EPDConfigurator():
         self.count_class_list = []
         self.path_to_color_template = ''
         self.track_type = ''
+        self.input_image_topic = ''
 
         # Check if session_config.json exits.
         self.session_config_filepath = start_dirpath \
             + "/config/session_config.json"
         if os.path.isfile(self.session_config_filepath):
-            print("[ config_epd ] - session_config.json detected.")
+            print("[ config_epd ] - session_config.json FOUND.")
             self.parse_session_config(self.session_config_filepath)
         else:
-            print("[ config_epd ] - ERROR. session_config.json missing.")
+            print("[ config_epd ] - ERROR. session_config.json MISSING.")
+            sys.exit(1)
+        # Check if input_image_topic.json exists.
+        self.inputimagetopic_config_filepath = start_dirpath \
+            + "/config/input_image_topic.json"
+        if os.path.isfile(self.inputimagetopic_config_filepath):
+            print("[ config_epd ] - input_image_topic.json FOUND.")
+            self.parse_inputimagetopic_config(
+                self.inputimagetopic_config_filepath)
+        else:
+            print("[ config_epd ] - ERROR. input_image_topic.json MISSING.")
             sys.exit(1)
         # Check if usecase_config.json exists.
         self.usecase_config_filepath = start_dirpath \
             + "/config/usecase_config.json"
         if os.path.isfile(self.usecase_config_filepath):
-            print("[ config_epd ] - usecase_config.txt detected.")
+            print("[ config_epd ] - usecase_config.json FOUND.")
             self.parse_usecase_config(self.usecase_config_filepath)
         else:
-            print("[ config_epd ] - ERROR. usecase_config.json missing.")
+            print("[ config_epd ] - ERROR. usecase_config.json MISSING.")
             sys.exit(1)
 
         if len(args) < 2:
@@ -83,6 +94,8 @@ class EPDConfigurator():
         print('--label   Sets new label list to be deployed via EPD.')
         print('--use   Sets usecase mode to be deployed via EPD. ' +
               'Eg. [0,1,2,3,4].')
+        print('--topic   Sets the subscriber topic name EPD uses ' +
+              'to get input images.')
 
     def isInEPDPackageRoot(self, start_dirpath):
         if (os.path.isdir(start_dirpath + "/scripts") and
@@ -105,7 +118,8 @@ class EPDConfigurator():
                                          'cpu',
                                          'model=',
                                          'label=',
-                                         'use='])
+                                         'use=',
+                                         'topic='])
 
         for opt, arg in opts:
             if opt == '-h':
@@ -139,6 +153,10 @@ class EPDConfigurator():
                 self._path_to_label_list = arg
             elif opt in ('--use'):
                 self.set_use_case_from_cli(int(arg))
+            elif opt in ('--topic'):
+                print("[ session_config.json ] - Setting new input " +
+                      "image topic to", arg)
+                self.input_image_topic = arg
 
     def parse_session_config(self, session_config_filepath):
 
@@ -166,25 +184,25 @@ class EPDConfigurator():
         elif self.usecase_mode == 1:
             print("[ Use Case ] - COUNTING")
             self.count_class_list = data["class_list"]
-            # DEBUG
-            print("class_list =", self.count_class_list)
         elif self.usecase_mode == 2:
             print("[ Use Case ] - COLOR-MATCHING")
             self.path_to_color_template = data["path_to_color_template"]
-            # DEBUG
-            print("path_to_color_template =", self.path_to_color_template)
         elif self.usecase_mode == 3:
             print("[ Use Case ] - LOCALIZATION")
         elif self.usecase_mode == 4:
             print("[ Use Case ] - TRACKING")
             self.track_type = data["track_type"]
-            # DEBUG
-            print("track_type =", self.track_type)
         else:
             print("[ Use Case ] - INVALID. Please rectify" +
                   " usecase_config.json. Exiting...")
             f.close()
             sys.exit(1)
+        f.close()
+
+    def parse_inputimagetopic_config(self, inputimagetopic_config_filepath):
+        f = open(inputimagetopic_config_filepath)
+        data = json.load(f)
+        self.input_image_topic = data["input_image_topic"]
         f.close()
 
     def set_use_case_from_cli(self, usecase_mode):
@@ -280,6 +298,14 @@ class EPDConfigurator():
             json_object_2 = json.dumps(dict, indent=4)
             with open(usecase_config_filepath, 'w') as outfile_2:
                 outfile_2.write(json_object_2)
+
+        dict = {
+            "input_image_topic": self.input_image_topic
+            }
+        json_object_2 = json.dumps(dict, indent=4)
+
+        with open(self.inputimagetopic_config_filepath, 'w') as outfile_1:
+            outfile_1.write(json_object_2)
 
 
 def main(args=None):
