@@ -405,37 +405,7 @@ def test_setSteps_Period(qtbot):
     assert widget.steps == '(100, 200, 300)'
 
 
-def test_conformDatasetToCOCO_TrainWindow(qtbot):
-
-    if not os.path.exists('../data/datasets/p2p3_dummy_dataset'):
-        p1 = subprocess.Popen([
-            'mkdir',
-            '-p',
-            '../data/datasets/p2p3_dummy_dataset/train_dataset'])
-        p1.communicate()
-        p2 = subprocess.Popen([
-            'mkdir',
-            '-p',
-            '../data/datasets/p2p3_dummy_dataset/val_dataset'])
-        p2.communicate()
-
-    widget = TrainWindow(True)
-    qtbot.addWidget(widget)
-
-    qtbot.mouseClick(widget.generate_button, QtCore.Qt.LeftButton)
-
-    assert widget.label_train_process is not None
-    widget.label_train_process.kill()
-    assert widget.label_val_process is not None
-    widget.label_val_process.kill()
-
-    # Clean up test materials.
-    if os.path.exists('../data/datasets/p2p3_dummy_dataset'):
-        p3 = subprocess.Popen([
-            'rm',
-            '-r',
-            '../data/datasets/p2p3_dummy_dataset'])
-        p3.communicate()
+# def test_conformDatasetToCOCO_TrainWindow(qtbot):
 
 
 def test_writeToUseCaseConfig_CountingWindow(qtbot):

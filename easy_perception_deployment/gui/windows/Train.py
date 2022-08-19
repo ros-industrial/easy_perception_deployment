@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import glob
 import threading
 import subprocess
 from ast import literal_eval as make_tuple
@@ -518,38 +519,129 @@ class TrainWindow(QWidget):
                     QFileDialog.ShowDirsOnly
                     | QFileDialog.DontResolveSymlinks))
         else:
-            path_to_labelled = '../data/datasets/p2p3_dummy_dataset'
-        # Check if every image in given folder
-        trainDirExists = os.path.exists(path_to_labelled + '/train_dataset')
-        valDirExists = os.path.exists(path_to_labelled + '/val_dataset')
+            print('[ WARNING ] - No valid input. Please try again.')
+            return
+
+        PATH_TO_TRAIN_DATASET = path_to_labelled + '/train_dataset'
+        PATH_TO_VAL_DATASET = path_to_labelled + '/val_dataset'
+        # Check if /train_dataset and /val_dataset folders exists 
+        # in user-provided annotated dataset.
+        trainDirExists = os.path.exists(PATH_TO_TRAIN_DATASET)
+        if not trainDirExists:
+            print('[ ERROR ] - /train_dataset MISSING.')
+            return
+        valDirExists = os.path.exists(PATH_TO_VAL_DATASET)
+        if not valDirExists:
+            print('[ ERROR ] - /val_dataset MISSING.')
+            return
+        # Check if there are non-zero images in /train_dataset.
+        no_of_train_image = 0
+        for file in os.listdir(PATH_TO_TRAIN_DATASET):
+            # Check only .png or .jpeg files.
+            filename, file_extension = os.path.splitext(file)
+            file_extension = file_extension.lower()
+            if (file_extension == '.png' or
+                file_extension == '.jpeg' or
+                file_extension == '.jpg'):
+                no_of_train_image = no_of_train_image + 1
+        doesTrainImagesExists = (no_of_train_image != 0)
+        if not doesTrainImagesExists:
+            print('[ ERROR ] - No train images ' +
+                  'found in /train_dataset.')
+            return
+        # Check if there are non-zero json files in /train_dataset.
+        # Check if there are non-zero images in /train_dataset.
+        no_of_train_json = 0
+        for file in os.listdir(PATH_TO_TRAIN_DATASET):
+            # Check only .json files.
+            filename, file_extension = os.path.splitext(file)
+            file_extension = file_extension.lower()
+            if file_extension == '.json':
+                no_of_train_json = no_of_train_json + 1
+        doesTrainJsonsExists = (no_of_train_json != 0)
+        if not doesTrainJsonsExists:
+            print('[ ERROR ] - No json files ' +
+                  'found in /train_dataset.')
+            return
+        # Check if there are non-zero images in /val_dataset.
+        no_of_val_image = 0
+        for file in os.listdir(PATH_TO_VAL_DATASET):
+            # Check only .png or .jpeg files.
+            filename, file_extension = os.path.splitext(file)
+            file_extension = file_extension.lower()
+            if (file_extension == '.png' or
+                file_extension == '.jpeg' or
+                file_extension == '.jpg'):
+                no_of_val_image = no_of_val_image + 1
+        doesValImagesExists = (no_of_val_image != 0)
+        if not doesValImagesExists:
+            print('[ ERROR ] - No val images ' +
+                  'found in /val_dataset.')
+            return
+        # Check if there are non-zero json files in /val_dataset.
+        no_of_val_json = 0
+        for file in os.listdir(PATH_TO_VAL_DATASET):
+            # Check only .json files.
+            filename, file_extension = os.path.splitext(file)
+            file_extension = file_extension.lower()
+            if file_extension == '.json':
+                no_of_val_json = no_of_val_json + 1
+        doesValJsonsExists = (no_of_val_json != 0)
+        if not doesValJsonsExists:
+            print('[ ERROR ] - No json files ' +
+                  'found in /val_dataset.')
+            return
+        # Check if there is a corresponding number of .json
+        # and image files in /train_dataset and /val_dataset
+        isAnnotatedTrainImageInvalid = (
+            no_of_train_image == no_of_train_json)
+        if not isAnnotatedTrainImageInvalid:
+            print('[ ERROR ] - Unequal images & .json files ' +
+                  'found in /train_dataset.')
+            return
+        isAnnotatedValImageInvalid = (
+            no_of_val_image == no_of_val_json)
+        if not isAnnotatedValImageInvalid:
+            print('[ ERROR ] - Unequal images & .json files ' +
+                  'found in /val_dataset.')
+            return
 
         outputTrainDir = '../data/datasets/custom_dataset/train_dataset'
         outputValDir = '../data/datasets/custom_dataset/val_dataset'
 
-        if trainDirExists and valDirExists:
-            self.label_train_process = (
-                subprocess.Popen([
-                    'python',
-                    'dataset/labelme2coco.py',
-                    '--labels',
-                    self._path_to_label_list,
-                    path_to_labelled + '/train_dataset',
-                    outputTrainDir]))
-            if not self.debug:
-                self.label_train_process.communicate()
-            self.label_val_process = (
-                subprocess.Popen([
-                    'python',
-                    'dataset/labelme2coco.py',
-                    '--labels',
-                    self._path_to_label_list,
-                    path_to_labelled + '/val_dataset',
-                    outputValDir]))
-            if not self.debug:
-                self.label_val_process.communicate()
-        else:
-            print('[ WARNING ] - Training Dataset MISSING ' +
-                  'or Labelled Incorrectly.')
+        if self._path_to_label_list == '':
+            print("[ ERROR ] - No Label List provided. " +
+                  "Please choose Label List.")
+            return
+        
+        if os.path.exists("../data/datasets/custom_dataset"):
+            print("[ WARNING ] - Pre-existing /custom_dataset " +
+                  "FOUND. Overwriting...")
+            subprocess.Popen([
+                'rm',
+                '-rf',
+                '../data/datasets/custom_dataset'])
+
+        self.label_train_process = (
+            subprocess.Popen([
+                'python',
+                'dataset/labelme2coco.py',
+                '--labels',
+                self._path_to_label_list,
+                PATH_TO_TRAIN_DATASET,
+                outputTrainDir]))
+        if not self.debug:
+            self.label_train_process.communicate()
+        self.label_val_process = (
+            subprocess.Popen([
+                'python',
+                'dataset/labelme2coco.py',
+                '--labels',
+                self._path_to_label_list,
+                PATH_TO_VAL_DATASET,
+                outputValDir]))
+        if not self.debug:
+            self.label_val_process.communicate()
 
     def populateModelSelector(self):
         '''
