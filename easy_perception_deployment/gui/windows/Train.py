@@ -458,11 +458,13 @@ class TrainWindow(QWidget):
             print('[ SUCCESS ] - Training Dataset VALID.')
             # Set button color to green
             self._is_dataset_linked = True
+            self.dataset_button.setIcon(QIcon('img/valid_dataset.png'))
             self.dataset_button.setStyleSheet(
                 'background-color: rgba(0,200,10,255);')
         else:
             # Set button color to red
             print('[ WARNING ] - Invalid Dataset. Please choose another.')
+            self.dataset_button.setIcon(QIcon('img/dataset.png'))
             self.dataset_button.setStyleSheet('background-color: red;')
 
     def startTraining(self):
