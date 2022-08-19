@@ -47,6 +47,7 @@ jobs:
         run: |
           pycodestyle --show-source easy_perception_deployment/gui/main.py \
           easy_perception_deployment/gui/test_gui.py \
+          easy_perception_deployment/gui/test_gui_gpu_local_only.py \
           easy_perception_deployment/gui/windows/*.py \
           easy_perception_deployment/gui/trainer/*.py --count
       - name: Dynamic Analysis

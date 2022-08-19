@@ -64,6 +64,7 @@ class P2Trainer:
             'trainer/exporter_files/export_to_p2_onnx.py')
 
         self.updateTrainingConfig()
+        self.updateTrainVerification()
         self.checkGPUAvailability()
 
     def updateTrainingConfig(self):
@@ -106,6 +107,89 @@ class P2Trainer:
         with open(self.path_to_export_config, 'w') as file:
             documents = yaml.dump(dict, file)
 
+    def updateTrainVerification(self):
+        _PATH_TO_P2_TRAIN_VERIFICATION = "../config/p2_train_verification.json"
+        # Load p2_trainfarm_verification.json
+        file = open(_PATH_TO_P2_TRAIN_VERIFICATION)
+        p2_train_verification = json.load(file)
+
+        # Check if docker image cardboardcode/epd-trainer:latest exists
+        cmd = ["docker", "inspect", "--type=image", self._TRAIN_DOCKER_IMG]
+
+        self.docker_inspect_process = subprocess.Popen(
+            cmd,
+            universal_newlines=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            env=None)
+        self.docker_inspect_process.communicate()
+
+        if self.docker_inspect_process.returncode != 0:
+            p2_train_verification["isTrainFarmDockerImagePulled"] = False
+        else:
+            p2_train_verification["isTrainFarmDockerImagePulled"] = True
+
+        # Check if docker container epd_p3_trainer exists
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._TRAIN_DOCKER_CONTAINER]
+
+        self.docker_inspect_process = subprocess.Popen(
+            cmd,
+            universal_newlines=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            env=None)
+        self.docker_inspect_process.communicate()
+
+        if self.docker_inspect_process.returncode != 0:
+            p2_train_verification["isTrainFarmDockerContainerCreated"] = False
+        else:
+            p2_train_verification["isTrainFarmDockerContainerCreated"] = True
+
+        # Check if docker image cardboardcode/epd-exporter:latest exists
+        cmd = ["docker", "inspect", "--type=image", self._EXPORT_DOCKER_IMG]
+
+        self.docker_inspect_process = subprocess.Popen(
+            cmd,
+            universal_newlines=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            env=None)
+        self.docker_inspect_process.communicate()
+
+        if self.docker_inspect_process.returncode != 0:
+            p2_train_verification["isExporterDockerImagePulled"] = False
+        else:
+            p2_train_verification["isExporterDockerImagePulled"] = True
+
+        # Check if docker container epd_p2_trainer exists
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._EXPORT_DOCKER_CONTAINER]
+
+        self.docker_inspect_process = subprocess.Popen(
+            cmd,
+            universal_newlines=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            env=None)
+        self.docker_inspect_process.communicate()
+
+        if self.docker_inspect_process.returncode != 0:
+            p2_train_verification["isExportDockerContainerCreated"] = False
+        else:
+            p2_train_verification["isExportDockerContainerCreated"] = True
+
+        json_object = json.dumps(p2_train_verification, indent=4)
+        with open(_PATH_TO_P2_TRAIN_VERIFICATION, 'w') as outfile:
+            outfile.write(json_object)
+        file.close()
+
     def checkGPUAvailability(self):
         # Checks whether there is available GPU device.
         cmd = ["nvidia-smi"]
@@ -145,6 +229,7 @@ class P2Trainer:
         # If P2TrainFarm has been set up.
         if not self.isTrainFarmSetupVerified():
             self.pullTrainFarmDockerImage()
+            self.createTrainFarmDockerContainer()
             self.installTrainingDependencies()
         else:
             print("P2 TrainFarm Setup - VERIFIED. Proceeding to train...")
@@ -162,6 +247,7 @@ class P2Trainer:
         # If P2Exporter has been set up.
         if not self.isExporterSetupVerified():
             self.pullExporterDockerImage()
+            self.createExportDockerContainer()
             self.installExporterDependencies()
         else:
             print("P2 Exporter Setup - VERIFIED. Proceeding to export...")
@@ -239,6 +325,54 @@ class P2Trainer:
             outfile.write(json_object)
         file.close()
 
+    def createTrainFarmDockerContainer(self):
+        # Check if docker container exists.
+        cmd = [
+            "docker",
+            "inspect",
+            "--type=container",
+            self._TRAIN_DOCKER_CONTAINER]
+
+        self.docker_inspect_process = subprocess.Popen(
+            cmd,
+            universal_newlines=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            env=None)
+        self.docker_inspect_process.communicate()
+        # If docker container missing,
+        # Create docker container, epd_p3_trainer, from image.
+        docker_construct_process_returncode = None
+        if self.docker_inspect_process.returncode != 0:
+            cmd = [
+                "bash",
+                "trainer/training_files/scripts/" +
+                "create_trainfarm_docker_container.bash",
+                "false"]
+            self.docker_construct_process = subprocess.Popen(cmd)
+            self.docker_construct_process.communicate()
+            docker_construct_process_returncode = (
+                self.docker_construct_process.returncode)
+        else:
+            print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            docker_construct_process_returncode = 0
+
+        # If docker_pull_process succeeded,
+        # Update p2_trainfarm_verification.json
+        _path_to_p2_train_verification = "../config/p2_train_verification.json"
+        # Load p2_trainfarm_verification.json
+        file = open(_path_to_p2_train_verification)
+        p2_train_verification = json.load(file)
+
+        if docker_construct_process_returncode == 0:
+            p2_train_verification["isTrainFarmDockerContainerCreated"] = True
+        else:
+            p2_train_verification["isTrainFarmDockerContainerCreated"] = False
+        json_object = json.dumps(p2_train_verification, indent=4)
+        with open(_path_to_p2_train_verification, 'w') as outfile:
+            outfile.write(json_object)
+        file.close()
+
     def pullExporterDockerImage(self):
         # Check if docker image cardboardcode/epd-exporter:latest exists
 
@@ -282,32 +416,6 @@ class P2Trainer:
         file.close()
 
     def installTrainingDependencies(self):
-        # Check if docker container exists.
-        cmd = [
-            "docker",
-            "inspect",
-            "--type=container",
-            self._TRAIN_DOCKER_CONTAINER]
-
-        self.docker_inspect_process = subprocess.Popen(
-            cmd,
-            universal_newlines=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            env=None)
-        self.docker_inspect_process.communicate()
-        # If docker container missing,
-        # Create docker container, epd_p3_trainer, from image.
-        if self.docker_inspect_process.returncode != 0:
-            cmd = [
-                "bash",
-                "trainer/training_files/scripts/" +
-                "create_trainfarm_docker_container.bash",
-                "false"]
-            self.docker_construct_process = subprocess.Popen(cmd)
-            self.docker_construct_process.communicate()
-        else:
-            print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
         # Enter docker container
         # Install dependencies
         cmd = [
@@ -334,7 +442,7 @@ class P2Trainer:
             outfile.write(json_object)
         file.close()
 
-    def installExporterDependencies(self):
+    def createExportDockerContainer(self):
         # Check if docker container exists.
         cmd = [
             "docker",
@@ -351,6 +459,7 @@ class P2Trainer:
         self.docker_inspect_process.communicate()
         # If docker container missing,
         # Create docker container, epd_p3_trainer, from image.
+        docker_construct_process_returncode = None
         if self.docker_inspect_process.returncode != 0:
             cmd = [
                 "bash",
@@ -359,8 +468,29 @@ class P2Trainer:
                 "false"]
             self.docker_construct_process = subprocess.Popen(cmd)
             self.docker_construct_process.communicate()
+            docker_construct_process_returncode = (
+                self.docker_construct_process.returncode)
         else:
             print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            docker_construct_process_returncode = 0
+
+        # If docker_pull_process succeeded,
+        # Update p2_trainfarm_verification.json
+        _path_to_p2_train_verification = "../config/p2_train_verification.json"
+        # Load p2_trainfarm_verification.json
+        file = open(_path_to_p2_train_verification)
+        p2_train_verification = json.load(file)
+
+        if docker_construct_process_returncode == 0:
+            p2_train_verification["isExportDockerContainerCreated"] = True
+        else:
+            p2_train_verification["isExportDockerContainerCreated"] = False
+        json_object = json.dumps(p2_train_verification, indent=4)
+        with open(_path_to_p2_train_verification, 'w') as outfile:
+            outfile.write(json_object)
+        file.close()
+
+    def installExporterDependencies(self):
         # Enter docker container
         # Install dependencies
         cmd = [

@@ -27,6 +27,7 @@ from windows.Train import TrainWindow
 from datetime import date
 from PySide2 import QtCore
 
+
 def isGPUAvailable():
     # Checks whether there is available GPU device.
     cmd = ["nvidia-smi"]
@@ -56,7 +57,9 @@ def isGPUAvailable():
     print("[ nvcc ] command - FOUND")
     return True
 
-# Check if nvidia-smi and nvcc has been installed correctly to verify Nvidia GPU is ready to be used.
+
+# Check if nvidia-smi and nvcc has been installed correctly
+# to verify Nvidia GPU is ready to be used.
 if not isGPUAvailable():
     print("No GPU devices FOUND.")
     print("Please install nvidia-driver and CUDA. Exiting...")
@@ -74,8 +77,10 @@ remove_2.communicate()
 
 dict = {
     "isTrainFarmDockerImagePulled": False,
+    "isTrainFarmDockerContainerCreated": False,
     "isTrainDependenciesInstalled": False,
     "isExporterDockerImagePulled": False,
+    "isExportDockerContainerCreated": False,
     "isExportDependenciesInstalled": False
     }
 json_object = json.dumps(dict, indent=4)
@@ -86,14 +91,54 @@ with open(FILE_PATH_TO_P3_TRAIN_VERIFICATION, 'w') as outfile:
     outfile.write(json_object)
 
 # Store path to test dataset as well as test label list.
-if not os.path.exists("../test/custom_dataset"): 
-    print("[ test_dataset ] - MISSING. Folder has been moved else where for unknown reason.")
+if not os.path.exists("../test/custom_dataset"):
+    print("[ test_dataset ] - MISSING. Folder has been " +
+          "moved else where for unknown reason.")
     sys.exit()
 else:
     PATH_TO_TEST_TRAIN_DATASET = os.path.abspath("../test/custom_dataset")
 
+
+def test_P3Trainer_createTrainFarmDockerContainer(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_CONTAINER = "epd_p3_trainer"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p3_trainer.createTrainFarmDockerContainer()
+
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _TRAIN_DOCKER_CONTAINER]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P3Trainer_installTrainingDependencies(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'maskrcnn'
@@ -119,8 +164,13 @@ def test_P3Trainer_installTrainingDependencies(qtbot):
 
     p3_trainer.installTrainingDependencies()
 
-    # Check if _TRAIN_DOCKER_CONTAINER Docker Container has been successfully created.
-    cmd = ["docker", "inspect", "--type=container", _TRAIN_DOCKER_CONTAINER]
+    # Check if _TRAIN_DOCKER_CONTAINER Docker Container
+    # has been successfully created.
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _TRAIN_DOCKER_CONTAINER]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -133,8 +183,9 @@ def test_P3Trainer_installTrainingDependencies(qtbot):
     assert docker_inspect_process.returncode == 0
     assert os.path.exists("p3_trainer") is True
 
+
 def test_P3Trainer_copyTrainingFiles(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'maskrcnn'
@@ -164,7 +215,8 @@ def test_P3Trainer_copyTrainingFiles(qtbot):
     # Check if custom_dataset has been transferred into p3_trainer
     assert os.path.exists("p3_trainer/datasets/custom_dataset") is True
     # Check if maskrcnn_training.yaml has been transferred into p3_trainer
-    assert os.path.exists("p3_trainer/configs/custom/maskrcnn_training.yaml") is True
+    assert os.path.exists(
+        "p3_trainer/configs/custom/maskrcnn_training.yaml") is True
 
     # Check that maskrcnn_training.yaml content are correct.
     dict = {}
@@ -177,8 +229,9 @@ def test_P3Trainer_copyTrainingFiles(qtbot):
     assert dict['SOLVER']['TEST_PERIOD'] == 100
     assert dict['SOLVER']['STEPS'] == '(100, 200, 300)'
 
+
 def test_P3Trainer_runTraining(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'maskrcnn'
@@ -206,8 +259,47 @@ def test_P3Trainer_runTraining(qtbot):
     # Check if trained.pth has been generated in root.
     assert os.path.exists("trained.pth") is True
 
+
+def test_P3Trainer_createExportDockerContainer(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _EXPORT_DOCKER_CONTAINER = "epd_p3_exporter"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p3_trainer.createExportDockerContainer()
+
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _EXPORT_DOCKER_CONTAINER]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P3Trainer_installExporterDependencies(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'maskrcnn'
@@ -233,7 +325,8 @@ def test_P3Trainer_installExporterDependencies(qtbot):
 
     p3_trainer.installExporterDependencies()
 
-    # Check if _TRAIN_DOCKER_CONTAINER Docker Container has been successfully created.
+    # Check if _TRAIN_DOCKER_CONTAINER Docker Container
+    # has been successfully created.
     cmd = ["docker", "inspect", "--type=container", _EXPORT_DOCKER_CONTAINER]
 
     docker_inspect_process = subprocess.Popen(
@@ -247,8 +340,9 @@ def test_P3Trainer_installExporterDependencies(qtbot):
     assert docker_inspect_process.returncode == 0
     assert os.path.exists("p3_exporter") is True
 
+
 def test_P3Trainer_copyExportFiles(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'maskrcnn'
@@ -278,7 +372,8 @@ def test_P3Trainer_copyExportFiles(qtbot):
     # Check if trained.pth has been transferred into p3_exporter
     assert os.path.exists("p3_exporter/weights/custom/trained.pth") is True
     # Check if maskrcnn_training.yaml has been transferred into p3_trainer
-    assert os.path.exists("p3_exporter/configs/custom/maskrcnn_export.yaml") is True
+    assert os.path.exists(
+        "p3_exporter/configs/custom/maskrcnn_export.yaml") is True
 
     # Check that maskrcnn_training.yaml content are correct.
     dict = {}
@@ -287,8 +382,9 @@ def test_P3Trainer_copyExportFiles(qtbot):
 
     assert dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] == 3
 
+
 def test_P3Trainer_runExporter(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'maskrcnn'
@@ -316,8 +412,47 @@ def test_P3Trainer_runExporter(qtbot):
     # Check if trained.pth has been generated in root.
     assert os.path.exists("output.onnx") is True
 
+
+def test_P2Trainer_createTrainFarmDockerContainer(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_CONTAINER = "epd_p2_trainer"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.createTrainFarmDockerContainer()
+
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _TRAIN_DOCKER_CONTAINER]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P2Trainer_installTrainingDependencies(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'fasterrcnn'
@@ -343,8 +478,13 @@ def test_P2Trainer_installTrainingDependencies(qtbot):
 
     p2_trainer.installTrainingDependencies()
 
-    # Check if _TRAIN_DOCKER_CONTAINER Docker Container has been successfully created.
-    cmd = ["docker", "inspect", "--type=container", _TRAIN_DOCKER_CONTAINER]
+    # Check if _TRAIN_DOCKER_CONTAINER Docker Container
+    # has been successfully created.
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _TRAIN_DOCKER_CONTAINER]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -357,8 +497,9 @@ def test_P2Trainer_installTrainingDependencies(qtbot):
     assert docker_inspect_process.returncode == 0
     assert os.path.exists("p2_trainer") is True
 
+
 def test_P2Trainer_copyTrainingFiles(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'fasterrcnn'
@@ -388,7 +529,8 @@ def test_P2Trainer_copyTrainingFiles(qtbot):
     # Check if custom_dataset has been transferred into p3_trainer
     assert os.path.exists("p2_trainer/datasets/custom_dataset") is True
     # Check if maskrcnn_training.yaml has been transferred into p3_trainer
-    assert os.path.exists("p2_trainer/configs/custom/fasterrcnn_training.yaml") is True
+    assert os.path.exists(
+        "p2_trainer/configs/custom/fasterrcnn_training.yaml") is True
 
     # Check that maskrcnn_training.yaml content are correct.
     dict = {}
@@ -401,8 +543,9 @@ def test_P2Trainer_copyTrainingFiles(qtbot):
     assert dict['SOLVER']['TEST_PERIOD'] == 100
     assert dict['SOLVER']['STEPS'] == '(100, 200, 300)'
 
+
 def test_P2Trainer_runTraining(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'fasterrcnn'
@@ -430,8 +573,46 @@ def test_P2Trainer_runTraining(qtbot):
     # Check if trained.pth has been generated in root.
     assert os.path.exists("trained.pth") is True
 
+
+def test_P2Trainer_createExportDockerContainer(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_CONTAINER = "epd_p2_trainer"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.createExportDockerContainer()
+
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _TRAIN_DOCKER_CONTAINER]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P2Trainer_installExporterDependencies(qtbot):
-    
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'fasterrcnn'
@@ -457,8 +638,13 @@ def test_P2Trainer_installExporterDependencies(qtbot):
 
     p2_trainer.installExporterDependencies()
 
-    # Check if _TRAIN_DOCKER_CONTAINER Docker Container has been successfully created.
-    cmd = ["docker", "inspect", "--type=container", _EXPORT_DOCKER_CONTAINER]
+    # Check if _TRAIN_DOCKER_CONTAINER Docker Container
+    # has been successfully created.
+    cmd = [
+        "docker",
+        "inspect",
+        "--type=container",
+        _EXPORT_DOCKER_CONTAINER]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -471,8 +657,9 @@ def test_P2Trainer_installExporterDependencies(qtbot):
     assert docker_inspect_process.returncode == 0
     assert os.path.exists("p2_exporter") is True
 
+
 def test_P2Trainer_copyExportFiles(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'fasterrcnn'
@@ -502,7 +689,8 @@ def test_P2Trainer_copyExportFiles(qtbot):
     # Check if trained.pth has been transferred into p3_exporter
     assert os.path.exists("p2_exporter/weights/custom/trained.pth") is True
     # Check if maskrcnn_training.yaml has been transferred into p3_trainer
-    assert os.path.exists("p2_exporter/configs/custom/fasterrcnn_export.yaml") is True
+    assert os.path.exists(
+        "p2_exporter/configs/custom/fasterrcnn_export.yaml") is True
 
     # Check that maskrcnn_training.yaml content are correct.
     dict = {}
@@ -511,8 +699,9 @@ def test_P2Trainer_copyExportFiles(qtbot):
 
     assert dict['MODEL']['ROI_BOX_HEAD']['NUM_CLASSES'] == 3
 
+
 def test_P2Trainer_runExporter(qtbot):
-    
+
     global PATH_TO_TEST_TRAIN_DATASET
     path_to_dataset = PATH_TO_TEST_TRAIN_DATASET
     model_name = 'fasterrcnn'
