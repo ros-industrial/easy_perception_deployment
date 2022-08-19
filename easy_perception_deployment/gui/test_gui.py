@@ -467,7 +467,7 @@ def test_writeToUseCaseConfig_CountingWindow(qtbot):
 
     assert usecase_mode == 1
     assert class_list[0] == 'person'
-    assert widget.isVisible() is True
+    assert widget.isVisible() is False
 
 
 def test_addObject_CountingWindow():

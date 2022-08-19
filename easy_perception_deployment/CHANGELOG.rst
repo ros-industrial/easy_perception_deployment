@@ -71,13 +71,13 @@ Changelog for package easy_perception_deployment
 ------------------
 * Added utilty bash script to allow users to purge all trainer/exporter related files, folders, docker images and containers.
 * Fix for potential faulty default p3_train_verification.json and p2_train_verification.json.
-* Fix for GUI Training misprints that occur whenever validating datasets.
+* Fix for confusing GUI Training terminal misprints that occur whenever validating datasets.
 * Elaborated checks for COCO-formatted training datasets when using Generate Dataset GUI feature.
 * Spilt GUI train button into train and export buttons for more modular operations and thus easier debugging.
 * Implemented logging system for GUI.
 * Shifted Validate Dataset feature to run automatically once Choose Dataset has been called.
 * Renamed Validate Dataset to Validate Training.
 * Combined initModel to setModel in Train.py GUI Window features.
-* Remove overlooked debug statements in Counting GUI Window.
+* Removed overlooked debug statements in Counting GUI Window.
 * Modified Counting GUI window to close when writeToUseCaseConfig function is called.
 * Contributor(s): Bey Hao Yun
