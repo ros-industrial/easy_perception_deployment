@@ -19,7 +19,7 @@
 # Static Analysis: shellcheck purge_trainer_exporter.bash -x -e SC1091
 
 echo "Removing [/p3_trainer], [/p2_trainer], [/p3_exporter], [/p2_exporter] local folders"
-read -p "Are you sure? [y/n]: " input
+read -rp "Are you sure? [y/n]: " input
 
 if [[ $input == "y" ]]; then
   if [ -d "gui/p3_trainer" ]; then
@@ -32,7 +32,7 @@ if [[ $input == "y" ]]; then
     sudo rm -r "gui/p2_trainer"
   fi
   if [ -d "gui/p2_exporter" ]; then 
-   sudo rm gui/p2_exporter
+   sudo rm -r "gui/p2_exporter"
   fi
 elif [[ $input == "n" ]]; then
   :
@@ -41,7 +41,7 @@ else
 fi
 
 echo "Removing transient [trained.pth], [output.onnx], [/trainer/training/custom_dataset] local files"
-read -p "Are you sure? [y/n]: " input
+read -rp "Are you sure? [y/n]: " input
 
 if [[ $input == "y" ]]; then
   if [ -d "gui/trained.pth" ]; then
@@ -60,7 +60,7 @@ else
 fi
 
 echo "Removing [epd_p3_trainer], [epd_p3_exporter], [epd_p2_trainer], [epd_p2_exporter] Docker Containers"
-read -p "Are you sure? [y/n]: " input
+read -rp "Are you sure? [y/n]: " input
 
 if [[ $input == "y" ]]; then
   docker stop epd_p3_trainer epd_p3_exporter epd_p2_trainer epd_p2_exporter
@@ -73,7 +73,7 @@ fi
 
 
 echo "Removing [epd-trainer], [epd-exporter] Docker Images"
-read -p "Are you sure? [y/n]: " input
+read -rp "Are you sure? [y/n]: " input
 
 if [[ $input == "y" ]]; then
   docker image rm cardboardcode/epd-trainer cardboardcode/epd-exporter
