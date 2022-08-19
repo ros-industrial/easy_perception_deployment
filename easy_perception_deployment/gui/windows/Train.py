@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import threading
 import subprocess
 from ast import literal_eval as make_tuple
 
@@ -128,7 +129,7 @@ class TrainWindow(QWidget):
             'background-color: rgba(0,200,10,255);')
 
         # Labeller button to initiate labelme
-        self.validate_button = QPushButton('Validate Dataset', self)
+        self.validate_button = QPushButton('Validate Training', self)
         self.validate_button.setIcon(QIcon('img/validate.png'))
         self.validate_button.setIconSize(QSize(50, 50))
         self.validate_button.setGeometry(
@@ -208,7 +209,7 @@ class TrainWindow(QWidget):
         self.dataset_button.clicked.connect(self.setDataset)
         self.label_button.clicked.connect(self.runLabelme)
         self.generate_button.clicked.connect(self.conformDatasetToCOCO)
-        self.validate_button.clicked.connect(self.validateDataset)
+        self.validate_button.clicked.connect(self.validateTraining)
         self.list_button.clicked.connect(self.setLabelList)
 
         self.maxiter_button.clicked.connect(self.setMaxIteration)
@@ -220,7 +221,7 @@ class TrainWindow(QWidget):
         '''A function that is triggered by the button labelled, P2.'''
         self._precision_level = 2
         self.populateModelSelector()
-        self.initModel()
+        self.setModel(0)
         self.label_button.show()
         self.generate_button.show()
         self.p2_button.setStyleSheet(
@@ -232,7 +233,7 @@ class TrainWindow(QWidget):
         '''A function that is triggered by the button labelled, P3.'''
         self._precision_level = 3
         self.populateModelSelector()
-        self.initModel()
+        self.setModel(0)
         self.label_button.show()
         self.generate_button.show()
         self.p3_button.setStyleSheet(
@@ -249,8 +250,7 @@ class TrainWindow(QWidget):
         self.model_selector.setStyleSheet(
             'background-color: rgba(0,200,10,255);')
         self._is_model_ready = True
-        self.validateTraining()
-        print('Set Model to ', self.model_name)
+        print('Setting Model to', self.model_name)
 
     def setLabelList(self):
         '''A function that is triggered by Choose Label List button.'''
@@ -275,7 +275,6 @@ class TrainWindow(QWidget):
             return
         self.list_button.setStyleSheet('background-color: rgba(0,150,10,255);')
         self._is_labellist_linked = True
-        self.validateTraining()
 
     def setDataset(self):
         '''A function that is triggered by Choose Dataset button.'''
@@ -292,18 +291,8 @@ class TrainWindow(QWidget):
         else:
             new_filepath_to_dataset = '../data/datasets'
 
-        if os.path.isdir(new_filepath_to_dataset):
-            self._path_to_dataset = new_filepath_to_dataset
-            # Set button color to green
-            self._is_dataset_linked = True
-            self.dataset_button.setStyleSheet(
-                'background-color: rgba(0,200,10,255);')
-        else:
-            # Set button color to red
-            print('[ WARNING ] - Dataset path does not exist.')
-            self.dataset_button.setStyleSheet('background-color: red;')
-
-        self.validateTraining()
+        self._path_to_dataset = new_filepath_to_dataset
+        self.validateDataset(new_filepath_to_dataset)
 
     def setMaxIteration(self):
         if not self.debug:
@@ -373,17 +362,6 @@ class TrainWindow(QWidget):
     def runLabelme(self):
         '''A function that is triggered by Label Dataset button.'''
         self.label_process = subprocess.Popen(['labelme'])
-        self.validateTraining()
-
-    def initModel(self):
-        '''
-        A Mutator function that sets the model_name
-        to the first model available
-        whenever the precision level changes.
-        '''
-        self.model_name = self._model_list[0]
-        self._is_model_ready = True
-        print('Setting Model to ', self.model_name)
 
     def validateTraining(self):
         '''
@@ -393,7 +371,6 @@ class TrainWindow(QWidget):
         '''
         # Perform 4 checks to ensure
         # all data is available for Training to start without issue.
-
         if not self._is_model_ready:
             print('[ WARNING ] - No model provided. Please choose Model.')
             self.train_button.setStyleSheet(
@@ -431,11 +408,14 @@ class TrainWindow(QWidget):
             self.disconnectTrainingButton()
             return
 
+        self.validate_button.setStyleSheet(
+            'background-color: rgba(0,200,10,255);')
+
         self.train_button.setStyleSheet('background-color: white;')
         self.connectTrainingButton()
 
-    def validateDataset(self):
-        '''A function that is triggered by Validate Dataset button.'''
+    def validateDataset(self, new_filepath_to_dataset):
+
         if self._precision_level == 2:
             isDatasetNamedRight = 'custom_dataset'
             os.path.basename(self._path_to_dataset) == 'custom_dataset'
@@ -446,8 +426,6 @@ class TrainWindow(QWidget):
             # Check if the dataset folder has the following structure
             if trainDirExists and valDirExists and isDatasetNamedRight:
                 self._is_dataset_labelled = True
-                self.validate_button.setStyleSheet(
-                    'background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
                 print('[ ERROR ] - Please ensure there is /train_dataset' +
@@ -463,22 +441,24 @@ class TrainWindow(QWidget):
             # Check if the dataset folder has the following structure
             if trainDirExists and valDirExists and isDatasetNamedRight:
                 self._is_dataset_labelled = True
-                self.validate_button.setStyleSheet(
-                    'background-color: rgba(0,200,10,255);')
             else:
                 self._is_dataset_labelled = False
                 print('[ ERROR ] - Please ensure there is /train_dataset' +
                       'and /val_dataset sub-directories' +
                       'in the selected dataset directory.')
 
-        self.validateTraining()
+        if self._is_dataset_labelled is True:
+            # Set button color to green
+            self._is_dataset_linked = True
+            self.dataset_button.setStyleSheet(
+                'background-color: rgba(0,200,10,255);')
+        else:
+            # Set button color to red
+            print('[ WARNING ] - Invalid Dataset. Please choose another.')
+            self.dataset_button.setStyleSheet('background-color: red;')
 
     def startTraining(self):
-        '''A function that is triggered by the button labelled, Train.'''
-        self.disconnectTrainingButton()
-        self.train_button.setText('Training In Progress')
-        self.train_button.updateGeometry()
-
+        
         if self._precision_level == 1:
             print("[ Deprecation Notice ] - Precision Level 1 features " +
                   "has been deprecated in EPD v0.3.0.")
@@ -506,6 +486,19 @@ class TrainWindow(QWidget):
 
         self.train_button.setText('Train')
         self.train_button.updateGeometry()
+
+    def updateBeforeStartingTraining(self):
+        '''A function that is triggered by the button labelled, Train.'''
+        self.validate_button.setStyleSheet(
+            'background-color: rgba(255,255,255,255);')
+        self.validate_button.updateGeometry()
+        self.train_button.setText('Training In Progress. Observe Terminal.')
+        self.train_button.updateGeometry()
+        self.disconnectTrainingButton()
+
+        d = threading.Thread(name='startTraining', target=self.startTraining)
+        d.setDaemon(True)
+        d.start()
 
     def conformDatasetToCOCO(self):
         '''A function that is triggered by Generate Dataset button.'''
@@ -575,7 +568,10 @@ class TrainWindow(QWidget):
         to be used by the user.
         '''
         if not self.buttonConnected:
-            self.train_button.clicked.connect(self.startTraining)
+            self.train_button.clicked.connect(self.updateBeforeStartingTraining)
+            self.train_button.setStyleSheet(
+                'background-color: rgba(255,255,255,255);')
+            self.train_button.updateGeometry()
             self.buttonConnected = True
 
     def disconnectTrainingButton(self):
@@ -585,7 +581,10 @@ class TrainWindow(QWidget):
         '''
         if self.buttonConnected:
             try:
-                self.train_button.clicked.disconnect(self.startTraining)
+                self.train_button.clicked.disconnect(self.updateBeforeStartingTraining)
+                self.train_button.setStyleSheet(
+                    'background-color: rgba(180,180,180,255);')
+                self.train_button.updateGeometry()
             except Exception:
                 pass
             self.buttonConnected = False

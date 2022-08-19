@@ -50,8 +50,6 @@ class CountingWindow(QWidget):
         path_to_label_list = '.' + path_to_label_list
 
         # Check if label-list file exits.
-        print("os.getcwd() =", os.getcwd())
-        print("path_to_label_list =", path_to_label_list)
         if not os.path.exists(path_to_label_list):
             msgBox = QMessageBox()
             msgBox.setText('No label list selected. ' +
@@ -136,6 +134,7 @@ class CountingWindow(QWidget):
 
         with open(self._path_to_usecase_config, 'w') as outfile:
             outfile.write(json_object)
+        self.close()
 
     def closeWindow(self):
         '''A function that is triggered by the button labelled, Cancel.'''
@@ -152,7 +151,6 @@ class CountingWindow(QWidget):
                 print('Duplicate object detected.')
                 return
 
-        print("len(self._label_list) =", len(self._label_list))
         self._select_list.append(self._label_list[index])
         self.selected_list_menu.addItem(self._label_list[index])
 
