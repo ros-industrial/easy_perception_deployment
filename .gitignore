@@ -2,8 +2,10 @@
 easy_perception_deployment/build/*
 easy_perception_deployment/log/*
 easy_perception_deployment/install/*
-easy_perception_deployment/gui/trainer/P2TrainFarm/*
-easy_perception_deployment/gui/trainer/P3TrainFarm/*
+easy_perception_deployment/gui/p2_trainer/
+easy_perception_deployment/gui/p3_trainer/
+easy_perception_deployment/gui/p2_exporter/
+easy_perception_deployment/gui/p3_exporter/
 epd_msgs/build/*
 epd_msgs/log/*
 epd_msgs/install/*
