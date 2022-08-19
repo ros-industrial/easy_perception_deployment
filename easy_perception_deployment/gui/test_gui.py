@@ -38,8 +38,8 @@ if (os.path.exists('../config/session_config.json') and
     p2.communicate()
 
     dict = {
-        "path_to_model": './data/model/squeezenet1.1-7.onnx',
-        "path_to_label_list": './data/label_list/imagenet_classes.txt',
+        "path_to_model": './data/model/MaskRCNN-10.onnx',
+        "path_to_label_list": './data/label_list/coco_classes.txt',
         "visualizeFlag": 'visualize',
         "useCPU": 'CPU'
         }
@@ -151,9 +151,9 @@ def test_invalidSession_invalidUseCase_DeployWindow(qtbot):
 
 def test_validSession_validUseCase_DeployWindow(qtbot):
 
-    local_path_to_model = './data/model/squeezenet1.1-7.onnx'
+    local_path_to_model = './data/model/MaskRCNN-10.onnx'
     local_path_to_label_list = ('./data/label_list/' +
-                                'imagenet_classes.txt')
+                                'coco_classes.txt')
 
     dict = {
         "path_to_model": local_path_to_model,
