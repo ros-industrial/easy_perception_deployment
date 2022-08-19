@@ -385,7 +385,7 @@ class TrainWindow(QWidget):
             self.disconnectTrainingButton()
             return
         if not self._is_labellist_linked:
-            print('[ WARNING ] - Label List not provided. ' +
+            print('[ WARNING ] - No label List not provided. ' +
                   'Please choose Label List.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
@@ -411,43 +411,50 @@ class TrainWindow(QWidget):
         self.validate_button.setStyleSheet(
             'background-color: rgba(0,200,10,255);')
 
+        print("[ SUCCESS ] - Training Validated. Train button unlocked.")
         self.train_button.setStyleSheet('background-color: white;')
         self.connectTrainingButton()
 
     def validateDataset(self, new_filepath_to_dataset):
+        isDatasetNamedRight = (
+            os.path.basename(self._path_to_dataset)
+            == 'custom_dataset')
+        PATH_TO_TRAIN_DATASET = (
+            self._path_to_dataset + '/train_dataset')
+        PATH_TO_VAL_DATASET = (
+            self._path_to_dataset + '/val_dataset')
+        PATH_TO_TRAIN_ANNOTATIONS = (
+            PATH_TO_TRAIN_DATASET + '/annotations.json')
+        PATH_TO_VAL_ANNOTATIONS = (
+            PATH_TO_VAL_DATASET + '/annotations.json')
+        trainDirExists = os.path.exists(PATH_TO_TRAIN_DATASET)
+        valDirExists = os.path.exists(PATH_TO_VAL_DATASET)
+        annotationsExists = (
+            os.path.exists(PATH_TO_TRAIN_ANNOTATIONS) and
+            os.path.exists(PATH_TO_VAL_ANNOTATIONS))
 
-        if self._precision_level == 2:
-            isDatasetNamedRight = 'custom_dataset'
-            os.path.basename(self._path_to_dataset) == 'custom_dataset'
-            trainDirExists = os.path.exists(
-                self._path_to_dataset + '/train_dataset')
-            valDirExists = os.path.exists(
-                self._path_to_dataset + '/val_dataset')
-            # Check if the dataset folder has the following structure
-            if trainDirExists and valDirExists and isDatasetNamedRight:
-                self._is_dataset_labelled = True
-            else:
-                self._is_dataset_labelled = False
-                print('[ ERROR ] - Please ensure there is /train_dataset' +
-                      'and /val_dataset sub-directories' +
-                      'in the selected dataset directory.')
-        elif self._precision_level == 3:
-            isDatasetNamedRight = 'custom_dataset'
-            os.path.basename(self._path_to_dataset) == 'custom_dataset'
-            trainDirExists = os.path.exists(
-                self._path_to_dataset + '/train_dataset')
-            valDirExists = os.path.exists(
-                self._path_to_dataset + '/val_dataset')
-            # Check if the dataset folder has the following structure
-            if trainDirExists and valDirExists and isDatasetNamedRight:
-                self._is_dataset_labelled = True
-            else:
-                self._is_dataset_labelled = False
-                print('[ ERROR ] - Please ensure there is /train_dataset' +
-                      'and /val_dataset sub-directories' +
-                      'in the selected dataset directory.')
+        self._is_dataset_labelled = True
+
+        if not trainDirExists:
+            self._is_dataset_labelled = False
+            print('[ ERROR ] - Invalid Training Dataset. ' +
+                  '/train_dataset directory MISSING')
+        if not valDirExists:
+            self._is_dataset_labelled = False
+            print('[ ERROR ] - Invalid Training Dataset. ' +
+                  '/val_dataset directory MISSING')
+        if not isDatasetNamedRight:
+            self._is_dataset_labelled = False
+            print('[ ERROR ] - Invalid Training Dataset. ' +
+                  'Dataset folder is not named custom_dataset.')
+        if not annotationsExists:
+            self._is_dataset_labelled = False
+            print('[ ERROR ] - Invalid Training Dataset. ' +
+                  'annotations.json files are missing for either' +
+                  '/train_dataset or /val_dataset.')
 
         if self._is_dataset_labelled is True:
+            print('[ SUCCESS ] - Training Dataset VALID.')
             # Set button color to green
             self._is_dataset_linked = True
             self.dataset_button.setStyleSheet(
@@ -541,7 +548,8 @@ class TrainWindow(QWidget):
             if not self.debug:
                 self.label_val_process.communicate()
         else:
-            print('[ WARNING ] - Faulty labelled dataset detected.')
+            print('[ WARNING ] - Training Dataset MISSING ' +
+                  'or Labelled Incorrectly.')
 
     def populateModelSelector(self):
         '''
