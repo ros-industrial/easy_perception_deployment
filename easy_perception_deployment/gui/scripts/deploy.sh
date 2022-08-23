@@ -10,7 +10,7 @@ showImage=$2
 
 # Check if Docker is installed.
 # If not installed, install it.
-if output=$(docker --version > /dev/null 2>&1); then
+if output=$(sudo docker --version > /dev/null 2>&1); then
     :
 else
     echo "Installing Docker..."
@@ -41,17 +41,17 @@ echo "Docker [ FOUND ]"
 if [ "$useCPU" = True ] ; then
   # Check if epd-foxy-base:CPU Docker Image has NOT been built.
   # If true, build it.
-  if output=$(docker images | grep cardboardcode/epd-foxy-base | grep CPU > /dev/null 2>&1); then
+  if output=$(sudo docker images | grep cardboardcode/epd-foxy-base | grep CPU > /dev/null 2>&1); then
       echo "epd-foxy-base:CPU  Docker Image [ FOUND ]"
   else
       # If there is internet connection,
       # Download public docker image.
       wget -q --spider http://google.com
       if [ $? -eq 0 ]; then
-        docker pull cardboardcode/epd-foxy-base:CPU
+        sudo docker pull cardboardcode/epd-foxy-base:CPU
       # Otherwise, build locally
       else
-        docker build --tag cardboardcode/epd-foxy-base:CPU ../../Dockerfiles/CPU/
+        sudo docker build --tag cardboardcode/epd-foxy-base:CPU ../../Dockerfiles/CPU/
       fi
       echo "epd-foxy-base:CPU  Docker Image [ CREATED ]"
   fi
@@ -59,17 +59,17 @@ if [ "$useCPU" = True ] ; then
 else
   # Check if epd-foxy-base:GPU Docker Image has NOT been built.
   # If true, build it.
-  if output=$(docker images | grep cardboardcode/epd-foxy-base | grep GPU > /dev/null 2>&1); then
+  if output=$(sudo docker images | grep cardboardcode/epd-foxy-base | grep GPU > /dev/null 2>&1); then
       echo "epd-foxy-base:GPU  Docker Image [ FOUND ]"
   else
       # If there is internet connection,
       # Download public docker image.
       wget -q --spider http://google.com
       if [ $? -eq 0 ]; then
-        docker pull cardboardcode/epd-foxy-base:GPU
+        sudo docker pull cardboardcode/epd-foxy-base:GPU
       # Otherwise, build locally
       else
-        docker build --tag cardboardcode/epd-foxy-base:GPU ../../Dockerfiles/GPU/
+        sudo docker build --tag cardboardcode/epd-foxy-base:GPU ../../Dockerfiles/GPU/
       fi
       echo "epd-foxy-base:GPU  Docker Image [ CREATED ]"
   fi
@@ -102,18 +102,16 @@ elif [[ $input == "n" ]]; then
 fi
 
 if [ "$useCPU" = True ] ; then
-  docker run -it --rm \
+  sudo docker run -it --rm \
   --name epd_test_container \
   -v $(pwd):/root/epd_ros2_ws/src/easy_perception_deployment \
-  -u 0 \
   cardboardcode/epd-foxy-base:CPU \
   $launch_script
 else
-  docker run -it --rm \
+  sudo docker run -it --rm \
   --name epd_test_container \
   -v $(pwd):/root/epd_ros2_ws/src/easy_perception_deployment \
   --gpus all \
-  -u 0 \
   cardboardcode/epd-foxy-base:GPU \
   $launch_script
 fi
