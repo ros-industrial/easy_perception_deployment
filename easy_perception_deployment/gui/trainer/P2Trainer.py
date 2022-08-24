@@ -18,6 +18,7 @@ import os
 import json
 import yaml
 import subprocess
+import logging
 
 
 class P2Trainer:
@@ -37,6 +38,8 @@ class P2Trainer:
         a training session.\n
         Calls updateTrainingConfig function.
         '''
+        self.p2_train_logger = logging.getLogger('p2_train')
+
         self.model_name = model_name
         self.label_list = label_list
         self.max_iteration = max_iteration
@@ -114,7 +117,12 @@ class P2Trainer:
         p2_train_verification = json.load(file)
 
         # Check if docker image cardboardcode/epd-trainer:latest exists
-        cmd = ["docker", "inspect", "--type=image", self._TRAIN_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._TRAIN_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -131,6 +139,7 @@ class P2Trainer:
 
         # Check if docker container epd_p3_trainer exists
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -150,7 +159,12 @@ class P2Trainer:
             p2_train_verification["isTrainFarmDockerContainerCreated"] = True
 
         # Check if docker image cardboardcode/epd-exporter:latest exists
-        cmd = ["docker", "inspect", "--type=image", self._EXPORT_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._EXPORT_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -167,6 +181,7 @@ class P2Trainer:
 
         # Check if docker container epd_p2_trainer exists
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -200,8 +215,8 @@ class P2Trainer:
             shell=True)
         inspect_gpu_process.communicate()
         if inspect_gpu_process.returncode == 127:
-            print("[ nvidia-smi ] command not found. " +
-                  "Please install nvidia-driver.")
+            self.p2_train_logger.warn("[ nvidia-smi ] command not found. " +
+                                      "Please install nvidia-driver.")
             self.isGPUAvailableFlag = False
         # Checks if CUDA has been installed.
         cmd = ["nvcc"]
@@ -212,17 +227,19 @@ class P2Trainer:
             shell=True)
         inspect_cuda_process.communicate()
         if inspect_cuda_process.returncode == 127:
-            print("[ nvcc ] command not found. Please install nvidia-driver.")
+            self.p2_train_logger.warn("[ nvcc ] command not found. " +
+                                      "Please install nvidia-driver.")
             self.isGPUAvailableFlag = False
 
-        print("[ nvidia-smi ] command - FOUND")
-        print("[ nvcc ] command - FOUND")
+        self.p2_train_logger.info("[ nvidia-smi ] command - FOUND")
+        self.p2_train_logger.info("[ nvcc ] command - FOUND")
         self.isGPUAvailableFlag = True
 
     def train(self, debug):
         # If GPU is unavailable, output warning and exit.
         if not self.isGPUAvailableFlag:
-            print("[ WARNING ] - GPU not detected. Skipping [ train ]...")
+            self.p2_train_logger.warning(
+                "GPU not detected. Skipping [ train ]...")
             return None
 
         # Verify that P2TrainFarm has successfully set up before.
@@ -232,7 +249,8 @@ class P2Trainer:
             self.createTrainFarmDockerContainer()
             self.installTrainingDependencies()
         else:
-            print("P2 TrainFarm Setup - VERIFIED. Proceeding to train...")
+            self.p2_train_logger.info(
+                "P2 TrainFarm Setup - VERIFIED. Proceeding to train...")
 
         self.copyTrainingFiles()
         self.runTraining()
@@ -240,7 +258,8 @@ class P2Trainer:
     def export(self, debug):
         # If GPU is unavailable, output warning and exit.
         if not self.isGPUAvailableFlag:
-            print("[ WARNING ] - GPU not detected. Skipping [ export ]...")
+            self.p2_train_logger.warning(
+                "GPU not detected. Skipping [ export ]...")
             return None
 
         # Verify that P2Exporter has successfully set up before.
@@ -250,7 +269,8 @@ class P2Trainer:
             self.createExportDockerContainer()
             self.installExporterDependencies()
         else:
-            print("P2 Exporter Setup - VERIFIED. Proceeding to export...")
+            self.p2_train_logger.info("P2 Exporter Setup - VERIFIED. " +
+                                      "Proceeding to export...")
 
         self.copyExportFiles()
         self.runExporter()
@@ -286,7 +306,12 @@ class P2Trainer:
     def pullTrainFarmDockerImage(self):
         # Check if docker image cardboardcode/epd-trainer:latest exists
 
-        cmd = ["docker", "inspect", "--type=image", self._TRAIN_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._TRAIN_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -300,13 +325,14 @@ class P2Trainer:
         # Otherwise, proceed.
         docker_pull_process_returncode = None
         if self.docker_inspect_process.returncode != 0:
-            cmd = ["docker", "pull", self._TRAIN_DOCKER_IMG]
+            cmd = ["sudo", "docker", "pull", self._TRAIN_DOCKER_IMG]
             self.docker_pull_process = subprocess.Popen(cmd)
             self.docker_pull_process.communicate()
             docker_pull_process_returncode = (
                 self.docker_pull_process.returncode)
         else:
-            print(self._TRAIN_DOCKER_IMG + " - Docker Image FOUND.")
+            self.p2_train_logger.info(
+                self._TRAIN_DOCKER_IMG + " - Docker Image FOUND.")
             docker_pull_process_returncode = 0
 
         # If docker_pull_process succeeded,
@@ -328,6 +354,7 @@ class P2Trainer:
     def createTrainFarmDockerContainer(self):
         # Check if docker container exists.
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -354,7 +381,8 @@ class P2Trainer:
             docker_construct_process_returncode = (
                 self.docker_construct_process.returncode)
         else:
-            print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            self.p2_train_logger.info(
+                self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
             docker_construct_process_returncode = 0
 
         # If docker_pull_process succeeded,
@@ -376,7 +404,12 @@ class P2Trainer:
     def pullExporterDockerImage(self):
         # Check if docker image cardboardcode/epd-exporter:latest exists
 
-        cmd = ["docker", "inspect", "--type=image", self._EXPORT_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._EXPORT_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -396,7 +429,8 @@ class P2Trainer:
             docker_pull_process_returncode = (
                 self.docker_pull_process.returncode)
         else:
-            print(self._EXPORT_DOCKER_IMG + " - Docker Image FOUND.")
+            self.p2_train_logger.info(
+                self._EXPORT_DOCKER_IMG + " - Docker Image FOUND.")
             docker_pull_process_returncode = 0
 
         # If docker_pull_process succeeded,
@@ -445,6 +479,7 @@ class P2Trainer:
     def createExportDockerContainer(self):
         # Check if docker container exists.
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -471,7 +506,8 @@ class P2Trainer:
             docker_construct_process_returncode = (
                 self.docker_construct_process.returncode)
         else:
-            print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            self.p2_train_logger.info(self._EXPORT_DOCKER_CONTAINER +
+                                      " - Docker Container FOUND.")
             docker_construct_process_returncode = 0
 
         # If docker_pull_process succeeded,
@@ -520,6 +556,7 @@ class P2Trainer:
     def copyTrainingFiles(self):
         # Check if docker container exists.
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -537,7 +574,8 @@ class P2Trainer:
         if self.docker_inspect_process.returncode != 0:
             self.installTrainingDependencies()
         else:
-            print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            self.p2_train_logger.info(self._TRAIN_DOCKER_CONTAINER +
+                                      " - Docker Container FOUND.")
         cmd = [
             "bash",
             "trainer/training_files/scripts/" +
@@ -549,6 +587,7 @@ class P2Trainer:
     def runTraining(self):
         # Check if docker container exists.
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -566,7 +605,8 @@ class P2Trainer:
         if self.docker_inspect_process.returncode != 0:
             self.installTrainingDependencies()
         else:
-            print(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            self.p2_train_logger.info(self._TRAIN_DOCKER_CONTAINER +
+                                      " - Docker Container FOUND.")
         cmd = [
             "bash",
             "trainer/training_files/scripts/run_training.bash",
@@ -577,6 +617,7 @@ class P2Trainer:
     def copyExportFiles(self):
         # Check if docker container exists.
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -594,7 +635,8 @@ class P2Trainer:
         if self.docker_inspect_process.returncode != 0:
             self.installExporterDependencies()
         else:
-            print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            self.p2_train_logger.info(self._EXPORT_DOCKER_CONTAINER +
+                                      " - Docker Container FOUND.")
         cmd = [
             "bash",
             "trainer/exporter_files/scripts/copy_exporter_files.bash",
@@ -605,6 +647,7 @@ class P2Trainer:
     def runExporter(self):
         # Check if docker container exists.
         cmd = [
+            "sudo",
             "docker",
             "inspect",
             "--type=container",
@@ -622,7 +665,8 @@ class P2Trainer:
         if self.docker_inspect_process.returncode != 0:
             self.installExporterDependencies()
         else:
-            print(self._EXPORT_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            self.p2_train_logger.info(self._EXPORT_DOCKER_CONTAINER +
+                                      " - Docker Container FOUND.")
         cmd = [
             "bash",
             "trainer/exporter_files/scripts/run_exporter.bash",
@@ -640,14 +684,16 @@ class P2Trainer:
                 "-" +
                 timestamp_string +
                 ".onnx")
-            print("ONNX model generated from .pth file. " +
-                  "File saved to [data/model/" +
-                  TIMESTAMPED_ONNX_FILE_NAME + "]...")
+            self.p2_train_logger.info(
+                "ONNX model generated from .pth file. " +
+                "File saved to [data/model/" +
+                TIMESTAMPED_ONNX_FILE_NAME + "]...")
             cmd = ["cp",
                    _FILE_PATH_TO_ONNX_MODEL,
                    "../data/model/" + TIMESTAMPED_ONNX_FILE_NAME]
             self.shift_process = subprocess.Popen(cmd)
             self.shift_process.communicate()
         else:
-            print("[ output.onnx ] - MISSING. " +
-                  "Something must have failed before this.")
+            self.p2_train_logger.warning(
+                "[ output.onnx ] - MISSING. " +
+                "Something must have failed before this.")

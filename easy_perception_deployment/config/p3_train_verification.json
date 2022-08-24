@@ -1,6 +1,8 @@
 {
     "isTrainFarmDockerImagePulled": false,
+    "isTrainFarmDockerContainerCreated": false,
     "isTrainDependenciesInstalled": false,
     "isExporterDockerImagePulled": false,
+    "isExportDockerContainerCreated": false,
     "isExportDependenciesInstalled": false
 }

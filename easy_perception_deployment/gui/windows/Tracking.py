@@ -14,6 +14,7 @@
 
 import os
 import json
+import logging
 
 from PySide2.QtCore import QSize
 from PySide2.QtGui import QIcon
@@ -37,6 +38,8 @@ class TrackingWindow(QWidget):
         Calls setButtons function to populate window with button.
         '''
         super().__init__()
+
+        self.tracking_logger = logging.getLogger('tracking')
 
         self._TRACKING_WIN_H = 150
         self._TRACKING_WIN_W = 300
@@ -96,7 +99,7 @@ class TrackingWindow(QWidget):
 
     def writeToUseCaseConfig(self):
         '''A function that is triggered by the button labelled, Finish.'''
-        print('Wrote to ../data/usecase_config.json')
+        self.tracking_logger.info('Wrote to ../data/usecase_config.json')
 
         dict = {
             "usecase_mode": 4,
@@ -116,5 +119,7 @@ class TrackingWindow(QWidget):
         A function that is triggered by the DropDown Menu labelled, Available
         Trackers
         '''
-        print(self._tracker_label_list[index] + ' tracker chosen.')
+        self.tracking_logger.info(self._tracker_label_list[index] +
+                                  ' tracker chosen.')
+
         self._selected_tracker_index = index

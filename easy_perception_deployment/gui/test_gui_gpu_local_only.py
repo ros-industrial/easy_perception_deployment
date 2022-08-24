@@ -99,6 +99,45 @@ else:
     PATH_TO_TEST_TRAIN_DATASET = os.path.abspath("../test/custom_dataset")
 
 
+def test_P3Trainer_pullTrainFarmDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-trainer:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p3_trainer.pullTrainFarmDockerImage()
+
+    cmd = ["sudo", "docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P3Trainer_createTrainFarmDockerContainer(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
@@ -121,6 +160,7 @@ def test_P3Trainer_createTrainFarmDockerContainer(qtbot):
     p3_trainer.createTrainFarmDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -167,6 +207,7 @@ def test_P3Trainer_installTrainingDependencies(qtbot):
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -260,6 +301,45 @@ def test_P3Trainer_runTraining(qtbot):
     assert os.path.exists("trained.pth") is True
 
 
+def test_P3Trainer_pullExporterDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'maskrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _EXPORT_DOCKER_IMG = "cardboardcode/epd-exporter:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p3_trainer = P3Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p3_trainer.pullExporterDockerImage()
+
+    cmd = ["sudo", "docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P3Trainer_createExportDockerContainer(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
@@ -282,6 +362,7 @@ def test_P3Trainer_createExportDockerContainer(qtbot):
     p3_trainer.createExportDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -327,7 +408,12 @@ def test_P3Trainer_installExporterDependencies(qtbot):
 
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
-    cmd = ["docker", "inspect", "--type=container", _EXPORT_DOCKER_CONTAINER]
+    cmd = [
+        "sudo",
+        "docker",
+        "inspect",
+        "--type=container",
+        _EXPORT_DOCKER_CONTAINER]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -413,6 +499,45 @@ def test_P3Trainer_runExporter(qtbot):
     assert os.path.exists("output.onnx") is True
 
 
+def test_P2Trainer_pullTrainFarmDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _TRAIN_DOCKER_IMG = "cardboardcode/epd-trainer:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.pullTrainFarmDockerImage()
+
+    cmd = ["sudo", "docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P2Trainer_createTrainFarmDockerContainer(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
@@ -435,6 +560,7 @@ def test_P2Trainer_createTrainFarmDockerContainer(qtbot):
     p2_trainer.createTrainFarmDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -481,6 +607,7 @@ def test_P2Trainer_installTrainingDependencies(qtbot):
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -574,6 +701,45 @@ def test_P2Trainer_runTraining(qtbot):
     assert os.path.exists("trained.pth") is True
 
 
+def test_P2Trainer_pullExporterDockerImage(qtbot):
+
+    path_to_dataset = 'path_to_dummy_dataset'
+    model_name = 'fasterrcnn'
+    label_list = ['__ignore__', '_background_', 'teabox']
+    _EXPORT_DOCKER_IMG = "cardboardcode/epd-exporter:latest"
+
+    widget = TrainWindow(True)
+    qtbot.addWidget(widget)
+
+    widget.max_iteration = 100
+    widget.checkpoint_period = 100
+    widget.test_period = 100
+    widget.steps = '(100, 200, 300)'
+
+    p2_trainer = P2Trainer(
+        path_to_dataset,
+        model_name,
+        label_list,
+        100,
+        100,
+        100,
+        '(100, 200, 300)')
+
+    p2_trainer.pullExporterDockerImage()
+
+    cmd = ["sudo", "docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
+
+    docker_inspect_process = subprocess.Popen(
+        cmd,
+        universal_newlines=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=None)
+    docker_inspect_process.communicate()
+
+    assert docker_inspect_process.returncode == 0
+
+
 def test_P2Trainer_createExportDockerContainer(qtbot):
 
     path_to_dataset = 'path_to_dummy_dataset'
@@ -596,6 +762,7 @@ def test_P2Trainer_createExportDockerContainer(qtbot):
     p2_trainer.createExportDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -641,6 +808,7 @@ def test_P2Trainer_installExporterDependencies(qtbot):
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
