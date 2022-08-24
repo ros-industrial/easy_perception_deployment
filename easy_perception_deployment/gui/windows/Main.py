@@ -20,6 +20,7 @@ from windows.Deploy import DeployWindow
 from windows.Train import TrainWindow
 
 import logging
+from datetime import datetime
 
 
 class MainWindow(QWidget):
@@ -35,11 +36,14 @@ class MainWindow(QWidget):
         '''
         super().__init__()
 
+        timestamp = datetime.now()
+        timestamp_string = timestamp.strftime("%d-%m-%Y-%H-%M-%S")
+
         logging.basicConfig(
             level=logging.NOTSET,
             format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
             datefmt='%m-%d %H:%M',
-            filename='/tmp/myapp.log',
+            filename='log/' + timestamp_string  + '.log',
             filemode='w')
         warn_console = logging.StreamHandler()
         warn_console.setLevel(logging.WARN)
