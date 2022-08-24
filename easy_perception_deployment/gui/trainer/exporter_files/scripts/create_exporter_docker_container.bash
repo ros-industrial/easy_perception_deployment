@@ -27,7 +27,7 @@ else
 fi
 
 # DEBUG STARTDIR = ./easy_perception_deployment/gui
-docker create -it \
+sudo docker create -it \
 --name $CONTAINER_NAME \
 --env="QT_X11_NO_MITSHM=1" \
 -v /tmp/.X11-unix:/tmp/.X11-unix \

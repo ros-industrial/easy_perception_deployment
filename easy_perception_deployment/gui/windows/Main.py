@@ -19,6 +19,8 @@ from PySide2.QtWidgets import QPushButton, QWidget
 from windows.Deploy import DeployWindow
 from windows.Train import TrainWindow
 
+import logging
+
 
 class MainWindow(QWidget):
     '''
@@ -32,6 +34,28 @@ class MainWindow(QWidget):
         Calls setButtons function to populate window with button.
         '''
         super().__init__()
+
+        
+
+        logging.basicConfig(
+            level=logging.NOTSET,
+            format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+            datefmt='%m-%d %H:%M',
+            filename='/tmp/myapp.log',
+            filemode='w')
+        warn_console = logging.StreamHandler()
+        warn_console.setLevel(logging.WARN)
+        info_console = logging.StreamHandler()
+        info_console.setLevel(logging.INFO)
+        error_console = logging.StreamHandler()
+        error_console.setLevel(logging.ERROR)
+        formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+        warn_console.setFormatter(formatter)
+        info_console.setFormatter(formatter)
+        error_console.setFormatter(formatter)
+        logging.getLogger('').addHandler(warn_console)
+        logging.getLogger('').addHandler(info_console)
+        logging.getLogger('').addHandler(error_console)
 
         self.train_window = TrainWindow(False)
         self.deploy_window = DeployWindow(False)

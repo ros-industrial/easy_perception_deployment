@@ -125,7 +125,7 @@ def test_P3Trainer_pullTrainFarmDockerImage(qtbot):
 
     p3_trainer.pullTrainFarmDockerImage()
 
-    cmd = ["docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+    cmd = ["sudo", "docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -160,6 +160,7 @@ def test_P3Trainer_createTrainFarmDockerContainer(qtbot):
     p3_trainer.createTrainFarmDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -206,6 +207,7 @@ def test_P3Trainer_installTrainingDependencies(qtbot):
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -325,7 +327,7 @@ def test_P3Trainer_pullExporterDockerImage(qtbot):
 
     p3_trainer.pullExporterDockerImage()
 
-    cmd = ["docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
+    cmd = ["sudo", "docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -360,6 +362,7 @@ def test_P3Trainer_createExportDockerContainer(qtbot):
     p3_trainer.createExportDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -405,7 +408,7 @@ def test_P3Trainer_installExporterDependencies(qtbot):
 
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
-    cmd = ["docker", "inspect", "--type=container", _EXPORT_DOCKER_CONTAINER]
+    cmd = ["sudo", "docker", "inspect", "--type=container", _EXPORT_DOCKER_CONTAINER]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -517,7 +520,7 @@ def test_P2Trainer_pullTrainFarmDockerImage(qtbot):
 
     p2_trainer.pullTrainFarmDockerImage()
 
-    cmd = ["docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
+    cmd = ["sudo", "docker", "inspect", "--type=image", _TRAIN_DOCKER_IMG]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -552,6 +555,7 @@ def test_P2Trainer_createTrainFarmDockerContainer(qtbot):
     p2_trainer.createTrainFarmDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -598,6 +602,7 @@ def test_P2Trainer_installTrainingDependencies(qtbot):
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -717,7 +722,7 @@ def test_P2Trainer_pullExporterDockerImage(qtbot):
 
     p2_trainer.pullExporterDockerImage()
 
-    cmd = ["docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
+    cmd = ["sudo", "docker", "inspect", "--type=image", _EXPORT_DOCKER_IMG]
 
     docker_inspect_process = subprocess.Popen(
         cmd,
@@ -752,6 +757,7 @@ def test_P2Trainer_createExportDockerContainer(qtbot):
     p2_trainer.createExportDockerContainer()
 
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",
@@ -797,6 +803,7 @@ def test_P2Trainer_installExporterDependencies(qtbot):
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
     cmd = [
+        "sudo",
         "docker",
         "inspect",
         "--type=container",

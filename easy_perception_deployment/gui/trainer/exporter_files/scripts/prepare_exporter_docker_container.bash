@@ -28,5 +28,5 @@ else
     CONTAINER_NAME="epd_p2_exporter"
 fi
 
-docker start $CONTAINER_NAME
-docker exec -it $CONTAINER_NAME $install_script
+sudo docker start $CONTAINER_NAME
+sudo docker exec -it $CONTAINER_NAME $install_script
