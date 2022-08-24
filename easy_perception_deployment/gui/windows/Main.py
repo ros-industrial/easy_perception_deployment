@@ -43,7 +43,7 @@ class MainWindow(QWidget):
             level=logging.NOTSET,
             format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
             datefmt='%m-%d %H:%M',
-            filename='log/' + timestamp_string  + '.log',
+            filename='log/' + timestamp_string + '.log',
             filemode='w')
         warn_console = logging.StreamHandler()
         warn_console.setLevel(logging.WARN)
