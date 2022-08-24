@@ -117,7 +117,12 @@ class P3Trainer:
         p3_train_verification = json.load(file)
 
         # Check if docker image cardboardcode/epd-trainer:latest exists
-        cmd = ["sudo", "docker", "inspect", "--type=image", self._TRAIN_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._TRAIN_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -154,7 +159,12 @@ class P3Trainer:
             p3_train_verification["isTrainFarmDockerContainerCreated"] = True
 
         # Check if docker image cardboardcode/epd-exporter:latest exists
-        cmd = ["sudo", "docker", "inspect", "--type=image", self._EXPORT_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._EXPORT_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -228,7 +238,8 @@ class P3Trainer:
     def train(self, debug):
         # If GPU is unavailable, output warning and exit.
         if not self.isGPUAvailableFlag:
-            self.p3_train_logger.warning("GPU not detected. Skipping [ train ]...")
+            self.p3_train_logger.warning(
+                "GPU not detected. Skipping [ train ]...")
             return None
 
         # Verify that P3TrainFarm has successfully set up before.
@@ -238,7 +249,8 @@ class P3Trainer:
             self.createTrainFarmDockerContainer()
             self.installTrainingDependencies()
         else:
-            self.p3_train_logger.info("P3 TrainFarm Setup - VERIFIED. Proceeding to train...")
+            self.p3_train_logger.info(
+                "P3 TrainFarm Setup - VERIFIED. Proceeding to train...")
 
         self.copyTrainingFiles()
         self.runTraining()
@@ -246,7 +258,8 @@ class P3Trainer:
     def export(self, debug):
         # If GPU is unavailable, output warning and exit.
         if not self.isGPUAvailableFlag:
-            self.p3_train_logger.warning("GPU not detected. Skipping [ export ]...")
+            self.p3_train_logger.warning(
+                "GPU not detected. Skipping [ export ]...")
             return None
 
         # Verify that P3Exporter has successfully set up before.
@@ -292,7 +305,12 @@ class P3Trainer:
 
     def pullTrainFarmDockerImage(self):
         # Check if docker image cardboardcode/epd-trainer:latest exists
-        cmd = ["sudo", "docker", "inspect", "--type=image", self._TRAIN_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._TRAIN_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -312,7 +330,8 @@ class P3Trainer:
             docker_pull_process_returncode = (
                 self.docker_pull_process.returncode)
         else:
-            self.p3_train_logger.info(self._TRAIN_DOCKER_IMG + " - Docker Image FOUND.")
+            self.p3_train_logger.info(
+                self._TRAIN_DOCKER_IMG + " - Docker Image FOUND.")
             docker_pull_process_returncode = 0
 
         # If docker_pull_process succeeded,
@@ -361,7 +380,8 @@ class P3Trainer:
             docker_construct_process_returncode = (
                 self.docker_construct_process.returncode)
         else:
-            self.p3_train_logger.info(self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
+            self.p3_train_logger.info(
+                self._TRAIN_DOCKER_CONTAINER + " - Docker Container FOUND.")
             docker_construct_process_returncode = 0
 
         # If docker_pull_process succeeded,
@@ -382,7 +402,12 @@ class P3Trainer:
 
     def pullExporterDockerImage(self):
         # Check if docker image cardboardcode/epd-exporter:latest exists
-        cmd = ["sudo", "docker", "inspect", "--type=image", self._EXPORT_DOCKER_IMG]
+        cmd = [
+            "sudo",
+            "docker",
+            "inspect",
+            "--type=image",
+            self._EXPORT_DOCKER_IMG]
 
         self.docker_inspect_process = subprocess.Popen(
             cmd,
@@ -402,7 +427,8 @@ class P3Trainer:
             docker_pull_process_returncode = (
                 self.docker_pull_process.returncode)
         else:
-            self.p3_train_logger.info(self._EXPORT_DOCKER_IMG + " - Docker Image FOUND.")
+            self.p3_train_logger.info(
+                self._EXPORT_DOCKER_IMG + " - Docker Image FOUND.")
             docker_pull_process_returncode = 0
 
         # If docker_pull_process succeeded,

@@ -310,7 +310,8 @@ class TrainWindow(QWidget):
             max_iteration = self.max_iteration
         if ok:
             self.max_iteration = max_iteration
-            self.train_logger.info("Setting Max Iteration to " + str(self.max_iteration))
+            self.train_logger.info(
+                "Setting Max Iteration to " + str(self.max_iteration))
 
     def setCheckPointPeriod(self):
         if not self.debug:
@@ -324,7 +325,8 @@ class TrainWindow(QWidget):
             checkpoint_p = self.checkpoint_period
         if ok:
             self.checkpoint_period = checkpoint_p
-            self.train_logger.info("Setting Checkpoint Period to " + str(self.checkpoint_period))
+            self.train_logger.info(
+                "Setting Checkpoint Period to " + str(self.checkpoint_period))
 
     def setTestPeriod(self):
         if not self.debug:
@@ -338,7 +340,8 @@ class TrainWindow(QWidget):
             test_p = self.test_period
         if ok:
             self.test_period = test_p
-            self.train_logger.info("Setting Test Period to " + str(self.test_period))
+            self.train_logger.info(
+                "Setting Test Period to " + str(self.test_period))
 
     def setSteps(self):
         if not self.debug:
@@ -358,9 +361,10 @@ class TrainWindow(QWidget):
             try:
                 local_steps = make_tuple(steps)
             except (ValueError, SyntaxError):
-                self.train_logger.exception("Invalid tuple given. " +
-                                             "ValueError or SyntaxError detected" +
-                                             "Assigning default values")
+                self.train_logger.exception(
+                    "Invalid tuple given. " +
+                    "ValueError or SyntaxError detected" +
+                    "Assigning default values")
             self.steps = steps
             self.train_logger.info("Setting Steps to " + str(self.steps))
 
@@ -377,37 +381,42 @@ class TrainWindow(QWidget):
         # Perform 4 checks to ensure
         # all data is available for Training to start without issue.
         if not self._is_model_ready:
-            self.train_logger.warning("No model provided. Please choose Model.")
+            self.train_logger.warning(
+                "No model provided. Please choose Model.")
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
             return
         if not self._is_dataset_linked:
-            self.train_logger.warning('Dataset directory not provided. ' +
-                                   'Please choose Dataset.')
+            self.train_logger.warning(
+                'Dataset directory not provided. ' +
+                'Please choose Dataset.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
             return
         if not self._is_labellist_linked:
-            self.train_logger.warning('No label List provided. ' +
-                                   'Please choose Label List.')
+            self.train_logger.warning(
+                'No label List provided. ' +
+                'Please choose Label List.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
             return
 
         if not self._is_dataset_labelled:
-            self.train_logger.warning('Dataset not properly restructured.' +
-                                   'Please restructure Dataset.')
+            self.train_logger.warning(
+                'Dataset not properly restructured.' +
+                'Please restructure Dataset.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
             return
 
         if not self._is_dataset_labelled:
-            self.train_logger.warning('Dataset not labelled properly. ' +
-                                   'Please label Dataset.')
+            self.train_logger.warning(
+                'Dataset not labelled properly. ' +
+                'Please label Dataset.')
             self.train_button.setStyleSheet(
                 'background-color: rgba(180,180,180,255);')
             self.disconnectTrainingButton()
@@ -416,7 +425,8 @@ class TrainWindow(QWidget):
         self.validate_button.setStyleSheet(
             'background-color: rgba(0,200,10,255);')
 
-        self.train_logger.info("[ SUCCESS ] - Training Validated. Train button unlocked.")
+        self.train_logger.info(
+            "[ SUCCESS ] - Training Validated. Train button unlocked.")
         self.train_button.setStyleSheet('background-color: white;')
         self.connectTrainingButton()
 
@@ -450,13 +460,15 @@ class TrainWindow(QWidget):
                                     '/val_dataset directory MISSING')
         if not isDatasetNamedRight:
             self._is_dataset_labelled = False
-            self.train_logger.error('Invalid Training Dataset. ' +
-                                    'Dataset folder is not named custom_dataset.')
+            self.train_logger.error(
+                'Invalid Training Dataset. ' +
+                'Dataset folder is not named custom_dataset.')
         if not annotationsExists:
             self._is_dataset_labelled = False
-            self.train_logger.error('Invalid Training Dataset. ' +
-                                    'annotations.json files are missing for either' +
-                                    '/train_dataset or /val_dataset.')
+            self.train_logger.error(
+                'Invalid Training Dataset. ' +
+                'annotations.json files are missing for either' +
+                '/train_dataset or /val_dataset.')
 
         if self._is_dataset_labelled is True:
             self.train_logger.info('[ SUCCESS ] - Training Dataset VALID.')
@@ -467,16 +479,19 @@ class TrainWindow(QWidget):
                 'background-color: rgba(0,200,10,255);')
         else:
             # Set button color to red
-            self.train_logger.warning('Invalid Dataset. Please choose another.')
+            self.train_logger.warning(
+                'Invalid Dataset. Please choose another.')
             self.dataset_button.setIcon(QIcon('img/dataset.png'))
             self.dataset_button.setStyleSheet('background-color: red;')
 
     def startTraining(self):
 
         if self._precision_level == 1:
-            self.train_logger.warning("[ Deprecation Notice ] - Precision Level 1 features " +
-                                   "has been deprecated in EPD v0.3.0.")
-            self.train_logger.warning("Please use Precision Level 1 and 2 features instead.")
+            self.train_logger.warning(
+                "[ Deprecation Notice ] - Precision Level 1 features " +
+                "has been deprecated in EPD v0.3.0.")
+            self.train_logger.warning(
+                "Please use Precision Level 1 and 2 features instead.")
         elif self._precision_level == 2:
             p2_trainer = P2Trainer(self._path_to_dataset,
                                    self.model_name,

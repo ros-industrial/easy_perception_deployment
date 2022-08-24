@@ -35,8 +35,6 @@ class MainWindow(QWidget):
         '''
         super().__init__()
 
-        
-
         logging.basicConfig(
             level=logging.NOTSET,
             format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -49,7 +47,9 @@ class MainWindow(QWidget):
         info_console.setLevel(logging.INFO)
         error_console = logging.StreamHandler()
         error_console.setLevel(logging.ERROR)
-        formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+        formatter = logging.Formatter(
+            '%(name)-12s: ' +
+            '%(levelname)-8s %(message)s')
         warn_console.setFormatter(formatter)
         info_console.setFormatter(formatter)
         error_console.setFormatter(formatter)

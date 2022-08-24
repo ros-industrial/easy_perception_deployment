@@ -408,7 +408,12 @@ def test_P3Trainer_installExporterDependencies(qtbot):
 
     # Check if _TRAIN_DOCKER_CONTAINER Docker Container
     # has been successfully created.
-    cmd = ["sudo", "docker", "inspect", "--type=container", _EXPORT_DOCKER_CONTAINER]
+    cmd = [
+        "sudo",
+        "docker",
+        "inspect",
+        "--type=container",
+        _EXPORT_DOCKER_CONTAINER]
 
     docker_inspect_process = subprocess.Popen(
         cmd,

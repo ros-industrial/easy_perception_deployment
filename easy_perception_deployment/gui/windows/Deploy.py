@@ -83,8 +83,9 @@ class DeployWindow(QWidget):
             session_config_json_obj = open(self._path_to_session_config)
             session_config = json.load(session_config_json_obj)
         else:
-            self.deploy_logger.warning('[ session_config.json ] is missing.' +
-                               'Assigning default values')
+            self.deploy_logger.warning(
+                '[ session_config.json ] is missing.' +
+                'Assigning default values')
             self._path_to_model = 'filepath/to/onnx/model'
             self._path_to_label_list = 'filepath/to/classes/list/txt'
             self.visualizeFlag = True
@@ -94,9 +95,10 @@ class DeployWindow(QWidget):
             usecase_config_json_obj = open(self._path_to_usecase_config)
             usecase_config = json.load(usecase_config_json_obj)
         else:
-            self.deploy_logger.warning('[usecase_config.json] is missing.'
-                               'Assigning default Use Case MODE : ' +
-                               '[CLASSIFICATION] ')
+            self.deploy_logger.warning(
+                '[usecase_config.json] is missing.'
+                'Assigning default Use Case MODE : ' +
+                '[CLASSIFICATION] ')
             self.usecase_mode = 0
 
         try:
@@ -123,9 +125,10 @@ class DeployWindow(QWidget):
             self.usecase_mode = int(usecase_config["usecase_mode"])
 
             if self.usecase_mode < 0 or self.usecase_mode > 4:
-                self.deploy_logger.warning('[ usecase_config.json ] - Invalid Usecase Mode' +
-                                   ' - FOUND.\n'
-                                   'Assigning default Use Case MODE : [CLASSIFICATION] ')
+                self.deploy_logger.warning(
+                    '[ usecase_config.json ] - Invalid Usecase Mode' +
+                    ' - FOUND.\n'
+                    'Assigning default Use Case MODE : [CLASSIFICATION] ')
                 self.usecase_mode = 0
 
             # Rearranging usecase_list based on saved configuration.
@@ -133,10 +136,11 @@ class DeployWindow(QWidget):
             self.usecase_list.remove(curr_usecase_mode)
             self.usecase_list.insert(0, curr_usecase_mode)
         except TypeError:
-            self.deploy_logger.exception("[ usecase_config.json ] - " +
-                                    "TypeError detected" +
-                                    "Assigning default Use Case MODE : " +
-                                    "[CLASSIFICATION] ")
+            self.deploy_logger.exception(
+                "[ usecase_config.json ] - " +
+                "TypeError detected" +
+                "Assigning default Use Case MODE : " +
+                "[CLASSIFICATION] ")
             self.usecase_mode = 0
 
         if self.doesFileExist(self._path_to_input_image_json_file):
@@ -165,7 +169,8 @@ class DeployWindow(QWidget):
         self.deploy_logger.info('[- EPD Deployment Configurations -]')
         self.deploy_logger.info('[ ONNX Model ] : ' + self._path_to_model)
         self.deploy_logger.info('[ Label List ] : ' + self._path_to_label_list)
-        self.deploy_logger.info('[ Input Image Topic ] : ' + self._input_image_topic)
+        self.deploy_logger.info(
+            '[ Input Image Topic ] : ' + self._input_image_topic)
 
     def setButtons(self):
         '''A Mutator function that defines all buttons in DeployWindow.'''
@@ -314,8 +319,9 @@ class DeployWindow(QWidget):
         run.launch.py file based on new image topic.
         '''
         new_image_topic = self.topic_button.toPlainText()
-        self.deploy_logger.info('Rewriting Input Image Topic to: ' +
-                               new_image_topic)
+        self.deploy_logger.info(
+            'Rewriting Input Image Topic to: ' +
+            new_image_topic)
 
         dict = {"input_image_topic": new_image_topic}
         json_object = json.dumps(dict, indent=4)
@@ -328,7 +334,8 @@ class DeployWindow(QWidget):
         if os.path.exists(input_filepath):
             return True
         else:
-            self.deploy_logger.warning('[ ' + input_filepath + ' ] does not exist.')
+            self.deploy_logger.warning(
+                '[ ' + input_filepath + ' ] does not exist.')
             return False
 
     def setVisualizeFlag(self):
