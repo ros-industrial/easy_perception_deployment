@@ -30,6 +30,7 @@ fi
 sudo docker create -it \
 --name $CONTAINER_NAME \
 --env="QT_X11_NO_MITSHM=1" \
+--env="FORCE_CUDA=1" \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
 -v "$(pwd)":/home/user/ \
 --gpus all \
