@@ -81,3 +81,8 @@ Changelog for package easy_perception_deployment
 * Removed overlooked debug statements in Counting GUI Window.
 * Modified Counting GUI window to close when writeToUseCaseConfig function is called.
 * Contributor(s): Bey Hao Yun
+
+0.3.2 (2022-09-05)
+-------------------
+* Included FORCE_CUDA variable when creating P2 and P3 training & exporting docker containers. Verified with fresh install. 
+* Contributor(s): Bey Hao Yun
