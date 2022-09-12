@@ -86,3 +86,8 @@ Changelog for package easy_perception_deployment
 -------------------
 * Included FORCE_CUDA variable when creating P2 and P3 training & exporting docker containers. Verified with fresh install. 
 * Contributor(s): Bey Hao Yun
+
+0.3.3 (2022-09-14)
+-------------------
+* Fix for [#15](https://github.com/cardboardcode/easy_perception_deployment/issues/15).  
+* Contributor(s): Bey Hao Yun
