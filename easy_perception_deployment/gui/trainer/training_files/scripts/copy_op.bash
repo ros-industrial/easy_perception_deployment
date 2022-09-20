@@ -41,9 +41,11 @@ if [ ! -d "/home/user/trainer/training_files/custom_dataset" ] ; then
   	echo "[ERROR] - [ custom_dataset ] NOT FOUND..."
 else
 	if $TRAIN_MASKRCNN ; then
+		rm -r /home/user/p3_trainer/datasets/custom_dataset
 		echo "[ custom_dataset ] FOUND. Transferring to p3_trainer/datasets/custom_dataset"
 		cp --force -r /home/user/trainer/training_files/custom_dataset /home/user/p3_trainer/datasets/custom_dataset
 	else
+		rm -r /home/user/p2_trainer/datasets/custom_dataset
 		echo "[ custom_dataset ] FOUND. Transferring to p2_trainer/datasets/custom_dataset"
 		cp --force -r /home/user/trainer/training_files/custom_dataset /home/user/p2_trainer/datasets/custom_dataset
 	fi
