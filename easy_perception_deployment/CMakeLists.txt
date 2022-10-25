@@ -89,6 +89,7 @@ if(BUILD_TESTING)
   list(APPEND AMENT_LINT_AUTO_EXCLUDE
     ament_cmake_pep257
     ament_cmake_flake8
+    ament_cmake_lint_cmake
   )
 
   ament_lint_auto_find_test_dependencies()
