@@ -51,12 +51,13 @@ if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/data/model/MaskRCNN-10.onnx")
   message(AUTHOR_WARNING "Pretrained models are downloaded.")
 else()
   message(AUTHOR_WARNING "Downloading pretrained ONNX model from ONNX Model Zoo.")
-  execute_process(COMMAND wget
-  https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx
-  --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
-  execute_process(COMMAND wget
+  file(DOWNLOAD https://github.com/onnx/models/raw/master/vision/classification/squeezenet/model/squeezenet1.1-7.onnx
+    ${CMAKE_CURRENT_LIST_DIR}/data/model/squeezenet1.1-7.onnx)
+  file(DOWNLOAD https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx
+    ${CMAKE_CURRENT_LIST_DIR}/data/model/FasterRCNN-10.onnx)
+  file(DOWNLOAD
   https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx
-  --directory-prefix=${CMAKE_CURRENT_LIST_DIR}/data/model/)
+    ${CMAKE_CURRENT_LIST_DIR}/data/model/MaskRCNN-10.onnx)
 endif()
 
 # Check if CUDA is available in local onnxruntime build
