@@ -15,7 +15,9 @@
   <build_depend>cv_bridge</build_depend>
   <build_depend>pcl_conversions</build_depend>
   <build_depend>epd_msgs</build_depend>
+  <build_depend>epd_onnxruntime_vendor</build_depend>
   <build_depend>libopencv-dev</build_depend>
+  <build_depend>tf2</build_depend>
 
   <exec_depend>cv_bridge</exec_depend>
   <exec_depend>libopencv-dev</exec_depend>
