@@ -17,7 +17,6 @@ jobs:
       # Use custom public docker image
       UPSTREAM_WORKSPACE: onnxruntime.repos
       ISOLATION: docker
-      CODECOV_TOKEN: b56af58a-9b3b-49a9-800d-65746dbfb346
 
     runs-on: ubuntu-20.04
     steps:
@@ -31,4 +30,6 @@ jobs:
       - uses: 'cardboardcode/industrial_ci@pr-coverage'
         env: ${{ matrix.env }}
       # Generate and upload code coverage report to codecov.
-      - uses: codecov/codecov-action@v1.0.6
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
