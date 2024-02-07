@@ -51,12 +51,12 @@ if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/data/model/MaskRCNN-10.onnx")
   message(AUTHOR_WARNING "Pretrained models are downloaded.")
 else()
   message(AUTHOR_WARNING "Downloading pretrained ONNX model from ONNX Model Zoo.")
-  file(DOWNLOAD https://github.com/onnx/models/raw/master/vision/classification/squeezenet/model/squeezenet1.1-7.onnx
+  file(DOWNLOAD https://github.com/onnx/models/raw/main/validated/vision/classification/squeezenet/model/squeezenet1.1-7.onnx
     ${CMAKE_CURRENT_LIST_DIR}/data/model/squeezenet1.1-7.onnx)
-  file(DOWNLOAD https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx
+  file(DOWNLOAD https://github.com/onnx/models/raw/main/validated/vision/object_detection_segmentation/faster-rcnn/model/FasterRCNN-10.onnx
     ${CMAKE_CURRENT_LIST_DIR}/data/model/FasterRCNN-10.onnx)
   file(DOWNLOAD
-  https://github.com/onnx/models/raw/main/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx
+  https://github.com/onnx/models/raw/main/validated/vision/object_detection_segmentation/mask-rcnn/model/MaskRCNN-10.onnx
     ${CMAKE_CURRENT_LIST_DIR}/data/model/MaskRCNN-10.onnx)
 endif()
 
