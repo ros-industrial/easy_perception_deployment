@@ -2,7 +2,7 @@ PySide2==5.15.0
 dateutils==0.6.12
 pycocotools==2.0.2
 labelme==5.0.1
-torch==1.8.1
+torch==1.13.1
 torchvision==0.9.1
 lark-parser==0.11.2
 empy==3.3.4
