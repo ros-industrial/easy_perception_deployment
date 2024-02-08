@@ -42,7 +42,7 @@ rosdep install --from-paths src --ignore-src -y
 colcon build
 
 # Start up GUI interface.
-cd easy_perception_deployment
+cd src/easy_perception_deployment/easy_perception_deployment
 bash run.bash
 ```
 
