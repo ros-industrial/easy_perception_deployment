@@ -48,7 +48,7 @@ bash run.bash
 
 ## **Docs**
 
-[Check out the full documentation here.](https://epd-docs.readthedocs.io/en/latest/)
+[Check out the full documentation here.](https://easy-perception-deployment.readthedocs.io/en/latest/)
 
 ## **Contributions & Feedback**
 
