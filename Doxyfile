@@ -24,7 +24,7 @@ EXTRACT_PRIVATE        = NO
 EXTRACT_PACKAGE        = NO
 EXTRACT_STATIC         = YES
 INPUT                  =  easy_perception_deployment/include \
-                          easy_perception_deployment/gui \ 
+                          easy_perception_deployment/gui 
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
