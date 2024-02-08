@@ -30,11 +30,19 @@ cd $HOME
 mkdir -p epd_ros2_ws/src && cd epd_ros2_ws/src
 
 # Download fast and shallow copy of easy_perception_deployment
-git clone https://github.com/ros-industrial/easy_perception_deployment.git \
---depth 1 --single-branch
-cd easy_perception_deployment/easy_perception_deployment
+git clone https://github.com/ros-industrial/epd_onnxruntime_vendor.git
+git clone https://github.com/ros-industrial/easy_perception_deployment.git
+
+# Install dependencies
+cd $HOME/epd_ros2_ws/
+source /opt/ros/foxy/setup.bash
+rosdep install --from-paths src --ignore-src -y
+
+# Build the ROS2 workspace
+colcon build
 
 # Start up GUI interface.
+cd easy_perception_deployment
 bash run.bash
 ```
 
