@@ -19,8 +19,6 @@ jobs:
       ISOLATION: docker
 
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:20.04
     steps:
       - uses: actions/checkout@v2
       # Fetch/store the directory used by ccache before/after the ci run
@@ -29,7 +27,7 @@ jobs:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
       # Run industrial_ci
-      - uses: 'cardboardcode/industrial_ci@pr-coverage'
+      - uses: 'ros-industrial/industrial_ci@master'
         env: ${{ matrix.env }}
       # Generate and upload code coverage report to codecov.
       - uses: codecov/codecov-action@v5
