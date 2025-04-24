@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Fetch/store the directory used by ccache before/after the ci run
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
@@ -32,6 +32,6 @@ jobs:
       - uses: 'cardboardcode/industrial_ci@pr-coverage'
         env: ${{ matrix.env }}
       # Generate and upload code coverage report to codecov.
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
