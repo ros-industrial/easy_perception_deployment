@@ -18,7 +18,9 @@ jobs:
       UPSTREAM_WORKSPACE: onnxruntime.repos
       ISOLATION: docker
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
     steps:
       - uses: actions/checkout@v2
       # Fetch/store the directory used by ccache before/after the ci run
