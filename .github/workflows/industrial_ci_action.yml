@@ -16,9 +16,11 @@ jobs:
       CODE_COVERAGE: "codecov.io"
       # Use custom public docker image
       UPSTREAM_WORKSPACE: onnxruntime.repos
-      ISOLATION: docker
+      ISOLATION: shell
 
     runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
     steps:
       - uses: actions/checkout@v2
       # Fetch/store the directory used by ccache before/after the ci run
