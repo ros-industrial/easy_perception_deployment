@@ -10,26 +10,38 @@ jobs:
         env:
           - {ROS_DISTRO: foxy, ROS_REPO: testing}
           - {ROS_DISTRO: foxy, ROS_REPO: main}
+          - ROS_DISTRO: foxy
+            ROS_REPO: main
+            TARGET_CMAKE_ARGS: "-DCMAKE_C_FLAGS='--coverage' -DCMAKE_CXX_FLAGS='--coverage'"
+            AFTER_SCRIPT: "./coverage.sh ci"
+            CODE_COVERAGE: "codecov.io"
     env:
       CCACHE_DIR: /github/home/.ccache
-      # Use code-coverage
-      CODE_COVERAGE: "codecov.io"
       # Use custom public docker image
       UPSTREAM_WORKSPACE: onnxruntime.repos
-      ISOLATION: docker
+      ISOLATION: shell
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
     steps:
       - uses: actions/checkout@v2
       # Fetch/store the directory used by ccache before/after the ci run
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
       # Run industrial_ci
-      - uses: 'cardboardcode/industrial_ci@pr-coverage'
+      - uses: 'ros-industrial/industrial_ci@master'
         env: ${{ matrix.env }}
       # Generate and upload code coverage report to codecov.
-      - uses: codecov/codecov-action@v3
+      - name: Install dependency for Codecov
+        if: ${{ matrix.env.CODE_COVERAGE == 'codecov.io' }}
+        run: sudo apt install curl git -y
+      - name: Upload coverage reports to Codecov
+        if: ${{ matrix.env.CODE_COVERAGE == 'codecov.io' }}
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.info
+          fail_ci_if_error: true
