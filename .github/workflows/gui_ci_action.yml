@@ -25,7 +25,7 @@ jobs:
           pip install pycodestyle
           pip install PySide2==5.15.0
           pip install dateutils==0.6.12
-          pip install pycocotools==2.0.5
+          pip install pycocotools==2.0.7
           pip install labelme==5.0.1
           pip install pytest==6.0.1
           pip install pytest-qt==3.3.0
